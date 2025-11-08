@@ -21,17 +21,17 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 bg-white shadow-md">
       {/* Top bar */}
-      <div className="bg-chocolate text-white py-2">
+      <div className="bg-dark text-white py-2">
         <div className="container">
           <div className="flex justify-between items-center text-sm">
             <div className="flex items-center gap-6">
-              <a href={`tel:${companyInfo.phone}`} className="flex items-center gap-2 hover:text-sage transition-colors">
+              <a href={`tel:${companyInfo.phone}`} className="flex items-center gap-2 hover:text-sport-blue transition-colors">
                 <Phone size={16} />
                 <span>{companyInfo.phone}</span>
               </a>
-              <a href={`mailto:${companyInfo.email}`} className="flex items-center gap-2 hover:text-sage transition-colors hidden md:flex">
+              <a href={`mailto:${companyInfo.email}`} className="flex items-center gap-2 hover:text-sport-blue transition-colors hidden md:flex">
                 <Mail size={16} />
                 <span>{companyInfo.email}</span>
               </a>
@@ -55,10 +55,10 @@ const Header = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm uppercase tracking-wider transition-colors ${
+                className={`text-sm uppercase tracking-wider transition-colors font-medium ${
                   isActive(item.path)
-                    ? 'text-sage font-medium border-b-2 border-sage'
-                    : 'text-gray-700 hover:text-sage'
+                    ? 'text-sport-blue border-b-2 border-sport-blue'
+                    : 'text-gray-700 hover:text-sport-blue'
                 }`}
               >
                 {item.name}
@@ -68,14 +68,14 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button asChild className="bg-sage hover:bg-chocolate text-white transition-colors">
+            <Button asChild className="bg-sport-red hover:bg-sport-orange text-white transition-colors font-medium">
               <Link to="/order">Сделать заказ</Link>
             </Button>
           </div>
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2 text-chocolate"
+            className="lg:hidden p-2 text-dark"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -91,16 +91,16 @@ const Header = () => {
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-sm uppercase tracking-wider py-2 transition-colors ${
+                  className={`text-sm uppercase tracking-wider py-2 transition-colors font-medium ${
                     isActive(item.path)
-                      ? 'text-sage font-medium'
-                      : 'text-gray-700 hover:text-sage'
+                      ? 'text-sport-blue'
+                      : 'text-gray-700 hover:text-sport-blue'
                   }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Button asChild className="bg-sage hover:bg-chocolate text-white w-full transition-colors">
+              <Button asChild className="bg-sport-red hover:bg-sport-orange text-white w-full transition-colors">
                 <Link to="/order" onClick={() => setIsMenuOpen(false)}>Сделать заказ</Link>
               </Button>
             </div>
