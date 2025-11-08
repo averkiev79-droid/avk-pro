@@ -94,9 +94,9 @@ const CalculatorPage = () => {
   };
 
   return (
-    <div className="calculator-page bg-cream min-h-screen">
+    <div className="calculator-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-chocolate text-white py-16">
+      <section className="bg-sport-red text-white py-16">
         <div className="container">
           <h1 className="text-5xl font-light mb-4">Калькулятор стоимости</h1>
           <p className="text-lg opacity-90">Рассчитайте предварительную стоимость вашего заказа</p>
@@ -108,7 +108,7 @@ const CalculatorPage = () => {
           {/* Form */}
           <Card className="p-8 border-none bg-white">
             <h2 className="text-2xl font-light mb-6 flex items-center gap-2">
-              <Calculator className="text-sage" />
+              <Calculator className="text-sport-blue" />
               Параметры заказа
             </h2>
 
@@ -207,14 +207,14 @@ const CalculatorPage = () => {
               <div className="flex gap-4 pt-4">
                 <Button 
                   onClick={handleCalculate} 
-                  className="flex-1 bg-sage hover:bg-chocolate text-white transition-colors"
+                  className="flex-1 bg-sport-blue hover:bg-sport-red text-white transition-colors"
                 >
                   Рассчитать
                 </Button>
                 <Button 
                   onClick={handleReset} 
                   variant="outline"
-                  className="border-gray-300 hover:bg-soft-gray transition-colors"
+                  className="border-gray-300 hover:bg-light transition-colors"
                 >
                   Сбросить
                 </Button>
@@ -243,7 +243,7 @@ const CalculatorPage = () => {
 
                   <div className="flex justify-between items-center py-3 border-b border-gray-200">
                     <span className="text-gray-600">Цена за единицу:</span>
-                    <span className="font-medium text-sage">{calculatedPrice.unitPrice} ₽</span>
+                    <span className="font-medium text-sport-blue">{calculatedPrice.unitPrice} ₽</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3 border-b border-gray-200">
@@ -263,24 +263,24 @@ const CalculatorPage = () => {
                     </div>
                   )}
 
-                  <div className="flex justify-between items-center py-4 bg-sage/10 px-4 rounded-lg mt-4">
+                  <div className="flex justify-between items-center py-4 bg-sport-blue/10 px-4 rounded-lg mt-4">
                     <span className="text-lg font-light">Итоговая стоимость:</span>
-                    <span className="text-3xl font-light text-sage">{calculatedPrice.total} ₽</span>
+                    <span className="text-3xl font-light text-sport-blue">{calculatedPrice.total} ₽</span>
                   </div>
 
                   <div className="pt-4 space-y-3">
                     <p className="text-sm text-gray-500">
                       * Это предварительный расчет. Точная стоимость определяется после обсуждения деталей заказа.
                     </p>
-                    <Button className="w-full bg-chocolate hover:bg-sage text-white transition-colors">
+                    <Button className="w-full bg-sport-red hover:bg-sport-blue text-white transition-colors">
                       Оформить заказ
                     </Button>
                   </div>
                 </div>
               </Card>
             ) : (
-              <Card className="p-12 border-none bg-soft-gray text-center h-full flex flex-col items-center justify-center">
-                <Calculator className="text-sage mb-4" size={64} />
+              <Card className="p-12 border-none bg-light text-center h-full flex flex-col items-center justify-center">
+                <Calculator className="text-sport-blue mb-4" size={64} />
                 <h3 className="text-xl font-light mb-2">Заполните форму</h3>
                 <p className="text-gray-500">Укажите параметры заказа для расчета стоимости</p>
               </Card>

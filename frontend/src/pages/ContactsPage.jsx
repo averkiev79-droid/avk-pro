@@ -36,9 +36,9 @@ const ContactsPage = () => {
   };
 
   return (
-    <div className="contacts-page bg-cream min-h-screen">
+    <div className="contacts-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-chocolate text-white py-16">
+      <section className="bg-sport-red text-white py-16">
         <div className="container">
           <h1 className="text-5xl font-light mb-4">Контакты</h1>
           <p className="text-lg opacity-90">Свяжитесь с нами удобным для вас способом</p>
@@ -51,12 +51,12 @@ const ContactsPage = () => {
           <div className="space-y-6">
             <Card className="p-6 border-none bg-white">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sage rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
                   <Phone className="text-white" size={20} />
                 </div>
                 <div>
                   <h3 className="text-lg font-light mb-1">Телефон</h3>
-                  <a href={`tel:${companyInfo.phone}`} className="text-sage hover:text-chocolate transition-colors text-xl">
+                  <a href={`tel:${companyInfo.phone}`} className="text-sport-blue hover:text-dark transition-colors text-xl">
                     {companyInfo.phone}
                   </a>
                   <p className="text-sm text-gray-500 mt-1">Позвоните нам в рабочее время</p>
@@ -66,12 +66,12 @@ const ContactsPage = () => {
 
             <Card className="p-6 border-none bg-white">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sage rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
                   <Mail className="text-white" size={20} />
                 </div>
                 <div>
                   <h3 className="text-lg font-light mb-1">Email</h3>
-                  <a href={`mailto:${companyInfo.email}`} className="text-sage hover:text-chocolate transition-colors text-xl">
+                  <a href={`mailto:${companyInfo.email}`} className="text-sport-blue hover:text-dark transition-colors text-xl">
                     {companyInfo.email}
                   </a>
                   <p className="text-sm text-gray-500 mt-1">Напишите нам письмо</p>
@@ -81,12 +81,12 @@ const ContactsPage = () => {
 
             <Card className="p-6 border-none bg-white">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sage rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
                   <MapPin className="text-white" size={20} />
                 </div>
                 <div>
                   <h3 className="text-lg font-light mb-1">Адрес</h3>
-                  <p className="text-chocolate text-xl mb-1">{companyInfo.address}</p>
+                  <p className="text-dark text-xl mb-1">{companyInfo.address}</p>
                   <p className="text-sm text-gray-500">Приезжайте к нам в офис</p>
                 </div>
               </div>
@@ -94,12 +94,12 @@ const ContactsPage = () => {
 
             <Card className="p-6 border-none bg-white">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sage rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
                   <Clock className="text-white" size={20} />
                 </div>
                 <div>
                   <h3 className="text-lg font-light mb-1">Режим работы</h3>
-                  <p className="text-chocolate text-xl">{companyInfo.workHours}</p>
+                  <p className="text-dark text-xl">{companyInfo.workHours}</p>
                   <p className="text-sm text-gray-500 mt-1">Воскресенье - выходной</p>
                 </div>
               </div>
@@ -159,7 +159,7 @@ const ContactsPage = () => {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-sage hover:bg-chocolate text-white py-6 text-lg transition-colors"
+                  className="w-full bg-sport-blue hover:bg-sport-red text-white py-6 text-lg transition-colors"
                 >
                   <Send className="mr-2" size={20} />
                   Отправить сообщение

@@ -11,9 +11,9 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="about-page bg-cream min-h-screen">
+    <div className="about-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-chocolate text-white py-16">
+      <section className="bg-sport-red text-white py-16">
         <div className="container">
           <h1 className="text-5xl font-light mb-4">О компании</h1>
           <p className="text-lg opacity-90">Профессиональное производство хоккейной экипировки</p>
@@ -35,7 +35,7 @@ const AboutPage = () => {
               <h2 className="text-4xl font-light mb-6">Компания ЛВК</h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Компания <strong className="text-sage">ЛВК</strong> более 14 лет занимается производством хоккейной формы и экипировки. Мы специализируемся на изготовлении качественной продукции для детских и взрослых хоккейных команд.
+                  Компания <strong className="text-sport-blue">ЛВК</strong> более 14 лет занимается производством хоккейной формы и экипировки. Мы специализируемся на изготовлении качественной продукции для детских и взрослых хоккейных команд.
                 </p>
                 <p>
                   Наше производство оснащено современным оборудованием, что позволяет нам выполнять заказы любой сложности. Мы используем только качественные материалы и проверенные технологии печати.
@@ -53,7 +53,7 @@ const AboutPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl lg:text-5xl font-light text-sage mb-2">{stat.value}</div>
+                <div className="text-4xl lg:text-5xl font-light text-sport-blue mb-2">{stat.value}</div>
                 <div className="text-sm text-gray-600 uppercase tracking-wider">{stat.label}</div>
               </div>
             ))}
@@ -70,7 +70,7 @@ const AboutPage = () => {
                           advantage.icon === 'Palette' ? Palette : Users;
               return (
                 <Card key={index} className="p-6 text-center hover:shadow-xl transition-shadow border-none bg-white">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-sage rounded-full mb-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-blue rounded-full mb-4">
                     <Icon className="text-white" size={28} />
                   </div>
                   <h3 className="text-xl font-light mb-2">{advantage.title}</h3>
@@ -86,7 +86,7 @@ const AboutPage = () => {
           <h2 className="text-4xl font-light text-center mb-12">Наш подход</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-6 border-none bg-white text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-chocolate rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-red rounded-full mb-4">
                 <Award className="text-white" size={28} />
               </div>
               <h3 className="text-xl font-light mb-3">Качество</h3>
@@ -95,7 +95,7 @@ const AboutPage = () => {
               </p>
             </Card>
             <Card className="p-6 border-none bg-white text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-chocolate rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-red rounded-full mb-4">
                 <TrendingUp className="text-white" size={28} />
               </div>
               <h3 className="text-xl font-light mb-3">Индивидуальность</h3>
@@ -104,7 +104,7 @@ const AboutPage = () => {
               </p>
             </Card>
             <Card className="p-6 border-none bg-white text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-chocolate rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-red rounded-full mb-4">
                 <Zap className="text-white" size={28} />
               </div>
               <h3 className="text-xl font-light mb-3">Скорость</h3>

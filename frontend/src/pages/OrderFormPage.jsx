@@ -76,9 +76,9 @@ const OrderFormPage = () => {
   };
 
   return (
-    <div className="order-form-page bg-cream min-h-screen">
+    <div className="order-form-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-chocolate text-white py-16">
+      <section className="bg-sport-red text-white py-16">
         <div className="container">
           <h1 className="text-5xl font-light mb-4">Оформление заказа</h1>
           <p className="text-lg opacity-90">Заполните форму, и мы свяжемся с вами для уточнения деталей</p>
@@ -90,7 +90,7 @@ const OrderFormPage = () => {
           {isSubmitted ? (
             <Card className="p-12 text-center border-none bg-white">
               <CheckCircle className="text-green-500 mx-auto mb-4" size={64} />
-              <h2 className="text-3xl font-light mb-4 text-sage">Спасибо за заявку!</h2>
+              <h2 className="text-3xl font-light mb-4 text-sport-blue">Спасибо за заявку!</h2>
               <p className="text-gray-600 mb-2">Ваша заявка принята в работу.</p>
               <p className="text-gray-600">Наш менеджер свяжется с вами в течение 1 рабочего дня.</p>
             </Card>
@@ -203,9 +203,9 @@ const OrderFormPage = () => {
                     <div className="flex items-center gap-4">
                       <label 
                         htmlFor="logo" 
-                        className="flex items-center gap-2 px-4 py-2 bg-soft-gray hover:bg-taupe cursor-pointer rounded-lg transition-colors border border-gray-300"
+                        className="flex items-center gap-2 px-4 py-2 bg-light hover:bg-taupe cursor-pointer rounded-lg transition-colors border border-gray-300"
                       >
-                        <Upload size={18} className="text-chocolate" />
+                        <Upload size={18} className="text-dark" />
                         <span className="text-sm">Выбрать файл</span>
                       </label>
                       {logoFileName && (
@@ -227,7 +227,7 @@ const OrderFormPage = () => {
                 <div className="pt-4">
                   <Button 
                     type="submit" 
-                    className="w-full bg-sage hover:bg-chocolate text-white py-6 text-lg transition-colors"
+                    className="w-full bg-sport-blue hover:bg-sport-red text-white py-6 text-lg transition-colors"
                   >
                     <Send className="mr-2" size={20} />
                     Отправить заявку
