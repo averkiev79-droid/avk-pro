@@ -8,7 +8,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #FAF9F7;
+  background-color: #FFFFFF;
 }
 
 .main-content {
@@ -27,28 +27,28 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #F5F3F0;
+  background: #F0F4F8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C4B5A0;
+  background: #0066CC;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6B4E37;
+  background: #FF4500;
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
-  color: #2C2C2C;
-  font-weight: 300;
+  color: #1A1A2E;
+  font-weight: 600;
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
-  color: #2C2C2C;
+  color: #1A1A2E;
   line-height: 1.6;
 }
 
@@ -109,30 +109,43 @@ body {
   padding: 64px 0;
 }
 
-.text-sage {
-  color: #C4B5A0;
+/* Sport color utilities */
+.text-sport-blue {
+  color: #0066CC;
 }
 
-.text-taupe {
-  color: #D4C4B0;
+.text-sport-red {
+  color: #FF4500;
 }
 
-.text-chocolate {
-  color: #6B4E37;
+.text-sport-orange {
+  color: #FF6B35;
 }
 
-.bg-sage {
-  background-color: #C4B5A0;
+.text-dark {
+  color: #1A1A2E;
 }
 
-.bg-taupe {
-  background-color: #D4C4B0;
+.bg-sport-blue {
+  background-color: #0066CC;
 }
 
-.bg-cream {
-  background-color: #FAF9F7;
+.bg-sport-red {
+  background-color: #FF4500;
 }
 
-.bg-soft-gray {
-  background-color: #F5F3F0;
+.bg-sport-orange {
+  background-color: #FF6B35;
+}
+
+.bg-dark {
+  background-color: #1A1A2E;
+}
+
+.bg-light {
+  background-color: #F0F4F8;
+}
+
+.bg-ice {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
 }
