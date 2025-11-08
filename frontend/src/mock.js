@@ -124,12 +124,12 @@ export const portfolio = [
 ];
 
 export const companyInfo = {
-  name: 'ЛВК',
-  fullName: 'ЛВК - Производство хоккейной экипировки',
+  name: 'АВК',
+  fullName: 'АВК - Производство хоккейной экипировки',
   description: 'Профессиональное производство хоккейной формы, экипировки и фирменной одежды для команд любого уровня',
   address: 'Санкт-Петербург, пр. Ветеранов 140',
   phone: '+7 (812) 648-17-49',
-  email: 'info@lvk-hockey.ru',
+  email: 'info@avk-hockey.ru',
   logo: 'https://customer-assets.emergentagent.com/job_7033b264-2db2-4f8d-9e16-886c3928ac72/artifacts/rhyakgsx_logo.jpg',
   workHours: 'Пн-Пт: 10:00-19:00, Сб: 11:00-17:00'
 };
