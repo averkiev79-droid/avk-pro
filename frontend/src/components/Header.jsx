@@ -45,12 +45,8 @@ const Header = () => {
       <div className="container py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <img src={companyInfo.logo} alt="ЛВК" className="h-12 w-auto" />
-            <div>
-              <h1 className="text-2xl font-light text-chocolate">ЛВК</h1>
-              <p className="text-xs text-gray-600 uppercase tracking-wider">Хоккейная экипировка</p>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src={companyInfo.logo} alt="АВК" className="h-16 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
