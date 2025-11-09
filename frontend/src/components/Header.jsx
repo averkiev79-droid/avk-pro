@@ -83,13 +83,21 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="lg:hidden p-2 text-dark"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile cart & menu button */}
+          <div className="lg:hidden flex items-center gap-2">
+            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-sport-blue transition-colors">
+              <ShoppingCart size={22} />
+              <span className="absolute -top-1 -right-1 bg-sport-red text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                2
+              </span>
+            </Link>
+            <button
+              className="p-2 text-dark"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
