@@ -28,9 +28,9 @@ const CatalogPage = () => {
     <div className="catalog-page bg-white min-h-screen">
       {/* Header */}
       <section className="bg-sport-red text-white py-16">
-        <div className="container">
-          <h1 className="text-5xl font-light mb-4">Каталог продукции</h1>
-          <p className="text-lg opacity-90">Хоккейная экипировка для команд любого уровня</p>
+        <div className="container px-4 sm:px-6">
+          <h1 className="text-4xl sm:text-5xl font-light mb-4">Каталог продукции</h1>
+          <p className="text-base sm:text-lg opacity-90">Хоккейная экипировка для команд любого уровня</p>
         </div>
       </section>
 
