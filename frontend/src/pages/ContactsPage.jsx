@@ -49,14 +49,14 @@ const ContactsPage = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Контактная информация */}
           <div className="space-y-6">
-            <Card className="p-6 border-none bg-white">
+            <Card className="p-6 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center shadow-sm">
                   <Phone className="text-white" size={20} />
                 </div>
                 <div>
                   <h3 className="text-lg font-light mb-1">Телефон</h3>
-                  <a href={`tel:${companyInfo.phone}`} className="text-sport-blue hover:text-dark transition-colors text-xl">
+                  <a href={`tel:${companyInfo.phone}`} className="text-sport-blue hover:text-sport-red transition-colors text-xl">
                     {companyInfo.phone}
                   </a>
                   <p className="text-sm text-gray-500 mt-1">Позвоните нам в рабочее время</p>
@@ -64,14 +64,14 @@ const ContactsPage = () => {
               </div>
             </Card>
 
-            <Card className="p-6 border-none bg-white">
+            <Card className="p-6 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center shadow-sm">
                   <Mail className="text-white" size={20} />
                 </div>
                 <div>
                   <h3 className="text-lg font-light mb-1">Email</h3>
-                  <a href={`mailto:${companyInfo.email}`} className="text-sport-blue hover:text-dark transition-colors text-xl">
+                  <a href={`mailto:${companyInfo.email}`} className="text-sport-blue hover:text-sport-red transition-colors text-xl break-all">
                     {companyInfo.email}
                   </a>
                   <p className="text-sm text-gray-500 mt-1">Напишите нам письмо</p>
@@ -79,9 +79,9 @@ const ContactsPage = () => {
               </div>
             </Card>
 
-            <Card className="p-6 border-none bg-white">
+            <Card className="p-6 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center shadow-sm">
                   <MapPin className="text-white" size={20} />
                 </div>
                 <div>
