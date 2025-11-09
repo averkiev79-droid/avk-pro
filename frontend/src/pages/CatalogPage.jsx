@@ -34,7 +34,7 @@ const CatalogPage = () => {
         </div>
       </section>
 
-      <div className="container py-12">
+      <div className="container py-12 px-4 sm:px-6">
         {/* Search Bar */}
         <div className="mb-8">
           <div className="relative max-w-xl">
@@ -44,7 +44,7 @@ const CatalogPage = () => {
               placeholder="Поиск товаров..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 py-6 text-base"
+              className="pl-10 py-6 text-base border-gray-300"
             />
           </div>
         </div>
