@@ -78,31 +78,31 @@ const HomePage = () => {
 
       {/* Featured Products */}
       <section className="section-padding bg-light">
-        <div className="container">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="text-4xl font-bold">Популярные товары</h2>
-            <Button asChild variant="ghost" className="text-sport-blue hover:text-sport-red font-medium">
+        <div className="container px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
+            <h2 className="text-3xl sm:text-4xl font-bold">Популярные товары</h2>
+            <Button asChild variant="ghost" className="text-sport-blue hover:text-sport-red font-medium hover:bg-blue-50 transition-all">
               <Link to="/catalog" className="flex items-center gap-2">
                 Весь каталог <ArrowRight size={18} />
               </Link>
             </Button>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {featuredProducts.map((product) => (
-              <Card key={product.id} className="overflow-hidden hover:shadow-2xl transition-all group cursor-pointer border-none hover:scale-105">
-                <div className="aspect-square overflow-hidden">
+              <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer border border-gray-200 hover:scale-105">
+                <div className="aspect-square overflow-hidden bg-gray-100">
                   <img 
                     src={product.image} 
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-bold mb-2">{product.name}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{product.description}</p>
+                <div className="p-5">
+                  <h3 className="text-base font-bold mb-2 text-dark">{product.name}</h3>
+                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">{product.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-xl font-bold text-sport-blue">от {product.basePrice} ₽</span>
-                    <Button size="sm" className="bg-sport-red hover:bg-sport-orange text-white transition-colors font-medium">
+                    <span className="text-lg font-bold text-sport-blue">от {product.basePrice} ₽</span>
+                    <Button size="sm" className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-sm">
                       Заказать
                     </Button>
                   </div>
