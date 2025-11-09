@@ -137,15 +137,15 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-sport-blue to-blue-600 text-white">
-        <div className="container text-center">
-          <h2 className="text-4xl font-bold mb-4">Готовы оформить заказ?</h2>
-          <p className="text-lg mb-8 opacity-90">Свяжитесь с нами для расчета стоимости и обсуждения деталей</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" className="bg-sport-red hover:bg-sport-orange text-white transition-colors font-medium">
+      <section className="section-padding bg-gradient-to-r from-sport-blue to-blue-700 text-white">
+        <div className="container text-center px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Готовы оформить заказ?</h2>
+          <p className="text-base sm:text-lg mb-8 opacity-90 max-w-2xl mx-auto">Свяжитесь с нами для расчета стоимости и обсуждения деталей</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button asChild size="lg" className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-md hover:shadow-lg">
               <Link to="/calculator">Рассчитать стоимость</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-sport-blue transition-colors font-medium">
+            <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-sport-blue transition-all duration-300 font-medium">
               <Link to="/contacts">Связаться с нами</Link>
             </Button>
           </div>
