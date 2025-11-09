@@ -111,15 +111,15 @@ body {
 
 /* Sport color utilities */
 .text-sport-blue {
-  color: #0066CC;
+  color: #2563eb;
 }
 
 .text-sport-red {
-  color: #FF4500;
+  color: #dc2626;
 }
 
 .text-sport-orange {
-  color: #FF6B35;
+  color: #ea580c;
 }
 
 .text-dark {
@@ -127,15 +127,15 @@ body {
 }
 
 .bg-sport-blue {
-  background-color: #0066CC;
+  background-color: #2563eb;
 }
 
 .bg-sport-red {
-  background-color: #FF4500;
+  background-color: #dc2626;
 }
 
 .bg-sport-orange {
-  background-color: #FF6B35;
+  background-color: #ea580c;
 }
 
 .bg-dark {
