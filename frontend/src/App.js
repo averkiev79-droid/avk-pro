@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 import CalculatorPage from './pages/CalculatorPage';
 import OrderFormPage from './pages/OrderFormPage';
 import PortfolioPage from './pages/PortfolioPage';
