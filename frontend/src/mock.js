@@ -91,7 +91,7 @@ export const portfolio = [
     category: 'Детская команда',
     description: 'Полный комплект формы для детской хоккейной команды',
     items: ['Джерси', 'Гамаши', 'Тренировочная форма'],
-    image: 'https://images.unsplash.com/photo-1642643805244-21195333ac8c',
+    image: 'https://picsum.photos/seed/portfolio1/800/600',
     year: '2024'
   },
   {
@@ -100,7 +100,7 @@ export const portfolio = [
     category: 'Взрослая команда',
     description: 'Игровая и тренировочная форма для любительской команды',
     items: ['Джерси домашнее', 'Джерси гостевое', 'Парки'],
-    image: 'https://images.unsplash.com/photo-1670509162391-1c16e6d0bb83',
+    image: 'https://picsum.photos/seed/portfolio2/800/600',
     year: '2024'
   },
   {
@@ -109,7 +109,7 @@ export const portfolio = [
     category: 'Болельщики',
     description: 'Фирменная одежда для фан-клуба',
     items: ['Бомберы', 'Жилетки', 'Шарфы'],
-    image: 'https://images.unsplash.com/photo-1669996160271-35f7abdc1563',
+    image: 'https://picsum.photos/seed/portfolio3/800/600',
     year: '2023'
   },
   {
@@ -118,7 +118,7 @@ export const portfolio = [
     category: 'Родители',
     description: 'Единая форма для родителей юных хоккеистов',
     items: ['Толстовки', 'Бейсболки', 'Шарфы'],
-    image: 'https://images.pexels.com/photos/793111/pexels-photo-793111.jpeg',
+    image: 'https://picsum.photos/seed/portfolio4/800/600',
     year: '2024'
   }
 ];
