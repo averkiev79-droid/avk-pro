@@ -26,7 +26,7 @@ const AboutPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src="https://picsum.photos/seed/about-production/800/600"
+                src="https://via.placeholder.com/800x600/2d3748/ffffff?text=PRODUCTION+FACILITY"
                 alt="Производство"
                 className="rounded-lg shadow-xl w-full h-auto"
               />
