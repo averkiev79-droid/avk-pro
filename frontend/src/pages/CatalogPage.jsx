@@ -58,10 +58,10 @@ const CatalogPage = () => {
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`text-left px-4 py-3 rounded-lg transition-colors text-sm ${
+                  className={`text-left px-4 py-3 rounded-lg transition-all duration-300 text-sm border ${
                     selectedCategory === category.id
-                      ? 'bg-sport-blue text-white'
-                      : 'bg-white hover:bg-light text-gray-700'
+                      ? 'bg-sport-blue text-white border-sport-blue shadow-md'
+                      : 'bg-white hover:bg-slate-50 text-gray-700 border-gray-200'
                   }`}
                 >
                   {category.name}
