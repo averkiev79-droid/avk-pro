@@ -115,19 +115,19 @@ const HomePage = () => {
 
       {/* Reviews Section */}
       <section className="section-padding bg-white">
-        <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-12">Отзывы наших клиентов</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+        <div className="container px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">Отзывы наших клиентов</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {reviews.map((review) => (
-              <Card key={review.id} className="p-6 border-none bg-light hover:shadow-xl transition-shadow">
+              <Card key={review.id} className="p-6 border border-gray-200 bg-slate-50 hover:shadow-lg transition-all duration-300">
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="fill-sport-orange text-sport-orange" size={18} />
+                    <Star key={i} className="fill-sport-orange text-sport-orange" size={16} />
                   ))}
                 </div>
                 <p className="text-gray-700 mb-4 italic text-sm leading-relaxed">"{review.text}"</p>
-                <div className="border-t border-gray-300 pt-4">
-                  <p className="font-bold text-dark">{review.author}</p>
+                <div className="border-t border-gray-200 pt-4">
+                  <p className="font-bold text-dark text-sm">{review.author}</p>
                   <p className="text-xs text-gray-500 uppercase tracking-wider">{review.role}</p>
                 </div>
               </Card>
