@@ -31,12 +31,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0066CC;
+  background: #2563eb;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF4500;
+  background: #dc2626;
 }
 
 /* Typography */
