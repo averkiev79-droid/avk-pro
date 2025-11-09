@@ -89,25 +89,27 @@ const HomePage = () => {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {featuredProducts.map((product) => (
-              <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer border border-gray-200 hover:scale-105">
-                <div className="aspect-square overflow-hidden bg-gray-100">
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold mb-2 text-dark">{product.name}</h3>
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-2">{product.description}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-lg font-bold text-sport-blue">от {product.basePrice} ₽</span>
-                    <Button size="sm" className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-sm">
-                      Заказать
-                    </Button>
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer border border-gray-200 hover:scale-105">
+                  <div className="aspect-square overflow-hidden bg-gray-100">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                </div>
-              </Card>
+                  <div className="p-5">
+                    <h3 className="text-base font-bold mb-2 text-dark">{product.name}</h3>
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">{product.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-lg font-bold text-sport-blue">от {product.basePrice} ₽</span>
+                      <Button size="sm" className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-sm">
+                        Смотреть
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
