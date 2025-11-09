@@ -10,25 +10,36 @@ import OrderFormPage from './pages/OrderFormPage';
 import PortfolioPage from './pages/PortfolioPage';
 import AboutPage from './pages/AboutPage';
 import ContactsPage from './pages/ContactsPage';
+import AdminLayout from './pages/AdminLayout';
 import { Toaster } from './components/ui/sonner';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/catalog" element={<CatalogPage />} />
-            <Route path="/calculator" element={<CalculatorPage />} />
-            <Route path="/order" element={<OrderFormPage />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contacts" element={<ContactsPage />} />
-          </Routes>
-        </main>
-        <Footer />
+        <Routes>
+          {/* Admin Routes */}
+          <Route path="/admin/*" element={<AdminLayout />} />
+          
+          {/* Public Routes */}
+          <Route path="/*" element={
+            <>
+              <Header />
+              <main className="main-content">
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/catalog" element={<CatalogPage />} />
+                  <Route path="/calculator" element={<CalculatorPage />} />
+                  <Route path="/order" element={<OrderFormPage />} />
+                  <Route path="/portfolio" element={<PortfolioPage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contacts" element={<ContactsPage />} />
+                </Routes>
+              </main>
+              <Footer />
+            </>
+          } />
+        </Routes>
         <Toaster position="top-right" />
       </BrowserRouter>
     </div>
