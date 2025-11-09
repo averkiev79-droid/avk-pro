@@ -7,7 +7,7 @@ export const products = [
     category: 'jersey',
     description: 'Профессиональное хоккейное джерси с вашим логотипом',
     basePrice: 3500,
-    image: 'https://via.placeholder.com/600x600/1a365d/ffffff?text=HOCKEY+JERSEY',
+    image: 'https://via.placeholder.com/600x600/2563eb/ffffff?text=HOCKEY+JERSEY',
     features: ['Дышащая ткань', 'Прочные швы', 'Сублимационная печать', 'Любой дизайн']
   },
   {
@@ -16,7 +16,7 @@ export const products = [
     category: 'socks',
     description: 'Высокие гамаши с логотипом команды',
     basePrice: 800,
-    image: 'https://via.placeholder.com/600x600/0066cc/ffffff?text=HOCKEY+SOCKS',
+    image: 'https://via.placeholder.com/600x600/1e40af/ffffff?text=HOCKEY+SOCKS',
     features: ['Эластичный материал', 'Яркие цвета', 'Долговечность']
   },
   {
@@ -25,7 +25,7 @@ export const products = [
     category: 'training',
     description: 'Комплект для тренировок в зале',
     basePrice: 2800,
-    image: 'https://via.placeholder.com/600x600/ff4500/ffffff?text=TRAINING+GEAR',
+    image: 'https://via.placeholder.com/600x600/ea580c/ffffff?text=TRAINING+GEAR',
     features: ['Комфортная посадка', 'Влагоотведение', 'Фирменный стиль']
   },
   {
@@ -34,7 +34,7 @@ export const products = [
     category: 'accessories',
     description: 'Защитные чехлы для хоккейных шорт',
     basePrice: 1200,
-    image: 'https://via.placeholder.com/600x600/2d3748/ffffff?text=SHORTS+COVERS',
+    image: 'https://via.placeholder.com/600x600/374151/ffffff?text=SHORTS+COVERS',
     features: ['Прочный материал', 'Удобная конструкция']
   },
   {
@@ -43,7 +43,7 @@ export const products = [
     category: 'outerwear',
     description: 'Стильный бомбер с символикой команды',
     basePrice: 4500,
-    image: 'https://via.placeholder.com/600x600/ff6b35/ffffff?text=TEAM+BOMBER',
+    image: 'https://via.placeholder.com/600x600/dc2626/ffffff?text=TEAM+BOMBER',
     features: ['Теплый и легкий', 'Современный дизайн', 'Вышивка логотипа']
   },
   {
@@ -52,7 +52,7 @@ export const products = [
     category: 'outerwear',
     description: 'Зимняя парка для болельщиков и команды',
     basePrice: 6500,
-    image: 'https://via.placeholder.com/600x600/1a202c/ffffff?text=WINTER+PARKA',
+    image: 'https://via.placeholder.com/600x600/1f2937/ffffff?text=WINTER+PARKA',
     features: ['Утеплитель', 'Водоотталкивающая ткань', 'Капюшон']
   },
   {
@@ -61,7 +61,7 @@ export const products = [
     category: 'outerwear',
     description: 'Утепленная жилетка с логотипом',
     basePrice: 3200,
-    image: 'https://via.placeholder.com/600x600/3182ce/ffffff?text=TEAM+VEST',
+    image: 'https://via.placeholder.com/600x600/1d4ed8/ffffff?text=TEAM+VEST',
     features: ['Легкая', 'Практичная', 'Удобные карманы']
   },
   {
@@ -70,7 +70,7 @@ export const products = [
     category: 'jersey',
     description: 'Реплика игрового джерси для фанатов',
     basePrice: 2500,
-    image: 'https://via.placeholder.com/600x600/e53e3e/ffffff?text=FAN+JERSEY',
+    image: 'https://via.placeholder.com/600x600/b91c1c/ffffff?text=FAN+JERSEY',
     features: ['Точная копия', 'Комфортная ткань', 'Доступная цена']
   }
 ];
