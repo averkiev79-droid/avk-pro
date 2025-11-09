@@ -7,7 +7,7 @@ export const products = [
     category: 'jersey',
     description: 'Профессиональное хоккейное джерси с вашим логотипом',
     basePrice: 3500,
-    image: 'https://images.unsplash.com/photo-1670509162391-1c16e6d0bb83',
+    image: 'https://picsum.photos/seed/jersey1/600/600',
     features: ['Дышащая ткань', 'Прочные швы', 'Сублимационная печать', 'Любой дизайн']
   },
   {
@@ -16,7 +16,7 @@ export const products = [
     category: 'socks',
     description: 'Высокие гамаши с логотипом команды',
     basePrice: 800,
-    image: 'https://images.pexels.com/photos/793111/pexels-photo-793111.jpeg',
+    image: 'https://picsum.photos/seed/socks2/600/600',
     features: ['Эластичный материал', 'Яркие цвета', 'Долговечность']
   },
   {
@@ -25,7 +25,7 @@ export const products = [
     category: 'training',
     description: 'Комплект для тренировок в зале',
     basePrice: 2800,
-    image: 'https://images.unsplash.com/photo-1642643805244-21195333ac8c',
+    image: 'https://picsum.photos/seed/training3/600/600',
     features: ['Комфортная посадка', 'Влагоотведение', 'Фирменный стиль']
   },
   {
@@ -34,7 +34,7 @@ export const products = [
     category: 'accessories',
     description: 'Защитные чехлы для хоккейных шорт',
     basePrice: 1200,
-    image: 'https://images.pexels.com/photos/6468935/pexels-photo-6468935.jpeg',
+    image: 'https://picsum.photos/seed/accessories4/600/600',
     features: ['Прочный материал', 'Удобная конструкция']
   },
   {
@@ -43,7 +43,7 @@ export const products = [
     category: 'outerwear',
     description: 'Стильный бомбер с символикой команды',
     basePrice: 4500,
-    image: 'https://images.unsplash.com/photo-1669996160271-35f7abdc1563',
+    image: 'https://picsum.photos/seed/bomber5/600/600',
     features: ['Теплый и легкий', 'Современный дизайн', 'Вышивка логотипа']
   },
   {
@@ -52,7 +52,7 @@ export const products = [
     category: 'outerwear',
     description: 'Зимняя парка для болельщиков и команды',
     basePrice: 6500,
-    image: 'https://images.pexels.com/photos/8972131/pexels-photo-8972131.jpeg',
+    image: 'https://picsum.photos/seed/parka6/600/600',
     features: ['Утеплитель', 'Водоотталкивающая ткань', 'Капюшон']
   },
   {
@@ -61,7 +61,7 @@ export const products = [
     category: 'outerwear',
     description: 'Утепленная жилетка с логотипом',
     basePrice: 3200,
-    image: 'https://images.unsplash.com/photo-1648312773792-3db3b560c793',
+    image: 'https://picsum.photos/seed/vest7/600/600',
     features: ['Легкая', 'Практичная', 'Удобные карманы']
   },
   {
@@ -70,7 +70,7 @@ export const products = [
     category: 'jersey',
     description: 'Реплика игрового джерси для фанатов',
     basePrice: 2500,
-    image: 'https://images.unsplash.com/photo-1754583340212-5bddfda09f7e',
+    image: 'https://picsum.photos/seed/fanjersey8/600/600',
     features: ['Точная копия', 'Комфортная ткань', 'Доступная цена']
   }
 ];
