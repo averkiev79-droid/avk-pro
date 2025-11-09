@@ -34,7 +34,7 @@ const HomePage = () => {
             <div className="slide-in-right">
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1670509162391-1c16e6d0bb83" 
+                  src="https://picsum.photos/seed/hero-hockey/800/600" 
                   alt="Хоккейная команда"
                   className="rounded-lg shadow-2xl w-full h-auto"
                 />
