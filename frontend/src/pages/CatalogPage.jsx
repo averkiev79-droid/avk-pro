@@ -84,27 +84,27 @@ const CatalogPage = () => {
                 <p className="text-gray-400 text-sm mt-2">Попробуйте изменить параметры поиска</p>
               </Card>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
-                  <Card key={product.id} className="overflow-hidden hover:shadow-xl transition-shadow group border-none bg-white">
-                    <div className="aspect-square overflow-hidden bg-light">
+                  <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 group border border-gray-200 bg-white">
+                    <div className="aspect-square overflow-hidden bg-gray-100">
                       <img
                         src={product.image}
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
-                    <div className="p-6">
-                      <Badge className="mb-3 bg-taupe text-dark">
+                    <div className="p-5">
+                      <Badge className="mb-3 bg-slate-100 text-gray-700 border border-gray-200">
                         {categories.find(c => c.id === product.category)?.name}
                       </Badge>
-                      <h3 className="text-xl font-light mb-2">{product.name}</h3>
+                      <h3 className="text-lg font-bold mb-2 text-dark">{product.name}</h3>
                       <p className="text-sm text-gray-600 mb-4 line-clamp-2">{product.description}</p>
                       
                       <div className="space-y-2 mb-4">
                         {product.features.slice(0, 3).map((feature, idx) => (
                           <div key={idx} className="flex items-start gap-2 text-xs text-gray-600">
-                            <span className="text-sport-blue mt-1">✓</span>
+                            <span className="text-sport-blue mt-1 font-bold">✓</span>
                             <span>{feature}</span>
                           </div>
                         ))}
@@ -113,11 +113,11 @@ const CatalogPage = () => {
                       <div className="flex justify-between items-center pt-4 border-t border-gray-200">
                         <div>
                           <p className="text-xs text-gray-500 mb-1">от</p>
-                          <p className="text-2xl font-light text-sport-blue">{product.basePrice} ₽</p>
+                          <p className="text-xl font-bold text-sport-blue">{product.basePrice} ₽</p>
                         </div>
                         <Button 
                           onClick={() => handleAddToCart(product)}
-                          className="bg-sport-red hover:bg-sport-blue text-white transition-colors"
+                          className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 shadow-sm"
                         >
                           Заказать
                         </Button>
