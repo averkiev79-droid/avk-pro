@@ -10,7 +10,7 @@ const Footer = () => {
           {/* О компании */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img src={companyInfo.logo} alt="АВК" className="h-10 w-auto brightness-0 invert" />
+              <img src={companyInfo.logo} alt="АВК SPORT" className="h-10 w-auto brightness-0 invert" />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Профессиональное производство хоккейной формы и экипировки для команд любого уровня
