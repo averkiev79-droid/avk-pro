@@ -124,13 +124,13 @@ export const portfolio = [
 ];
 
 export const companyInfo = {
-  name: 'АВК',
-  fullName: 'АВК - Производство хоккейной экипировки',
+  name: 'АВК SPORT',
+  fullName: 'АВК SPORT - Производство хоккейной экипировки',
   description: 'Профессиональное производство хоккейной формы, экипировки и фирменной одежды для команд любого уровня',
   address: 'Санкт-Петербург, пр. Ветеранов 140',
   phone: '+7 (812) 648-17-49',
   email: 'info@avk-hockey.ru',
-  logo: 'https://customer-assets.emergentagent.com/job_7033b264-2db2-4f8d-9e16-886c3928ac72/artifacts/rhyakgsx_logo.jpg',
+  logo: 'https://customer-assets.emergentagent.com/job_ice-team-gear/artifacts/3358v90v_MashaGPT-Ai-Image%20%2813%29.png',
   workHours: 'Пн-Пт: 10:00-19:00, Сб: 11:00-17:00'
 };
 
