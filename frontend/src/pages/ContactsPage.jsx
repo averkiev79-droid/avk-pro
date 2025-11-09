@@ -92,7 +92,7 @@ const ContactsPage = () => {
               </div>
             </Card>
 
-            <Card className="p-6 border-none bg-white">
+            <Card className="p-6 border-none bg-white shadow-sm">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
                   <Clock className="text-white" size={20} />
@@ -100,7 +100,6 @@ const ContactsPage = () => {
                 <div>
                   <h3 className="text-lg font-light mb-1">Режим работы</h3>
                   <p className="text-dark text-xl">{companyInfo.workHours}</p>
-                  <p className="text-sm text-gray-500 mt-1">Воскресенье - выходной</p>
                 </div>
               </div>
             </Card>
