@@ -31,12 +31,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2563eb;
+  background: #4A5568;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #dc2626;
+  background: #2D3748;
 }
 
 /* Typography */
@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  color: #1A1A2E;
+  color: #2D3748;
   line-height: 1.6;
 }
 
@@ -109,43 +109,43 @@ body {
   padding: 64px 0;
 }
 
-/* Sport color utilities */
+/* Professional sport color utilities - more subdued */
 .text-sport-blue {
-  color: #1e3a8a;
+  color: #2C5282;
 }
 
 .text-sport-red {
-  color: #991b1b;
+  color: #9B2C2C;
 }
 
 .text-sport-orange {
-  color: #c2410c;
+  color: #C05621;
 }
 
 .text-dark {
-  color: #1A1A2E;
+  color: #1A202C;
 }
 
 .bg-sport-blue {
-  background-color: #1e3a8a;
+  background-color: #2C5282;
 }
 
 .bg-sport-red {
-  background-color: #991b1b;
+  background-color: #9B2C2C;
 }
 
 .bg-sport-orange {
-  background-color: #c2410c;
+  background-color: #C05621;
 }
 
 .bg-dark {
-  background-color: #1A1A2E;
+  background-color: #1A202C;
 }
 
 .bg-light {
-  background-color: #F8FAFC;
+  background-color: #F7FAFC;
 }
 
 .bg-ice {
-  background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
+  background: linear-gradient(135deg, #EDF2F7 0%, #E2E8F0 100%);
 }

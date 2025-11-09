@@ -127,11 +127,12 @@ export const companyInfo = {
   name: 'A.V.K. SPORT',
   fullName: 'A.V.K. SPORT - Производство хоккейной экипировки',
   description: 'Профессиональное производство хоккейной формы, экипировки и фирменной одежды для команд любого уровня',
-  address: 'Санкт-Петербург, пр. Ветеранов 140',
+  address: 'Санкт-Петербург, пр. Ветеранов 140 литГ',
   phone: '+7 (812) 648-17-49',
   email: 'info@avk-hockey.ru',
   logo: 'https://customer-assets.emergentagent.com/job_ice-team-gear/artifacts/ctcjnms4_%D0%A0%D0%B5%D0%B7%D0%B5%D1%80%D0%B2%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F_%D0%9B%D0%BE%D0%B3%D0%BE.png',
-  workHours: 'Пн-Пт: 10:00-19:00, Сб: 11:00-17:00'
+  workHours: 'Пн-Пт: 10:00-19:00, Сб: 11:00-17:00',
+  minOrder: 'Минимальная партия заказа - от 10 штук'
 };
 
 export const advantages = [
@@ -152,7 +153,7 @@ export const advantages = [
   },
   {
     title: 'Опт и розница',
-    description: 'Работаем с заказами любого объема',
+    description: 'Работаем с заказами от 10 штук',
     icon: 'Users'
   }
 ];
