@@ -55,20 +55,20 @@ const HomePage = () => {
 
       {/* Advantages Section */}
       <section className="section-padding bg-white">
-        <div className="container">
-          <h2 className="text-4xl font-bold text-center mb-12">Почему выбирают нас</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="container px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">Почему выбирают нас</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {advantages.map((advantage, index) => {
               const Icon = advantage.icon === 'Factory' ? Factory : 
                           advantage.icon === 'Zap' ? Zap :
                           advantage.icon === 'Palette' ? Palette : Users;
               return (
-                <Card key={index} className="p-6 text-center hover:shadow-xl transition-all border-none bg-gradient-to-b from-blue-50 to-white hover:scale-105">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-blue rounded-full mb-4">
-                    <Icon className="text-white" size={28} />
+                <Card key={index} className="p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 bg-gradient-to-b from-slate-50 to-white hover:scale-105">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-sport-blue rounded-full mb-4 shadow-sm">
+                    <Icon className="text-white" size={24} />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-dark">{advantage.title}</h3>
-                  <p className="text-gray-600 text-sm">{advantage.description}</p>
+                  <h3 className="text-lg font-bold mb-2 text-dark">{advantage.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{advantage.description}</p>
                 </Card>
               );
             })}
