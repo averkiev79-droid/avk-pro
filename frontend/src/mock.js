@@ -130,7 +130,7 @@ export const companyInfo = {
   address: 'Санкт-Петербург, пр. Ветеранов 140',
   phone: '+7 (812) 648-17-49',
   email: 'info@avk-hockey.ru',
-  logo: 'https://customer-assets.emergentagent.com/job_ice-team-gear/artifacts/3358v90v_MashaGPT-Ai-Image%20%2813%29.png',
+  logo: 'https://customer-assets.emergentagent.com/job_ice-team-gear/artifacts/0nmyfrrz_Logo.png',
   workHours: 'Пн-Пт: 10:00-19:00, Сб: 11:00-17:00'
 };
 
