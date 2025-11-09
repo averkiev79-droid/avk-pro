@@ -70,9 +70,15 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button asChild className="bg-sport-red hover:bg-sport-orange text-white transition-colors font-medium">
+          {/* CTA Button & Cart */}
+          <div className="hidden md:flex items-center gap-4">
+            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-sport-blue transition-colors">
+              <ShoppingCart size={24} />
+              <span className="absolute -top-1 -right-1 bg-sport-red text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                2
+              </span>
+            </Link>
+            <Button asChild className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-sm">
               <Link to="/order">Сделать заказ</Link>
             </Button>
           </div>
