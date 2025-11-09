@@ -119,8 +119,8 @@ const ContactsPage = () => {
 
           {/* Форма обратной связи */}
           <div>
-            <Card className="p-8 border-none bg-white sticky top-24">
-              <h2 className="text-3xl font-light mb-6">Напишите нам</h2>
+            <Card className="p-6 sm:p-8 border border-gray-200 bg-white sticky top-24 shadow-md">
+              <h2 className="text-2xl sm:text-3xl font-light mb-6">Напишите нам</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">Ваше имя *</Label>
@@ -130,6 +130,7 @@ const ContactsPage = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     required
+                    className="border-gray-300"
                   />
                 </div>
 
@@ -142,6 +143,7 @@ const ContactsPage = () => {
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     required
+                    className="border-gray-300"
                   />
                 </div>
 
@@ -153,12 +155,13 @@ const ContactsPage = () => {
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    className="border-gray-300"
                   />
                 </div>
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-sport-blue hover:bg-sport-red text-white py-6 text-lg transition-colors"
+                  className="w-full bg-sport-blue hover:bg-sport-red text-white py-6 text-base sm:text-lg transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   <Send className="mr-2" size={20} />
                   Отправить сообщение
