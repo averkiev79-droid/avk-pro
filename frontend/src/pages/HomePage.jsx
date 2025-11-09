@@ -34,7 +34,7 @@ const HomePage = () => {
             <div className="slide-in-right">
               <div className="relative">
                 <img 
-                  src="https://picsum.photos/seed/hero-hockey/800/600" 
+                  src="https://via.placeholder.com/800x600/0066cc/ffffff?text=HOCKEY+TEAM+PHOTO" 
                   alt="Хоккейная команда"
                   className="rounded-lg shadow-2xl w-full h-auto"
                 />
