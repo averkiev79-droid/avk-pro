@@ -111,15 +111,15 @@ body {
 
 /* Sport color utilities */
 .text-sport-blue {
-  color: #2563eb;
+  color: #1e3a8a;
 }
 
 .text-sport-red {
-  color: #dc2626;
+  color: #991b1b;
 }
 
 .text-sport-orange {
-  color: #ea580c;
+  color: #c2410c;
 }
 
 .text-dark {
@@ -127,15 +127,15 @@ body {
 }
 
 .bg-sport-blue {
-  background-color: #2563eb;
+  background-color: #1e3a8a;
 }
 
 .bg-sport-red {
-  background-color: #dc2626;
+  background-color: #991b1b;
 }
 
 .bg-sport-orange {
-  background-color: #ea580c;
+  background-color: #c2410c;
 }
 
 .bg-dark {
@@ -143,9 +143,9 @@ body {
 }
 
 .bg-light {
-  background-color: #F0F4F8;
+  background-color: #F8FAFC;
 }
 
 .bg-ice {
-  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
 }
