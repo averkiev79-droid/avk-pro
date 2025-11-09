@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { products, categories } from '../mock';
 import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
