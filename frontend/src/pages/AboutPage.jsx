@@ -14,13 +14,13 @@ const AboutPage = () => {
     <div className="about-page bg-white min-h-screen">
       {/* Header */}
       <section className="bg-sport-red text-white py-16">
-        <div className="container">
-          <h1 className="text-5xl font-light mb-4">О компании</h1>
-          <p className="text-lg opacity-90">Профессиональное производство хоккейной экипировки</p>
+        <div className="container px-4 sm:px-6">
+          <h1 className="text-4xl sm:text-5xl font-light mb-4">О компании</h1>
+          <p className="text-base sm:text-lg opacity-90">Профессиональное производство хоккейной экипировки</p>
         </div>
       </section>
 
-      <div className="container py-12">
+      <div className="container py-12 px-4 sm:px-6">
         {/* О компании */}
         <section className="mb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
