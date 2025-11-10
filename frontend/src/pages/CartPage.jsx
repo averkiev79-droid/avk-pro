@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -7,23 +7,41 @@ import { Trash2, Plus, Minus, ShoppingCart, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 
 const CartPage = () => {
-  // Пример данных корзины (позже будет из состояния приложения или контекста)
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: 'Хоккейное джерси Pro',
-      price: 3500,
-      quantity: 10,
-      image: 'https://via.placeholder.com/150x150/2C5282/ffffff?text=JERSEY'
-    },
-    {
-      id: 2,
-      name: 'Хоккейные гамаши',
-      price: 800,
-      quantity: 15,
-      image: 'https://via.placeholder.com/150x150/2C5282/ffffff?text=SOCKS'
+  // Загрузка корзины из localStorage
+  const getInitialCart = () => {
+    try {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+        return JSON.parse(savedCart);
+      }
+    } catch (error) {
+      console.error('Error loading cart:', error);
     }
-  ]);
+    // Пример данных корзины только при первом запуске
+    return [
+      {
+        id: 1,
+        name: 'Хоккейное джерси Pro',
+        price: 3500,
+        quantity: 10,
+        image: 'https://via.placeholder.com/150x150/2C5282/ffffff?text=JERSEY'
+      },
+      {
+        id: 2,
+        name: 'Хоккейные гамаши',
+        price: 800,
+        quantity: 15,
+        image: 'https://via.placeholder.com/150x150/2C5282/ffffff?text=SOCKS'
+      }
+    ];
+  };
+
+  const [cartItems, setCartItems] = useState(getInitialCart);
+
+  // Сохранение корзины в localStorage при изменении
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity < 10) {
