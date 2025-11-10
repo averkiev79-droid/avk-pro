@@ -100,26 +100,27 @@ const MediaPage = () => {
 
       {/* Uploaded Files Grid */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Загруженные файлы ({uploadedFiles.length})</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-gray-900">Загруженные файлы ({uploadedFiles.length})</h2>
         
         {uploadedFiles.length === 0 ? (
-          <Card className="p-12 text-center border border-gray-200">
-            <Image className="mx-auto mb-4 text-gray-400" size={64} />
+          <div className="p-12 text-center border border-gray-200 rounded-md bg-gray-50">
+            <Image className="mx-auto mb-4 text-gray-400" size={64} strokeWidth={1.5} />
             <p className="text-gray-500">Нет загруженных файлов</p>
-          </Card>
+            <p className="text-sm text-gray-400 mt-2">Загрузите изображения с помощью формы выше</p>
+          </div>
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {uploadedFiles.map((file, index) => (
-              <Card key={index} className="overflow-hidden border border-gray-200 group">
+              <div key={index} className="overflow-hidden border border-gray-200 rounded-md group bg-white">
                 <div className="aspect-square bg-gray-100 relative overflow-hidden">
                   <img
                     src={file.url}
                     alt={file.filename}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-4">
-                  <p className="text-sm font-medium text-gray-700 truncate mb-3">
+                  <p className="text-sm font-medium text-gray-900 truncate mb-3">
                     {file.filename}
                   </p>
                   <div className="flex gap-2">
@@ -127,7 +128,7 @@ const MediaPage = () => {
                       size="sm"
                       variant="outline"
                       onClick={() => copyToClipboard(file.url)}
-                      className="flex-1 border-gray-300"
+                      className="flex-1 border-gray-300 hover:bg-gray-100 text-gray-900"
                     >
                       {copiedUrl === file.url ? (
                         <>
@@ -143,7 +144,7 @@ const MediaPage = () => {
                     </Button>
                   </div>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         )}
