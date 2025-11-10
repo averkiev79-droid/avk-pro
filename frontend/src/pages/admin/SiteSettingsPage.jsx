@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from '../../components/ui/card';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
@@ -17,11 +17,6 @@ const SiteSettingsPage = () => {
   });
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState('');
-  const fileInputRefs = {
-    hero_image: useRef(null),
-    about_image: useRef(null),
-    about_secondary_image: useRef(null)
-  };
 
   useEffect(() => {
     fetchSettings();
