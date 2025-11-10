@@ -38,8 +38,11 @@ const AdminLayout = () => {
     { name: 'Продукция', href: '/admin/products', icon: Package },
     { name: 'Заказы', href: '/admin/orders', icon: ShoppingCart },
     { name: 'Портфолио', href: '/admin/portfolio', icon: FolderOpen },
+    { name: 'Отзывы', href: '/admin/reviews', icon: MessageSquare },
+    { name: 'Медиа', href: '/admin/media', icon: ImageIcon },
+    { name: 'Настройки сайта', href: '/admin/site-settings', icon: Settings },
+    { name: 'Юридическая инфо', href: '/admin/legal', icon: FileText },
     { name: 'Пользователи', href: '/admin/users', icon: Users },
-    { name: 'Настройки', href: '/admin/settings', icon: Settings },
   ];
 
   const isActive = (path, exact = false) => {
