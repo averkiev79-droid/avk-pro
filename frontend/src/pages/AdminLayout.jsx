@@ -150,6 +150,7 @@ const AdminLayout = () => {
             <Route path="products" element={<ProductsPage />} />
             <Route path="orders" element={<OrdersPage />} />
             <Route path="portfolio" element={<PortfolioPage />} />
+            <Route path="hockey-clubs" element={<HockeyClubsPage />} />
             <Route path="reviews" element={<ReviewsManagementPage />} />
             <Route path="media" element={<MediaPage />} />
             <Route path="site-settings" element={<SiteSettingsPage />} />
