@@ -40,6 +40,7 @@ const AdminLayout = () => {
     { name: 'Продукция', href: '/admin/products', icon: Package },
     { name: 'Заказы', href: '/admin/orders', icon: ShoppingCart },
     { name: 'Портфолио', href: '/admin/portfolio', icon: FolderOpen },
+    { name: 'Хоккейные клубы', href: '/admin/hockey-clubs', icon: Shield },
     { name: 'Отзывы', href: '/admin/reviews', icon: MessageSquare },
     { name: 'Медиа', href: '/admin/media', icon: ImageIcon },
     { name: 'Настройки сайта', href: '/admin/site-settings', icon: Settings },
