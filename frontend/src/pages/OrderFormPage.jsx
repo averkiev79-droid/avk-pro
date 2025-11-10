@@ -106,20 +106,21 @@ const OrderFormPage = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Контактная информация */}
                 <div>
-                  <h3 className="text-xl font-light mb-4 pb-2 border-b border-gray-200">Контактная информация</h3>
+                  <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Контактная информация</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Ваше имя *</Label>
+                      <Label htmlFor="name" className="text-sm font-medium text-gray-900">Ваше имя *</Label>
                       <Input
                         id="name"
                         placeholder="Иван Иванов"
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
                         required
+                        className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Телефон *</Label>
+                      <Label htmlFor="phone" className="text-sm font-medium text-gray-900">Телефон *</Label>
                       <Input
                         id="phone"
                         type="tel"
@@ -127,33 +128,36 @@ const OrderFormPage = () => {
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
                         required
+                        className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                       />
                     </div>
                   </div>
                   <div className="space-y-2 mt-4">
-                    <Label htmlFor="email">Email (опционально)</Label>
+                    <Label htmlFor="email" className="text-sm font-medium text-gray-900">Email (опционально)</Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="example@mail.ru"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                     />
                   </div>
                   <div className="space-y-2 mt-4">
-                    <Label htmlFor="teamName">Название команды (опционально)</Label>
+                    <Label htmlFor="teamName" className="text-sm font-medium text-gray-900">Название команды (опционально)</Label>
                     <Input
                       id="teamName"
                       placeholder="Хоккейный клуб СПб"
                       value={formData.teamName}
                       onChange={(e) => setFormData({...formData, teamName: e.target.value})}
+                      className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                     />
                   </div>
                 </div>
 
                 {/* Детали заказа */}
                 <div>
-                  <h3 className="text-xl font-light mb-4 pb-2 border-b border-gray-200">Детали заказа</h3>
+                  <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Детали заказа</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="productType">Что хотите заказать? *</Label>
