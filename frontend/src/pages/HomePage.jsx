@@ -104,98 +104,56 @@ const HomePage = () => {
       </section>
 
       {/* Hockey Clubs Carousel Section */}
-      <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
-        <div className="container max-w-7xl mx-auto px-4 mb-12">
-          <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4 tracking-tight">
-              Работаем с <span className="italic font-serif">известными</span> клубами
-            </h2>
-            <p className="text-center text-gray-600 max-w-2xl mx-auto">
-              Доверие профессиональных команд — наша лучшая рекомендация
-            </p>
-          </AnimatedSection>
-        </div>
-        
-        <div className="relative">
-          <div className="flex animate-scroll">
-            {/* First set of clubs */}
-            <div className="flex items-center gap-6 px-3 flex-shrink-0">
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
-                  <div className="text-sm text-gray-600">Стрельна</div>
-                </div>
+      {hockeyClubs.length > 0 && (
+        <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
+          <div className="container max-w-7xl mx-auto px-4 mb-12">
+            <AnimatedSection>
+              <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4 tracking-tight">
+                Работаем с <span className="italic font-serif">известными</span> клубами
+              </h2>
+              <p className="text-center text-gray-600 max-w-2xl mx-auto">
+                Доверие профессиональных команд — наша лучшая рекомендация
+              </p>
+            </AnimatedSection>
+          </div>
+          
+          <div className="relative">
+            <div className="flex animate-scroll">
+              {/* First set of clubs */}
+              <div className="flex items-center gap-6 px-3 flex-shrink-0">
+                {hockeyClubs.map((club) => (
+                  <div key={club.id} className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                    {club.logo_url ? (
+                      <img src={club.logo_url} alt={club.name} className="max-w-full max-h-full object-contain" />
+                    ) : (
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-gray-900 mb-1">{club.name}</div>
+                        <div className="text-sm text-gray-600">{club.subtitle}</div>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
               
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
-                  <div className="text-sm text-gray-600">Петергоф</div>
-                </div>
-              </div>
-              
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">ХК</div>
-                  <div className="text-sm text-gray-600">Викинги</div>
-                </div>
-              </div>
-              
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
-                  <div className="text-sm text-gray-600">Звезда</div>
-                </div>
-              </div>
-              
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">ХК</div>
-                  <div className="text-sm text-gray-600">Красные Тигры</div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Duplicate set for seamless loop */}
-            <div className="flex items-center gap-6 px-3 flex-shrink-0">
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
-                  <div className="text-sm text-gray-600">Стрельна</div>
-                </div>
-              </div>
-              
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
-                  <div className="text-sm text-gray-600">Петергоф</div>
-                </div>
-              </div>
-              
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">ХК</div>
-                  <div className="text-sm text-gray-600">Викинги</div>
-                </div>
-              </div>
-              
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
-                  <div className="text-sm text-gray-600">Звезда</div>
-                </div>
-              </div>
-              
-              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-1">ХК</div>
-                  <div className="text-sm text-gray-600">Красные Тигры</div>
-                </div>
+              {/* Duplicate set for seamless loop */}
+              <div className="flex items-center gap-6 px-3 flex-shrink-0">
+                {hockeyClubs.map((club) => (
+                  <div key={`${club.id}-duplicate`} className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                    {club.logo_url ? (
+                      <img src={club.logo_url} alt={club.name} className="max-w-full max-h-full object-contain" />
+                    ) : (
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-gray-900 mb-1">{club.name}</div>
+                        <div className="text-sm text-gray-600">{club.subtitle}</div>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Advantages Section */}
       <section className="py-20 bg-gray-50">
