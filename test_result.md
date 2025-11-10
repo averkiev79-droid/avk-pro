@@ -122,7 +122,7 @@ frontend:
   - task: "Short Par 4 style redesign"
     implemented: true
     working: true
-    file: "frontend/src/index.css, frontend/src/components/Header.jsx, frontend/src/components/Footer.jsx, frontend/src/pages/HomePage.jsx, frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ContactsPage.jsx, frontend/src/pages/AboutPage.jsx"
+    file: "frontend/src/index.css, frontend/src/components/Header.jsx, frontend/src/components/Footer.jsx, frontend/src/pages/HomePage.jsx, frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ContactsPage.jsx, frontend/src/pages/AboutPage.jsx, frontend/src/pages/OrderFormPage.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
@@ -130,6 +130,9 @@ frontend:
         - working: true
           agent: "main"
           comment: "Complete redesign implemented: Updated colors to black/white/gray palette, new typography with Inter and Playfair Display fonts, minimalist design, clean layout, updated all major pages"
+        - working: true
+          agent: "main"
+          comment: "OrderFormPage styling completed: Logo upload section updated with black button styling, all form elements now consistent with Short Par 4 design, auto-scroll to top working"
 
 metadata:
   created_by: "main_agent"
