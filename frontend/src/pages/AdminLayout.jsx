@@ -9,7 +9,10 @@ import {
   Settings, 
   LogOut,
   Menu,
-  X
+  X,
+  Image as ImageIcon,
+  MessageSquare,
+  FileText
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -19,6 +22,10 @@ import PortfolioPage from './admin/PortfolioPage';
 import UsersPage from './admin/UsersPage';
 import SettingsPage from './admin/SettingsPage';
 import DashboardPage from './admin/DashboardPage';
+import MediaPage from './admin/MediaPage';
+import ReviewsManagementPage from './admin/ReviewsManagementPage';
+import SiteSettingsPage from './admin/SiteSettingsPage';
+import LegalPagesPage from './admin/LegalPagesPage';
 import { companyInfo } from '../mock';
 
 const AdminLayout = () => {
