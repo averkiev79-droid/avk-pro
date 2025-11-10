@@ -10,43 +10,40 @@ const HomePage = () => {
   return (
     <div className="home-page">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-white to-gray-50 py-20 lg:py-32 overflow-hidden">
-        <div className="container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="fade-in px-4 sm:px-0">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Профессиональная<br />
-                <span className="text-sport-blue">хоккейная экипировка</span>
+      <section className="relative bg-white py-16 md:py-24 lg:py-32 overflow-hidden">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
+                Профессиональная <span className="italic font-serif">хоккейная</span> экипировка
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed">
-                Производим форму для детских и взрослых команд, родителей и болельщиков. 
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                Производим форму для детских и взрослых команд. 
                 Индивидуальный дизайн, быстрые сроки, отличное качество.
               </p>
-              <div className="bg-blue-50 border-l-4 border-sport-blue p-4 mb-8 rounded">
-                <p className="text-sm font-medium text-gray-700">
-                  ℹ️ Минимальная партия заказа - от 10 штук
+              <div className="bg-gray-50 border border-gray-200 p-4 mb-8 rounded-md max-w-xl mx-auto lg:mx-0">
+                <p className="text-sm text-gray-700">
+                  Минимальная партия заказа - <span className="font-semibold">от 10 штук</span>
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-md hover:shadow-lg">
-                  <Link to="/order">Сделать заказ</Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button asChild size="lg" className="bg-gray-900 hover:bg-gray-800 text-white px-10 py-7 rounded-md transition-colors font-medium text-base">
+                  <Link to="/order">Заказать форму</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-2 border-sport-blue text-sport-blue hover:bg-sport-blue hover:text-white transition-all duration-300 font-medium">
+                <Button asChild size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-10 py-7 rounded-md transition-colors font-medium text-base">
                   <Link to="/catalog">Смотреть каталог</Link>
                 </Button>
               </div>
             </div>
-            <div className="slide-in-right px-4 sm:px-0">
-              <div className="relative">
-                <img 
-                  src="https://via.placeholder.com/800x600/2C5282/ffffff?text=HOCKEY+TEAM+PHOTO" 
-                  alt="Хоккейная команда"
-                  className="rounded-lg shadow-xl w-full h-auto"
-                />
-                <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-white p-4 sm:p-6 rounded-lg shadow-lg border-t-4 border-sport-blue">
-                  <div className="text-3xl sm:text-4xl font-bold text-sport-blue mb-1">14+</div>
-                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
-                </div>
+            <div className="relative">
+              <img 
+                src="https://via.placeholder.com/800x800/1a1a1a/ffffff?text=HOCKEY+TEAM" 
+                alt="Хоккейная команда"
+                className="rounded-md w-full h-auto"
+              />
+              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-md shadow-lg border border-gray-200">
+                <div className="text-5xl font-bold text-gray-900 mb-1">14+</div>
+                <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
               </div>
             </div>
           </div>
