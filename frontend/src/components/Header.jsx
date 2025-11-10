@@ -21,9 +21,28 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+    <header className="sticky top-0 z-50 bg-white shadow-md">
+      {/* Top bar */}
+      <div className="bg-dark text-white py-2">
+        <div className="container">
+          <div className="flex justify-between items-center text-sm">
+            <div className="flex items-center gap-6">
+              <a href={`tel:${companyInfo.phone}`} className="flex items-center gap-2 hover:text-sport-blue transition-colors">
+                <Phone size={16} />
+                <span>{companyInfo.phone}</span>
+              </a>
+              <a href={`mailto:${companyInfo.email}`} className="flex items-center gap-2 hover:text-sport-blue transition-colors hidden md:flex">
+                <Mail size={16} />
+                <span>{companyInfo.email}</span>
+              </a>
+            </div>
+            <div className="text-sm">{companyInfo.workHours}</div>
+          </div>
+        </div>
+      </div>
+
       {/* Main header */}
-      <div className="container py-6">
+      <div className="container py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
