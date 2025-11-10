@@ -348,15 +348,38 @@ async def serve_upload(filename: str):
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="File not found")
     
+    # Determine MIME type based on extension
+    extension = file_path.suffix.lower()
+    mime_types = {
+        '.jpg': 'image/jpeg',
+        '.jpeg': 'image/jpeg',
+        '.png': 'image/png',
+        '.gif': 'image/gif',
+        '.webp': 'image/webp',
+        '.svg': 'image/svg+xml',
+    }
+    media_type = mime_types.get(extension, 'application/octet-stream')
+    
     return FileResponse(
         file_path,
-        media_type="image/jpeg",  # You might want to determine this based on file extension
+        media_type=media_type,
         headers={
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS",
             "Access-Control-Allow-Headers": "*",
+            "Cross-Origin-Resource-Policy": "cross-origin",
         }
     )
+
+# OPTIONS handler for CORS preflight
+@app.options("/uploads/{filename}")
+async def serve_upload_options(filename: str):
+    return {
+        "Allow": "GET, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "*",
+    }
 
 # Include the router in the main app
 app.include_router(api_router)
