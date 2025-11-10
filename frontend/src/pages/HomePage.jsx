@@ -40,6 +40,21 @@ const ParallaxImage = ({ src, alt, className = '', speed = 0.3 }) => {
 
 const HomePage = () => {
   const featuredProducts = products.slice(0, 4);
+  const [hockeyClubs, setHockeyClubs] = React.useState([]);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+
+  React.useEffect(() => {
+    const fetchClubs = async () => {
+      try {
+        const response = await fetch(`${backendUrl}/api/hockey-clubs`);
+        const data = await response.json();
+        setHockeyClubs(data);
+      } catch (error) {
+        console.error('Failed to fetch hockey clubs:', error);
+      }
+    };
+    fetchClubs();
+  }, [backendUrl]);
 
   return (
     <div className="home-page">
