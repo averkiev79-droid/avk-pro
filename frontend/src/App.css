@@ -109,46 +109,43 @@ body {
   padding: 64px 0;
 }
 
-/* Premium luxury color utilities */
-.text-gold {
-  color: #D4AF37;
+/* Professional sport color utilities - more subdued */
+.text-sport-blue {
+  color: #2C5282;
 }
 
-.text-copper {
-  color: #B87333;
+.text-sport-red {
+  color: #9B2C2C;
+}
+
+.text-sport-orange {
+  color: #C05621;
 }
 
 .text-dark {
-  color: #1A1A2E;
+  color: #1A202C;
 }
 
-.text-muted {
-  color: #6B7280;
+.bg-sport-blue {
+  background-color: #2C5282;
 }
 
-.bg-gold {
-  background-color: #D4AF37;
+.bg-sport-red {
+  background-color: #9B2C2C;
 }
 
-.bg-copper {
-  background-color: #B87333;
+.bg-sport-orange {
+  background-color: #C05621;
 }
 
 .bg-dark {
-  background-color: #1A1A2E;
+  background-color: #1A202C;
 }
 
 .bg-light {
-  background-color: #FAFAFA;
+  background-color: #F7FAFC;
 }
 
-.bg-luxury {
-  background: linear-gradient(135deg, #1A1A2E 0%, #2D2D44 100%);
-}
-
-/* Italic accent class for luxury feel */
-.italic-accent {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 400;
+.bg-ice {
+  background: linear-gradient(135deg, #EDF2F7 0%, #E2E8F0 100%);
 }
