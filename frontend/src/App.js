@@ -39,6 +39,11 @@ function App() {
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contacts" element={<ContactsPage />} />
                   <Route path="/cart" element={<CartPage />} />
+                  <Route path="/privacy" element={<LegalPage />} />
+                  <Route path="/terms" element={<LegalPage />} />
+                  <Route path="/requisites" element={<LegalPage />} />
+                  <Route path="/cookies" element={<LegalPage />} />
+                  <Route path="/legal/:pageType" element={<LegalPage />} />
                 </Routes>
               </main>
               <Footer />
