@@ -235,12 +235,12 @@ const OrderFormPage = () => {
                 </div>
 
                 {/* Submit */}
-                <div className="pt-4">
+                <div className="pt-6">
                   <Button 
                     type="submit" 
-                    className="w-full bg-sport-blue hover:bg-sport-red text-white py-6 text-lg transition-colors"
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-white py-7 text-base rounded-md transition-colors font-medium"
                   >
-                    <Send className="mr-2" size={20} />
+                    <Send className="mr-2" size={20} strokeWidth={1.5} />
                     Отправить заявку
                   </Button>
                   <p className="text-xs text-gray-500 text-center mt-4">
@@ -248,7 +248,7 @@ const OrderFormPage = () => {
                   </p>
                 </div>
               </form>
-            </Card>
+            </div>
           )}
         </div>
       </div>
