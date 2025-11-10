@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Label } from '../components/ui/label';
@@ -22,6 +22,11 @@ const OrderFormPage = () => {
 
   const [logoFileName, setLogoFileName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
