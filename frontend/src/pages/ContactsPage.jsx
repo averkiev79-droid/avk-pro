@@ -38,74 +38,74 @@ const ContactsPage = () => {
   return (
     <div className="contacts-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-sport-red text-white py-16">
-        <div className="container px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl font-light mb-4">Контакты</h1>
-          <p className="text-base sm:text-lg opacity-90">Свяжитесь с нами удобным для вас способом</p>
+      <section className="bg-gray-900 text-white py-20">
+        <div className="container max-w-7xl mx-auto px-4">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight"><span className="italic font-serif">Свяжитесь</span> с нами</h1>
+          <p className="text-lg text-gray-300">Мы всегда готовы ответить на ваши вопросы</p>
         </div>
       </section>
 
-      <div className="container py-12">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <div className="container max-w-7xl mx-auto py-16 px-4">
+        <div className="grid lg:grid-cols-2 gap-16">
           {/* Контактная информация */}
-          <div className="space-y-6">
-            <Card className="p-6 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center shadow-sm">
-                  <Phone className="text-white" size={20} />
+          <div className="space-y-8">
+            <div className="bg-gray-50 p-8 rounded-md border border-gray-200">
+              <div className="flex items-start gap-6">
+                <div className="flex-shrink-0 w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center">
+                  <Phone className="text-white" size={22} strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-light mb-1">Телефон</h3>
-                  <a href={`tel:${companyInfo.phone}`} className="text-sport-blue hover:text-sport-red transition-colors text-xl">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900">Телефон</h3>
+                  <a href={`tel:${companyInfo.phone}`} className="text-gray-900 hover:text-gray-600 transition-colors text-xl font-medium">
                     {companyInfo.phone}
                   </a>
-                  <p className="text-sm text-gray-500 mt-1">Позвоните нам в рабочее время</p>
+                  <p className="text-sm text-gray-600 mt-2">Позвоните нам в рабочее время</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
-            <Card className="p-6 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center shadow-sm">
-                  <Mail className="text-white" size={20} />
+            <div className="bg-gray-50 p-8 rounded-md border border-gray-200">
+              <div className="flex items-start gap-6">
+                <div className="flex-shrink-0 w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center">
+                  <Mail className="text-white" size={22} strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-light mb-1">Email</h3>
-                  <a href={`mailto:${companyInfo.email}`} className="text-sport-blue hover:text-sport-red transition-colors text-xl break-all">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900">Email</h3>
+                  <a href={`mailto:${companyInfo.email}`} className="text-gray-900 hover:text-gray-600 transition-colors text-xl font-medium break-all">
                     {companyInfo.email}
                   </a>
-                  <p className="text-sm text-gray-500 mt-1">Напишите нам письмо</p>
+                  <p className="text-sm text-gray-600 mt-2">Напишите нам письмо</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
-            <Card className="p-6 border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center shadow-sm">
-                  <MapPin className="text-white" size={20} />
+            <div className="bg-gray-50 p-8 rounded-md border border-gray-200">
+              <div className="flex items-start gap-6">
+                <div className="flex-shrink-0 w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center">
+                  <MapPin className="text-white" size={22} strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-light mb-1">Адрес</h3>
-                  <p className="text-dark text-xl mb-1">{companyInfo.address}</p>
-                  <p className="text-sm text-gray-500">Приезжайте к нам в офис</p>
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900">Адрес</h3>
+                  <p className="text-gray-900 text-xl font-medium mb-2">{companyInfo.address}</p>
+                  <p className="text-sm text-gray-600">Приезжайте к нам в офис</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
-            <Card className="p-6 border-none bg-white shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-sport-blue rounded-full flex items-center justify-center">
-                  <Clock className="text-white" size={20} />
+            <div className="bg-gray-50 p-8 rounded-md border border-gray-200">
+              <div className="flex items-start gap-6">
+                <div className="flex-shrink-0 w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center">
+                  <Clock className="text-white" size={22} strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-light mb-1">Режим работы</h3>
-                  <p className="text-dark text-xl">{companyInfo.workHours}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900">Режим работы</h3>
+                  <p className="text-gray-900 text-xl font-medium">{companyInfo.workHours}</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Карта */}
-            <Card className="p-0 overflow-hidden border-none">
+            <div className="overflow-hidden rounded-md border border-gray-200">
               <iframe
                 src="https://yandex.ru/map-widget/v1/?um=constructor%3A5f8e3c3c8c8e8c8e8c8e8c8e8c8e8c8e&amp;source=constructor"
                 width="100%"
@@ -114,28 +114,28 @@ const ContactsPage = () => {
                 className="w-full"
                 title="Карта"
               ></iframe>
-            </Card>
+            </div>
           </div>
 
           {/* Форма обратной связи */}
           <div>
-            <Card className="p-6 sm:p-8 border border-gray-200 bg-white sticky top-24 shadow-md">
-              <h2 className="text-2xl sm:text-3xl font-light mb-6">Напишите нам</h2>
+            <div className="bg-white p-8 sm:p-10 border border-gray-200 rounded-md sticky top-24">
+              <h2 className="text-3xl font-bold mb-8 tracking-tight">Напишите <span className="italic font-serif">нам</span></h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Ваше имя *</Label>
+                  <Label htmlFor="name" className="text-sm font-medium text-gray-900">Ваше имя *</Label>
                   <Input
                     id="name"
                     placeholder="Иван Иванов"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     required
-                    className="border-gray-300"
+                    className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Телефон *</Label>
+                  <Label htmlFor="phone" className="text-sm font-medium text-gray-900">Телефон *</Label>
                   <Input
                     id="phone"
                     type="tel"
@@ -143,31 +143,31 @@ const ContactsPage = () => {
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     required
-                    className="border-gray-300"
+                    className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Сообщение (опционально)</Label>
+                  <Label htmlFor="message" className="text-sm font-medium text-gray-900">Сообщение (опционально)</Label>
                   <Textarea
                     id="message"
                     placeholder="Расскажите о вашем запросе..."
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="border-gray-300"
+                    className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                   />
                 </div>
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-sport-blue hover:bg-sport-red text-white py-6 text-base sm:text-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="w-full bg-gray-900 hover:bg-gray-800 text-white py-6 text-base rounded-md transition-colors font-medium"
                 >
-                  <Send className="mr-2" size={20} />
+                  <Send className="mr-2" size={18} strokeWidth={1.5} />
                   Отправить сообщение
                 </Button>
               </form>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
