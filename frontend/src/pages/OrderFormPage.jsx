@@ -83,24 +83,26 @@ const OrderFormPage = () => {
   return (
     <div className="order-form-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-sport-red text-white py-16">
-        <div className="container">
-          <h1 className="text-5xl font-light mb-4">Оформление заказа</h1>
-          <p className="text-lg opacity-90">Заполните форму, и мы свяжемся с вами для уточнения деталей</p>
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 border-b border-gray-200">
+        <div className="container max-w-7xl mx-auto px-4">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight text-gray-900">
+            Оформление <span className="italic font-serif text-gray-700">заказа</span>
+          </h1>
+          <p className="text-lg text-gray-600">Заполните форму, и мы свяжемся с вами для уточнения деталей</p>
         </div>
       </section>
 
-      <div className="container py-12">
+      <div className="container max-w-7xl mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
           {isSubmitted ? (
-            <Card className="p-12 text-center border-none bg-white">
-              <CheckCircle className="text-green-500 mx-auto mb-4" size={64} />
-              <h2 className="text-3xl font-light mb-4 text-sport-blue">Спасибо за заявку!</h2>
-              <p className="text-gray-600 mb-2">Ваша заявка принята в работу.</p>
+            <div className="p-12 text-center bg-white border border-gray-200 rounded-md">
+              <CheckCircle className="text-green-500 mx-auto mb-6" size={64} strokeWidth={1.5} />
+              <h2 className="text-3xl font-bold mb-4 text-gray-900 tracking-tight">Спасибо за заявку!</h2>
+              <p className="text-gray-600 mb-2 text-lg">Ваша заявка принята в работу.</p>
               <p className="text-gray-600">Наш менеджер свяжется с вами в течение 1 рабочего дня.</p>
-            </Card>
+            </div>
           ) : (
-            <Card className="p-8 border-none bg-white">
+            <div className="p-8 bg-white border border-gray-200 rounded-md">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Контактная информация */}
                 <div>
