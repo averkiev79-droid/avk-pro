@@ -71,10 +71,11 @@ const HomePage = () => {
             </AnimatedSection>
             <AnimatedSection delay={0.2} className="relative">
               <div className="relative">
-                <img 
+                <ParallaxImage
                   src="https://via.placeholder.com/800x800/1a1a1a/ffffff?text=" 
                   alt="Хоккейная команда"
-                  className="rounded-md w-full h-auto parallax-image"
+                  className="w-full h-auto"
+                  speed={0.3}
                 />
                 <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-md shadow-lg border border-gray-200 z-10">
                   <div className="text-5xl font-bold text-gray-900 mb-1">14+</div>
