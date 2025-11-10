@@ -128,35 +128,39 @@ const HomePage = () => {
       {/* Featured Products */}
       <section className="py-20 bg-white">
         <div className="container max-w-7xl mx-auto px-4">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">Популярная <span className="italic font-serif">продукция</span></h2>
-            <Button asChild variant="ghost" className="text-gray-900 hover:text-gray-600 font-medium transition-all">
-              <Link to="/catalog" className="flex items-center gap-2">
-                Весь каталог <ArrowRight size={18} strokeWidth={1.5} />
-              </Link>
-            </Button>
-          </div>
+          <AnimatedSection>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">Популярная <span className="italic font-serif">продукция</span></h2>
+              <Button asChild variant="ghost" className="text-gray-900 hover:text-gray-600 font-medium transition-all">
+                <Link to="/catalog" className="flex items-center gap-2">
+                  Весь каталог <ArrowRight size={18} strokeWidth={1.5} />
+                </Link>
+              </Button>
+            </div>
+          </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <Link key={product.id} to={`/product/${product.id}`}>
-                <div className="overflow-hidden transition-all duration-300 group cursor-pointer">
-                  <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md">
-                    <img 
-                      src={product.image} 
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2 text-gray-900 group-hover:text-gray-600 transition-colors">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-base font-semibold text-gray-900">от {product.basePrice} ₽</span>
-                      <span className="text-sm font-medium text-gray-900 group-hover:underline">Подробнее →</span>
+            {featuredProducts.map((product, index) => (
+              <AnimatedSection key={product.id} delay={index * 0.1}>
+                <Link to={`/product/${product.id}`}>
+                  <div className="overflow-hidden transition-all duration-300 group cursor-pointer">
+                    <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md">
+                      <img 
+                        src={product.image} 
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 parallax-image"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2 text-gray-900 group-hover:text-gray-600 transition-colors">{product.name}</h3>
+                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-base font-semibold text-gray-900">от {product.basePrice} ₽</span>
+                        <span className="text-sm font-medium text-gray-900 group-hover:underline">Подробнее →</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </AnimatedSection>
             ))}
           </div>
         </div>
