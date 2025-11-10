@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { companyInfo, advantages } from '../mock';
 import { Card } from '../components/ui/card';
 import { Factory, Zap, Palette, Users, Award, TrendingUp } from 'lucide-react';
@@ -9,6 +10,11 @@ const AboutPage = () => {
     { value: '2000+', label: 'выполненных заказов' },
     { value: '14 дней', label: 'средний срок' }
   ];
+
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <div className="about-page bg-white min-h-screen">
