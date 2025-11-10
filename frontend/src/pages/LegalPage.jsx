@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { Card } from '../components/ui/card';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 
 const LegalPage = () => {
-  const { pageType } = useParams();
+  const { pageType: paramPageType } = useParams();
+  const location = useLocation();
   const [page, setPage] = useState({ title: '', content: '' });
   const [loading, setLoading] = useState(true);
+  
+  // Определяем pageType из URL (например, /privacy -> privacy)
+  const pageType = paramPageType || location.pathname.replace('/', '');
 
   useEffect(() => {
     fetchPage();
