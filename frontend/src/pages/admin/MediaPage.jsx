@@ -67,11 +67,11 @@ const MediaPage = () => {
       </div>
 
       {/* Upload Area */}
-      <Card className="p-8 mb-8 border-2 border-dashed border-gray-300 hover:border-sport-blue transition-colors">
+      <Card className="p-8 mb-8 border-2 border-dashed border-gray-300 hover:border-gray-400 transition-colors">
         <div className="text-center">
           <Upload className="mx-auto mb-4 text-gray-400" size={48} />
-          <h3 className="text-lg font-bold mb-2">Загрузить изображения</h3>
-          <p className="text-gray-600 mb-4">Перетащите файлы сюда или нажмите для выбора</p>
+          <h3 className="text-lg font-semibold mb-2 text-gray-900">Загрузить изображения</h3>
+          <p className="text-gray-600 mb-6">Перетащите файлы сюда или нажмите для выбора</p>
           
           <input
             ref={fileInputRef}
@@ -83,15 +83,14 @@ const MediaPage = () => {
             id="file-upload"
           />
           
-          <label htmlFor="file-upload">
-            <Button
-              as="span"
-              disabled={uploading}
-              className="bg-sport-blue hover:bg-sport-red text-white cursor-pointer"
-            >
-              {uploading ? 'Загрузка...' : 'Выбрать файлы'}
-            </Button>
-          </label>
+          <Button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="bg-gray-900 hover:bg-gray-800 text-white"
+          >
+            {uploading ? 'Загрузка...' : 'Выбрать файлы'}
+          </Button>
           
           <p className="text-sm text-gray-500 mt-4">
             Поддерживаемые форматы: JPG, PNG, GIF, WebP (макс. 10MB)
