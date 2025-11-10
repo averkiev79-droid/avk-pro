@@ -111,23 +111,23 @@ const HomePage = () => {
       </section>
 
       {/* Reviews Section */}
-      <section className="section-padding bg-white">
-        <div className="container px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">Отзывы наших клиентов</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <section className="py-20 bg-gray-50">
+        <div className="container max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 tracking-tight">Отзывы <span className="italic font-serif">наших</span> клиентов</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {reviews.map((review) => (
-              <Card key={review.id} className="p-6 border border-gray-200 bg-slate-50 hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center gap-1 mb-4">
+              <div key={review.id} className="bg-white p-8 rounded-md border border-gray-200">
+                <div className="flex items-center gap-1 mb-6">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="fill-sport-orange text-sport-orange" size={16} />
+                    <Star key={i} className="fill-gray-900 text-gray-900" size={16} />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-4 italic text-sm leading-relaxed">"{review.text}"</p>
-                <div className="border-t border-gray-200 pt-4">
-                  <p className="font-bold text-dark text-sm">{review.author}</p>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">{review.role}</p>
+                <p className="text-gray-700 mb-6 leading-relaxed">"{review.text}"</p>
+                <div className="border-t border-gray-200 pt-6">
+                  <p className="font-semibold text-gray-900">{review.author}</p>
+                  <p className="text-sm text-gray-500 mt-1">{review.role}</p>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
