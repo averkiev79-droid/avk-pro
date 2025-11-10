@@ -13,29 +13,29 @@ const AboutPage = () => {
   return (
     <div className="about-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-sport-red text-white py-16">
-        <div className="container px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl font-light mb-4">О компании</h1>
-          <p className="text-base sm:text-lg opacity-90">Профессиональное производство хоккейной экипировки</p>
+      <section className="bg-gray-900 text-white py-20">
+        <div className="container max-w-7xl mx-auto px-4">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight">О <span className="italic font-serif">компании</span></h1>
+          <p className="text-lg text-gray-300">Профессиональное производство хоккейной экипировки</p>
         </div>
       </section>
 
-      <div className="container py-12 px-4 sm:px-6">
+      <div className="container max-w-7xl mx-auto py-16 px-4">
         {/* О компании */}
-        <section className="mb-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <section className="mb-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <img
-                src="https://via.placeholder.com/800x600/2d3748/ffffff?text=PRODUCTION+FACILITY"
+                src="https://via.placeholder.com/800x800/1a1a1a/ffffff?text=PRODUCTION+FACILITY"
                 alt="Производство"
-                className="rounded-lg shadow-xl w-full h-auto"
+                className="rounded-md w-full h-auto"
               />
             </div>
             <div>
-              <h2 className="text-4xl font-light mb-6">Компания {companyInfo.name}</h2>
-              <div className="space-y-4 text-gray-700 leading-relaxed">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-6 tracking-tight">Компания <span className="italic font-serif">{companyInfo.name}</span></h2>
+              <div className="space-y-4 text-gray-700 leading-relaxed text-base">
                 <p>
-                  Компания <strong className="text-sport-blue">{companyInfo.name}</strong> более 14 лет занимается производством хоккейной формы и экипировки. Мы специализируемся на изготовлении качественной продукции для детских и взрослых хоккейных команд.
+                  Компания <span className="font-semibold text-gray-900">{companyInfo.name}</span> более 14 лет занимается производством хоккейной формы и экипировки. Мы специализируемся на изготовлении качественной продукции для детских и взрослых хоккейных команд.
                 </p>
                 <p>
                   Наше производство оснащено современным оборудованием, что позволяет нам выполнять заказы любой сложности. Мы используем только качественные материалы и проверенные технологии печати.
@@ -43,9 +43,9 @@ const AboutPage = () => {
                 <p>
                   Мы работаем с командами всех уровней - от детских ДЮСШ до любительских команд и фан-клубов. Каждый заказ выполняется с максимальным вниманием к деталям.
                 </p>
-                <div className="bg-blue-50 border-l-4 border-sport-blue p-4 rounded mt-6">
-                  <p className="text-sm font-medium text-gray-700">
-                    ℹ️ {companyInfo.minOrder}
+                <div className="bg-gray-50 border border-gray-200 p-4 rounded-md mt-6">
+                  <p className="text-sm text-gray-700">
+                    {companyInfo.minOrder}
                   </p>
                 </div>
               </div>
@@ -54,12 +54,12 @@ const AboutPage = () => {
         </section>
 
         {/* Статистика */}
-        <section className="mb-16 bg-white rounded-lg shadow-sm p-12">
+        <section className="mb-20 bg-gray-50 rounded-md p-12 border border-gray-200">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl lg:text-5xl font-light text-sport-blue mb-2">{stat.value}</div>
-                <div className="text-sm text-gray-600 uppercase tracking-wider">{stat.label}</div>
+                <div className="text-5xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -67,56 +67,56 @@ const AboutPage = () => {
 
         {/* Преимущества */}
         <section>
-          <h2 className="text-4xl font-light text-center mb-12">Наши преимущества</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 tracking-tight">Наши <span className="italic font-serif">преимущества</span></h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {advantages.map((advantage, index) => {
               const Icon = advantage.icon === 'Factory' ? Factory : 
                           advantage.icon === 'Zap' ? Zap :
                           advantage.icon === 'Palette' ? Palette : Users;
               return (
-                <Card key={index} className="p-6 text-center hover:shadow-xl transition-shadow border-none bg-white">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-blue rounded-full mb-4">
-                    <Icon className="text-white" size={28} />
+                <div key={index} className="text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-full mb-6">
+                    <Icon className="text-white" size={28} strokeWidth={1.5} />
                   </div>
-                  <h3 className="text-xl font-light mb-2">{advantage.title}</h3>
-                  <p className="text-gray-600 text-sm">{advantage.description}</p>
-                </Card>
+                  <h3 className="text-xl font-semibold mb-3 text-gray-900">{advantage.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{advantage.description}</p>
+                </div>
               );
             })}
           </div>
         </section>
 
         {/* Наш подход */}
-        <section className="mt-16">
-          <h2 className="text-4xl font-light text-center mb-12">Наш подход</h2>
+        <section className="mt-20">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 tracking-tight">Наш <span className="italic font-serif">подход</span></h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-6 border-none bg-white text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-red rounded-full mb-4">
-                <Award className="text-white" size={28} />
+            <div className="bg-gray-50 p-8 rounded-md border border-gray-200 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-full mb-6">
+                <Award className="text-white" size={28} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-light mb-3">Качество</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <h3 className="text-xl font-semibold mb-4 text-gray-900">Качество</h3>
+              <p className="text-gray-600 leading-relaxed">
                 Используем только проверенные материалы и современные технологии печати для долговечности изделий.
               </p>
-            </Card>
-            <Card className="p-6 border-none bg-white text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-red rounded-full mb-4">
-                <TrendingUp className="text-white" size={28} />
+            </div>
+            <div className="bg-gray-50 p-8 rounded-md border border-gray-200 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-full mb-6">
+                <TrendingUp className="text-white" size={28} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-light mb-3">Индивидуальность</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <h3 className="text-xl font-semibold mb-4 text-gray-900">Индивидуальность</h3>
+              <p className="text-gray-600 leading-relaxed">
                 Каждый заказ уникален. Разрабатываем дизайн с учетом всех пожеланий клиента.
               </p>
-            </Card>
-            <Card className="p-6 border-none bg-white text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-sport-red rounded-full mb-4">
-                <Zap className="text-white" size={28} />
+            </div>
+            <div className="bg-gray-50 p-8 rounded-md border border-gray-200 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-full mb-6">
+                <Zap className="text-white" size={28} strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-light mb-3">Скорость</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <h3 className="text-xl font-semibold mb-4 text-gray-900">Скорость</h3>
+              <p className="text-gray-600 leading-relaxed">
                 Собственное производство позволяет выполнять заказы в кратчайшие сроки.
               </p>
-            </Card>
+            </div>
           </div>
         </section>
       </div>
