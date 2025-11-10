@@ -49,7 +49,10 @@ const SiteSettingsPage = () => {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
-      const fileUrl = `${BACKEND_URL}${uploadResponse.data.url}`;
+      // Backend returns relative path like "/uploads/filename.jpg"
+      // We need to construct full URL for display
+      const relativePath = uploadResponse.data.url;
+      const fileUrl = relativePath.startsWith('http') ? relativePath : `${BACKEND_URL}${relativePath}`;
       
       await axios.post(`${BACKEND_URL}/api/site-settings`, {
         key,
