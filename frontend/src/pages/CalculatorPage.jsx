@@ -232,65 +232,65 @@ const CalculatorPage = () => {
           {/* Results */}
           <div>
             {calculatedPrice ? (
-              <Card className="p-8 border-none bg-white">
-                <h2 className="text-2xl font-light mb-6">Результат расчета</h2>
+              <div className="bg-white p-8 border border-gray-200 rounded-md sticky top-24">
+                <h2 className="text-2xl font-bold mb-8 tracking-tight">Результат расчета</h2>
                 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-3 border-b border-gray-200">
                     <span className="text-gray-600">Базовая цена:</span>
-                    <span className="font-medium">{calculatedPrice.basePrice} ₽</span>
+                    <span className="font-semibold text-gray-900">{calculatedPrice.basePrice} ₽</span>
                   </div>
 
                   {calculatedPrice.logoPrice > 0 && (
                     <div className="flex justify-between items-center py-3 border-b border-gray-200">
                       <span className="text-gray-600">Нанесение логотипа:</span>
-                      <span className="font-medium">+{calculatedPrice.logoPrice} ₽</span>
+                      <span className="font-semibold text-gray-900">+{calculatedPrice.logoPrice} ₽</span>
                     </div>
                   )}
 
                   <div className="flex justify-between items-center py-3 border-b border-gray-200">
                     <span className="text-gray-600">Цена за единицу:</span>
-                    <span className="font-medium text-sport-blue">{calculatedPrice.unitPrice} ₽</span>
+                    <span className="font-semibold text-gray-900">{calculatedPrice.unitPrice} ₽</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3 border-b border-gray-200">
                     <span className="text-gray-600">Количество:</span>
-                    <span className="font-medium">{calculatedPrice.quantity} шт</span>
+                    <span className="font-semibold text-gray-900">{calculatedPrice.quantity} шт</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3 border-b border-gray-200">
                     <span className="text-gray-600">Промежуточная сумма:</span>
-                    <span className="font-medium">{calculatedPrice.subtotal} ₽</span>
+                    <span className="font-semibold text-gray-900">{calculatedPrice.subtotal} ₽</span>
                   </div>
 
                   {calculatedPrice.discount > 0 && (
                     <div className="flex justify-between items-center py-3 border-b border-gray-200">
                       <span className="text-green-600">Скидка:</span>
-                      <span className="font-medium text-green-600">-{Math.round(calculatedPrice.discount)} ₽</span>
+                      <span className="font-semibold text-green-600">-{Math.round(calculatedPrice.discount)} ₽</span>
                     </div>
                   )}
 
-                  <div className="flex justify-between items-center py-4 bg-sport-blue/10 px-4 rounded-lg mt-4">
-                    <span className="text-lg font-light">Итоговая стоимость:</span>
-                    <span className="text-3xl font-light text-sport-blue">{calculatedPrice.total} ₽</span>
+                  <div className="flex justify-between items-center py-6 bg-gray-50 px-6 rounded-md mt-6">
+                    <span className="text-lg font-semibold text-gray-900">Итоговая стоимость:</span>
+                    <span className="text-3xl font-bold text-gray-900">{calculatedPrice.total} ₽</span>
                   </div>
 
-                  <div className="pt-4 space-y-3">
+                  <div className="pt-6 space-y-4">
                     <p className="text-sm text-gray-500">
                       * Это предварительный расчет. Точная стоимость определяется после обсуждения деталей заказа.
                     </p>
-                    <Button className="w-full bg-sport-red hover:bg-sport-blue text-white transition-colors">
+                    <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white py-6 rounded-md transition-colors font-medium">
                       Оформить заказ
                     </Button>
                   </div>
                 </div>
-              </Card>
+              </div>
             ) : (
-              <Card className="p-12 border-none bg-light text-center h-full flex flex-col items-center justify-center">
-                <Calculator className="text-sport-blue mb-4" size={64} />
-                <h3 className="text-xl font-light mb-2">Заполните форму</h3>
+              <div className="bg-gray-50 p-12 border border-gray-200 rounded-md text-center h-full flex flex-col items-center justify-center">
+                <Calculator className="text-gray-400 mb-4" size={64} strokeWidth={1.5} />
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">Заполните форму</h3>
                 <p className="text-gray-500">Укажите параметры заказа для расчета стоимости</p>
-              </Card>
+              </div>
             )}
           </div>
         </div>
