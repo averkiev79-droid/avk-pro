@@ -32,8 +32,8 @@ const Footer = () => {
 
           {/* Категории товаров */}
           <div>
-            <h4 className="text-lg font-medium mb-4 text-sport-blue">Продукция</h4>
-            <ul className="flex flex-col gap-2 text-sm text-gray-400">
+            <h4 className="text-sm font-light mb-6 text-gold uppercase tracking-widest">Продукция</h4>
+            <ul className="flex flex-col gap-3 text-sm text-gray-400 font-light">
               <li>Хоккейные джерси</li>
               <li>Гамаши</li>
               <li>Форма для зала</li>
@@ -45,21 +45,21 @@ const Footer = () => {
 
           {/* Контакты */}
           <div>
-            <h4 className="text-lg font-medium mb-4 text-sport-blue">Контакты</h4>
-            <div className="flex flex-col gap-3 text-sm text-gray-400">
-              <a href={`tel:${companyInfo.phone}`} className="flex items-start gap-2 hover:text-sport-blue transition-colors">
+            <h4 className="text-sm font-light mb-6 text-gold uppercase tracking-widest">Контакты</h4>
+            <div className="flex flex-col gap-4 text-sm text-gray-400 font-light">
+              <a href={`tel:${companyInfo.phone}`} className="flex items-start gap-3 hover:text-gold transition-colors">
                 <Phone size={16} className="mt-1 flex-shrink-0" />
                 <span>{companyInfo.phone}</span>
               </a>
-              <a href={`mailto:${companyInfo.email}`} className="flex items-start gap-2 hover:text-sport-blue transition-colors">
+              <a href={`mailto:${companyInfo.email}`} className="flex items-start gap-3 hover:text-gold transition-colors">
                 <Mail size={16} className="mt-1 flex-shrink-0" />
                 <span>{companyInfo.email}</span>
               </a>
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-3">
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
                 <span>{companyInfo.address}</span>
               </div>
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-3">
                 <Clock size={16} className="mt-1 flex-shrink-0" />
                 <span>{companyInfo.workHours}</span>
               </div>
