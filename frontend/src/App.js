@@ -12,6 +12,7 @@ import PortfolioPage from './pages/PortfolioPage';
 import AboutPage from './pages/AboutPage';
 import ContactsPage from './pages/ContactsPage';
 import CartPage from './pages/CartPage';
+import LegalPage from './pages/LegalPage';
 import AdminLayout from './pages/AdminLayout';
 import { Toaster } from './components/ui/sonner';
 
