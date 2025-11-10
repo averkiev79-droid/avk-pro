@@ -50,6 +50,41 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Brands Carousel Section */}
+      <section className="py-16 bg-white border-y border-gray-100 overflow-hidden">
+        <div className="container max-w-7xl mx-auto px-4 mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center tracking-tight">
+            Работаем с <span className="italic font-serif">ведущими</span> брендами
+          </h2>
+        </div>
+        <div className="relative">
+          <div className="flex animate-scroll">
+            {/* First set of brands */}
+            <div className="flex items-center gap-16 px-8 flex-shrink-0">
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">BAUER</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">CCM</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">WARRIOR</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">TRUE</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">EASTON</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">REEBOK</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">SHER-WOOD</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">GRAF</div>
+            </div>
+            {/* Duplicate set for seamless loop */}
+            <div className="flex items-center gap-16 px-8 flex-shrink-0">
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">BAUER</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">CCM</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">WARRIOR</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">TRUE</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">EASTON</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">REEBOK</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">SHER-WOOD</div>
+              <div className="text-4xl font-bold text-gray-300 whitespace-nowrap">GRAF</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Advantages Section */}
       <section className="py-20 bg-gray-50">
         <div className="container max-w-7xl mx-auto px-4">
