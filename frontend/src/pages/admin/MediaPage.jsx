@@ -52,12 +52,6 @@ const MediaPage = () => {
     }
   };
 
-  const handleButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
   const copyToClipboard = (url) => {
     navigator.clipboard.writeText(url);
     setCopiedUrl(url);
