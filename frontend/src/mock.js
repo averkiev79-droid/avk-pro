@@ -91,7 +91,7 @@ export const portfolio = [
     category: 'Детская команда',
     description: 'Полный комплект формы для детской хоккейной команды',
     items: ['Джерси', 'Гамаши', 'Тренировочная форма'],
-    image: 'https://via.placeholder.com/800x600/2563eb/ffffff?text=JUNIOR+TEAM+SPB',
+    image: 'https://images.unsplash.com/photo-1589487391730-58f20eb2c308?w=800&h=600&fit=crop',
     year: '2024'
   },
   {
@@ -100,7 +100,7 @@ export const portfolio = [
     category: 'Взрослая команда',
     description: 'Игровая и тренировочная форма для любительской команды',
     items: ['Джерси домашнее', 'Джерси гостевое', 'Парки'],
-    image: 'https://via.placeholder.com/800x600/1e40af/ffffff?text=VETERANS+TEAM',
+    image: 'https://images.unsplash.com/photo-1515703407324-5f753afd8be8?w=800&h=600&fit=crop',
     year: '2024'
   },
   {
@@ -109,7 +109,7 @@ export const portfolio = [
     category: 'Болельщики',
     description: 'Фирменная одежда для фан-клуба',
     items: ['Бомберы', 'Жилетки', 'Шарфы'],
-    image: 'https://via.placeholder.com/800x600/dc2626/ffffff?text=ZENITH+FAN+CLUB',
+    image: 'https://images.unsplash.com/photo-1566305977571-5666677c6e98?w=800&h=600&fit=crop',
     year: '2023'
   },
   {
@@ -118,7 +118,7 @@ export const portfolio = [
     category: 'Родители',
     description: 'Единая форма для родителей юных хоккеистов',
     items: ['Толстовки', 'Бейсболки', 'Шарфы'],
-    image: 'https://via.placeholder.com/800x600/374151/ffffff?text=PARENTS+CLUB',
+    image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop',
     year: '2024'
   }
 ];
