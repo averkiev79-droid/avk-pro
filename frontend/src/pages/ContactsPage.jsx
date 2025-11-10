@@ -38,10 +38,12 @@ const ContactsPage = () => {
   return (
     <div className="contacts-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-gray-900 text-white py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 border-b border-gray-200">
         <div className="container max-w-7xl mx-auto px-4">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight"><span className="italic font-serif">Свяжитесь</span> с нами</h1>
-          <p className="text-lg text-gray-300">Мы всегда готовы ответить на ваши вопросы</p>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight text-gray-900">
+            <span className="italic font-serif text-gray-700">Свяжитесь</span> с нами
+          </h1>
+          <p className="text-lg text-gray-600">Мы всегда готовы ответить на ваши вопросы</p>
         </div>
       </section>
 
