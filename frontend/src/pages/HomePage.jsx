@@ -51,14 +51,16 @@ const HomePage = () => {
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.2} className="relative">
-              <img 
-                src="https://via.placeholder.com/800x800/1a1a1a/ffffff?text=HOCKEY+TEAM" 
-                alt="Хоккейная команда"
-                className="rounded-md w-full h-auto parallax-image"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-md shadow-lg border border-gray-200">
-                <div className="text-5xl font-bold text-gray-900 mb-1">14+</div>
-                <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
+              <div className="relative">
+                <img 
+                  src="https://via.placeholder.com/800x800/1a1a1a/ffffff?text=" 
+                  alt="Хоккейная команда"
+                  className="rounded-md w-full h-auto parallax-image"
+                />
+                <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-md shadow-lg border border-gray-200 z-10">
+                  <div className="text-5xl font-bold text-gray-900 mb-1">14+</div>
+                  <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
+                </div>
               </div>
             </AnimatedSection>
           </div>
