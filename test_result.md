@@ -122,7 +122,7 @@ frontend:
   - task: "Short Par 4 style redesign"
     implemented: true
     working: true
-    file: "frontend/src/index.css, frontend/src/components/Header.jsx, frontend/src/components/Footer.jsx, frontend/src/pages/HomePage.jsx, frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ContactsPage.jsx, frontend/src/pages/AboutPage.jsx, frontend/src/pages/OrderFormPage.jsx"
+    file: "frontend/src/index.css, frontend/src/components/Header.jsx, frontend/src/components/Footer.jsx, frontend/src/pages/HomePage.jsx, frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ContactsPage.jsx, frontend/src/pages/AboutPage.jsx, frontend/src/pages/OrderFormPage.jsx, frontend/src/mock.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
@@ -133,6 +133,9 @@ frontend:
         - working: true
           agent: "main"
           comment: "OrderFormPage styling completed: Logo upload section updated with black button styling, all form elements now consistent with Short Par 4 design, auto-scroll to top working"
+        - working: true
+          agent: "main"
+          comment: "Image loading fixed: Replaced all placeholder images from via.placeholder.com and problematic Unsplash URLs with Picsum Photos. All images now load correctly without CORS errors. Verified on HomePage and CatalogPage."
 
 metadata:
   created_by: "main_agent"
