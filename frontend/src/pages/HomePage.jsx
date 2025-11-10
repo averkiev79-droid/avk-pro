@@ -134,15 +134,15 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-sport-blue to-blue-700 text-white">
-        <div className="container text-center px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Готовы оформить заказ?</h2>
-          <p className="text-base sm:text-lg mb-8 opacity-90 max-w-2xl mx-auto">Свяжитесь с нами для расчета стоимости и обсуждения деталей</p>
+      <section className="py-24 bg-gray-900 text-white">
+        <div className="container max-w-4xl mx-auto text-center px-4">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 tracking-tight">Готовы <span className="italic font-serif">оформить</span> заказ?</h2>
+          <p className="text-lg text-gray-300 mb-10 leading-relaxed">Свяжитесь с нами для расчета стоимости и обсуждения деталей</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-md hover:shadow-lg">
+            <Button asChild size="lg" className="bg-white hover:bg-gray-100 text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base">
               <Link to="/calculator">Рассчитать стоимость</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-sport-blue transition-all duration-300 font-medium">
+            <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base">
               <Link to="/contacts">Связаться с нами</Link>
             </Button>
           </div>
