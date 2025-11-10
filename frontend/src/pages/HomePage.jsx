@@ -103,20 +103,22 @@ const HomePage = () => {
       {/* Advantages Section */}
       <section className="py-20 bg-gray-50">
         <div className="container max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 tracking-tight">Почему <span className="italic font-serif">выбирают</span> нас</h2>
+          <AnimatedSection>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 tracking-tight">Почему <span className="italic font-serif">выбирают</span> нас</h2>
+          </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {advantages.map((advantage, index) => {
               const Icon = advantage.icon === 'Factory' ? Factory : 
                           advantage.icon === 'Zap' ? Zap :
                           advantage.icon === 'Palette' ? Palette : Users;
               return (
-                <div key={index} className="text-center">
+                <AnimatedSection key={index} delay={index * 0.1} className="text-center">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-900 rounded-full mb-6">
                     <Icon className="text-white" size={28} strokeWidth={1.5} />
                   </div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-900">{advantage.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{advantage.description}</p>
-                </div>
+                </AnimatedSection>
               );
             })}
           </div>
