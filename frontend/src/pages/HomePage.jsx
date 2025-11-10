@@ -28,7 +28,7 @@ const HomePage = () => {
       <section className="relative bg-white py-16 md:py-24 lg:py-32 overflow-hidden">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="text-center lg:text-left">
+            <AnimatedSection className="text-center lg:text-left">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
                 Профессиональная <span className="italic font-serif">хоккейная</span> экипировка
               </h1>
@@ -49,18 +49,18 @@ const HomePage = () => {
                   <Link to="/catalog">Смотреть каталог</Link>
                 </Button>
               </div>
-            </div>
-            <div className="relative">
+            </AnimatedSection>
+            <AnimatedSection delay={0.2} className="relative">
               <img 
                 src="https://via.placeholder.com/800x800/1a1a1a/ffffff?text=HOCKEY+TEAM" 
                 alt="Хоккейная команда"
-                className="rounded-md w-full h-auto"
+                className="rounded-md w-full h-auto parallax-image"
               />
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-md shadow-lg border border-gray-200">
                 <div className="text-5xl font-bold text-gray-900 mb-1">14+</div>
                 <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
