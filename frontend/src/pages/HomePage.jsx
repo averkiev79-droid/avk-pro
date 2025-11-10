@@ -169,21 +169,25 @@ const HomePage = () => {
       {/* Reviews Section */}
       <section className="py-20 bg-gray-50">
         <div className="container max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 tracking-tight">Отзывы <span className="italic font-serif">наших</span> клиентов</h2>
+          <AnimatedSection>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 tracking-tight">Отзывы <span className="italic font-serif">наших</span> клиентов</h2>
+          </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {reviews.map((review) => (
-              <div key={review.id} className="bg-white p-8 rounded-md border border-gray-200">
-                <div className="flex items-center gap-1 mb-6">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="fill-gray-900 text-gray-900" size={16} />
-                  ))}
+            {reviews.map((review, index) => (
+              <AnimatedSection key={review.id} delay={index * 0.15}>
+                <div className="bg-white p-8 rounded-md border border-gray-200 h-full">
+                  <div className="flex items-center gap-1 mb-6">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="fill-gray-900 text-gray-900" size={16} />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-6 leading-relaxed">"{review.text}"</p>
+                  <div className="border-t border-gray-200 pt-6">
+                    <p className="font-semibold text-gray-900">{review.author}</p>
+                    <p className="text-sm text-gray-500 mt-1">{review.role}</p>
+                  </div>
                 </div>
-                <p className="text-gray-700 mb-6 leading-relaxed">"{review.text}"</p>
-                <div className="border-t border-gray-200 pt-6">
-                  <p className="font-semibold text-gray-900">{review.author}</p>
-                  <p className="text-sm text-gray-500 mt-1">{review.role}</p>
-                </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -192,16 +196,18 @@ const HomePage = () => {
       {/* CTA Section */}
       <section className="py-24 bg-gray-900 text-white">
         <div className="container max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 tracking-tight">Готовы <span className="italic font-serif">оформить</span> заказ?</h2>
-          <p className="text-lg text-gray-300 mb-10 leading-relaxed">Свяжитесь с нами для расчета стоимости и обсуждения деталей</p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="bg-white hover:bg-gray-100 text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base">
-              <Link to="/calculator">Рассчитать стоимость</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base">
-              <Link to="/contacts">Связаться с нами</Link>
-            </Button>
-          </div>
+          <AnimatedSection>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6 tracking-tight">Готовы <span className="italic font-serif">оформить</span> заказ?</h2>
+            <p className="text-lg text-gray-300 mb-10 leading-relaxed">Свяжитесь с нами для расчета стоимости и обсуждения деталей</p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Button asChild size="lg" className="bg-white hover:bg-gray-100 text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base">
+                <Link to="/calculator">Рассчитать стоимость</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base">
+                <Link to="/contacts">Связаться с нами</Link>
+              </Button>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </div>
