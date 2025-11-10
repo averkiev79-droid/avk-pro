@@ -210,19 +210,19 @@ const OrderFormPage = () => {
 
                 {/* Загрузка логотипа */}
                 <div>
-                  <h3 className="text-xl font-light mb-4 pb-2 border-b border-gray-200">Логотип команды</h3>
+                  <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Логотип команды</h3>
                   <div className="space-y-2">
-                    <Label htmlFor="logo">Загрузить логотип (опционально)</Label>
+                    <Label htmlFor="logo" className="text-sm font-medium text-gray-900">Загрузить логотип (опционально)</Label>
                     <div className="flex items-center gap-4">
                       <label 
                         htmlFor="logo" 
-                        className="flex items-center gap-2 px-4 py-2 bg-light hover:bg-taupe cursor-pointer rounded-lg transition-colors border border-gray-300"
+                        className="flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white cursor-pointer rounded-md transition-colors font-medium"
                       >
-                        <Upload size={18} className="text-dark" />
+                        <Upload size={18} strokeWidth={1.5} />
                         <span className="text-sm">Выбрать файл</span>
                       </label>
                       {logoFileName && (
-                        <span className="text-sm text-gray-600">{logoFileName}</span>
+                        <span className="text-sm text-gray-600 font-medium">{logoFileName}</span>
                       )}
                     </div>
                     <Input
@@ -232,7 +232,7 @@ const OrderFormPage = () => {
                       onChange={handleFileUpload}
                       className="hidden"
                     />
-                    <p className="text-xs text-gray-500">PNG, JPG, PDF, AI, EPS. Макс. 5 МБ</p>
+                    <p className="text-xs text-gray-500 mt-2">PNG, JPG, PDF, AI, EPS. Максимальный размер: 5 МБ</p>
                   </div>
                 </div>
 
