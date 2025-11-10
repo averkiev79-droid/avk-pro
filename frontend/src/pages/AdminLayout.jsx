@@ -27,6 +27,7 @@ import MediaPage from './admin/MediaPage';
 import ReviewsManagementPage from './admin/ReviewsManagementPage';
 import SiteSettingsPage from './admin/SiteSettingsPage';
 import LegalPagesPage from './admin/LegalPagesPage';
+import HockeyClubsPage from './admin/HockeyClubsPage';
 import { companyInfo } from '../mock';
 
 const AdminLayout = () => {
