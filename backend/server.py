@@ -293,6 +293,57 @@ async def get_all_legal_pages():
     pages = await db.legal_pages.find({}, {"_id": 0}).to_list(1000)
     return pages
 
+# ==================== HOCKEY CLUBS API ====================
+@api_router.get("/hockey-clubs", response_model=List[HockeyClub])
+async def get_hockey_clubs():
+    clubs = await db.hockey_clubs.find({}, {"_id": 0}).sort("order", 1).to_list(1000)
+    
+    # Convert ISO string timestamps back to datetime objects
+    for club in clubs:
+        if isinstance(club.get('created_at'), str):
+            club['created_at'] = datetime.fromisoformat(club['created_at'])
+        if isinstance(club.get('updated_at'), str):
+            club['updated_at'] = datetime.fromisoformat(club['updated_at'])
+    
+    return clubs
+
+@api_router.post("/hockey-clubs", response_model=HockeyClub)
+async def create_hockey_club(club_data: HockeyClubCreate):
+    club_obj = HockeyClub(**club_data.model_dump())
+    
+    # Convert to dict and serialize datetime to ISO string for MongoDB
+    doc = club_obj.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    doc['updated_at'] = doc['updated_at'].isoformat()
+    
+    await db.hockey_clubs.insert_one(doc)
+    return club_obj
+
+@api_router.put("/hockey-clubs/{club_id}")
+async def update_hockey_club(club_id: str, club_update: HockeyClubUpdate):
+    # Check if club exists
+    existing_club = await db.hockey_clubs.find_one({"id": club_id}, {"_id": 0})
+    if not existing_club:
+        raise HTTPException(status_code=404, detail="Hockey club not found")
+    
+    # Update club
+    update_data = club_update.model_dump()
+    update_data['updated_at'] = datetime.now(timezone.utc).isoformat()
+    
+    await db.hockey_clubs.update_one(
+        {"id": club_id},
+        {"$set": update_data}
+    )
+    
+    return {"message": "Hockey club updated successfully"}
+
+@api_router.delete("/hockey-clubs/{club_id}")
+async def delete_hockey_club(club_id: str):
+    result = await db.hockey_clubs.delete_one({"id": club_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Hockey club not found")
+    return {"message": "Hockey club deleted successfully"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
