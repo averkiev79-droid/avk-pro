@@ -85,13 +85,12 @@ const MediaPage = () => {
             multiple
             accept="image/*"
             onChange={handleFileUpload}
-            className="hidden"
-            id="file-upload"
+            style={{ display: 'none' }}
           />
           
           <Button
             type="button"
-            onClick={() => fileInputRef.current?.click()}
+            onClick={handleButtonClick}
             disabled={uploading}
             className="bg-gray-900 hover:bg-gray-800 text-white"
           >
