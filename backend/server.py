@@ -133,6 +133,143 @@ async def get_status_checks():
     
     return status_checks
 
+# ==================== FILE UPLOAD API ====================
+@api_router.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    try:
+        # Generate unique filename
+        file_extension = Path(file.filename).suffix
+        unique_filename = f"{uuid.uuid4()}{file_extension}"
+        file_path = UPLOAD_DIR / unique_filename
+        
+        # Save file
+        async with aiofiles.open(file_path, 'wb') as f:
+            content = await file.read()
+            await f.write(content)
+        
+        # Return URL
+        file_url = f"/uploads/{unique_filename}"
+        return {"url": file_url, "filename": unique_filename}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"File upload failed: {str(e)}")
+
+# ==================== REVIEWS API ====================
+@api_router.get("/reviews", response_model=List[Review])
+async def get_reviews():
+    reviews = await db.reviews.find({}, {"_id": 0}).to_list(1000)
+    for review in reviews:
+        if isinstance(review.get('created_at'), str):
+            review['created_at'] = datetime.fromisoformat(review['created_at'])
+    return reviews
+
+@api_router.post("/reviews", response_model=Review)
+async def create_review(review: ReviewCreate):
+    review_obj = Review(**review.model_dump())
+    doc = review_obj.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.reviews.insert_one(doc)
+    return review_obj
+
+@api_router.put("/reviews/{review_id}", response_model=Review)
+async def update_review(review_id: str, review_update: ReviewUpdate):
+    update_data = {k: v for k, v in review_update.model_dump().items() if v is not None}
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No data to update")
+    
+    result = await db.reviews.find_one_and_update(
+        {"id": review_id},
+        {"$set": update_data},
+        return_document=True
+    )
+    
+    if not result:
+        raise HTTPException(status_code=404, detail="Review not found")
+    
+    result.pop('_id', None)
+    if isinstance(result.get('created_at'), str):
+        result['created_at'] = datetime.fromisoformat(result['created_at'])
+    return Review(**result)
+
+@api_router.delete("/reviews/{review_id}")
+async def delete_review(review_id: str):
+    result = await db.reviews.delete_one({"id": review_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Review not found")
+    return {"message": "Review deleted successfully"}
+
+# ==================== SITE SETTINGS API ====================
+@api_router.get("/site-settings")
+async def get_site_settings():
+    settings = await db.site_settings.find({}, {"_id": 0}).to_list(1000)
+    return settings
+
+@api_router.get("/site-settings/{key}")
+async def get_site_setting(key: str):
+    setting = await db.site_settings.find_one({"key": key}, {"_id": 0})
+    if not setting:
+        return {"key": key, "value": ""}
+    return setting
+
+@api_router.post("/site-settings")
+async def update_site_setting(setting: SiteSettingsUpdate):
+    existing = await db.site_settings.find_one({"key": setting.key})
+    
+    if existing:
+        await db.site_settings.update_one(
+            {"key": setting.key},
+            {"$set": {"value": setting.value, "updated_at": datetime.now(timezone.utc).isoformat()}}
+        )
+    else:
+        setting_obj = SiteSettings(key=setting.key, value=setting.value)
+        doc = setting_obj.model_dump()
+        doc['updated_at'] = doc['updated_at'].isoformat()
+        await db.site_settings.insert_one(doc)
+    
+    return {"message": "Setting updated successfully"}
+
+# ==================== LEGAL PAGES API ====================
+@api_router.get("/legal-pages/{page_type}")
+async def get_legal_page(page_type: str):
+    page = await db.legal_pages.find_one({"page_type": page_type}, {"_id": 0})
+    if not page:
+        # Return default content
+        return {
+            "page_type": page_type,
+            "title": "",
+            "content": ""
+        }
+    return page
+
+@api_router.post("/legal-pages/{page_type}")
+async def update_legal_page(page_type: str, page_update: LegalPageUpdate):
+    existing = await db.legal_pages.find_one({"page_type": page_type})
+    
+    if existing:
+        await db.legal_pages.update_one(
+            {"page_type": page_type},
+            {"$set": {
+                "title": page_update.title,
+                "content": page_update.content,
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+    else:
+        page_obj = LegalPage(
+            page_type=page_type,
+            title=page_update.title,
+            content=page_update.content
+        )
+        doc = page_obj.model_dump()
+        doc['updated_at'] = doc['updated_at'].isoformat()
+        await db.legal_pages.insert_one(doc)
+    
+    return {"message": "Legal page updated successfully"}
+
+@api_router.get("/legal-pages")
+async def get_all_legal_pages():
+    pages = await db.legal_pages.find({}, {"_id": 0}).to_list(1000)
+    return pages
+
 # Include the router in the main app
 app.include_router(api_router)
 
