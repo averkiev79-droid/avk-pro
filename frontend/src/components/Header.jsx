@@ -35,15 +35,15 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-10">
             {navigation.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm uppercase tracking-wider transition-colors font-medium ${
+                className={`text-xs uppercase tracking-widest transition-all duration-300 font-light ${
                   isActive(item.path)
-                    ? 'text-sport-blue border-b-2 border-sport-blue'
-                    : 'text-gray-700 hover:text-sport-blue'
+                    ? 'text-gold'
+                    : 'text-gray-600 hover:text-gold'
                 }`}
               >
                 {item.name}
