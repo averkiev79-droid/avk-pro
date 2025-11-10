@@ -164,12 +164,13 @@ const HomePage = () => {
             {featuredProducts.map((product, index) => (
               <AnimatedSection key={product.id} delay={index * 0.1}>
                 <Link to={`/product/${product.id}`}>
-                  <div className="overflow-hidden transition-all duration-300 group cursor-pointer">
+                  <div className="transition-all duration-300 group cursor-pointer">
                     <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md">
-                      <img 
+                      <ParallaxImage
                         src={product.image} 
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 parallax-image"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        speed={0.2}
                       />
                     </div>
                     <div>
