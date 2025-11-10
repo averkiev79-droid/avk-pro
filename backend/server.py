@@ -48,6 +48,62 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Review Models
+class Review(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    author: str
+    role: str
+    text: str
+    rating: int = Field(ge=1, le=5)
+    date: str
+    verified: bool = False
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ReviewCreate(BaseModel):
+    author: str
+    role: str
+    text: str
+    rating: int = Field(ge=1, le=5)
+    date: str
+    verified: bool = False
+
+class ReviewUpdate(BaseModel):
+    author: Optional[str] = None
+    role: Optional[str] = None
+    text: Optional[str] = None
+    rating: Optional[int] = Field(None, ge=1, le=5)
+    date: Optional[str] = None
+    verified: Optional[bool] = None
+
+# Site Settings Models
+class SiteSettings(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    key: str  # hero_image, about_image, etc.
+    value: str  # URL or path to image
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class SiteSettingsUpdate(BaseModel):
+    key: str
+    value: str
+
+# Legal Page Models
+class LegalPage(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    page_type: str  # privacy, terms, requisites, cookies
+    title: str
+    content: str
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class LegalPageUpdate(BaseModel):
+    title: str
+    content: str
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
