@@ -341,6 +341,23 @@ async def delete_hockey_club(club_id: str):
         raise HTTPException(status_code=404, detail="Hockey club not found")
     return {"message": "Hockey club deleted successfully"}
 
+# Custom static files endpoint with CORS support
+@app.get("/uploads/{filename}")
+async def serve_upload(filename: str):
+    file_path = UPLOAD_DIR / filename
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    return FileResponse(
+        file_path,
+        media_type="image/jpeg",  # You might want to determine this based on file extension
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+        }
+    )
+
 # Include the router in the main app
 app.include_router(api_router)
 
@@ -350,6 +367,7 @@ app.add_middleware(
     allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 # Configure logging
