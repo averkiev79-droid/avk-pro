@@ -375,13 +375,15 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gray-900 text-white">
+      <section className="py-24 bg-gradient-to-br from-gray-800 to-gray-900">
         <div className="container max-w-4xl mx-auto text-center px-4">
           <AnimatedSection>
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6 tracking-tight">Готовы <span className="italic font-serif">оформить</span> заказ?</h2>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6 tracking-tight text-white">
+              Готовы <span className="italic font-serif text-gray-300">оформить</span> заказ?
+            </h2>
             <p className="text-lg text-gray-300 mb-10 leading-relaxed">Свяжитесь с нами для расчета стоимости и обсуждения деталей</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button asChild size="lg" className="bg-white hover:bg-gray-100 text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base">
+              <Button asChild size="lg" className="bg-white hover:bg-gray-100 text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base shadow-lg">
                 <Link to="/calculator">Рассчитать стоимость</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-7 rounded-md transition-colors font-medium text-base">
