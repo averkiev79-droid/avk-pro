@@ -87,63 +87,96 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Hockey Clubs Section */}
-      <section className="py-20 bg-white border-y border-gray-100">
-        <div className="container max-w-7xl mx-auto px-4">
+      {/* Hockey Clubs Carousel Section */}
+      <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
+        <div className="container max-w-7xl mx-auto px-4 mb-12">
           <AnimatedSection>
             <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4 tracking-tight">
               Работаем с <span className="italic font-serif">известными</span> клубами
             </h2>
-            <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-gray-600 max-w-2xl mx-auto">
               Доверие профессиональных команд — наша лучшая рекомендация
             </p>
           </AnimatedSection>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            <AnimatedSection delay={0.1}>
-              <div className="aspect-square bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+        </div>
+        
+        <div className="relative">
+          <div className="flex animate-scroll">
+            {/* First set of clubs */}
+            <div className="flex items-center gap-6 px-3 flex-shrink-0">
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
                   <div className="text-sm text-gray-600">Стрельна</div>
                 </div>
               </div>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={0.2}>
-              <div className="aspect-square bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+              
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
                   <div className="text-sm text-gray-600">Петергоф</div>
                 </div>
               </div>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={0.3}>
-              <div className="aspect-square bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+              
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-900 mb-1">ХК</div>
                   <div className="text-sm text-gray-600">Викинги</div>
                 </div>
               </div>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={0.4}>
-              <div className="aspect-square bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+              
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
                   <div className="text-sm text-gray-600">Звезда</div>
                 </div>
               </div>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={0.5}>
-              <div className="aspect-square bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+              
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-900 mb-1">ХК</div>
                   <div className="text-sm text-gray-600">Красные Тигры</div>
                 </div>
               </div>
-            </AnimatedSection>
+            </div>
+            
+            {/* Duplicate set for seamless loop */}
+            <div className="flex items-center gap-6 px-3 flex-shrink-0">
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
+                  <div className="text-sm text-gray-600">Стрельна</div>
+                </div>
+              </div>
+              
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
+                  <div className="text-sm text-gray-600">Петергоф</div>
+                </div>
+              </div>
+              
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900 mb-1">ХК</div>
+                  <div className="text-sm text-gray-600">Викинги</div>
+                </div>
+              </div>
+              
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900 mb-1">СКА</div>
+                  <div className="text-sm text-gray-600">Звезда</div>
+                </div>
+              </div>
+              
+              <div className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-gray-900 mb-1">ХК</div>
+                  <div className="text-sm text-gray-600">Красные Тигры</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
