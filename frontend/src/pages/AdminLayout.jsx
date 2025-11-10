@@ -12,7 +12,8 @@ import {
   X,
   Image as ImageIcon,
   MessageSquare,
-  FileText
+  FileText,
+  Shield
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
