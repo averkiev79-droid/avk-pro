@@ -12,7 +12,6 @@ const Header = () => {
     { name: 'Главная', path: '/' },
     { name: 'Каталог', path: '/catalog' },
     { name: 'Калькулятор', path: '/calculator' },
-    { name: 'Заказать', path: '/order' },
     { name: 'Портфолио', path: '/portfolio' },
     { name: 'О компании', path: '/about' },
     { name: 'Контакты', path: '/contacts' }
@@ -21,48 +20,29 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
-      {/* Top bar */}
-      <div className="bg-dark text-white py-2">
-        <div className="container">
-          <div className="flex justify-between items-center text-sm">
-            <div className="flex items-center gap-6">
-              <a href={`tel:${companyInfo.phone}`} className="flex items-center gap-2 hover:text-sport-blue transition-colors">
-                <Phone size={16} />
-                <span>{companyInfo.phone}</span>
-              </a>
-              <a href={`mailto:${companyInfo.email}`} className="flex items-center gap-2 hover:text-sport-blue transition-colors hidden md:flex">
-                <Mail size={16} />
-                <span>{companyInfo.email}</span>
-              </a>
-            </div>
-            <div className="text-sm">{companyInfo.workHours}</div>
-          </div>
-        </div>
-      </div>
-
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
       {/* Main header */}
-      <div className="container py-4">
-        <div className="flex items-center justify-between">
+      <div className="container max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between py-6">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <img src={companyInfo.logo} alt="A.V.K. SPORT" className="h-12 w-auto" />
-            <div className="hidden md:block">
-              <div className="text-2xl font-bold text-dark tracking-tight">A.V.K.</div>
-              <div className="text-sm font-bold text-sport-blue tracking-wider">SPORT</div>
+          <Link to="/" className="flex items-center gap-2">
+            <img src={companyInfo.logo} alt="A.V.K. SPORT" className="h-10 w-auto" />
+            <div>
+              <div className="text-xl font-bold text-gray-900 tracking-tight leading-none">A.V.K.</div>
+              <div className="text-xs font-semibold text-gray-900 tracking-widest uppercase">SPORT</div>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-10">
             {navigation.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm uppercase tracking-wider transition-colors font-medium ${
+                className={`text-sm font-medium transition-colors relative ${
                   isActive(item.path)
-                    ? 'text-sport-blue border-b-2 border-sport-blue'
-                    : 'text-gray-700 hover:text-sport-blue'
+                    ? 'text-gray-900 after:absolute after:bottom-[-24px] after:left-0 after:right-0 after:h-[2px] after:bg-gray-900'
+                    : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
                 {item.name}
@@ -70,56 +50,56 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button & Cart */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-sport-blue transition-colors">
-              <ShoppingCart size={24} />
-              <span className="absolute -top-1 -right-1 bg-sport-red text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+          {/* Cart & CTA */}
+          <div className="hidden md:flex items-center gap-6">
+            <Link to="/cart" className="relative text-gray-900 hover:text-gray-600 transition-colors">
+              <ShoppingCart size={22} strokeWidth={1.5} />
+              <span className="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
                 2
               </span>
             </Link>
-            <Button asChild className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-sm">
-              <Link to="/order">Сделать заказ</Link>
+            <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-5 rounded-md transition-colors font-medium">
+              <Link to="/order">Заказать</Link>
             </Button>
           </div>
 
-          {/* Mobile cart & menu button */}
-          <div className="lg:hidden flex items-center gap-2">
-            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-sport-blue transition-colors">
-              <ShoppingCart size={22} />
-              <span className="absolute -top-1 -right-1 bg-sport-red text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+          {/* Mobile menu button */}
+          <div className="lg:hidden flex items-center gap-4">
+            <Link to="/cart" className="relative text-gray-900">
+              <ShoppingCart size={22} strokeWidth={1.5} />
+              <span className="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
                 2
               </span>
             </Link>
             <button
-              className="p-2 text-dark"
+              className="text-gray-900"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="lg:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
-            <div className="flex flex-col gap-4">
+          <nav className="lg:hidden border-t border-gray-100 py-6">
+            <div className="flex flex-col gap-1">
               {navigation.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-sm uppercase tracking-wider py-2 transition-colors font-medium ${
+                  className={`py-3 px-4 text-sm font-medium transition-colors rounded-md ${
                     isActive(item.path)
-                      ? 'text-sport-blue'
-                      : 'text-gray-700 hover:text-sport-blue'
+                      ? 'text-gray-900 bg-gray-50'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Button asChild className="bg-sport-red hover:bg-sport-orange text-white w-full transition-colors">
-                <Link to="/order" onClick={() => setIsMenuOpen(false)}>Сделать заказ</Link>
+              <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white w-full mt-4 py-6">
+                <Link to="/order" onClick={() => setIsMenuOpen(false)}>Заказать</Link>
               </Button>
             </div>
           </nav>
