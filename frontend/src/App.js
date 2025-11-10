@@ -50,7 +50,31 @@ function App() {
             </>
           } />
         </Routes>
-        <Toaster position="top-right" />
+        <Toaster 
+          position="bottom-right" 
+          toastOptions={{
+            duration: 2000,
+            style: {
+              background: '#fff',
+              color: '#1A202C',
+              border: '1px solid #E2E8F0',
+            },
+            success: {
+              duration: 2000,
+              iconTheme: {
+                primary: '#2C5282',
+                secondary: '#fff',
+              },
+            },
+            error: {
+              duration: 2000,
+              iconTheme: {
+                primary: '#9B2C2C',
+                secondary: '#fff',
+              },
+            },
+          }}
+        />
       </BrowserRouter>
     </div>
   );
