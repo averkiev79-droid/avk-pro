@@ -129,6 +129,15 @@ code {
         }
     }
 
+    @keyframes scrollReverse {
+        0% {
+            transform: translateX(-50%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -165,6 +174,22 @@ code {
     }
 
     .animate-scroll:hover {
+        animation-play-state: paused;
+    }
+
+    .animate-scroll-slow {
+        animation: scroll 40s linear infinite;
+    }
+
+    .animate-scroll-slow:hover {
+        animation-play-state: paused;
+    }
+
+    .animate-scroll-reverse {
+        animation: scrollReverse 35s linear infinite;
+    }
+
+    .animate-scroll-reverse:hover {
         animation-play-state: paused;
     }
 
