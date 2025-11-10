@@ -341,8 +341,8 @@ async def delete_hockey_club(club_id: str):
         raise HTTPException(status_code=404, detail="Hockey club not found")
     return {"message": "Hockey club deleted successfully"}
 
-# Custom static files endpoint with CORS support
-@app.get("/uploads/{filename}")
+# Custom static files endpoint with CORS support - через API router
+@api_router.get("/uploads/{filename}")
 async def serve_upload(filename: str):
     file_path = UPLOAD_DIR / filename
     if not file_path.exists():
@@ -372,7 +372,7 @@ async def serve_upload(filename: str):
     )
 
 # OPTIONS handler for CORS preflight
-@app.options("/uploads/{filename}")
+@api_router.options("/uploads/{filename}")
 async def serve_upload_options(filename: str):
     return {
         "Allow": "GET, OPTIONS",
