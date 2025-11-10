@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Label } from '../components/ui/label';
@@ -8,6 +8,10 @@ import { toast } from 'sonner';
 import { Calculator, Download } from 'lucide-react';
 
 const CalculatorPage = () => {
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
   const [formData, setFormData] = useState({
     productType: '',
     quantity: '',
