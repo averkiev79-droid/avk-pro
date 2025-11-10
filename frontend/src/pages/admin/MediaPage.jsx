@@ -85,17 +85,17 @@ const MediaPage = () => {
             multiple
             accept="image/*"
             onChange={handleFileUpload}
+            id="file-upload-input"
             style={{ display: 'none' }}
           />
           
-          <Button
-            type="button"
-            onClick={handleButtonClick}
-            disabled={uploading}
-            className="bg-gray-900 hover:bg-gray-800 text-white"
+          <label 
+            htmlFor="file-upload-input"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-gray-900 text-white hover:bg-gray-800 h-10 py-2 px-8 cursor-pointer"
+            style={{ pointerEvents: uploading ? 'none' : 'auto', opacity: uploading ? 0.5 : 1 }}
           >
             {uploading ? 'Загрузка...' : 'Выбрать файлы'}
-          </Button>
+          </label>
           
           <p className="text-sm text-gray-500 mt-4">
             Поддерживаемые форматы: JPG, PNG, GIF, WebP (макс. 10MB)
