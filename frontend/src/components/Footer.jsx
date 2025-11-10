@@ -4,8 +4,8 @@ import { companyInfo } from '../mock';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-white mt-auto border-t border-gold/20">
-      <div className="container py-16">
+    <footer className="bg-dark text-white mt-auto">
+      <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* О компании */}
           <div>
