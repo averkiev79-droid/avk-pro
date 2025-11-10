@@ -121,12 +121,12 @@ const CalculatorPage = () => {
             <div className="space-y-6">
               {/* Тип товара */}
               <div className="space-y-2">
-                <Label htmlFor="productType">Тип товара *</Label>
+                <Label htmlFor="productType" className="text-sm font-medium text-gray-900">Тип товара *</Label>
                 <Select 
                   value={formData.productType} 
                   onValueChange={(value) => setFormData({...formData, productType: value})}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
                     <SelectValue placeholder="Выберите товар" />
                   </SelectTrigger>
                   <SelectContent>
@@ -139,7 +139,7 @@ const CalculatorPage = () => {
 
               {/* Количество */}
               <div className="space-y-2">
-                <Label htmlFor="quantity">Количество *</Label>
+                <Label htmlFor="quantity" className="text-sm font-medium text-gray-900">Количество *</Label>
                 <Input
                   id="quantity"
                   type="number"
@@ -147,18 +147,19 @@ const CalculatorPage = () => {
                   placeholder="Введите количество"
                   value={formData.quantity}
                   onChange={(e) => setFormData({...formData, quantity: e.target.value})}
+                  className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                 />
                 <p className="text-xs text-gray-500">Скидки: от 5 шт - 5%, от 10 шт - 10%, от 20 шт - 15%</p>
               </div>
 
               {/* Нужен логотип */}
               <div className="space-y-2">
-                <Label>Нужен логотип команды?</Label>
+                <Label className="text-sm font-medium text-gray-900">Нужен логотип команды?</Label>
                 <Select 
                   value={formData.hasLogo} 
                   onValueChange={(value) => setFormData({...formData, hasLogo: value, logoType: ''})}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -171,12 +172,12 @@ const CalculatorPage = () => {
               {/* Тип нанесения */}
               {formData.hasLogo === 'yes' && (
                 <div className="space-y-2">
-                  <Label htmlFor="logoType">Тип нанесения логотипа</Label>
+                  <Label htmlFor="logoType" className="text-sm font-medium text-gray-900">Тип нанесения логотипа</Label>
                   <Select 
                     value={formData.logoType} 
                     onValueChange={(value) => setFormData({...formData, logoType: value})}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
                       <SelectValue placeholder="Выберите тип" />
                     </SelectTrigger>
                     <SelectContent>
@@ -190,12 +191,12 @@ const CalculatorPage = () => {
 
               {/* Размер */}
               <div className="space-y-2">
-                <Label htmlFor="size">Размер (опционально)</Label>
+                <Label htmlFor="size" className="text-sm font-medium text-gray-900">Размер (опционально)</Label>
                 <Select 
                   value={formData.size} 
                   onValueChange={(value) => setFormData({...formData, size: value})}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
                     <SelectValue placeholder="Выберите размер" />
                   </SelectTrigger>
                   <SelectContent>
@@ -210,23 +211,23 @@ const CalculatorPage = () => {
               </div>
 
               {/* Buttons */}
-              <div className="flex gap-4 pt-4">
+              <div className="flex gap-4 pt-6">
                 <Button 
                   onClick={handleCalculate} 
-                  className="flex-1 bg-sport-blue hover:bg-sport-red text-white transition-colors"
+                  className="flex-1 bg-gray-900 hover:bg-gray-800 text-white rounded-md py-6 transition-colors font-medium"
                 >
                   Рассчитать
                 </Button>
                 <Button 
                   onClick={handleReset} 
                   variant="outline"
-                  className="border-gray-300 hover:bg-light transition-colors"
+                  className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white rounded-md py-6 transition-colors font-medium"
                 >
                   Сбросить
                 </Button>
               </div>
             </div>
-          </Card>
+          </div>
 
           {/* Results */}
           <div>
