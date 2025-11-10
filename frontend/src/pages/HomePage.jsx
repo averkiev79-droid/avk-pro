@@ -88,7 +88,7 @@ const HomePage = () => {
             <AnimatedSection delay={0.2} className="relative">
               <div className="relative">
                 <ParallaxImage
-                  src="https://images.unsplash.com/photo-1515703407324-5f753afd8be8?w=800&h=800&fit=crop" 
+                  src="https://picsum.photos/800/800?random=10" 
                   alt="Хоккейная команда"
                   className="w-full h-auto"
                   speed={0.3}
