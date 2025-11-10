@@ -67,8 +67,24 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; 2024 A.V.K. SPORT. Все права защищены.</p>
+        <div className="border-t border-gray-700 mt-8 pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+            <p>&copy; 2024 A.V.K. SPORT. Все права защищены.</p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link to="/privacy" className="hover:text-sport-blue transition-colors">
+                Политика конфиденциальности
+              </Link>
+              <Link to="/terms" className="hover:text-sport-blue transition-colors">
+                Пользовательское соглашение
+              </Link>
+              <Link to="/requisites" className="hover:text-sport-blue transition-colors">
+                Реквизиты
+              </Link>
+              <Link to="/cookies" className="hover:text-sport-blue transition-colors">
+                Информация о куках
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
