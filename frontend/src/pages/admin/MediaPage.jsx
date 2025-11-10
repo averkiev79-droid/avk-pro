@@ -12,7 +12,6 @@ const MediaPage = () => {
   const [uploading, setUploading] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [copiedUrl, setCopiedUrl] = useState('');
-  const fileInputRef = useRef(null);
 
   const handleFileUpload = async (event) => {
     const files = Array.from(event.target.files);
