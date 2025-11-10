@@ -167,8 +167,8 @@ async def upload_file(file: UploadFile = File(...)):
             content = await file.read()
             await f.write(content)
         
-        # Return URL
-        file_url = f"/uploads/{unique_filename}"
+        # Return URL with /api prefix so it routes through our endpoint
+        file_url = f"/api/uploads/{unique_filename}"
         return {"url": file_url, "filename": unique_filename}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"File upload failed: {str(e)}")
