@@ -74,19 +74,41 @@ const MediaPage = () => {
           <p className="text-gray-600 mb-6">Перетащите файлы сюда или нажмите для выбора</p>
           
           <input
-            ref={fileInputRef}
             type="file"
             multiple
             accept="image/*"
             onChange={handleFileUpload}
             id="file-upload-input"
-            style={{ display: 'none' }}
+            style={{ 
+              position: 'absolute',
+              width: '1px',
+              height: '1px',
+              padding: 0,
+              margin: '-1px',
+              overflow: 'hidden',
+              clip: 'rect(0,0,0,0)',
+              whiteSpace: 'nowrap',
+              border: 0
+            }}
           />
           
           <label 
             htmlFor="file-upload-input"
-            className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-gray-900 text-white hover:bg-gray-800 h-10 py-2 px-8 cursor-pointer"
-            style={{ pointerEvents: uploading ? 'none' : 'auto', opacity: uploading ? 0.5 : 1 }}
+            style={{
+              display: 'inline-block',
+              padding: '12px 32px',
+              backgroundColor: '#111827',
+              color: 'white',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: '500',
+              transition: 'background-color 0.2s',
+              pointerEvents: uploading ? 'none' : 'auto',
+              opacity: uploading ? 0.5 : 1
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#1f2937'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#111827'}
           >
             {uploading ? 'Загрузка...' : 'Выбрать файлы'}
           </label>
