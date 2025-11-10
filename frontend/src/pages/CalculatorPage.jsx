@@ -100,19 +100,21 @@ const CalculatorPage = () => {
   return (
     <div className="calculator-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-sport-red text-white py-16">
-        <div className="container">
-          <h1 className="text-5xl font-light mb-4">Калькулятор стоимости</h1>
-          <p className="text-lg opacity-90">Рассчитайте предварительную стоимость вашего заказа</p>
+      <section className="bg-gray-900 text-white py-20">
+        <div className="container max-w-7xl mx-auto px-4">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight">
+            Калькулятор <span className="italic font-serif">стоимости</span>
+          </h1>
+          <p className="text-lg text-gray-300">Рассчитайте предварительную стоимость вашего заказа</p>
         </div>
       </section>
 
-      <div className="container py-12">
-        <div className="grid lg:grid-cols-2 gap-8">
+      <div className="container max-w-7xl mx-auto px-4 py-16">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Form */}
-          <Card className="p-8 border-none bg-white">
-            <h2 className="text-2xl font-light mb-6 flex items-center gap-2">
-              <Calculator className="text-sport-blue" />
+          <div className="bg-white p-8 border border-gray-200 rounded-md">
+            <h2 className="text-2xl font-bold mb-8 flex items-center gap-3 tracking-tight">
+              <Calculator className="text-gray-900" size={28} strokeWidth={1.5} />
               Параметры заказа
             </h2>
 
