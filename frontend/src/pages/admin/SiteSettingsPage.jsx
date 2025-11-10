@@ -27,7 +27,12 @@ const SiteSettingsPage = () => {
       const response = await axios.get(`${BACKEND_URL}/api/site-settings`);
       const settingsObj = {};
       response.data.forEach(item => {
-        settingsObj[item.key] = item.value;
+        // Fix old URLs that don't have /api prefix
+        let value = item.value;
+        if (value && value.includes('/uploads/') && !value.includes('/api/uploads/')) {
+          value = value.replace('/uploads/', '/api/uploads/');
+        }
+        settingsObj[item.key] = value;
       });
       setSettings(prevSettings => ({...prevSettings, ...settingsObj}));
     } catch (error) {
