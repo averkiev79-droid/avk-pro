@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Factory, Zap, Palette, Users, Star } from 'lucide-react';
 import { products, advantages, reviews } from '../mock';
