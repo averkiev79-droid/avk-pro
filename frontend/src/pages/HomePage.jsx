@@ -222,29 +222,154 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container max-w-7xl mx-auto px-4">
+      {/* Reviews Section - Yandex Style Carousel */}
+      <section className="py-20 bg-gray-50 overflow-hidden">
+        <div className="container max-w-7xl mx-auto px-4 mb-12">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-16 tracking-tight">Отзывы <span className="italic font-serif">наших</span> клиентов</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 tracking-tight">
+              Отзывы <span className="italic font-serif">наших</span> клиентов
+            </h2>
+            <p className="text-center text-gray-600">Реальные отзывы с Яндекс.Карт</p>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {reviews.map((review, index) => (
-              <AnimatedSection key={review.id} delay={index * 0.15}>
-                <div className="bg-white p-8 rounded-md border border-gray-200 h-full">
-                  <div className="flex items-center gap-1 mb-6">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="fill-gray-900 text-gray-900" size={16} />
-                    ))}
+        </div>
+
+        <div className="space-y-6">
+          {/* First row - moving left to right */}
+          <div className="relative">
+            <div className="flex animate-scroll">
+              <div className="flex items-center gap-4 px-2 flex-shrink-0">
+                {reviews.slice(0, 5).map((review) => (
+                  <div 
+                    key={review.id}
+                    className="bg-white p-6 rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                    style={{ 
+                      minWidth: review.text.length < 50 ? '280px' : review.text.length < 100 ? '350px' : '420px',
+                      maxWidth: '420px'
+                    }}
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-1">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star key={i} className="fill-yellow-400 text-yellow-400" size={14} />
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-500">Яндекс</span>
+                    </div>
+                    <p className="text-gray-700 text-sm leading-relaxed mb-4">"{review.text}"</p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 text-xs font-semibold">
+                        {review.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 text-sm">{review.author}</p>
+                        <p className="text-xs text-gray-500">{review.role}</p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-gray-700 mb-6 leading-relaxed">"{review.text}"</p>
-                  <div className="border-t border-gray-200 pt-6">
-                    <p className="font-semibold text-gray-900">{review.author}</p>
-                    <p className="text-sm text-gray-500 mt-1">{review.role}</p>
+                ))}
+              </div>
+              {/* Duplicate for seamless loop */}
+              <div className="flex items-center gap-4 px-2 flex-shrink-0">
+                {reviews.slice(0, 5).map((review) => (
+                  <div 
+                    key={`${review.id}-dup1`}
+                    className="bg-white p-6 rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                    style={{ 
+                      minWidth: review.text.length < 50 ? '280px' : review.text.length < 100 ? '350px' : '420px',
+                      maxWidth: '420px'
+                    }}
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-1">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star key={i} className="fill-yellow-400 text-yellow-400" size={14} />
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-500">Яндекс</span>
+                    </div>
+                    <p className="text-gray-700 text-sm leading-relaxed mb-4">"{review.text}"</p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 text-xs font-semibold">
+                        {review.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 text-sm">{review.author}</p>
+                        <p className="text-xs text-gray-500">{review.role}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </AnimatedSection>
-            ))}
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Second row - moving right to left */}
+          <div className="relative">
+            <div className="flex animate-scroll-reverse">
+              <div className="flex items-center gap-4 px-2 flex-shrink-0">
+                {reviews.slice(5, 10).map((review) => (
+                  <div 
+                    key={review.id}
+                    className="bg-white p-6 rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                    style={{ 
+                      minWidth: review.text.length < 50 ? '280px' : review.text.length < 100 ? '350px' : '420px',
+                      maxWidth: '420px'
+                    }}
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-1">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star key={i} className="fill-yellow-400 text-yellow-400" size={14} />
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-500">Яндекс</span>
+                    </div>
+                    <p className="text-gray-700 text-sm leading-relaxed mb-4">"{review.text}"</p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 text-xs font-semibold">
+                        {review.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 text-sm">{review.author}</p>
+                        <p className="text-xs text-gray-500">{review.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Duplicate for seamless loop */}
+              <div className="flex items-center gap-4 px-2 flex-shrink-0">
+                {reviews.slice(5, 10).map((review) => (
+                  <div 
+                    key={`${review.id}-dup2`}
+                    className="bg-white p-6 rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                    style={{ 
+                      minWidth: review.text.length < 50 ? '280px' : review.text.length < 100 ? '350px' : '420px',
+                      maxWidth: '420px'
+                    }}
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-1">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star key={i} className="fill-yellow-400 text-yellow-400" size={14} />
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-500">Яндекс</span>
+                    </div>
+                    <p className="text-gray-700 text-sm leading-relaxed mb-4">"{review.text}"</p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 text-xs font-semibold">
+                        {review.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900 text-sm">{review.author}</p>
+                        <p className="text-xs text-gray-500">{review.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
