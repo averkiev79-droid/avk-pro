@@ -160,12 +160,12 @@ const OrderFormPage = () => {
                   <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Детали заказа</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="productType">Что хотите заказать? *</Label>
+                      <Label htmlFor="productType" className="text-sm font-medium text-gray-900">Что хотите заказать? *</Label>
                       <Select 
                         value={formData.productType} 
                         onValueChange={(value) => setFormData({...formData, productType: value})}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
                           <SelectValue placeholder="Выберите товар" />
                         </SelectTrigger>
                         <SelectContent>
@@ -181,7 +181,7 @@ const OrderFormPage = () => {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="quantity">Количество *</Label>
+                      <Label htmlFor="quantity" className="text-sm font-medium text-gray-900">Количество *</Label>
                       <Input
                         id="quantity"
                         type="number"
@@ -190,18 +190,20 @@ const OrderFormPage = () => {
                         value={formData.quantity}
                         onChange={(e) => setFormData({...formData, quantity: e.target.value})}
                         required
+                        className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2 mt-4">
-                    <Label htmlFor="description">Описание заказа (опционально)</Label>
+                    <Label htmlFor="description" className="text-sm font-medium text-gray-900">Описание заказа (опционально)</Label>
                     <Textarea
                       id="description"
                       placeholder="Укажите пожелания к дизайну, цвета, размеры и другие детали..."
                       rows={5}
                       value={formData.description}
                       onChange={(e) => setFormData({...formData, description: e.target.value})}
+                      className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                     />
                   </div>
                 </div>
