@@ -9,11 +9,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* О компании */}
           <div>
-            <div className="flex items-center gap-2 mb-6">
-              <img src={companyInfo.logo} alt="A.V.K. SPORT" className="h-8 w-auto brightness-0 invert" />
+            <div className="flex items-center gap-3 mb-6">
+              <img src={companyInfo.logo} alt="A.V.K. SPORT" className="h-10 w-auto brightness-0 invert" />
               <div>
-                <div className="text-base font-bold text-white tracking-tight leading-none">A.V.K.</div>
-                <div className="text-[10px] font-semibold text-white tracking-widest uppercase">SPORT</div>
+                <div className="text-lg font-bold text-white tracking-tight leading-none">A.V.K.</div>
+                <div className="text-xs font-semibold text-white tracking-widest uppercase">SPORT</div>
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
