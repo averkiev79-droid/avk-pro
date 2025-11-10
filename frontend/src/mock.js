@@ -91,7 +91,7 @@ export const portfolio = [
     category: 'Детская команда',
     description: 'Полный комплект формы для детской хоккейной команды',
     items: ['Джерси', 'Гамаши', 'Тренировочная форма'],
-    image: 'https://picsum.photos/800/600?random=11',
+    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect width="800" height="600" fill="%232563eb"/%3E%3Ctext x="50%25" y="50%25" font-size="32" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EЮниор СПб%3C/text%3E%3C/svg%3E',
     year: '2024'
   },
   {
@@ -100,7 +100,7 @@ export const portfolio = [
     category: 'Взрослая команда',
     description: 'Игровая и тренировочная форма для любительской команды',
     items: ['Джерси домашнее', 'Джерси гостевое', 'Парки'],
-    image: 'https://picsum.photos/800/600?random=12',
+    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect width="800" height="600" fill="%231e40af"/%3E%3Ctext x="50%25" y="50%25" font-size="32" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EВетераны Невы%3C/text%3E%3C/svg%3E',
     year: '2024'
   },
   {
@@ -109,7 +109,7 @@ export const portfolio = [
     category: 'Болельщики',
     description: 'Фирменная одежда для фан-клуба',
     items: ['Бомберы', 'Жилетки', 'Шарфы'],
-    image: 'https://picsum.photos/800/600?random=13',
+    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect width="800" height="600" fill="%23dc2626"/%3E%3Ctext x="50%25" y="50%25" font-size="32" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EФан-клуб Зенит%3C/text%3E%3C/svg%3E',
     year: '2023'
   },
   {
@@ -118,7 +118,7 @@ export const portfolio = [
     category: 'Родители',
     description: 'Единая форма для родителей юных хоккеистов',
     items: ['Толстовки', 'Бейсболки', 'Шарфы'],
-    image: 'https://picsum.photos/800/600?random=14',
+    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect width="800" height="600" fill="%23374151"/%3E%3Ctext x="50%25" y="50%25" font-size="32" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EРодительский клуб%3C/text%3E%3C/svg%3E',
     year: '2024'
   }
 ];
