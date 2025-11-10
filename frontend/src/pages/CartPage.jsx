@@ -27,7 +27,9 @@ const CartPage = () => {
 
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity < 10) {
-      toast.error('Минимальное количество для заказа - 10 штук');
+      toast.error('Минимальное количество - 10 штук', {
+        duration: 2000,
+      });
       return;
     }
     setCartItems(cartItems.map(item => 
@@ -36,8 +38,13 @@ const CartPage = () => {
   };
 
   const removeItem = (id) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-    toast.success('Товар удален из корзины');
+    const itemToRemove = cartItems.find(item => item.id === id);
+    
+    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+    
+    toast.success(`${itemToRemove?.name} удален из корзины`, {
+      duration: 2000,
+    });
   };
 
   const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
