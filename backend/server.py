@@ -104,6 +104,29 @@ class LegalPageUpdate(BaseModel):
     title: str
     content: str
 
+class HockeyClub(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    subtitle: str
+    logo_url: Optional[str] = None
+    order: int = 0
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class HockeyClubCreate(BaseModel):
+    name: str
+    subtitle: str
+    logo_url: Optional[str] = None
+    order: int = 0
+
+class HockeyClubUpdate(BaseModel):
+    name: str
+    subtitle: str
+    logo_url: Optional[str] = None
+    order: int = 0
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
