@@ -9,24 +9,24 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* О компании */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <img src={companyInfo.logo} alt="A.V.K. SPORT" className="h-10 w-auto brightness-0 invert" />
+            <div className="flex items-center gap-3 mb-6">
+              <img src={companyInfo.logo} alt="A.V.K. SPORT" className="h-12 w-auto brightness-0 invert" />
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-400 text-sm leading-relaxed font-light">
               Профессиональное производство хоккейной формы и экипировки для команд любого уровня
             </p>
           </div>
 
           {/* Навигация */}
           <div>
-            <h4 className="text-lg font-medium mb-4 text-sport-blue">Навигация</h4>
-            <nav className="flex flex-col gap-2">
-              <Link to="/catalog" className="text-gray-400 hover:text-sport-blue text-sm transition-colors">Каталог</Link>
-              <Link to="/calculator" className="text-gray-400 hover:text-sport-blue text-sm transition-colors">Калькулятор</Link>
-              <Link to="/order" className="text-gray-400 hover:text-sport-blue text-sm transition-colors">Заказать</Link>
-              <Link to="/portfolio" className="text-gray-400 hover:text-sport-blue text-sm transition-colors">Портфолио</Link>
-              <Link to="/about" className="text-gray-400 hover:text-sport-blue text-sm transition-colors">О компании</Link>
-              <Link to="/contacts" className="text-gray-400 hover:text-sport-blue text-sm transition-colors">Контакты</Link>
+            <h4 className="text-sm font-light mb-6 text-gold uppercase tracking-widest">Навигация</h4>
+            <nav className="flex flex-col gap-3">
+              <Link to="/catalog" className="text-gray-400 hover:text-gold text-sm transition-colors font-light">Каталог</Link>
+              <Link to="/calculator" className="text-gray-400 hover:text-gold text-sm transition-colors font-light">Калькулятор</Link>
+              <Link to="/order" className="text-gray-400 hover:text-gold text-sm transition-colors font-light">Заказать</Link>
+              <Link to="/portfolio" className="text-gray-400 hover:text-gold text-sm transition-colors font-light">Портфолио</Link>
+              <Link to="/about" className="text-gray-400 hover:text-gold text-sm transition-colors font-light">О компании</Link>
+              <Link to="/contacts" className="text-gray-400 hover:text-gold text-sm transition-colors font-light">Контакты</Link>
             </nav>
           </div>
 
