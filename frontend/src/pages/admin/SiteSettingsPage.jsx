@@ -141,23 +141,55 @@ const SiteSettingsPage = () => {
                   <div>
                     <Label>Или загрузить новое изображение</Label>
                     <input
-                      ref={fileInputRefs[config.key]}
                       type="file"
                       accept="image/*"
                       onChange={(e) => handleFileUpload(config.key, e.target.files[0])}
-                      className="hidden"
                       id={`file-${config.key}`}
+                      style={{ 
+                        position: 'absolute',
+                        width: '1px',
+                        height: '1px',
+                        padding: 0,
+                        margin: '-1px',
+                        overflow: 'hidden',
+                        clip: 'rect(0,0,0,0)',
+                        whiteSpace: 'nowrap',
+                        border: 0
+                      }}
                     />
-                    <label htmlFor={`file-${config.key}`}>
-                      <Button
-                        as="span"
-                        variant="outline"
-                        disabled={uploading === config.key}
-                        className="w-full border-gray-300 cursor-pointer"
-                      >
-                        <Upload size={18} className="mr-2" />
-                        {uploading === config.key ? 'Загрузка...' : 'Выбрать файл'}
-                      </Button>
+                    <label 
+                      htmlFor={`file-${config.key}`}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        padding: '12px 16px',
+                        backgroundColor: 'white',
+                        color: '#111827',
+                        border: '1px solid #d1d5db',
+                        borderRadius: '6px',
+                        cursor: uploading === config.key ? 'not-allowed' : 'pointer',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        textAlign: 'center',
+                        transition: 'all 0.2s',
+                        opacity: uploading === config.key ? 0.5 : 1,
+                        pointerEvents: uploading === config.key ? 'none' : 'auto'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (uploading !== config.key) {
+                          e.currentTarget.style.backgroundColor = '#f9fafb';
+                          e.currentTarget.style.borderColor = '#9ca3af';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (uploading !== config.key) {
+                          e.currentTarget.style.backgroundColor = 'white';
+                          e.currentTarget.style.borderColor = '#d1d5db';
+                        }
+                      }}
+                    >
+                      <Upload size={18} style={{ display: 'inline-block', marginRight: '8px', verticalAlign: 'middle' }} />
+                      {uploading === config.key ? 'Загрузка...' : 'Выбрать файл'}
                     </label>
                   </div>
                 </div>
