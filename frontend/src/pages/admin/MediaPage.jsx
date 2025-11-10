@@ -1,0 +1,156 @@
+import { useState, useRef } from 'react';
+import { Card } from '../../components/ui/card';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
+import { Upload, Image, Copy, Check, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+
+const MediaPage = () => {
+  const [uploading, setUploading] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [copiedUrl, setCopiedUrl] = useState('');
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = async (event) => {
+    const files = Array.from(event.target.files);
+    if (files.length === 0) return;
+
+    setUploading(true);
+
+    try {
+      const uploadPromises = files.map(async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await axios.post(`${BACKEND_URL}/api/upload`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        return {
+          url: `${BACKEND_URL}${response.data.url}`,
+          filename: response.data.filename,
+          uploadedAt: new Date().toISOString(),
+        };
+      });
+
+      const results = await Promise.all(uploadPromises);
+      setUploadedFiles([...results, ...uploadedFiles]);
+      toast.success(`${files.length} файл(ов) загружено успешно`);
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast.error('Ошибка при загрузке файлов');
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+  const copyToClipboard = (url) => {
+    navigator.clipboard.writeText(url);
+    setCopiedUrl(url);
+    toast.success('URL скопирован в буфер обмена');
+    setTimeout(() => setCopiedUrl(''), 2000);
+  };
+
+  return (
+    <div className="p-6">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-dark mb-2">Управление медиа</h1>
+        <p className="text-gray-600">Загрузка и управление изображениями сайта</p>
+      </div>
+
+      {/* Upload Area */}
+      <Card className="p-8 mb-8 border-2 border-dashed border-gray-300 hover:border-sport-blue transition-colors">
+        <div className="text-center">
+          <Upload className="mx-auto mb-4 text-gray-400" size={48} />
+          <h3 className="text-lg font-bold mb-2">Загрузить изображения</h3>
+          <p className="text-gray-600 mb-4">Перетащите файлы сюда или нажмите для выбора</p>
+          
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleFileUpload}
+            className="hidden"
+            id="file-upload"
+          />
+          
+          <label htmlFor="file-upload">
+            <Button
+              as="span"
+              disabled={uploading}
+              className="bg-sport-blue hover:bg-sport-red text-white cursor-pointer"
+            >
+              {uploading ? 'Загрузка...' : 'Выбрать файлы'}
+            </Button>
+          </label>
+          
+          <p className="text-sm text-gray-500 mt-4">
+            Поддерживаемые форматы: JPG, PNG, GIF, WebP (макс. 10MB)
+          </p>
+        </div>
+      </Card>
+
+      {/* Uploaded Files Grid */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Загруженные файлы ({uploadedFiles.length})</h2>
+        
+        {uploadedFiles.length === 0 ? (
+          <Card className="p-12 text-center border border-gray-200">
+            <Image className="mx-auto mb-4 text-gray-400" size={64} />
+            <p className="text-gray-500">Нет загруженных файлов</p>
+          </Card>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {uploadedFiles.map((file, index) => (
+              <Card key={index} className="overflow-hidden border border-gray-200 group">
+                <div className="aspect-square bg-gray-100 relative overflow-hidden">
+                  <img
+                    src={file.url}
+                    alt={file.filename}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-sm font-medium text-gray-700 truncate mb-3">
+                    {file.filename}
+                  </p>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => copyToClipboard(file.url)}
+                      className="flex-1 border-gray-300"
+                    >
+                      {copiedUrl === file.url ? (
+                        <>
+                          <Check size={16} className="mr-1" />
+                          Скопировано
+                        </>
+                      ) : (
+                        <>
+                          <Copy size={16} className="mr-1" />
+                          URL
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MediaPage;
