@@ -52,15 +52,15 @@ const Header = () => {
           </nav>
 
           {/* CTA Button & Cart */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link to="/cart" className="relative p-2 text-gray-700 hover:text-sport-blue transition-colors">
-              <ShoppingCart size={24} />
-              <span className="absolute -top-1 -right-1 bg-sport-red text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+          <div className="hidden md:flex items-center gap-6">
+            <Link to="/cart" className="relative p-2 text-gray-600 hover:text-gold transition-colors">
+              <ShoppingCart size={22} />
+              <span className="absolute -top-1 -right-1 bg-gold text-dark text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
                 2
               </span>
             </Link>
-            <Button asChild className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300 font-medium shadow-sm">
-              <Link to="/order">Сделать заказ</Link>
+            <Button asChild className="bg-dark hover:bg-gold text-white hover:text-dark transition-all duration-300 font-light uppercase tracking-widest text-xs px-6 py-5">
+              <Link to="/order">Заказать</Link>
             </Button>
           </div>
 
