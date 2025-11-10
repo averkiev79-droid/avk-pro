@@ -45,9 +45,6 @@ const MediaPage = () => {
       toast.error('Ошибка при загрузке файлов');
     } finally {
       setUploading(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
     }
   };
 
