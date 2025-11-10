@@ -3,6 +3,21 @@ import { ArrowRight, Factory, Zap, Palette, Users, Star } from 'lucide-react';
 import { products, advantages, reviews } from '../mock';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+
+const AnimatedSection = ({ children, className = '', delay = 0 }) => {
+  const [ref, isVisible] = useScrollAnimation({ threshold: 0.1 });
+  
+  return (
+    <div
+      ref={ref}
+      className={`scroll-animate ${isVisible ? 'visible fade-in-up' : ''} ${className}`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      {children}
+    </div>
+  );
+};
 
 const HomePage = () => {
   const featuredProducts = products.slice(0, 4);
