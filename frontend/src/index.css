@@ -209,6 +209,18 @@ code {
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
         }
+        
+        /* Enable touch scroll on mobile */
+        .carousel-container {
+            overflow-x: auto !important;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     .animate-scroll-slow {
