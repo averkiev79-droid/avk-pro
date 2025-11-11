@@ -98,9 +98,9 @@ const HomePage = () => {
             <AnimatedSection delay={0.2} className="relative">
               <div className="relative">
                 <ParallaxImage
-                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231a1a1a;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23374151;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='800' fill='url(%23grad)'/%3E%3Ccircle cx='400' cy='400' r='150' fill='none' stroke='white' stroke-width='3' opacity='0.3'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3EA.V.K.%3C/text%3E%3Ctext x='50%25' y='60%25' font-size='24' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3ESPORT%3C/text%3E%3C/svg%3E" 
+                  src={heroImage} 
                   alt="Хоккейная команда"
-                  className="w-full h-auto"
+                  className="w-full h-auto rounded-md"
                   speed={0.3}
                 />
                 <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-md shadow-lg border border-gray-200 z-10">
