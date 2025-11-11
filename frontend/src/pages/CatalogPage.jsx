@@ -33,7 +33,7 @@ const CatalogPage = () => {
   return (
     <div className="catalog-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 border-b border-gray-200">
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20 border-b border-gray-200">
         <div className="container max-w-7xl mx-auto px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight text-gray-900">
             Каталог <span className="italic font-serif text-gray-700">продукции</span>
@@ -42,7 +42,7 @@ const CatalogPage = () => {
         </div>
       </section>
 
-      <div className="container max-w-7xl mx-auto py-16 px-4">
+      <div className="container max-w-7xl mx-auto py-20 px-4 mb-10">
         {/* Search Bar */}
         <div className="mb-12">
           <div className="relative max-w-xl">
