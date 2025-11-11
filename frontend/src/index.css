@@ -177,7 +177,7 @@ code {
         animation-play-state: paused;
     }
 
-    /* Carousel animation - desktop only */
+    /* Carousel animation - desktop */
     .animate-scroll-carousel {
         animation: scroll 30s linear infinite;
     }
@@ -186,10 +186,15 @@ code {
         animation-play-state: paused;
     }
 
-    /* Disable animation on mobile for touch scroll */
+    /* Faster animation on mobile + touch scroll */
     @media (max-width: 768px) {
         .animate-scroll-carousel {
-            animation: none;
+            animation: scroll 20s linear infinite;
+        }
+        
+        /* Pause animation when user is actively scrolling */
+        .carousel-container:active .animate-scroll-carousel {
+            animation-play-state: paused;
         }
     }
 
