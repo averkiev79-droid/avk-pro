@@ -74,7 +74,7 @@ const AboutPage = () => {
         </section>
 
         {/* Преимущества */}
-        <section>
+        <section className="mb-20">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-16 tracking-tight">Наши <span className="italic font-serif">преимущества</span></h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {advantages.map((advantage, index) => {
