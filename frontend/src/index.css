@@ -177,10 +177,19 @@ code {
         animation-play-state: paused;
     }
 
-    /* Faster animation on mobile */
+    /* Carousel animation - desktop only */
+    .animate-scroll-carousel {
+        animation: scroll 30s linear infinite;
+    }
+
+    .animate-scroll-carousel:hover {
+        animation-play-state: paused;
+    }
+
+    /* Disable animation on mobile for touch scroll */
     @media (max-width: 768px) {
-        .animate-scroll {
-            animation: scroll 20s linear infinite;
+        .animate-scroll-carousel {
+            animation: none;
         }
     }
 
