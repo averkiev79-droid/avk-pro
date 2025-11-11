@@ -122,7 +122,7 @@ frontend:
   - task: "Short Par 4 style redesign"
     implemented: true
     working: true
-    file: "frontend/src/index.css, frontend/src/components/Header.jsx, frontend/src/components/Footer.jsx, frontend/src/pages/HomePage.jsx, frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ContactsPage.jsx, frontend/src/pages/AboutPage.jsx, frontend/src/pages/OrderFormPage.jsx, frontend/src/mock.js"
+    file: "frontend/src/index.css, frontend/src/components/Header.jsx, frontend/src/components/Footer.jsx, frontend/src/pages/HomePage.jsx, frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ContactsPage.jsx, frontend/src/pages/AboutPage.jsx, frontend/src/pages/OrderFormPage.jsx, frontend/src/pages/PortfolioPage.jsx, frontend/src/mock.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
@@ -136,6 +136,9 @@ frontend:
         - working: true
           agent: "main"
           comment: "Image loading fixed: Replaced all placeholder images from via.placeholder.com and problematic Unsplash URLs with Picsum Photos. All images now load correctly without CORS errors. Verified on HomePage and CatalogPage."
+        - working: true
+          agent: "main"
+          comment: "Fixed all remaining pages: PortfolioPage updated from old color scheme (red/blue) to Short Par 4 style. Fixed spacing issues on all pages - increased padding (py-20 instead of py-16) and added bottom margin (mb-10) to prevent content from sticking to footer. All pages now have proper spacing between header/content/footer."
 
 metadata:
   created_by: "main_agent"
