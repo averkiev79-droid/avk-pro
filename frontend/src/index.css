@@ -184,6 +184,24 @@ code {
         }
     }
 
+    /* Hide scrollbar for touch scroll */
+    .scrollbar-hide {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari and Opera */
+    }
+
+    /* Smooth touch scrolling */
+    @media (max-width: 768px) {
+        .scrollbar-hide {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+    }
+
     .animate-scroll-slow {
         animation: scroll 40s linear infinite;
     }
