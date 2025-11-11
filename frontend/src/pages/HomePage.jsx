@@ -127,8 +127,8 @@ const HomePage = () => {
             </AnimatedSection>
           </div>
           
-          <div className="relative overflow-hidden">
-            <div className="flex animate-scroll-carousel"
+          <div className="relative overflow-hidden carousel-container">
+            <div className="flex animate-scroll-carousel" style={{ minWidth: 'max-content' }}
               {/* First set of clubs */}
               <div className="flex items-center gap-6 px-3 flex-shrink-0">
                 {hockeyClubs.map((club) => (
