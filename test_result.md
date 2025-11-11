@@ -166,3 +166,5 @@ agent_communication:
       message: "Connected HomePage to site settings API. Hero image now loads from database (site_settings collection, key: hero_image). When admin uploads image in admin panel, it displays on homepage. Falls back to SVG placeholder if no image set. Verified - uploaded hockey photo displays correctly on homepage."
     - agent: "main"
       message: "Logo and favicon updated site-wide. User uploaded new logo (Лого_new.png - AK hexagon design). Logo placed in /app/frontend/public/logo.png, updated companyInfo.logo to '/logo.png' in mock.js. Logo displays correctly in Header and Footer (white inverted version in footer). Favicon also updated."
+    - agent: "main"
+      message: "Hockey clubs carousel optimized for mobile. Added touch-scroll support (swipe left/right), faster animation on mobile (20s vs 30s on desktop), hidden scrollbar, smooth scrolling. Desktop keeps auto-animation, mobile allows manual scroll. Grayscale hover effect works on both."
