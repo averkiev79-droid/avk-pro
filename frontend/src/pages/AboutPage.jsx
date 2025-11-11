@@ -19,7 +19,7 @@ const AboutPage = () => {
   return (
     <div className="about-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 border-b border-gray-200">
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20 border-b border-gray-200">
         <div className="container max-w-7xl mx-auto px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight text-gray-900">
             О <span className="italic font-serif text-gray-700">компании</span>
@@ -28,7 +28,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <div className="container max-w-7xl mx-auto py-16 px-4">
+      <div className="container max-w-7xl mx-auto py-20 px-4">
         {/* О компании */}
         <section className="mb-20">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
