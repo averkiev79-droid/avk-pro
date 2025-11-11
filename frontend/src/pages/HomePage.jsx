@@ -42,19 +42,29 @@ const ParallaxImage = ({ src, alt, className = '', speed = 0.3 }) => {
 const HomePage = () => {
   const featuredProducts = products.slice(0, 4);
   const [hockeyClubs, setHockeyClubs] = React.useState([]);
+  const [heroImage, setHeroImage] = React.useState("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231a1a1a;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23374151;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='800' fill='url(%23grad)'/%3E%3Ccircle cx='400' cy='400' r='150' fill='none' stroke='white' stroke-width='3' opacity='0.3'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em' font-family='Arial' font-weight='bold'%3EA.V.K.%3C/text%3E%3Ctext x='50%25' y='60%25' font-size='24' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3ESPORT%3C/text%3E%3C/svg%3E");
   const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
 
   React.useEffect(() => {
-    const fetchClubs = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`${backendUrl}/api/hockey-clubs`);
-        const data = await response.json();
-        setHockeyClubs(data);
+        // Fetch hockey clubs
+        const clubsResponse = await fetch(`${backendUrl}/api/hockey-clubs`);
+        const clubsData = await clubsResponse.json();
+        setHockeyClubs(clubsData);
+
+        // Fetch site settings for hero image
+        const settingsResponse = await fetch(`${backendUrl}/api/site-settings`);
+        const settingsData = await settingsResponse.json();
+        const heroSetting = settingsData.find(s => s.key === 'hero_image');
+        if (heroSetting && heroSetting.value) {
+          setHeroImage(heroSetting.value);
+        }
       } catch (error) {
-        console.error('Failed to fetch hockey clubs:', error);
+        console.error('Failed to fetch data:', error);
       }
     };
-    fetchClubs();
+    fetchData();
   }, [backendUrl]);
 
   return (
