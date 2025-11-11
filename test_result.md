@@ -164,3 +164,5 @@ agent_communication:
       message: "FINAL FIX: Replaced all external image URLs with inline SVG data URLs. This eliminates ALL CORS issues and ensures images display on production (preview.emergentagent.com). All 8 product images, 4 portfolio images, and hero image now use embedded SVG with proper colors and text labels. Verified on HomePage and CatalogPage - all images display correctly."
     - agent: "main"
       message: "Connected HomePage to site settings API. Hero image now loads from database (site_settings collection, key: hero_image). When admin uploads image in admin panel, it displays on homepage. Falls back to SVG placeholder if no image set. Verified - uploaded hockey photo displays correctly on homepage."
+    - agent: "main"
+      message: "Logo and favicon updated site-wide. User uploaded new logo (Лого_new.png - AK hexagon design). Logo placed in /app/frontend/public/logo.png, updated companyInfo.logo to '/logo.png' in mock.js. Logo displays correctly in Header and Footer (white inverted version in footer). Favicon also updated."
