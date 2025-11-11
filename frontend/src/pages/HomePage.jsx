@@ -132,9 +132,13 @@ const HomePage = () => {
               {/* First set of clubs */}
               <div className="flex items-center gap-6 px-3 flex-shrink-0">
                 {hockeyClubs.map((club) => (
-                  <div key={club.id} className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                  <div key={club.id} className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-all duration-300 group">
                     {club.logo_url ? (
-                      <img src={club.logo_url} alt={club.name} className="max-w-full max-h-full object-contain" />
+                      <img 
+                        src={club.logo_url} 
+                        alt={club.name} 
+                        className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out" 
+                      />
                     ) : (
                       <div className="text-center">
                         <div className="text-2xl font-bold text-gray-900 mb-1">{club.name}</div>
@@ -148,9 +152,13 @@ const HomePage = () => {
               {/* Duplicate set for seamless loop */}
               <div className="flex items-center gap-6 px-3 flex-shrink-0">
                 {hockeyClubs.map((club) => (
-                  <div key={`${club.id}-duplicate`} className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-shadow duration-300">
+                  <div key={`${club.id}-duplicate`} className="w-48 h-48 bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-all duration-300 group">
                     {club.logo_url ? (
-                      <img src={club.logo_url} alt={club.name} className="max-w-full max-h-full object-contain" />
+                      <img 
+                        src={club.logo_url} 
+                        alt={club.name} 
+                        className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out" 
+                      />
                     ) : (
                       <div className="text-center">
                         <div className="text-2xl font-bold text-gray-900 mb-1">{club.name}</div>
