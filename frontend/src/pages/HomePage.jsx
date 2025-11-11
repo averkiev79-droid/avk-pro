@@ -128,7 +128,7 @@ const HomePage = () => {
           </div>
           
           <div className="relative overflow-x-auto md:overflow-hidden scrollbar-hide">
-            <div className="flex md:animate-scroll" style={{ minWidth: 'max-content' }}>
+            <div className="flex animate-scroll-carousel" style={{ minWidth: 'max-content' }}>
               {/* First set of clubs */}
               <div className="flex items-center gap-6 px-3 flex-shrink-0">
                 {hockeyClubs.map((club) => (
