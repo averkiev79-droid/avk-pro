@@ -508,3 +508,127 @@ async def update_order(order_id: str, order_update: OrderUpdate, background_task
     except Exception as e:
         logger.error(f"Error updating order: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# BLOG/ARTICLES API - For SEO content management
+# ============================================================================
+from models import Article, ArticleCreate, ArticleUpdate, AIGenerateRequest
+
+@api_router.post("/articles", response_model=dict, status_code=201)
+async def create_article(article: ArticleCreate):
+    """Create new blog article"""
+    try:
+        article_data = Article(**article.model_dump())
+        article_dict = article_data.model_dump()
+        article_dict['created_at'] = article_dict['created_at'].isoformat()
+        article_dict['updated_at'] = article_dict['updated_at'].isoformat()
+        
+        await db.articles.insert_one(article_dict)
+        
+        return {
+            "success": True,
+            "message": "Статья создана",
+            "article_id": article_data.id
+        }
+    except Exception as e:
+        logger.error(f"Error creating article: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/articles", response_model=List[Article])
+async def get_articles(
+    category: Optional[str] = None,
+    published_only: bool = True,
+    skip: int = 0,
+    limit: int = 20
+):
+    """Get blog articles with optional filtering"""
+    try:
+        query = {}
+        if category:
+            query["category"] = category
+        if published_only:
+            query["is_published"] = True
+        
+        articles = await db.articles.find(query).sort("created_at", -1).skip(skip).limit(limit).to_list(length=limit)
+        return [Article(**article) for article in articles]
+    except Exception as e:
+        logger.error(f"Error fetching articles: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/articles/{article_id}", response_model=Article)
+async def get_article(article_id: str):
+    """Get single article by ID"""
+    try:
+        article = await db.articles.find_one({"id": article_id})
+        if not article:
+            raise HTTPException(status_code=404, detail="Статья не найдена")
+        return Article(**article)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching article: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/articles/slug/{slug}", response_model=Article)
+async def get_article_by_slug(slug: str):
+    """Get article by URL slug"""
+    try:
+        article = await db.articles.find_one({"slug": slug})
+        if not article:
+            raise HTTPException(status_code=404, detail="Статья не найдена")
+        return Article(**article)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching article: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.patch("/articles/{article_id}", response_model=dict)
+async def update_article(article_id: str, article_update: ArticleUpdate):
+    """Update article"""
+    try:
+        article = await db.articles.find_one({"id": article_id})
+        if not article:
+            raise HTTPException(status_code=404, detail="Статья не найдена")
+        
+        update_data = {k: v for k, v in article_update.model_dump().items() if v is not None}
+        update_data["updated_at"] = datetime.now().isoformat()
+        
+        await db.articles.update_one(
+            {"id": article_id},
+            {"$set": update_data}
+        )
+        
+        return {
+            "success": True,
+            "message": "Статья обновлена"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating article: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.delete("/articles/{article_id}", response_model=dict)
+async def delete_article(article_id: str):
+    """Delete article"""
+    try:
+        result = await db.articles.delete_one({"id": article_id})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Статья не найдена")
+        
+        return {
+            "success": True,
+            "message": "Статья удалена"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error deleting article: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
