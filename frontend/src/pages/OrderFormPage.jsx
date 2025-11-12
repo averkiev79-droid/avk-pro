@@ -133,7 +133,7 @@ const OrderFormPage = () => {
                     </div>
                   </div>
                   <div className="space-y-2 mt-4">
-                    <Label htmlFor="email" className="text-sm font-medium text-gray-900">Email (опционально)</Label>
+                    <Label htmlFor="email" className="text-sm font-medium text-gray-900">Email</Label>
                     <Input
                       id="email"
                       type="email"
