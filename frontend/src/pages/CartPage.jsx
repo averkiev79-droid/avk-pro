@@ -26,6 +26,8 @@ const CartPage = () => {
   // Сохранение корзины в localStorage при изменении
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
+    // Dispatch custom event to update header cart count
+    window.dispatchEvent(new Event('cartUpdated'));
   }, [cartItems]);
 
   const updateQuantity = (id, newQuantity) => {
