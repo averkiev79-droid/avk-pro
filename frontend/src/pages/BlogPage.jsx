@@ -23,7 +23,7 @@ const BlogPage = () => {
 
   const fetchArticles = async () => {
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || process.env.REACT_APP_BACKEND_URL;
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
       const categoryParam = selectedCategory !== 'all' ? `?category=${selectedCategory}` : '';
       const response = await fetch(`${backendUrl}/api/articles${categoryParam}`);
       const data = await response.json();
