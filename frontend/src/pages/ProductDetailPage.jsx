@@ -131,6 +131,7 @@ const ProductDetailPage = () => {
               <img 
                 src={images[selectedImage]} 
                 alt={product.name}
+                loading="eager"
                 className="w-full h-full object-cover"
               />
             </div>
