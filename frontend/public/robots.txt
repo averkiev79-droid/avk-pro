@@ -1,0 +1,43 @@
+# Robots.txt для A.V.K. SPORT
+# https://avk-sport.ru
+
+User-agent: *
+Allow: /
+Allow: /catalog
+Allow: /calculator
+Allow: /portfolio
+Allow: /about
+Allow: /contacts
+Allow: /order
+
+# Запретить доступ к служебным страницам
+Disallow: /cart
+Disallow: /admin
+Disallow: /api/
+
+# Разрешить сканирование статических ресурсов
+Allow: /static/
+Allow: /logo.png
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.svg
+Allow: /*.webp
+
+# Sitemap
+Sitemap: https://avk-sport.ru/sitemap.xml
+
+# Основные поисковые боты
+User-agent: Googlebot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Время между запросами (в секундах)
+Crawl-delay: 1
