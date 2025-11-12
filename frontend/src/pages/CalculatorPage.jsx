@@ -102,9 +102,9 @@ const CalculatorPage = () => {
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 border-b border-gray-200">
         <div className="container max-w-7xl mx-auto px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight text-gray-900">
-            Калькулятор <span className="italic font-serif text-gray-700">стоимости</span>
+            Калькулятор стоимости <span className="italic font-serif text-gray-700">хоккейной формы</span>
           </h1>
-          <p className="text-lg text-gray-600">Рассчитайте предварительную стоимость вашего заказа</p>
+          <p className="text-lg text-gray-600">Рассчитайте цену на джерси, гамаши и экипировку для вашей команды</p>
         </div>
       </section>
 
