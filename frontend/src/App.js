@@ -29,6 +29,7 @@ function App() {
           <Route path="/*" element={
             <>
               <Header />
+              <Breadcrumbs />
               <main className="main-content">
                 <Routes>
                   <Route path="/" element={<HomePage />} />
