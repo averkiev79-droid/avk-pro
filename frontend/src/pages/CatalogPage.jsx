@@ -99,7 +99,7 @@ const CatalogPage = () => {
                       <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md">
                         <img
                           src={product.image}
-                          alt={product.name}
+                          alt={product.alt || product.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
