@@ -102,8 +102,8 @@ const CartPage = () => {
                       className="w-24 h-24 object-cover rounded-md bg-gray-100"
                     />
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold mb-2 text-dark">{item.name}</h3>
-                      <p className="text-sport-blue font-bold text-lg mb-4">{item.price} ₽ / шт</p>
+                      <h3 className="text-lg font-bold mb-2 text-gray-900">{item.name}</h3>
+                      <p className="text-gray-900 font-bold text-lg mb-4">{item.price} ₽ / шт</p>
                       
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
