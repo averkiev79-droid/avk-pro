@@ -31,6 +31,7 @@ const ParallaxImage = ({ src, alt, className = '', speed = 0.3 }) => {
       <img 
         src={src}
         alt={alt}
+        loading="lazy"
         className={className}
         style={{
           transform: `translateY(${offset}px)`,
