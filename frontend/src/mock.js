@@ -7,7 +7,7 @@ export const products = [
     category: 'jersey',
     description: 'Профессиональное хоккейное джерси с индивидуальным дизайном и логотипом команды. Изготовлено из высококачественной дышащей ткани с влагоотведением. Сублимационная печать обеспечивает яркость цветов на протяжении всего срока эксплуатации. Прочные усиленные швы выдерживают интенсивные тренировки и матчи. Доступны все размеры от детских до взрослых.',
     basePrice: 3500,
-    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%232563eb"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EHOCKEY JERSEY%3C/text%3E%3C/svg%3E',
+    image: 'https://images.unsplash.com/photo-1674571386896-54ea8a62b62d?w=800&q=80',
     alt: 'Хоккейное джерси Pro - профессиональная хоккейная форма на заказ СПб',
     features: ['Дышащая ткань с влагоотведением', 'Прочные усиленные швы', 'Яркая сублимационная печать', 'Индивидуальный дизайн и логотип']
   },
@@ -17,7 +17,7 @@ export const products = [
     category: 'socks',
     description: 'Высокие профессиональные гамаши (рейтузы) с логотипом команды. Изготовлены из эластичного износостойкого материала, который обеспечивает идеальную посадку и комфорт во время игры. Яркая сублимационная печать не выцветает после стирок. Усиленные зоны в местах повышенной нагрузки. Подходят для детей, подростков и взрослых игроков.',
     basePrice: 800,
-    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%231e40af"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EHOCKEY SOCKS%3C/text%3E%3C/svg%3E',
+    image: 'https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?w=800&q=80',
     alt: 'Хоккейные гамаши - пошив на заказ с логотипом команды',
     features: ['Эластичный износостойкий материал', 'Яркие цвета не выцветают', 'Усиленные зоны нагрузки', 'Идеальная посадка']
   },
@@ -27,7 +27,7 @@ export const products = [
     category: 'training',
     description: 'Комплект для тренировок в зале',
     basePrice: 2800,
-    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23ea580c"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3ETRAINING GEAR%3C/text%3E%3C/svg%3E',
+    image: 'https://images.unsplash.com/photo-1697050267730-d7c89fac0d21?w=800&q=80',
     alt: 'Тренировочная форма для хоккея - спортивная одежда на заказ',
     features: ['Комфортная посадка', 'Влагоотведение', 'Фирменный стиль']
   },
@@ -37,7 +37,7 @@ export const products = [
     category: 'accessories',
     description: 'Защитные чехлы для хоккейных шорт',
     basePrice: 1200,
-    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23374151"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3ESHORTS COVERS%3C/text%3E%3C/svg%3E',
+    image: 'https://images.unsplash.com/photo-1754583340212-5bddfda09f7e?w=800&q=80',
     alt: 'Чехлы для хоккейных шорт - защитная экипировка',
     features: ['Прочный материал', 'Удобная конструкция']
   },
@@ -47,7 +47,7 @@ export const products = [
     category: 'outerwear',
     description: 'Стильный бомбер с символикой команды',
     basePrice: 4500,
-    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23dc2626"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3ETEAM BOMBER%3C/text%3E%3C/svg%3E',
+    image: 'https://images.pexels.com/photos/8972140/pexels-photo-8972140.jpeg?w=800&q=80',
     alt: 'Бомбер команды - куртка с вышивкой логотипа для хоккеистов',
     features: ['Теплый и легкий', 'Современный дизайн', 'Вышивка логотипа']
   },
@@ -57,7 +57,7 @@ export const products = [
     category: 'outerwear',
     description: 'Зимняя парка для болельщиков и команды',
     basePrice: 6500,
-    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%231f2937"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EWINTER PARKA%3C/text%3E%3C/svg%3E',
+    image: 'https://images.unsplash.com/photo-1516226415502-d6624544376b?w=800&q=80',
     alt: 'Зимняя парка для хоккейной команды - теплая куртка с логотипом',
     features: ['Утеплитель', 'Водоотталкивающая ткань', 'Капюшон']
   },
@@ -67,7 +67,7 @@ export const products = [
     category: 'outerwear',
     description: 'Утепленная жилетка с логотипом',
     basePrice: 3200,
-    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%231d4ed8"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3ETEAM VEST%3C/text%3E%3C/svg%3E',
+    image: 'https://images.unsplash.com/photo-1708477859742-7bce099bce11?w=800&q=80',
     alt: 'Жилетка команды - спортивная безрукавка с фирменным стилем',
     features: ['Легкая', 'Практичная', 'Удобные карманы']
   },
@@ -77,7 +77,7 @@ export const products = [
     category: 'jersey',
     description: 'Реплика игрового джерси для фанатов',
     basePrice: 2500,
-    image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23b91c1c"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EFAN JERSEY%3C/text%3E%3C/svg%3E',
+    image: 'https://images.unsplash.com/photo-1648312773792-3db3b560c793?w=800&q=80',
     alt: 'Джерси для болельщиков - фанатская хоккейная форма',
     features: ['Точная копия', 'Комфортная ткань', 'Доступная цена']
   }
