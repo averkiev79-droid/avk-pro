@@ -56,7 +56,11 @@ const ProductDetailPage = () => {
     'https://via.placeholder.com/800x800/2C5282/ffffff?text=View+4'
   ];
 
-  const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+  const sizeCategories = [
+    { id: 'kids', name: 'Дети 110-140' },
+    { id: 'teens', name: 'Подростки 146-170' },
+    { id: 'adult', name: 'Взрослые' }
+  ];
   const colors = ['Синий', 'Красный', 'Черный', 'Белый', 'Зеленый'];
 
   const relatedProducts = products.filter(p => 
