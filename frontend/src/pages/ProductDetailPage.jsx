@@ -25,7 +25,7 @@ const ProductDetailPage = () => {
   const product = products.find(p => p.id === parseInt(id));
   
   const [quantity, setQuantity] = useState(10);
-  const [selectedSize, setSelectedSize] = useState('M');
+  const [selectedSizeCategory, setSelectedSizeCategory] = useState('adult');
   const [selectedColor, setSelectedColor] = useState('Синий');
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImage, setSelectedImage] = useState(0);
