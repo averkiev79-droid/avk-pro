@@ -168,3 +168,5 @@ agent_communication:
       message: "Logo and favicon updated site-wide. User uploaded new logo (Лого_new.png - AK hexagon design). Logo placed in /app/frontend/public/logo.png, updated companyInfo.logo to '/logo.png' in mock.js. Logo displays correctly in Header and Footer (white inverted version in footer). Favicon also updated."
     - agent: "main"
       message: "Hockey clubs carousel optimized for mobile. Added touch-scroll support (swipe left/right), faster animation on mobile (20s vs 30s on desktop), hidden scrollbar, smooth scrolling. Desktop keeps auto-animation, mobile allows manual scroll. Grayscale hover effect works on both."
+    - agent: "main"
+      message: "Calculator page simplified per user request: Removed discount system (5%/10%/15%), removed logo selection block entirely, changed size options from S/M/L/XL to categories (Дети 110-140, Подростки 146-170, Взрослые). Removed '(опционально)' text from all pages (OrderFormPage, ContactsPage). Calculator now shows simple calculation: unit price × quantity = total."
