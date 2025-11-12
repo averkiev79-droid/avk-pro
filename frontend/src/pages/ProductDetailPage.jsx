@@ -148,7 +148,7 @@ const ProductDetailPage = () => {
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
-                  <img src={img} alt={`View ${index + 1}`} className="w-full h-full object-cover" />
+                  <img src={img} alt={`View ${index + 1}`} loading="lazy" className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
