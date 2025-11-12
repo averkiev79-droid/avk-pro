@@ -212,7 +212,7 @@ const OrderFormPage = () => {
                 <div>
                   <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Логотип команды</h3>
                   <div className="space-y-2">
-                    <Label htmlFor="logo" className="text-sm font-medium text-gray-900">Загрузить логотип (опционально)</Label>
+                    <Label htmlFor="logo" className="text-sm font-medium text-gray-900">Загрузить логотип</Label>
                     <div className="flex items-center gap-4">
                       <label 
                         htmlFor="logo" 
