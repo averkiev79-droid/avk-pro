@@ -165,12 +165,12 @@ const CartPage = () => {
                   <div className="border-t border-gray-200 pt-4">
                     <div className="flex justify-between text-lg font-bold">
                       <span>Сумма</span>
-                      <span className="text-sport-blue">{totalAmount.toLocaleString('ru-RU')} ₽</span>
+                      <span className="text-gray-900">{totalAmount.toLocaleString('ru-RU')} ₽</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-blue-50 border-l-4 border-sport-blue p-4 mb-6 rounded">
+                <div className="bg-gray-50 border-l-4 border-gray-900 p-4 mb-6 rounded-md">
                   <p className="text-sm text-gray-700">
                     ℹ️ Финальная стоимость будет рассчитана после согласования деталей заказа
                   </p>
@@ -178,7 +178,7 @@ const CartPage = () => {
 
                 <Button 
                   asChild
-                  className="w-full bg-sport-red hover:bg-sport-orange text-white py-6 text-lg transition-all duration-300 mb-3 shadow-md hover:shadow-lg"
+                  className="w-full bg-gray-900 hover:bg-gray-800 text-white py-6 text-lg transition-all duration-300 mb-3 rounded-md font-medium"
                 >
                   <Link to="/order" className="flex items-center justify-center gap-2">
                     Оформить заказ <ArrowRight size={20} />
@@ -188,7 +188,7 @@ const CartPage = () => {
                 <Button 
                   asChild
                   variant="outline"
-                  className="w-full border-2 border-sport-blue text-sport-blue hover:bg-sport-blue hover:text-white transition-all duration-300"
+                  className="w-full border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300 rounded-md font-medium"
                 >
                   <Link to="/catalog">Продолжить покупки</Link>
                 </Button>
