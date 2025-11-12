@@ -91,8 +91,9 @@ const ProductDetailPage = () => {
       toast.error('Минимальное количество для заказа - 10 штук');
       return;
     }
+    const sizeCategoryName = sizeCategories.find(s => s.id === selectedSizeCategory)?.name;
     toast.success(`${product.name} добавлен в корзину`, {
-      description: `Количество: ${quantity} шт, размер: ${selectedSize}, цвет: ${selectedColor}`
+      description: `Количество: ${quantity} шт, категория: ${sizeCategoryName}, цвет: ${selectedColor}`
     });
   };
 
