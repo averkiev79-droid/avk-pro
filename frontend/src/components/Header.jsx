@@ -103,9 +103,11 @@ const Header = () => {
           <div className="lg:hidden flex items-center gap-4">
             <Link to="/cart" className="relative text-gray-900">
               <ShoppingCart size={22} strokeWidth={1.5} />
-              <span className="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
-                2
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                  {cartCount}
+                </span>
+              )}
             </Link>
             <button
               className="text-gray-900"
