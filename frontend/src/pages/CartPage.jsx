@@ -68,12 +68,14 @@ const CartPage = () => {
   const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   return (
-    <div className="cart-page bg-light min-h-screen">
+    <div className="cart-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-sport-blue text-white py-16">
-        <div className="container px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl font-light mb-4">Корзина</h1>
-          <p className="text-base sm:text-lg opacity-90">Оформите заказ или продолжите покупки</p>
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-12 border-b border-gray-200">
+        <div className="container max-w-7xl mx-auto px-4">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight text-gray-900">
+            <span className="italic font-serif text-gray-700">Корзина</span>
+          </h1>
+          <p className="text-lg text-gray-600">Оформите заказ или продолжите покупки</p>
         </div>
       </section>
 
