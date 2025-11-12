@@ -403,3 +403,108 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+
+# ============================================================================
+# ORDERS API - New endpoints for order management and email notifications
+# ============================================================================
+from models import Order, OrderCreate, OrderUpdate
+from email_service import EmailService
+from fastapi import BackgroundTasks
+
+@api_router.post("/orders", response_model=dict, status_code=201)
+async def create_order(order: OrderCreate, background_tasks: BackgroundTasks):
+    """
+    Create a new order and send confirmation email
+    """
+    try:
+        # Create order object
+        order_data = Order(
+            **order.model_dump(),
+            status="pending"
+        )
+        
+        # Convert to dict for MongoDB (serialize datetime)
+        order_dict = order_data.model_dump()
+        order_dict['created_at'] = order_dict['created_at'].isoformat()
+        order_dict['updated_at'] = order_dict['updated_at'].isoformat()
+        
+        # Save to database
+        await db.orders.insert_one(order_dict)
+        
+        # Send email confirmation in background
+        background_tasks.add_task(EmailService.send_order_confirmation, order_data)
+        
+        return {
+            "success": True,
+            "message": "Заказ создан успешно",
+            "order_id": order_data.id
+        }
+    except Exception as e:
+        logger.error(f"Error creating order: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/orders", response_model=List[Order])
+async def get_orders(skip: int = 0, limit: int = 100):
+    """Get all orders (admin only in production)"""
+    try:
+        orders = await db.orders.find().skip(skip).limit(limit).to_list(length=limit)
+        return [Order(**order) for order in orders]
+    except Exception as e:
+        logger.error(f"Error fetching orders: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/orders/{order_id}", response_model=Order)
+async def get_order(order_id: str):
+    """Get order by ID"""
+    try:
+        order = await db.orders.find_one({"id": order_id})
+        if not order:
+            raise HTTPException(status_code=404, detail="Заказ не найден")
+        return Order(**order)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching order: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.patch("/orders/{order_id}", response_model=dict)
+async def update_order(order_id: str, order_update: OrderUpdate, background_tasks: BackgroundTasks):
+    """Update order status and send notification email"""
+    try:
+        order = await db.orders.find_one({"id": order_id})
+        if not order:
+            raise HTTPException(status_code=404, detail="Заказ не найден")
+        
+        old_status = order.get("status")
+        update_data = {k: v for k, v in order_update.model_dump().items() if v is not None}
+        update_data["updated_at"] = datetime.now().isoformat()
+        
+        await db.orders.update_one(
+            {"id": order_id},
+            {"$set": update_data}
+        )
+        
+        # If status changed, send email notification
+        if "status" in update_data and update_data["status"] != old_status:
+            updated_order = await db.orders.find_one({"id": order_id})
+            order_obj = Order(**updated_order)
+            background_tasks.add_task(
+                EmailService.send_order_status_update,
+                order_obj,
+                old_status,
+                update_data["status"]
+            )
+        
+        return {
+            "success": True,
+            "message": "Заказ обновлен"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating order: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
