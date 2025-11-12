@@ -155,7 +155,7 @@ const ContactsPage = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="text-sm font-medium text-gray-900">Сообщение (опционально)</Label>
+                  <Label htmlFor="message" className="text-sm font-medium text-gray-900">Сообщение</Label>
                   <Textarea
                     id="message"
                     placeholder="Расскажите о вашем запросе..."
