@@ -139,7 +139,8 @@ const HomePage = () => {
                     {club.logo_url ? (
                       <img 
                         src={club.logo_url} 
-                        alt={club.name} 
+                        alt={club.name}
+                        loading="lazy"
                         className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out pointer-events-none" 
                       />
                     ) : (
@@ -159,7 +160,8 @@ const HomePage = () => {
                     {club.logo_url ? (
                       <img 
                         src={club.logo_url} 
-                        alt={club.name} 
+                        alt={club.name}
+                        loading="lazy"
                         className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out pointer-events-none" 
                       />
                     ) : (
