@@ -15,7 +15,7 @@ const ArticlePage = () => {
 
   const fetchArticle = async () => {
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || process.env.REACT_APP_BACKEND_URL;
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
       const response = await fetch(`${backendUrl}/api/articles/slug/${slug}`);
       if (response.ok) {
         const data = await response.json();
