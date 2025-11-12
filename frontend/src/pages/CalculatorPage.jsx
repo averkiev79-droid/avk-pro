@@ -53,31 +53,13 @@ const CalculatorPage = () => {
     }
 
     let basePrice = productPrices[formData.productType].base;
-    let logoPrice = 0;
-
-    if (formData.hasLogo === 'yes' && formData.logoType) {
-      logoPrice = logoTypePrices[formData.logoType];
-    }
-
-    const unitPrice = basePrice + logoPrice;
+    const unitPrice = basePrice;
     let totalPrice = unitPrice * qty;
-
-    // Скидки за объем
-    if (qty >= 20) {
-      totalPrice *= 0.85; // 15% скидка
-    } else if (qty >= 10) {
-      totalPrice *= 0.9; // 10% скидка
-    } else if (qty >= 5) {
-      totalPrice *= 0.95; // 5% скидка
-    }
 
     setCalculatedPrice({
       basePrice,
-      logoPrice,
       unitPrice,
       quantity: qty,
-      subtotal: unitPrice * qty,
-      discount: (unitPrice * qty) - totalPrice,
       total: Math.round(totalPrice)
     });
 
