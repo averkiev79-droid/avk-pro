@@ -28,6 +28,9 @@ function App() {
           {/* Admin Routes */}
           <Route path="/admin/*" element={<AdminLayout />} />
           
+          {/* AI Articles Generator (standalone) */}
+          <Route path="/ai-articles" element={<AdminArticlesPage />} />
+          
           {/* Public Routes */}
           <Route path="/*" element={
             <>
@@ -46,7 +49,6 @@ function App() {
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/blog" element={<BlogPage />} />
                   <Route path="/blog/:slug" element={<ArticlePage />} />
-                  <Route path="/admin/articles" element={<AdminArticlesPage />} />
                   <Route path="/privacy" element={<LegalPage />} />
                   <Route path="/terms" element={<LegalPage />} />
                   <Route path="/requisites" element={<LegalPage />} />
