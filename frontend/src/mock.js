@@ -8,6 +8,7 @@ export const products = [
     description: 'Профессиональное хоккейное джерси с вашим логотипом',
     basePrice: 3500,
     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%232563eb"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EHOCKEY JERSEY%3C/text%3E%3C/svg%3E',
+    alt: 'Хоккейное джерси Pro - профессиональная хоккейная форма на заказ СПб',
     features: ['Дышащая ткань', 'Прочные швы', 'Сублимационная печать', 'Любой дизайн']
   },
   {
