@@ -133,7 +133,7 @@ const CartPage = () => {
                         </div>
                         
                         <div className="flex items-center justify-between w-full sm:w-auto gap-4">
-                          <span className="text-xl font-bold text-dark">
+                          <span className="text-xl font-bold text-gray-900">
                             {(item.price * item.quantity).toLocaleString('ru-RU')} ₽
                           </span>
                           <Button 
