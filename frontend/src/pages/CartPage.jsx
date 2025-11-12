@@ -85,7 +85,7 @@ const CartPage = () => {
             <ShoppingCart className="mx-auto mb-4 text-gray-400" size={64} />
             <h2 className="text-2xl font-bold mb-4">Корзина пуста</h2>
             <p className="text-gray-600 mb-6">Добавьте товары из каталога</p>
-            <Button asChild className="bg-sport-blue hover:bg-sport-red text-white transition-all duration-300">
+            <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white transition-all duration-300 rounded-md font-medium">
               <Link to="/catalog">Перейти в каталог</Link>
             </Button>
           </Card>
