@@ -7,6 +7,7 @@ import { Card } from '../components/ui/card';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useParallax } from '../hooks/useParallax';
 import FAQ from '../components/FAQ';
+import Testimonials from '../components/Testimonials';
 
 const AnimatedSection = ({ children, className = '', delay = 0 }) => {
   const [ref, isVisible] = useScrollAnimation({ threshold: 0.1 });
