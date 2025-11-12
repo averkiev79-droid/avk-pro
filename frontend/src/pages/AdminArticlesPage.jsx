@@ -28,7 +28,7 @@ const AdminArticlesPage = () => {
 
     setGenerating(true);
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || process.env.REACT_APP_BACKEND_URL;
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
       const response = await fetch(`${backendUrl}/api/articles/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -56,7 +56,7 @@ const AdminArticlesPage = () => {
 
     setSaving(true);
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || process.env.REACT_APP_BACKEND_URL;
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
       
       // Create slug from title
       const slug = generatedArticle.title
