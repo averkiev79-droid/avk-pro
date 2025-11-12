@@ -18,6 +18,7 @@ export const products = [
     description: 'Высокие гамаши с логотипом команды',
     basePrice: 800,
     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%231e40af"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EHOCKEY SOCKS%3C/text%3E%3C/svg%3E',
+    alt: 'Хоккейные гамаши - пошив на заказ с логотипом команды',
     features: ['Эластичный материал', 'Яркие цвета', 'Долговечность']
   },
   {
@@ -27,6 +28,7 @@ export const products = [
     description: 'Комплект для тренировок в зале',
     basePrice: 2800,
     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23ea580c"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3ETRAINING GEAR%3C/text%3E%3C/svg%3E',
+    alt: 'Тренировочная форма для хоккея - спортивная одежда на заказ',
     features: ['Комфортная посадка', 'Влагоотведение', 'Фирменный стиль']
   },
   {
@@ -36,6 +38,7 @@ export const products = [
     description: 'Защитные чехлы для хоккейных шорт',
     basePrice: 1200,
     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23374151"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3ESHORTS COVERS%3C/text%3E%3C/svg%3E',
+    alt: 'Чехлы для хоккейных шорт - защитная экипировка',
     features: ['Прочный материал', 'Удобная конструкция']
   },
   {
@@ -45,6 +48,7 @@ export const products = [
     description: 'Стильный бомбер с символикой команды',
     basePrice: 4500,
     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23dc2626"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3ETEAM BOMBER%3C/text%3E%3C/svg%3E',
+    alt: 'Бомбер команды - куртка с вышивкой логотипа для хоккеистов',
     features: ['Теплый и легкий', 'Современный дизайн', 'Вышивка логотипа']
   },
   {
@@ -54,6 +58,7 @@ export const products = [
     description: 'Зимняя парка для болельщиков и команды',
     basePrice: 6500,
     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%231f2937"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EWINTER PARKA%3C/text%3E%3C/svg%3E',
+    alt: 'Зимняя парка для хоккейной команды - теплая куртка с логотипом',
     features: ['Утеплитель', 'Водоотталкивающая ткань', 'Капюшон']
   },
   {
@@ -63,6 +68,7 @@ export const products = [
     description: 'Утепленная жилетка с логотипом',
     basePrice: 3200,
     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%231d4ed8"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3ETEAM VEST%3C/text%3E%3C/svg%3E',
+    alt: 'Жилетка команды - спортивная безрукавка с фирменным стилем',
     features: ['Легкая', 'Практичная', 'Удобные карманы']
   },
   {
@@ -72,6 +78,7 @@ export const products = [
     description: 'Реплика игрового джерси для фанатов',
     basePrice: 2500,
     image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="600"%3E%3Crect width="600" height="600" fill="%23b91c1c"/%3E%3Ctext x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dy=".3em" font-family="Arial"%3EFAN JERSEY%3C/text%3E%3C/svg%3E',
+    alt: 'Джерси для болельщиков - фанатская хоккейная форма',
     features: ['Точная копия', 'Комфортная ткань', 'Доступная цена']
   }
 ];
