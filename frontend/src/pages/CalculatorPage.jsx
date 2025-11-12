@@ -131,63 +131,22 @@ const CalculatorPage = () => {
                   onChange={(e) => setFormData({...formData, quantity: e.target.value})}
                   className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                 />
-                <p className="text-xs text-gray-500">Скидки: от 5 шт - 5%, от 10 шт - 10%, от 20 шт - 15%</p>
               </div>
-
-              {/* Нужен логотип */}
-              <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-900">Нужен логотип команды?</Label>
-                <Select 
-                  value={formData.hasLogo} 
-                  onValueChange={(value) => setFormData({...formData, hasLogo: value, logoType: ''})}
-                >
-                  <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="no">Нет</SelectItem>
-                    <SelectItem value="yes">Да</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Тип нанесения */}
-              {formData.hasLogo === 'yes' && (
-                <div className="space-y-2">
-                  <Label htmlFor="logoType" className="text-sm font-medium text-gray-900">Тип нанесения логотипа</Label>
-                  <Select 
-                    value={formData.logoType} 
-                    onValueChange={(value) => setFormData({...formData, logoType: value})}
-                  >
-                    <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
-                      <SelectValue placeholder="Выберите тип" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="sublimation">Сублимация (+500 ₽)</SelectItem>
-                      <SelectItem value="embroidery">Вышивка (+800 ₽)</SelectItem>
-                      <SelectItem value="print">Печать (+300 ₽)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
 
               {/* Размер */}
               <div className="space-y-2">
-                <Label htmlFor="size" className="text-sm font-medium text-gray-900">Размер (опционально)</Label>
+                <Label htmlFor="size" className="text-sm font-medium text-gray-900">Категория размеров</Label>
                 <Select 
                   value={formData.size} 
                   onValueChange={(value) => setFormData({...formData, size: value})}
                 >
                   <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
-                    <SelectValue placeholder="Выберите размер" />
+                    <SelectValue placeholder="Выберите категорию" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="xs">XS</SelectItem>
-                    <SelectItem value="s">S</SelectItem>
-                    <SelectItem value="m">M</SelectItem>
-                    <SelectItem value="l">L</SelectItem>
-                    <SelectItem value="xl">XL</SelectItem>
-                    <SelectItem value="xxl">XXL</SelectItem>
+                    <SelectItem value="kids">Дети 110-140</SelectItem>
+                    <SelectItem value="teens">Подростки 146-170</SelectItem>
+                    <SelectItem value="adults">Взрослые</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
