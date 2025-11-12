@@ -16,9 +16,9 @@ const PortfolioPage = () => {
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20 border-b border-gray-200">
         <div className="container max-w-7xl mx-auto px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight text-gray-900">
-            Наше <span className="italic font-serif text-gray-700">портфолио</span>
+            Портфолио <span className="italic font-serif text-gray-700">хоккейной формы</span>
           </h1>
-          <p className="text-lg text-gray-600">Примеры выполненных заказов для команд разного уровня</p>
+          <p className="text-lg text-gray-600">Наши работы: джерси и экипировка для детских, подростковых и взрослых команд</p>
         </div>
       </section>
 
