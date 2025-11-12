@@ -46,6 +46,7 @@ const Header = () => {
     { name: 'Главная', path: '/' },
     { name: 'Каталог', path: '/catalog' },
     { name: 'Калькулятор', path: '/calculator' },
+    { name: 'Блог', path: '/blog' },
     { name: 'Портфолио', path: '/portfolio' },
     { name: 'О компании', path: '/about' },
     { name: 'Контакты', path: '/contacts' }
