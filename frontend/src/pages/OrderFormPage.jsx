@@ -144,7 +144,7 @@ const OrderFormPage = () => {
                     />
                   </div>
                   <div className="space-y-2 mt-4">
-                    <Label htmlFor="teamName" className="text-sm font-medium text-gray-900">Название команды (опционально)</Label>
+                    <Label htmlFor="teamName" className="text-sm font-medium text-gray-900">Название команды</Label>
                     <Input
                       id="teamName"
                       placeholder="Хоккейный клуб СПб"
