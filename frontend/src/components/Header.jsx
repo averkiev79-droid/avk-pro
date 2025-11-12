@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Mail, ShoppingCart } from 'lucide-react';
 import { companyInfo } from '../mock';
@@ -6,7 +6,41 @@ import { Button } from './ui/button';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const location = useLocation();
+
+  // Load cart count from localStorage
+  useEffect(() => {
+    const updateCartCount = () => {
+      try {
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+          const cart = JSON.parse(savedCart);
+          const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+          setCartCount(totalItems);
+        } else {
+          setCartCount(0);
+        }
+      } catch (error) {
+        console.error('Error loading cart count:', error);
+        setCartCount(0);
+      }
+    };
+
+    // Initial load
+    updateCartCount();
+
+    // Listen for storage changes (from other tabs/windows)
+    window.addEventListener('storage', updateCartCount);
+    
+    // Listen for custom cart update event (from same tab)
+    window.addEventListener('cartUpdated', updateCartCount);
+
+    return () => {
+      window.removeEventListener('storage', updateCartCount);
+      window.removeEventListener('cartUpdated', updateCartCount);
+    };
+  }, []);
 
   const navigation = [
     { name: 'Главная', path: '/' },
