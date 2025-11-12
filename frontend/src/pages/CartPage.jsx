@@ -17,23 +17,8 @@ const CartPage = () => {
     } catch (error) {
       console.error('Error loading cart:', error);
     }
-    // Пример данных корзины только при первом запуске
-    return [
-      {
-        id: 1,
-        name: 'Хоккейное джерси Pro',
-        price: 3500,
-        quantity: 10,
-        image: 'https://via.placeholder.com/150x150/2C5282/ffffff?text=JERSEY'
-      },
-      {
-        id: 2,
-        name: 'Хоккейные гамаши',
-        price: 800,
-        quantity: 15,
-        image: 'https://via.placeholder.com/150x150/2C5282/ffffff?text=SOCKS'
-      }
-    ];
+    // Возвращаем пустую корзину
+    return [];
   };
 
   const [cartItems, setCartItems] = useState(getInitialCart);
