@@ -632,3 +632,75 @@ async def delete_article(article_id: str):
     except Exception as e:
         logger.error(f"Error deleting article: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/articles/generate", response_model=dict)
+async def generate_article_with_ai(request: AIGenerateRequest):
+    """Generate article content using AI (Emergent LLM key)"""
+    try:
+        from emergentintegrations.llm.chat import LlmChat, UserMessage
+        import os
+        
+        api_key = os.environ.get("EMERGENT_LLM_KEY")
+        if not api_key:
+            raise HTTPException(status_code=500, detail="AI ключ не настроен")
+        
+        # Initialize AI chat
+        chat = LlmChat(
+            api_key=api_key,
+            session_id=f"article-gen-{uuid.uuid4()}",
+            system_message=f"Ты профессиональный копирайтер, специализирующийся на спортивной тематике. Пиши статьи в стиле {request.tone}, используй простой русский язык."
+        ).with_model("openai", "gpt-4o-mini")
+        
+        # Create user message for article generation
+        user_message = UserMessage(
+            text=f"""Напиши статью на тему: "{request.topic}" для категории "{request.category}".
+            
+Статья должна быть:
+- Объемом 500-800 слов
+- С заголовками H2 и H3
+- С практическими советами
+- SEO-оптимизированной
+- На русском языке
+
+Формат ответа: JSON с полями:
+{{
+  "title": "Заголовок статьи",
+  "content": "HTML контент статьи с тегами <h2>, <h3>, <p>, <ul>, <li>",
+  "excerpt": "Краткое описание статьи (2-3 предложения)",
+  "seo_title": "SEO заголовок для браузера",
+  "seo_description": "SEO описание для поисковиков",
+  "seo_keywords": "ключевое слово 1, ключевое слово 2, ключевое слово 3"
+}}
+
+Верни ТОЛЬКО JSON, без дополнительного текста."""
+        )
+        
+        # Generate content
+        response = await chat.send_message(user_message)
+        
+        # Parse JSON from response
+        import json
+        
+        # Try to extract JSON from response
+        response_text = response.strip()
+        if response_text.startswith("```json"):
+            response_text = response_text[7:]
+        if response_text.startswith("```"):
+            response_text = response_text[3:]
+        if response_text.endswith("```"):
+            response_text = response_text[:-3]
+        
+        article_data = json.loads(response_text.strip())
+        
+        return {
+            "success": True,
+            "data": article_data
+        }
+        
+    except json.JSONDecodeError as e:
+        logger.error(f"Failed to parse AI response as JSON: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Ошибка парсинга ответа AI: {str(e)}")
+    except Exception as e:
+        logger.error(f"Error generating article with AI: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
