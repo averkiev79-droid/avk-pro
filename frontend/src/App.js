@@ -44,6 +44,9 @@ function App() {
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contacts" element={<ContactsPage />} />
                   <Route path="/cart" element={<CartPage />} />
+                  <Route path="/blog" element={<BlogPage />} />
+                  <Route path="/blog/:slug" element={<ArticlePage />} />
+                  <Route path="/admin/articles" element={<AdminArticlesPage />} />
                   <Route path="/privacy" element={<LegalPage />} />
                   <Route path="/terms" element={<LegalPage />} />
                   <Route path="/requisites" element={<LegalPage />} />
