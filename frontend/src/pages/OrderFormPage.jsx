@@ -196,7 +196,7 @@ const OrderFormPage = () => {
                   </div>
 
                   <div className="space-y-2 mt-4">
-                    <Label htmlFor="description" className="text-sm font-medium text-gray-900">Описание заказа (опционально)</Label>
+                    <Label htmlFor="description" className="text-sm font-medium text-gray-900">Описание заказа</Label>
                     <Textarea
                       id="description"
                       placeholder="Укажите пожелания к дизайну, цвета, размеры и другие детали..."
