@@ -371,8 +371,8 @@ const ProductDetailPage = () => {
                       <td className="py-3 text-gray-600">Сублимация</td>
                     </tr>
                     <tr className="border-b border-gray-200">
-                      <td className="py-3 font-medium text-gray-700">Доступные размеры:</td>
-                      <td className="py-3 text-gray-600">XS - XXL</td>
+                      <td className="py-3 font-medium text-gray-700">Доступные категории:</td>
+                      <td className="py-3 text-gray-600">Дети 110-140, Подростки 146-170, Взрослые</td>
                     </tr>
                     <tr className="border-b border-gray-200">
                       <td className="py-3 font-medium text-gray-700">Срок изготовления:</td>
