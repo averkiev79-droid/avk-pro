@@ -14,6 +14,9 @@ import AboutPage from './pages/AboutPage';
 import ContactsPage from './pages/ContactsPage';
 import CartPage from './pages/CartPage';
 import LegalPage from './pages/LegalPage';
+import BlogPage from './pages/BlogPage';
+import ArticlePage from './pages/ArticlePage';
+import AdminArticlesPage from './pages/AdminArticlesPage';
 import AdminLayout from './pages/AdminLayout';
 import { Toaster } from './components/ui/sonner';
 
