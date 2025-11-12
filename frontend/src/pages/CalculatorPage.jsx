@@ -178,18 +178,6 @@ const CalculatorPage = () => {
                 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                    <span className="text-gray-600">Базовая цена:</span>
-                    <span className="font-semibold text-gray-900">{calculatedPrice.basePrice} ₽</span>
-                  </div>
-
-                  {calculatedPrice.logoPrice > 0 && (
-                    <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                      <span className="text-gray-600">Нанесение логотипа:</span>
-                      <span className="font-semibold text-gray-900">+{calculatedPrice.logoPrice} ₽</span>
-                    </div>
-                  )}
-
-                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
                     <span className="text-gray-600">Цена за единицу:</span>
                     <span className="font-semibold text-gray-900">{calculatedPrice.unitPrice} ₽</span>
                   </div>
@@ -198,18 +186,6 @@ const CalculatorPage = () => {
                     <span className="text-gray-600">Количество:</span>
                     <span className="font-semibold text-gray-900">{calculatedPrice.quantity} шт</span>
                   </div>
-
-                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                    <span className="text-gray-600">Промежуточная сумма:</span>
-                    <span className="font-semibold text-gray-900">{calculatedPrice.subtotal} ₽</span>
-                  </div>
-
-                  {calculatedPrice.discount > 0 && (
-                    <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                      <span className="text-green-600">Скидка:</span>
-                      <span className="font-semibold text-green-600">-{Math.round(calculatedPrice.discount)} ₽</span>
-                    </div>
-                  )}
 
                   <div className="flex justify-between items-center py-6 bg-gray-50 px-6 rounded-md mt-6">
                     <span className="text-lg font-semibold text-gray-900">Итоговая стоимость:</span>
