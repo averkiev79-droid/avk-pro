@@ -88,9 +88,11 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-6">
             <Link to="/cart" className="relative text-gray-900 hover:text-gray-600 transition-colors">
               <ShoppingCart size={22} strokeWidth={1.5} />
-              <span className="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
-                2
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                  {cartCount}
+                </span>
+              )}
             </Link>
             <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-5 rounded-md transition-colors font-medium">
               <Link to="/order">Заказать</Link>
