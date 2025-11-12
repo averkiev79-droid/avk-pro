@@ -471,6 +471,9 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQ />
+
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-br from-gray-800 to-gray-900">
         <div className="container max-w-4xl mx-auto text-center px-4">
