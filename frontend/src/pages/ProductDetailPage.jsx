@@ -200,23 +200,25 @@ const ProductDetailPage = () => {
               </p>
             </Card>
 
-            {/* Size Selection */}
+            {/* Size Category Selection */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                Размер: <span className="text-sport-blue font-bold">{selectedSize}</span>
+                Категория размеров: <span className="text-sport-blue font-bold">
+                  {sizeCategories.find(s => s.id === selectedSizeCategory)?.name}
+                </span>
               </label>
               <div className="flex gap-2 flex-wrap">
-                {sizes.map(size => (
+                {sizeCategories.map(sizeCategory => (
                   <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
+                    key={sizeCategory.id}
+                    onClick={() => setSelectedSizeCategory(sizeCategory.id)}
                     className={`px-5 py-2.5 rounded-lg border-2 transition-all duration-300 font-medium ${
-                      selectedSize === size
+                      selectedSizeCategory === sizeCategory.id
                         ? 'bg-sport-blue text-white border-sport-blue shadow-md'
                         : 'bg-white text-gray-700 border-gray-300 hover:border-sport-blue'
                     }`}
                   >
-                    {size}
+                    {sizeCategory.name}
                   </button>
                 ))}
               </div>
