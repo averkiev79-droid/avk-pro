@@ -5,22 +5,21 @@ import { Label } from '../components/ui/label';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { toast } from 'sonner';
-import { Calculator, Download } from 'lucide-react';
+import { Calculator, Plus, Trash2 } from 'lucide-react';
 
 const CalculatorPage = () => {
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+  
   const [formData, setFormData] = useState({
     productType: '',
     quantity: '',
-    hasLogo: 'no',
-    logoType: '',
     size: ''
   });
 
-  const [calculatedPrice, setCalculatedPrice] = useState(null);
+  const [items, setItems] = useState([]);
 
   const productPrices = {
     'jersey': { base: 3500, name: 'Хоккейное джерси' },
@@ -32,13 +31,13 @@ const CalculatorPage = () => {
     'vest': { base: 3200, name: 'Жилетка' }
   };
 
-  const logoTypePrices = {
-    'sublimation': 500,
-    'embroidery': 800,
-    'print': 300
+  const sizeCategories = {
+    'kids': 'Дети 110-140',
+    'teens': 'Подростки 146-170',
+    'adults': 'Взрослые'
   };
 
-  const handleCalculate = () => {
+  const handleAddItem = () => {
     if (!formData.productType || !formData.quantity) {
       toast.error('Заполните обязательные поля', {
         description: 'Выберите тип товара и укажите количество'
@@ -52,31 +51,49 @@ const CalculatorPage = () => {
       return;
     }
 
-    let basePrice = productPrices[formData.productType].base;
-    const unitPrice = basePrice;
-    let totalPrice = unitPrice * qty;
-
-    setCalculatedPrice({
-      basePrice,
-      unitPrice,
+    const product = productPrices[formData.productType];
+    const newItem = {
+      id: Date.now(),
+      productType: formData.productType,
+      productName: product.name,
+      unitPrice: product.base,
       quantity: qty,
-      total: Math.round(totalPrice)
+      size: formData.size,
+      sizeName: formData.size ? sizeCategories[formData.size] : '',
+      total: product.base * qty
+    };
+
+    setItems([...items, newItem]);
+    
+    // Reset form
+    setFormData({
+      productType: '',
+      quantity: '',
+      size: ''
     });
 
-    toast.success('Расчет выполнен!', {
-      description: 'Стоимость вашего заказа рассчитана'
+    toast.success('Товар добавлен!', {
+      description: `${product.name} добавлен в калькулятор`
     });
+  };
+
+  const handleRemoveItem = (id) => {
+    setItems(items.filter(item => item.id !== id));
+    toast.success('Товар удален');
   };
 
   const handleReset = () => {
     setFormData({
       productType: '',
       quantity: '',
-      hasLogo: 'no',
-      logoType: '',
       size: ''
     });
-    setCalculatedPrice(null);
+    setItems([]);
+    toast.success('Калькулятор очищен');
+  };
+
+  const getTotalPrice = () => {
+    return items.reduce((sum, item) => sum + item.total, 0);
   };
 
   return (
