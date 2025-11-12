@@ -171,17 +171,18 @@ const CalculatorPage = () => {
               {/* Buttons */}
               <div className="flex gap-4 pt-6">
                 <Button 
-                  onClick={handleCalculate} 
-                  className="flex-1 bg-gray-900 hover:bg-gray-800 text-white rounded-md py-6 transition-colors font-medium"
+                  onClick={handleAddItem} 
+                  className="flex-1 bg-gray-900 hover:bg-gray-800 text-white rounded-md py-6 transition-colors font-medium flex items-center justify-center gap-2"
                 >
-                  Рассчитать
+                  <Plus size={20} strokeWidth={2} />
+                  Добавить товар
                 </Button>
                 <Button 
                   onClick={handleReset} 
                   variant="outline"
                   className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white rounded-md py-6 transition-colors font-medium"
                 >
-                  Сбросить
+                  Очистить
                 </Button>
               </div>
             </div>
@@ -189,41 +190,52 @@ const CalculatorPage = () => {
 
           {/* Results */}
           <div>
-            {calculatedPrice ? (
+            {items.length > 0 ? (
               <div className="bg-white p-8 border border-gray-200 rounded-md sticky top-24">
-                <h2 className="text-2xl font-bold mb-8 tracking-tight">Результат расчета</h2>
+                <h2 className="text-2xl font-bold mb-8 tracking-tight">Список товаров</h2>
                 
+                <div className="space-y-4 mb-8">
+                  {items.map((item) => (
+                    <div key={item.id} className="flex items-start justify-between p-4 bg-gray-50 rounded-md border border-gray-200">
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900 mb-1">{item.productName}</h3>
+                        <div className="text-sm text-gray-600 space-y-1">
+                          <p>Цена: {item.unitPrice} ₽ × {item.quantity} шт</p>
+                          {item.sizeName && <p>Размер: {item.sizeName}</p>}
+                          <p className="font-semibold text-gray-900">Сумма: {item.total} ₽</p>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleRemoveItem(item.id)}
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      >
+                        <Trash2 size={18} />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex justify-between items-center py-6 bg-gray-900 text-white px-6 rounded-md mb-6">
+                  <span className="text-lg font-semibold">Итоговая стоимость:</span>
+                  <span className="text-3xl font-bold">{getTotalPrice()} ₽</span>
+                </div>
+
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                    <span className="text-gray-600">Цена за единицу:</span>
-                    <span className="font-semibold text-gray-900">{calculatedPrice.unitPrice} ₽</span>
-                  </div>
-
-                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                    <span className="text-gray-600">Количество:</span>
-                    <span className="font-semibold text-gray-900">{calculatedPrice.quantity} шт</span>
-                  </div>
-
-                  <div className="flex justify-between items-center py-6 bg-gray-50 px-6 rounded-md mt-6">
-                    <span className="text-lg font-semibold text-gray-900">Итоговая стоимость:</span>
-                    <span className="text-3xl font-bold text-gray-900">{calculatedPrice.total} ₽</span>
-                  </div>
-
-                  <div className="pt-6 space-y-4">
-                    <p className="text-sm text-gray-500">
-                      * Это предварительный расчет. Точная стоимость определяется после обсуждения деталей заказа.
-                    </p>
-                    <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white py-6 rounded-md transition-colors font-medium">
-                      Оформить заказ
-                    </Button>
-                  </div>
+                  <p className="text-sm text-gray-500">
+                    * Это предварительный расчет. Точная стоимость определяется после обсуждения деталей заказа.
+                  </p>
+                  <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white py-6 rounded-md transition-colors font-medium">
+                    Оформить заказ
+                  </Button>
                 </div>
               </div>
             ) : (
               <div className="bg-gray-50 p-12 border border-gray-200 rounded-md text-center h-full flex flex-col items-center justify-center">
                 <Calculator className="text-gray-400 mb-4" size={64} strokeWidth={1.5} />
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">Заполните форму</h3>
-                <p className="text-gray-500">Укажите параметры заказа для расчета стоимости</p>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">Добавьте товары</h3>
+                <p className="text-gray-500">Выберите товары и нажмите "Добавить товар"</p>
               </div>
             )}
           </div>
