@@ -309,40 +309,59 @@ const ProductsPage = () => {
       </Card>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProducts.map(product => (
-          <Card key={product.id} className="overflow-hidden">
-            <div className="aspect-square bg-gray-100">
-              <img 
-                src={product.image} 
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div className="p-4">
-              <div className="flex items-center justify-between mb-2">
-                <Badge variant="outline">{getCategoryName(product.category)}</Badge>
-                <span className="text-lg font-bold text-sport-blue">₽{product.basePrice}</span>
+      {loading ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500">Загрузка товаров...</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProducts.map(product => (
+            <Card key={product.id} className="overflow-hidden">
+              <div className="aspect-square bg-gray-100 relative">
+                {product.images && product.images.length > 0 ? (
+                  <>
+                    <img 
+                      src={product.images[0]} 
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                    {product.images.length > 1 && (
+                      <Badge className="absolute top-2 right-2 bg-black/70 text-white">
+                        +{product.images.length - 1} фото
+                      </Badge>
+                    )}
+                  </>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-400">
+                    <Upload size={48} />
+                  </div>
+                )}
               </div>
               
-              <h3 className="font-semibold mb-2">{product.name}</h3>
-              <p className="text-sm text-gray-600 mb-4 line-clamp-2">{product.description}</p>
-              
-              <div className="flex gap-2">
-                <Button size="sm" variant="outline" onClick={() => handleEdit(product)}>
-                  <Edit size={14} className="mr-1" />
-                  Изменить
-                </Button>
-                <Button size="sm" variant="outline" onClick={() => handleDelete(product.id)} className="text-red-600 hover:bg-red-50">
-                  <Trash2 size={14} className="mr-1" />
-                  Удалить
-                </Button>
+              <div className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <Badge variant="outline">{getCategoryName(product.category)}</Badge>
+                  <span className="text-lg font-bold text-gray-900">₽{product.base_price}</span>
+                </div>
+                
+                <h3 className="font-semibold mb-2">{product.name}</h3>
+                <p className="text-sm text-gray-600 mb-4 line-clamp-2">{product.description}</p>
+                
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" onClick={() => handleEdit(product)} className="bg-gray-900 text-white hover:bg-gray-800">
+                    <Edit size={14} className="mr-1" />
+                    Изменить
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={() => handleDelete(product.id)} className="text-red-600 hover:bg-red-50 border-red-200">
+                    <Trash2 size={14} className="mr-1" />
+                    Удалить
+                  </Button>
+                </div>
               </div>
-            </div>
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))}
+        </div>
+      )}
       
       {filteredProducts.length === 0 && (
         <Card className="p-12 text-center">
