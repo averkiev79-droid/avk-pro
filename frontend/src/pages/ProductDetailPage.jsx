@@ -454,17 +454,17 @@ const ProductDetailPage = () => {
                   <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 group border border-gray-200 bg-white h-full">
                     <div className="aspect-square overflow-hidden bg-gray-100">
                       <img 
-                        src={relProduct.image} 
+                        src={relProduct.images && relProduct.images.length > 0 ? relProduct.images[0] : 'https://via.placeholder.com/400'}
                         alt={relProduct.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
                     <div className="p-4">
-                      <h3 className="text-base font-bold mb-2 text-dark line-clamp-2">{relProduct.name}</h3>
+                      <h3 className="text-base font-bold mb-2 text-gray-900 line-clamp-2">{relProduct.name}</h3>
                       <p className="text-sm text-gray-600 mb-3 line-clamp-2">{relProduct.description}</p>
                       <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-sport-blue">от {relProduct.basePrice} ₽</span>
-                        <Button size="sm" className="bg-sport-red hover:bg-sport-orange text-white transition-all duration-300">
+                        <span className="text-lg font-bold text-gray-900">от {relProduct.base_price} ₽</span>
+                        <Button size="sm" className="bg-gray-900 hover:bg-gray-800 text-white transition-all duration-300">
                           Смотреть
                         </Button>
                       </div>
