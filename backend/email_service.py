@@ -40,6 +40,9 @@ class EmailService:
             Dictionary with success status and email ID or error message
         """
         try:
+            # Set API key from environment
+            resend.api_key = os.environ.get("RESEND_API_KEY", "")
+            
             items_html = EmailService.format_items_html(order.items)
             
             html_content = f"""
