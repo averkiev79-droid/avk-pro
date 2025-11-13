@@ -215,7 +215,7 @@ const ProductDetailPage = () => {
             {/* Price */}
             <Card className="p-6 mb-6 bg-gradient-to-br from-slate-50 to-white border-2 border-gray-200 shadow-md">
               <div className="flex items-end gap-3 mb-2">
-                <span className="text-4xl font-bold text-sport-blue">{product.basePrice} ₽</span>
+                <span className="text-4xl font-bold text-gray-900">{product.base_price} ₽</span>
                 <span className="text-gray-500 pb-1">/ шт</span>
               </div>
               <p className="text-sm text-gray-600">
