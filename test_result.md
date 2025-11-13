@@ -132,26 +132,41 @@ backend:
           comment: "Added Product model with support for multiple images (images: List[str]). Created full CRUD API endpoints: POST /api/products, GET /api/products, GET /api/products/{id}, PUT /api/products/{id}, DELETE /api/products/{id}. Needs testing."
 
 frontend:
-  - task: "Short Par 4 style redesign"
+  - task: "Hero section desktop layout fix"
     implemented: true
-    working: true
-    file: "frontend/src/index.css, frontend/src/components/Header.jsx, frontend/src/components/Footer.jsx, frontend/src/pages/HomePage.jsx, frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ContactsPage.jsx, frontend/src/pages/AboutPage.jsx, frontend/src/pages/OrderFormPage.jsx, frontend/src/pages/PortfolioPage.jsx, frontend/src/mock.js"
+    working: false
+    file: "frontend/src/pages/HomePage.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        - working: true
+        - working: false
           agent: "main"
-          comment: "Complete redesign implemented: Updated colors to black/white/gray palette, new typography with Inter and Playfair Display fonts, minimalist design, clean layout, updated all major pages"
-        - working: true
+          comment: "Fixed hero section for desktop by adding explicit width classes (w-full lg:w-1/2 flex-shrink-0) to both left and right columns. Changed from grid to flexbox layout. Also updated to use heroImage state variable instead of hardcoded URL. Needs verification on live site."
+  
+  - task: "Admin Products Page - Multiple Image Upload"
+    implemented: true
+    working: false
+    file: "frontend/src/pages/admin/ProductsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
           agent: "main"
-          comment: "OrderFormPage styling completed: Logo upload section updated with black button styling, all form elements now consistent with Short Par 4 design, auto-scroll to top working"
-        - working: true
+          comment: "Completely refactored ProductsPage to work with API instead of mock data. Added support for multiple image URLs with dynamic add/remove buttons. Changed from single 'image' field to 'images' array. Updated form to show image count badge on product cards. Connected to /api/products endpoints for CRUD operations. Needs testing."
+  
+  - task: "Public Pages - Product Display with Multiple Images"
+    implemented: true
+    working: false
+    file: "frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ProductDetailPage.jsx, frontend/src/pages/HomePage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
           agent: "main"
-          comment: "Image loading fixed: Replaced all placeholder images from via.placeholder.com and problematic Unsplash URLs with Picsum Photos. All images now load correctly without CORS errors. Verified on HomePage and CatalogPage."
-        - working: true
-          agent: "main"
-          comment: "Fixed all remaining pages: PortfolioPage updated from old color scheme (red/blue) to Short Par 4 style. Fixed spacing issues on all pages - increased padding (py-20 instead of py-16) and added bottom margin (mb-10) to prevent content from sticking to footer. All pages now have proper spacing between header/content/footer."
+          comment: "Updated all public product pages to fetch from API and display multiple images. CatalogPage: fetches products from API, shows first image with badge for additional photos. ProductDetailPage: updated to fetch product by ID, uses product.images array. HomePage: fetches featured products from API. All pages updated to use base_price instead of basePrice. Needs testing."
 
 metadata:
   created_by: "main_agent"
