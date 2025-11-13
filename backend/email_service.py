@@ -159,6 +159,9 @@ class EmailService:
             Dictionary with success status
         """
         try:
+            # Set API key from environment
+            resend.api_key = os.environ.get("RESEND_API_KEY", "")
+            
             status_messages = {
                 "confirmed": "Ваш заказ подтвержден и принят в производство.",
                 "processing": "Ваш заказ находится в производстве.",
