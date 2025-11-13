@@ -513,7 +513,6 @@ async def update_order(order_id: str, order_update: OrderUpdate, background_task
 # ============================================================================
 # BLOG/ARTICLES API - For SEO content management
 # ============================================================================
-from models import Article, ArticleCreate, ArticleUpdate, AIGenerateRequest
 
 @api_router.post("/articles", response_model=dict, status_code=201)
 async def create_article(article: ArticleCreate):
