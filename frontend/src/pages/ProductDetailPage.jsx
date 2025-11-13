@@ -220,7 +220,7 @@ const ProductDetailPage = () => {
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`px-5 py-2.5 rounded-lg border-2 transition-all duration-300 font-medium ${
+                    className={`px-4 sm:px-5 py-3 sm:py-2.5 rounded-lg border-2 transition-all duration-300 font-medium text-sm sm:text-base ${
                       selectedColor === color
                         ? 'bg-sport-blue text-white border-sport-blue shadow-md'
                         : 'bg-white text-gray-700 border-gray-300 hover:border-sport-blue'
