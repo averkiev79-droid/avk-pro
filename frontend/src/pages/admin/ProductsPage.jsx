@@ -153,6 +153,43 @@ const ProductsPage = () => {
     setImageUrls(newUrls);
   };
 
+  const handleFileUpload = async (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+
+    setUploadingFiles(true);
+    
+    try {
+      const uploadPromises = files.map(async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch(`${backendUrl}/api/upload`, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) throw new Error('Upload failed');
+        
+        const data = await response.json();
+        return `${backendUrl}/api${data.url}`;
+      });
+
+      const urls = await Promise.all(uploadPromises);
+      setUploadedImages([...uploadedImages, ...urls]);
+      toast.success(`${files.length} изображений загружено`);
+    } catch (error) {
+      console.error('Error uploading files:', error);
+      toast.error('Ошибка загрузки изображений');
+    } finally {
+      setUploadingFiles(false);
+    }
+  };
+
+  const handleRemoveUploadedImage = (index) => {
+    setUploadedImages(uploadedImages.filter((_, i) => i !== index));
+  };
+
   const getCategoryName = (categoryId) => {
     return categories.find(c => c.id === categoryId)?.name || categoryId;
   };
