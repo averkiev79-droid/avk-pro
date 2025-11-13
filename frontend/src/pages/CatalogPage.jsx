@@ -106,7 +106,11 @@ const CatalogPage = () => {
               </p>
             </div>
 
-            {filteredProducts.length === 0 ? (
+            {loading ? (
+              <div className="p-16 text-center">
+                <p className="text-gray-500 text-lg">Загрузка товаров...</p>
+              </div>
+            ) : filteredProducts.length === 0 ? (
               <div className="p-16 text-center bg-gray-50 rounded-md">
                 <p className="text-gray-500 text-lg">Товары не найдены</p>
                 <p className="text-gray-400 text-sm mt-2">Попробуйте изменить параметры поиска</p>
@@ -116,13 +120,18 @@ const CatalogPage = () => {
                 {filteredProducts.map((product) => (
                   <Link key={product.id} to={`/product/${product.id}`}>
                     <div className="transition-all duration-300 group cursor-pointer h-full">
-                      <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md">
+                      <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md relative">
                         <img
-                          src={product.image}
-                          alt={product.alt || product.name}
+                          src={product.images && product.images.length > 0 ? product.images[0] : 'https://via.placeholder.com/400'}
+                          alt={product.name}
                           loading="lazy"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
+                        {product.images && product.images.length > 1 && (
+                          <Badge className="absolute top-2 right-2 bg-black/70 text-white">
+                            +{product.images.length - 1}
+                          </Badge>
+                        )}
                       </div>
                       <div>
                         <Badge className="mb-3 bg-gray-100 text-gray-700 hover:bg-gray-100 border-0 font-medium text-xs">
@@ -131,19 +140,21 @@ const CatalogPage = () => {
                         <h3 className="text-lg font-semibold mb-2 text-gray-900 group-hover:text-gray-600 transition-colors">{product.name}</h3>
                         <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">{product.description}</p>
                         
-                        <div className="space-y-2 mb-4">
-                          {product.features.slice(0, 3).map((feature, idx) => (
-                            <div key={idx} className="flex items-start gap-2 text-xs text-gray-600">
-                              <span className="text-gray-900 mt-0.5">✓</span>
-                              <span>{feature}</span>
-                            </div>
-                          ))}
-                        </div>
+                        {product.features && product.features.length > 0 && (
+                          <div className="space-y-2 mb-4">
+                            {product.features.slice(0, 3).map((feature, idx) => (
+                              <div key={idx} className="flex items-start gap-2 text-xs text-gray-600">
+                                <span className="text-gray-900 mt-0.5">✓</span>
+                                <span>{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
 
                         <div className="flex justify-between items-center pt-4 border-t border-gray-200">
                           <div>
                             <p className="text-xs text-gray-500 mb-1">от</p>
-                            <p className="text-xl font-semibold text-gray-900">{product.basePrice} ₽</p>
+                            <p className="text-xl font-semibold text-gray-900">{product.base_price} ₽</p>
                           </div>
                           <span className="text-sm font-medium text-gray-900 group-hover:underline">
                             Подробнее →
