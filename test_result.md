@@ -103,7 +103,8 @@
 #====================================================================================================
 
 user_problem_statement: |
-  Редизайн сайта A.V.K. SPORT в стиле shortpar4.com - минималистичный, премиальный дизайн
+  1. Исправление героического раздела на главной странице для десктопа
+  2. Добавление возможности загружать несколько фотографий в карточке товара в админ-панели
 
 backend:
   - task: "Backend API endpoints"
@@ -117,6 +118,18 @@ backend:
         - working: true
           agent: "main"
           comment: "Backend working correctly, no changes needed for redesign"
+  
+  - task: "Product Model and CRUD API"
+    implemented: true
+    working: false
+    file: "backend/models.py, backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "Added Product model with support for multiple images (images: List[str]). Created full CRUD API endpoints: POST /api/products, GET /api/products, GET /api/products/{id}, PUT /api/products/{id}, DELETE /api/products/{id}. Needs testing."
 
 frontend:
   - task: "Short Par 4 style redesign"
