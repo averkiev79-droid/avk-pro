@@ -20,6 +20,7 @@ class ProductAPITester:
         self.base_url = BACKEND_URL
         self.created_product_ids = []
         self.test_results = []
+        self.uploaded_files = []
         
     def log_result(self, test_name, success, message, details=None):
         """Log test result"""
