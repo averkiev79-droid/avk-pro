@@ -41,6 +41,7 @@ const AdminLayout = () => {
     { name: 'Дашборд', href: '/admin', icon: LayoutDashboard, exact: true },
     { name: 'Продукция', href: '/admin/products', icon: Package },
     { name: 'Заказы', href: '/admin/orders', icon: ShoppingCart },
+    { name: 'Статьи (AI)', href: '/admin/articles', icon: BookOpen },
     { name: 'Портфолио', href: '/admin/portfolio', icon: FolderOpen },
     { name: 'Хоккейные клубы', href: '/admin/hockey-clubs', icon: Shield },
     { name: 'Отзывы', href: '/admin/reviews', icon: MessageSquare },
