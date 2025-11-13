@@ -122,12 +122,12 @@ const ProductDetailPage = () => {
             </div>
             
             {/* Thumbnails */}
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-4 gap-2 sm:gap-3">
               {images.map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`aspect-square rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                  className={`aspect-square rounded-md sm:rounded-lg overflow-hidden border-2 transition-all duration-300 ${
                     selectedImage === index 
                       ? 'border-sport-blue shadow-md scale-105' 
                       : 'border-gray-200 hover:border-gray-300'
