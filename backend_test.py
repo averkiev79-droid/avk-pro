@@ -459,6 +459,9 @@ class ProductAPITester:
         # Test 7: Datetime serialization
         self.test_datetime_serialization()
         
+        # Test 8: File upload endpoint
+        self.test_file_upload()
+        
         # Summary
         self.print_summary()
     
