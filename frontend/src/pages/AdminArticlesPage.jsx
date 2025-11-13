@@ -51,6 +51,25 @@ const AdminArticlesPage = () => {
     }
   };
 
+  // Transliteration function for creating SEO-friendly slugs
+  const transliterate = (text) => {
+    const map = {
+      'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo',
+      'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm',
+      'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+      'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch', 'ъ': '',
+      'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'
+    };
+    
+    return text
+      .toLowerCase()
+      .split('')
+      .map(char => map[char] || char)
+      .join('')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  };
+
   const handleSave = async () => {
     if (!generatedArticle) return;
 
@@ -58,11 +77,8 @@ const AdminArticlesPage = () => {
     try {
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
       
-      // Create slug from title
-      const slug = generatedArticle.title
-        .toLowerCase()
-        .replace(/[^a-zа-яё0-9]+/g, '-')
-        .replace(/^-|-$/g, '');
+      // Create SEO-friendly transliterated slug
+      const slug = transliterate(generatedArticle.title);
 
       const articleData = {
         ...generatedArticle,
