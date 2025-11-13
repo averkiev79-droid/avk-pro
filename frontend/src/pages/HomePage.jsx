@@ -97,8 +97,9 @@ const HomePage = () => {
                   <Link to="/catalog">Смотреть каталог</Link>
                 </Button>
               </div>
-            </AnimatedSection>
-            <div className="relative" style={{ border: '2px solid red', minHeight: '500px' }}>
+            </div>
+            <div className="relative" style={{ border: '2px solid red', minHeight: '500px', backgroundColor: 'pink' }}>
+              <p className="text-red-600 font-bold text-2xl">DEBUG: Right column - Should be visible!</p>
               <div className="relative bg-blue-100" style={{ padding: '20px' }}>
                 <p className="text-red-600 font-bold mb-4">DEBUG: Image container</p>
                 <div className="overflow-hidden rounded-md bg-gray-200" style={{ minHeight: '400px' }}>
