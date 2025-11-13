@@ -18,7 +18,9 @@ const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
-  const [imageUrls, setImageUrls] = useState(['']);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [uploadingFiles, setUploadingFiles] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     category: '',
