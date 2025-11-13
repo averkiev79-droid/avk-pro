@@ -384,9 +384,6 @@ async def serve_upload_options(filename: str):
         "Access-Control-Allow-Headers": "*",
     }
 
-# Include the router in the main app
-app.include_router(api_router)
-
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
