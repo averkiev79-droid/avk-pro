@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Card } from '../../components/ui/card';
-import { Badge } from '../../components/ui/badge';
-import { Button } from '../../components/ui/button';
+import { Card } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Calendar, User, Phone, Mail, MapPin, Package, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
-const OrdersPage = () => {
+const AdminOrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -78,282 +78,201 @@ const OrdersPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <Loader2 className="animate-spin h-12 w-12 text-gray-400" />
       </div>
     );
   }
 
-  // Mock orders data - УДАЛЯЕМ
-  const oldMockOrders = [
-    {
-      id: '#001',
-      customer: {
-        name: 'Иван Петров',
-        email: 'ivan@example.com',
-        phone: '+7 (999) 123-45-67',
-        teamName: 'Юниор СПб'
-      },
-      items: [
-        { name: 'Хоккейное джерси Pro', quantity: 5, price: 3500 },
-        { name: 'Гамаши', quantity: 5, price: 800 }
-      ],
-      total: 21500,
-      status: 'processing',
-      date: '2024-11-08',
-      description: 'Полный комплект для детской команды'
-    },
-    {
-      id: '#002',
-      customer: {
-        name: 'Мария Сидорова',
-        email: 'maria@example.com',
-        phone: '+7 (999) 234-56-78',
-        teamName: 'Ветераны Невы'
-      },
-      items: [
-        { name: 'Бомбер команды', quantity: 10, price: 4500 }
-      ],
-      total: 45000,
-      status: 'completed',
-      date: '2024-11-07',
-      description: 'Одинаковые бомберы для любительской команды'
-    },
-    {
-      id: '#003',
-      customer: {
-        name: 'Алексей Козлов',
-        email: 'alex@example.com',
-        phone: '+7 (999) 345-67-89',
-        teamName: 'Фан-клуб Зенит'
-      },
-      items: [
-        { name: 'Куртка-парка', quantity: 15, price: 6500 },
-        { name: 'Жилетка команды', quantity: 15, price: 3200 }
-      ],
-      total: 145500,
-      status: 'pending',
-      date: '2024-11-09',
-      description: 'Зимняя коллекция для фан-клуба'
-    }
-  ]);
-
-  const statusOptions = [
-    { value: 'all', label: 'Все статусы' },
-    { value: 'pending', label: 'Ожидает' },
-    { value: 'processing', label: 'В работе' },
-    { value: 'completed', label: 'Выполнен' },
-    { value: 'cancelled', label: 'Отменен' }
-  ];
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'completed': return 'bg-green-100 text-green-800';
-      case 'processing': return 'bg-blue-100 text-blue-800';
-      case 'pending': return 'bg-yellow-100 text-yellow-800';
-      case 'cancelled': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getStatusText = (status) => {
-    return statusOptions.find(s => s.value === status)?.label || status;
-  };
-
-  const filteredOrders = orders.filter(order => {
-    const matchesSearch = order.customer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         order.customer.teamName.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
-
-  const updateOrderStatus = (orderId, newStatus) => {
-    setOrders(orders.map(order => 
-      order.id === orderId ? { ...order, status: newStatus } : order
-    ));
-  };
-
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Управление заказами</h1>
-        <p className="text-gray-600">Просматривайте и обрабатывайте заказы клиентов</p>
-      </div>
-
-      {/* Filters */}
-      <Card className="p-4">
-        <div className="flex flex-wrap gap-4">
-          <div className="flex-1 min-w-[200px]">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-              <Input
-                placeholder="Поиск по клиенту, номеру или команде..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-          </div>
-          
-          <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {statusOptions.map(option => (
-                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
-          <Button variant="outline">
-            <Download size={16} className="mr-2" />
-            Экспорт
-          </Button>
+    <div className="admin-orders-page bg-gray-50 min-h-screen py-8">
+      <div className="container max-w-7xl mx-auto px-4">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Заказы</h1>
+          <p className="text-gray-600">Управление заказами клиентов</p>
         </div>
-      </Card>
 
-      {/* Orders Table */}
-      <Card>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-4 px-6 font-medium text-gray-700">Заказ</th>
-                <th className="text-left py-4 px-6 font-medium text-gray-700">Клиент</th>
-                <th className="text-left py-4 px-6 font-medium text-gray-700">Команда</th>
-                <th className="text-left py-4 px-6 font-medium text-gray-700">Сумма</th>
-                <th className="text-left py-4 px-6 font-medium text-gray-700">Статус</th>
-                <th className="text-left py-4 px-6 font-medium text-gray-700">Дата</th>
-                <th className="text-left py-4 px-6 font-medium text-gray-700">Действия</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredOrders.map(order => (
-                <tr key={order.id} className="border-b border-gray-100 hover:bg-gray-50">
-                  <td className="py-4 px-6 font-medium text-blue-600">{order.id}</td>
-                  <td className="py-4 px-6">
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Orders List */}
+          <div className="lg:col-span-2 space-y-4">
+            {orders.length === 0 ? (
+              <Card className="p-12 text-center">
+                <Package size={48} className="mx-auto mb-4 text-gray-400" />
+                <p className="text-xl text-gray-600">Заказов пока нет</p>
+              </Card>
+            ) : (
+              orders.map((order) => (
+                <Card 
+                  key={order.id}
+                  className={`p-6 cursor-pointer transition-all hover:shadow-lg ${
+                    selectedOrder?.id === order.id ? 'ring-2 ring-blue-500' : ''
+                  }`}
+                  onClick={() => setSelectedOrder(order)}
+                >
+                  <div className="flex items-start justify-between mb-4">
                     <div>
-                      <div className="font-medium">{order.customer.name}</div>
-                      <div className="text-sm text-gray-500">{order.customer.email}</div>
+                      <h3 className="text-lg font-bold text-gray-900">
+                        Заказ #{order.id.substring(0, 8).toUpperCase()}
+                      </h3>
+                      <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
+                        <Calendar size={14} />
+                        {new Date(order.created_at).toLocaleDateString('ru-RU', {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </p>
                     </div>
-                  </td>
-                  <td className="py-4 px-6">{order.customer.teamName}</td>
-                  <td className="py-4 px-6 font-semibold">₽{order.total.toLocaleString()}</td>
-                  <td className="py-4 px-6">
-                    <Select 
-                      value={order.status} 
-                      onValueChange={(newStatus) => updateOrderStatus(order.id, newStatus)}
-                    >
-                      <SelectTrigger className="w-auto">
-                        <Badge className={getStatusColor(order.status)}>
-                          {getStatusText(order.status)}
-                        </Badge>
-                      </SelectTrigger>
-                      <SelectContent>
-                        {statusOptions.filter(s => s.value !== 'all').map(option => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </td>
-                  <td className="py-4 px-6 text-gray-600">{order.date}</td>
-                  <td className="py-4 px-6">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button size="sm" variant="outline" onClick={() => setSelectedOrder(order)}>
-                          <Eye size={14} className="mr-1" />
-                          Подробно
-                        </Button>
-                      </DialogTrigger>
-                      
-                      <DialogContent className="max-w-2xl">
-                        <DialogHeader>
-                          <DialogTitle>Детали заказа {order.id}</DialogTitle>
-                        </DialogHeader>
-                        
-                        {selectedOrder && (
-                          <div className="space-y-6">
-                            <div className="grid grid-cols-2 gap-6">
-                              <div>
-                                <h4 className="font-semibold mb-3">Информация о клиенте</h4>
-                                <div className="space-y-2 text-sm">
-                                  <div><span className="font-medium">Имя:</span> {selectedOrder.customer.name}</div>
-                                  <div><span className="font-medium">Email:</span> {selectedOrder.customer.email}</div>
-                                  <div><span className="font-medium">Телефон:</span> {selectedOrder.customer.phone}</div>
-                                  <div><span className="font-medium">Команда:</span> {selectedOrder.customer.teamName}</div>
-                                </div>
-                              </div>
-                              
-                              <div>
-                                <h4 className="font-semibold mb-3">Информация о заказе</h4>
-                                <div className="space-y-2 text-sm">
-                                  <div><span className="font-medium">Номер:</span> {selectedOrder.id}</div>
-                                  <div><span className="font-medium">Дата:</span> {selectedOrder.date}</div>
-                                  <div><span className="font-medium">Статус:</span> 
-                                    <Badge className={`ml-1 ${getStatusColor(selectedOrder.status)}`}>
-                                      {getStatusText(selectedOrder.status)}
-                                    </Badge>
-                                  </div>
-                                  <div><span className="font-medium">Общая сумма:</span> ₽{selectedOrder.total.toLocaleString()}</div>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <div>
-                              <h4 className="font-semibold mb-3">Товары в заказе</h4>
-                              <div className="border rounded-lg overflow-hidden">
-                                <table className="w-full text-sm">
-                                  <thead className="bg-gray-50">
-                                    <tr>
-                                      <th className="text-left py-3 px-4 font-medium">Товар</th>
-                                      <th className="text-left py-3 px-4 font-medium">Кол-во</th>
-                                      <th className="text-left py-3 px-4 font-medium">Цена</th>
-                                      <th className="text-left py-3 px-4 font-medium">Сумма</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {selectedOrder.items.map((item, index) => (
-                                      <tr key={index} className="border-t">
-                                        <td className="py-3 px-4">{item.name}</td>
-                                        <td className="py-3 px-4">{item.quantity}</td>
-                                        <td className="py-3 px-4">₽{item.price.toLocaleString()}</td>
-                                        <td className="py-3 px-4 font-medium">₽{(item.quantity * item.price).toLocaleString()}</td>
-                                      </tr>
-                                    ))}
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
-                            
-                            <div>
-                              <h4 className="font-semibold mb-3">Описание заказа</h4>
-                              <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
-                                {selectedOrder.description}
-                              </p>
-                            </div>
-                          </div>
-                        )}
-                      </DialogContent>
-                    </Dialog>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        
-        {filteredOrders.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500">Заказы не найдены</p>
+                    <Badge className={getStatusColor(order.status)}>
+                      {getStatusLabel(order.status)}
+                    </Badge>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="flex items-center gap-2 text-sm text-gray-700">
+                      <User size={16} />
+                      <span>{order.customer_name}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-700">
+                      <Phone size={16} />
+                      <span>{order.customer_phone}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t">
+                    <span className="text-sm text-gray-600">
+                      {order.items.length} товар(ов)
+                    </span>
+                    <span className="text-xl font-bold text-gray-900">
+                      {order.total_amount.toLocaleString('ru-RU')} ₽
+                    </span>
+                  </div>
+                </Card>
+              ))
+            )}
           </div>
-        )}
-      </Card>
+
+          {/* Order Details */}
+          <div className="lg:col-span-1">
+            {selectedOrder ? (
+              <Card className="p-6 sticky top-4">
+                <h2 className="text-2xl font-bold mb-6">Детали заказа</h2>
+
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Клиент</p>
+                    <div className="flex items-center gap-2">
+                      <User size={16} />
+                      <span className="font-medium">{selectedOrder.customer_name}</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Телефон</p>
+                    <div className="flex items-center gap-2">
+                      <Phone size={16} />
+                      <a href={`tel:${selectedOrder.customer_phone}`} className="font-medium text-blue-600 hover:underline">
+                        {selectedOrder.customer_phone}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Email</p>
+                    <div className="flex items-center gap-2">
+                      <Mail size={16} />
+                      <a href={`mailto:${selectedOrder.customer_email}`} className="font-medium text-blue-600 hover:underline">
+                        {selectedOrder.customer_email}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-gray-500 mb-1">Адрес доставки</p>
+                    <div className="flex items-start gap-2">
+                      <MapPin size={16} className="mt-1" />
+                      <span className="font-medium">{selectedOrder.shipping_address}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h3 className="font-semibold mb-3">Товары:</h3>
+                  <div className="space-y-2">
+                    {selectedOrder.items.map((item, idx) => (
+                      <div key={idx} className="p-3 bg-gray-50 rounded-md">
+                        <p className="font-medium text-sm">{item.product_name}</p>
+                        <p className="text-xs text-gray-600">
+                          {item.size_category} • {item.quantity} шт. • {(item.price * item.quantity).toLocaleString('ru-RU')} ₽
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-3 pt-3 border-t">
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold">Итого:</span>
+                      <span className="text-xl font-bold text-blue-600">
+                        {selectedOrder.total_amount.toLocaleString('ru-RU')} ₽
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {selectedOrder.order_notes && (
+                  <div className="mb-6 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+                    <p className="text-xs text-gray-500 mb-1">Комментарий:</p>
+                    <p className="text-sm">{selectedOrder.order_notes}</p>
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold mb-2">Изменить статус:</p>
+                  <Button
+                    onClick={() => updateOrderStatus(selectedOrder.id, 'confirmed')}
+                    disabled={selectedOrder.status === 'confirmed'}
+                    className="w-full"
+                    variant="outline"
+                  >
+                    Подтвердить
+                  </Button>
+                  <Button
+                    onClick={() => updateOrderStatus(selectedOrder.id, 'processing')}
+                    disabled={selectedOrder.status === 'processing'}
+                    className="w-full"
+                    variant="outline"
+                  >
+                    В производство
+                  </Button>
+                  <Button
+                    onClick={() => updateOrderStatus(selectedOrder.id, 'shipped')}
+                    disabled={selectedOrder.status === 'shipped'}
+                    className="w-full"
+                    variant="outline"
+                  >
+                    Отправлено
+                  </Button>
+                  <Button
+                    onClick={() => updateOrderStatus(selectedOrder.id, 'delivered')}
+                    disabled={selectedOrder.status === 'delivered'}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white"
+                  >
+                    Доставлено
+                  </Button>
+                </div>
+              </Card>
+            ) : (
+              <Card className="p-12 text-center">
+                <Package size={48} className="mx-auto mb-4 text-gray-400" />
+                <p className="text-gray-600">Выберите заказ для просмотра деталей</p>
+              </Card>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default OrdersPage;
+export default AdminOrdersPage;
