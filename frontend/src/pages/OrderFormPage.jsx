@@ -6,7 +6,7 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { toast } from 'sonner';
-import { Upload, Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle, X } from 'lucide-react';
 
 const OrderFormPage = () => {
   const [customerInfo, setCustomerInfo] = useState({
