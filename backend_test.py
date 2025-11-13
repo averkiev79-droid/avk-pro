@@ -9,6 +9,8 @@ import json
 import uuid
 from datetime import datetime
 import sys
+import io
+from PIL import Image
 
 # Backend URL from environment
 BACKEND_URL = "https://hockey-shop.preview.emergentagent.com/api"
