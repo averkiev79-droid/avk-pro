@@ -60,13 +60,14 @@ const ProductsPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Filter out empty image URLs
-    const validImages = imageUrls.filter(url => url.trim() !== '');
+    // Combine uploaded images and manual URLs
+    const validUrls = imageUrls.filter(url => url.trim() !== '');
+    const allImages = [...uploadedImages, ...validUrls];
     
     const productData = {
       ...formData,
       base_price: parseFloat(formData.base_price),
-      images: validImages
+      images: allImages
     };
 
     try {
