@@ -13,7 +13,8 @@ import {
   Image as ImageIcon,
   MessageSquare,
   FileText,
-  Shield
+  Shield,
+  BookOpen
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
