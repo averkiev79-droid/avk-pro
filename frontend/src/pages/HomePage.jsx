@@ -97,14 +97,17 @@ const HomePage = () => {
                 </Button>
               </div>
             </AnimatedSection>
-            <div className="relative">
-              <div className="relative">
-                <div className="overflow-hidden rounded-md bg-gray-100">
+            <div className="relative" style={{ border: '2px solid red', minHeight: '500px' }}>
+              <div className="relative bg-blue-100" style={{ padding: '20px' }}>
+                <p className="text-red-600 font-bold mb-4">DEBUG: Image container</p>
+                <div className="overflow-hidden rounded-md bg-gray-200" style={{ minHeight: '400px' }}>
                   <img
                     src="https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?auto=compress&cs=tinysrgb&w=1920"
                     alt="Хоккейная команда"
                     className="w-full h-auto rounded-md shadow-lg object-cover"
-                    style={{ minHeight: '400px' }}
+                    style={{ minHeight: '400px', display: 'block' }}
+                    onLoad={() => console.log('Image loaded successfully')}
+                    onError={(e) => console.error('Image failed to load', e)}
                   />
                 </div>
                 <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-md shadow-lg border border-gray-200 z-10">
