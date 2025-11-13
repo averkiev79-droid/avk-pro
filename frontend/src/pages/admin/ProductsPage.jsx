@@ -193,8 +193,9 @@ const ProductsPage = () => {
                   <Input
                     id="price"
                     type="number"
-                    value={formData.basePrice}
-                    onChange={(e) => setFormData({...formData, basePrice: e.target.value})}
+                    step="0.01"
+                    value={formData.base_price}
+                    onChange={(e) => setFormData({...formData, base_price: e.target.value})}
                     required
                   />
                 </div>
@@ -202,7 +203,7 @@ const ProductsPage = () => {
               
               <div className="space-y-2">
                 <Label htmlFor="category">Категория</Label>
-                <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
+                <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})} required>
                   <SelectTrigger>
                     <SelectValue placeholder="Выберите категорию" />
                   </SelectTrigger>
@@ -221,17 +222,49 @@ const ProductsPage = () => {
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   rows={3}
+                  required
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="image">URL изображения</Label>
-                <Input
-                  id="image"
-                  value={formData.image}
-                  onChange={(e) => setFormData({...formData, image: e.target.value})}
-                  placeholder="https://..."
-                />
+                <div className="flex items-center justify-between mb-2">
+                  <Label>Изображения товара</Label>
+                  <Button 
+                    type="button" 
+                    size="sm" 
+                    variant="outline"
+                    onClick={handleAddImageUrl}
+                    className="h-8"
+                  >
+                    <Plus size={14} className="mr-1" />
+                    Добавить фото
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {imageUrls.map((url, index) => (
+                    <div key={index} className="flex gap-2">
+                      <Input
+                        value={url}
+                        onChange={(e) => handleImageUrlChange(index, e.target.value)}
+                        placeholder={`URL изображения ${index + 1}`}
+                      />
+                      {imageUrls.length > 1 && (
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleRemoveImageUrl(index)}
+                          className="flex-shrink-0 text-red-600 hover:bg-red-50"
+                        >
+                          <X size={16} />
+                        </Button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Первое изображение будет использоваться как основное
+                </p>
               </div>
               
               <div className="flex gap-2 pt-4">
