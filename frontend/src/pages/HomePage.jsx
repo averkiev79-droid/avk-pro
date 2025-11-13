@@ -74,8 +74,9 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="relative bg-white py-12 md:py-20 lg:py-32 overflow-hidden">
         <div className="container max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <AnimatedSection className="text-center lg:text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center" style={{ border: '3px solid green' }}>
+            <div className="text-center lg:text-left" style={{ border: '2px solid blue', padding: '20px' }}>
+              <p className="text-blue-600 font-bold mb-2">DEBUG: Left column</p>
               <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-[1.1] tracking-tight">
                 Профессиональная <span className="italic font-serif">хоккейная</span> экипировка
               </h1>
