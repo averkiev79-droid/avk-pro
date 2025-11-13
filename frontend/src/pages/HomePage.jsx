@@ -97,18 +97,14 @@ const HomePage = () => {
                 </Button>
               </div>
             </AnimatedSection>
-            <AnimatedSection delay={0.2} className="relative">
+            <div className="relative">
               <div className="relative">
-                <div className="overflow-hidden rounded-md">
+                <div className="overflow-hidden rounded-md bg-gray-100">
                   <img
-                    src={heroImage} 
+                    src="https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?auto=compress&cs=tinysrgb&w=1920"
                     alt="Хоккейная команда"
-                    className="w-full h-auto rounded-md shadow-lg"
-                    loading="eager"
-                    onError={(e) => {
-                      console.error('Hero image failed to load:', heroImage);
-                      e.target.src = "https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?auto=compress&cs=tinysrgb&w=1920";
-                    }}
+                    className="w-full h-auto rounded-md shadow-lg object-cover"
+                    style={{ minHeight: '400px' }}
                   />
                 </div>
                 <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-md shadow-lg border border-gray-200 z-10">
@@ -116,7 +112,7 @@ const HomePage = () => {
                   <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
                 </div>
               </div>
-            </AnimatedSection>
+            </div>
           </div>
         </div>
       </section>
