@@ -699,3 +699,12 @@ async def generate_article_with_ai(request: AIGenerateRequest):
     except Exception as e:
         logger.error(f"Error generating article with AI: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
+# APPLICATION LIFECYCLE EVENTS
+# ============================================================================
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    client.close()
