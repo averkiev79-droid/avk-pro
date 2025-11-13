@@ -32,6 +32,9 @@ function App() {
           {/* AI Articles Generator (standalone) */}
           <Route path="/ai-articles" element={<AdminArticlesPage />} />
           
+          {/* Admin Orders Page */}
+          <Route path="/admin-orders" element={<AdminOrdersPage />} />
+          
           {/* Public Routes */}
           <Route path="/*" element={
             <>
