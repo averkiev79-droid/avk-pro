@@ -76,7 +76,7 @@ const HomePage = () => {
         <div className="container max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             {/* Left Column - Text */}
-            <div className="text-center lg:text-left">
+            <div className="w-full lg:w-1/2 text-center lg:text-left flex-shrink-0">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
                 Профессиональная <span className="italic font-serif">хоккейная</span> экипировка
               </h1>
@@ -104,11 +104,12 @@ const HomePage = () => {
             </div>
 
             {/* Right Column - Image */}
-            <div className="relative">
+            <div className="relative w-full lg:w-1/2 flex-shrink-0">
               <img
-                src="https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                src={heroImage}
                 alt="Профессиональная хоккейная команда"
                 className="w-full rounded-lg shadow-xl"
+                loading="lazy"
               />
               <div className="absolute -bottom-4 -left-4 bg-white p-6 rounded-md shadow-lg border border-gray-200">
                 <div className="text-5xl font-bold text-gray-900">14+</div>
