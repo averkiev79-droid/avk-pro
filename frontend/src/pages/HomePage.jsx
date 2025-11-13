@@ -74,7 +74,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="relative bg-white py-12 md:py-20 lg:py-32 overflow-hidden">
         <div className="container max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
             {/* Left Column - Text */}
             <div className="text-center lg:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
