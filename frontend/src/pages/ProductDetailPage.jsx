@@ -259,25 +259,26 @@ const ProductDetailPage = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-3 mb-6">
+            <div className="flex gap-2 sm:gap-3 mb-6">
               <Button 
                 onClick={handleAddToCart}
-                className="flex-1 bg-sport-red hover:bg-sport-orange text-white py-6 text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                className="flex-1 bg-sport-red hover:bg-sport-orange text-white py-5 sm:py-6 text-base sm:text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <ShoppingCart className="mr-2" size={22} />
-                Добавить в корзину
+                <ShoppingCart className="mr-1 sm:mr-2" size={20} />
+                <span className="hidden xs:inline">Добавить в корзину</span>
+                <span className="xs:hidden">В корзину</span>
               </Button>
               <Button 
                 variant="outline" 
-                className="px-6 border-2 border-gray-300 hover:bg-slate-50"
+                className="px-4 sm:px-6 border-2 border-gray-300 hover:bg-slate-50"
               >
-                <Heart size={22} />
+                <Heart size={20} />
               </Button>
               <Button 
                 variant="outline" 
-                className="px-6 border-2 border-gray-300 hover:bg-slate-50"
+                className="px-4 sm:px-6 border-2 border-gray-300 hover:bg-slate-50"
               >
-                <Share2 size={22} />
+                <Share2 size={20} />
               </Button>
             </div>
 
