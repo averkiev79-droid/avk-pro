@@ -258,84 +258,112 @@ const OrderFormPage = () => {
                   </div>
                 </div>
 
-                {/* Детали заказа */}
+                {/* Добавление товаров */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Детали заказа</h3>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="productType" className="text-sm font-medium text-gray-900">Что хотите заказать? *</Label>
-                      <Select 
-                        value={formData.productType} 
-                        onValueChange={(value) => setFormData({...formData, productType: value})}
-                      >
-                        <SelectTrigger className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900">
-                          <SelectValue placeholder="Выберите товар" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="jersey">Хоккейные джерси</SelectItem>
-                          <SelectItem value="socks">Гамаши</SelectItem>
-                          <SelectItem value="training">Тренировочная форма</SelectItem>
-                          <SelectItem value="accessories">Чехлы для шорт</SelectItem>
-                          <SelectItem value="bomber">Бомбер</SelectItem>
-                          <SelectItem value="parka">Парка</SelectItem>
-                          <SelectItem value="vest">Жилетка</SelectItem>
-                          <SelectItem value="custom">Другое</SelectItem>
-                        </SelectContent>
-                      </Select>
+                  <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Добавить товары</h3>
+                  <div className="bg-gray-50 p-6 rounded-md border border-gray-200">
+                    <div className="grid md:grid-cols-3 gap-4 mb-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="productType" className="text-sm font-medium text-gray-900">Тип товара</Label>
+                        <Select 
+                          value={currentItem.productType} 
+                          onValueChange={(value) => setCurrentItem({...currentItem, productType: value})}
+                        >
+                          <SelectTrigger className="border-gray-200 rounded-md bg-white">
+                            <SelectValue placeholder="Выберите товар" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {productTypes.map(p => (
+                              <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="sizeCategory" className="text-sm font-medium text-gray-900">Категория</Label>
+                        <Select 
+                          value={currentItem.sizeCategory} 
+                          onValueChange={(value) => setCurrentItem({...currentItem, sizeCategory: value})}
+                        >
+                          <SelectTrigger className="border-gray-200 rounded-md bg-white">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {sizeCategories.map(s => (
+                              <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="quantity" className="text-sm font-medium text-gray-900">Количество</Label>
+                        <Input
+                          id="quantity"
+                          type="number"
+                          min="10"
+                          value={currentItem.quantity}
+                          onChange={(e) => setCurrentItem({...currentItem, quantity: e.target.value})}
+                          className="border-gray-200 rounded-md bg-white"
+                        />
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="quantity" className="text-sm font-medium text-gray-900">Количество *</Label>
-                      <Input
-                        id="quantity"
-                        type="number"
-                        min="1"
-                        placeholder="10"
-                        value={formData.quantity}
-                        onChange={(e) => setFormData({...formData, quantity: e.target.value})}
-                        required
-                        className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
-                      />
-                    </div>
+                    <Button 
+                      type="button"
+                      onClick={addItem}
+                      className="w-full bg-gray-900 hover:bg-gray-800 text-white"
+                    >
+                      Добавить товар
+                    </Button>
                   </div>
 
-                  <div className="space-y-2 mt-4">
-                    <Label htmlFor="description" className="text-sm font-medium text-gray-900">Описание заказа</Label>
-                    <Textarea
-                      id="description"
-                      placeholder="Укажите пожелания к дизайну, цвета, размеры и другие детали..."
-                      rows={5}
-                      value={formData.description}
-                      onChange={(e) => setFormData({...formData, description: e.target.value})}
-                      className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
-                    />
-                  </div>
+                  {/* Список добавленных товаров */}
+                  {items.length > 0 && (
+                    <div className="mt-6">
+                      <h4 className="font-semibold mb-4 text-gray-900">Ваш заказ:</h4>
+                      <div className="space-y-3">
+                        {items.map(item => (
+                          <div key={item.id} className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-md">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{item.product_name}</p>
+                              <p className="text-sm text-gray-600">
+                                {item.size_category} • {item.quantity} шт. • {item.price.toLocaleString('ru-RU')} ₽
+                              </p>
+                            </div>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => removeItem(item.id)}
+                              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                            >
+                              Удалить
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="mt-4 p-4 bg-gray-50 border border-gray-200 rounded-md">
+                        <div className="flex justify-between items-center">
+                          <span className="text-lg font-semibold text-gray-900">Итого:</span>
+                          <span className="text-2xl font-bold text-gray-900">{calculateTotal().toLocaleString('ru-RU')} ₽</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                {/* Загрузка логотипа */}
+                {/* Дополнительные комментарии */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Логотип команды</h3>
+                  <h3 className="text-xl font-semibold mb-6 pb-3 border-b border-gray-200 text-gray-900">Дополнительно</h3>
                   <div className="space-y-2">
-                    <Label htmlFor="logo" className="text-sm font-medium text-gray-900">Загрузить логотип</Label>
-                    <div className="flex items-center gap-4">
-                      <label 
-                        htmlFor="logo" 
-                        className="flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white cursor-pointer rounded-md transition-colors font-medium"
-                      >
-                        <Upload size={18} strokeWidth={1.5} />
-                        <span className="text-sm">Выбрать файл</span>
-                      </label>
-                      {logoFileName && (
-                        <span className="text-sm text-gray-600 font-medium">{logoFileName}</span>
-                      )}
-                    </div>
-                    <Input
-                      id="logo"
-                      type="file"
-                      accept="image/*,.pdf,.ai,.eps"
-                      onChange={handleFileUpload}
-                      className="hidden"
+                    <Label htmlFor="notes" className="text-sm font-medium text-gray-900">Комментарий к заказу</Label>
+                    <Textarea
+                      id="notes"
+                      placeholder="Укажите пожелания к дизайну, логотип отправлю позже..."
+                      rows={4}
+                      value={customerInfo.notes}
+                      onChange={(e) => setCustomerInfo({...customerInfo, notes: e.target.value})}
+                      className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                     />
-                    <p className="text-xs text-gray-500 mt-2">PNG, JPG, PDF, AI, EPS. Максимальный размер: 5 МБ</p>
                   </div>
                 </div>
 
