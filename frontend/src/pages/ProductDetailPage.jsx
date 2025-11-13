@@ -107,22 +107,7 @@ const ProductDetailPage = () => {
 
   return (
     <div className="product-detail-page bg-white min-h-screen">
-      {/* Breadcrumbs */}
-      <div className="bg-slate-50 border-b border-gray-200">
-        <div className="container px-4 sm:px-6 py-4">
-          <div className="flex items-center gap-2 text-sm text-gray-600 flex-wrap">
-            <Link to="/" className="hover:text-sport-blue transition-colors">Главная</Link>
-            <ChevronRight size={16} />
-            <Link to="/catalog" className="hover:text-sport-blue transition-colors">Каталог</Link>
-            <ChevronRight size={16} />
-            <span className="text-gray-400">{category?.name}</span>
-            <ChevronRight size={16} />
-            <span className="text-gray-900 font-medium">{product.name}</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="container px-4 sm:px-6 py-8 lg:py-12">
+      <div className="container px-4 sm:px-6 py-6 lg:py-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           {/* Image Gallery */}
           <div className="space-y-4">
