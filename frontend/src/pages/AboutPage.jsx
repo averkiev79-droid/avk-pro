@@ -34,8 +34,9 @@ const AboutPage = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <img
-                src="https://via.placeholder.com/800x800/1a1a1a/ffffff?text=PRODUCTION+FACILITY"
-                alt="Производство"
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80"
+                alt="Производство хоккейной формы"
+                loading="lazy"
                 className="rounded-md w-full h-auto"
               />
             </div>
