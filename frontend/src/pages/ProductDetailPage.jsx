@@ -219,7 +219,7 @@ const ProductDetailPage = () => {
                 <span className="text-gray-500 pb-1">/ шт</span>
               </div>
               <p className="text-sm text-gray-600">
-                Итого: <span className="font-bold text-lg text-dark">{(product.basePrice * quantity).toLocaleString('ru-RU')} ₽</span>
+                Итого: <span className="font-bold text-lg text-gray-900">{(product.base_price * quantity).toLocaleString('ru-RU')} ₽</span>
               </p>
             </Card>
 
