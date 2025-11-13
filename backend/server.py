@@ -709,6 +709,126 @@ async def generate_article_with_ai(request: AIGenerateRequest):
 
 
 # ============================================================================
+# PRODUCTS API - CRUD endpoints for product management
+# ============================================================================
+
+@api_router.post("/products", response_model=dict, status_code=201)
+async def create_product(product: ProductCreate):
+    """Create a new product"""
+    try:
+        # Convert to dict and prepare for MongoDB
+        product_dict = product.model_dump()
+        product_dict['id'] = str(uuid.uuid4())
+        product_dict['created_at'] = datetime.now(timezone.utc).isoformat()
+        product_dict['updated_at'] = datetime.now(timezone.utc).isoformat()
+        
+        result = await db.products.insert_one(product_dict)
+        
+        if not result.inserted_id:
+            raise HTTPException(status_code=500, detail="Failed to create product")
+        
+        logger.info(f"Product created with id: {product_dict['id']}")
+        
+        return {
+            "success": True,
+            "message": "Товар успешно создан",
+            "id": product_dict['id']
+        }
+    except Exception as e:
+        logger.error(f"Error creating product: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/products", response_model=List[Product])
+async def get_products(category: Optional[str] = None, is_active: Optional[bool] = None):
+    """Get all products with optional filters"""
+    try:
+        # Build query
+        query = {}
+        if category:
+            query['category'] = category
+        if is_active is not None:
+            query['is_active'] = is_active
+        
+        products = await db.products.find(query).to_list(length=None)
+        return [Product(**product) for product in products]
+    except Exception as e:
+        logger.error(f"Error fetching products: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/products/{product_id}", response_model=Product)
+async def get_product(product_id: str):
+    """Get a single product by ID"""
+    try:
+        product = await db.products.find_one({"id": product_id})
+        if not product:
+            raise HTTPException(status_code=404, detail="Товар не найден")
+        
+        return Product(**product)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching product: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.put("/products/{product_id}", response_model=dict)
+async def update_product(product_id: str, product_update: ProductUpdate):
+    """Update a product"""
+    try:
+        # Only update fields that are provided
+        update_data = {k: v for k, v in product_update.model_dump().items() if v is not None}
+        
+        if not update_data:
+            raise HTTPException(status_code=400, detail="No fields to update")
+        
+        update_data['updated_at'] = datetime.now(timezone.utc).isoformat()
+        
+        result = await db.products.update_one(
+            {"id": product_id},
+            {"$set": update_data}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Товар не найден")
+        
+        logger.info(f"Product {product_id} updated")
+        
+        return {
+            "success": True,
+            "message": "Товар успешно обновлен"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating product: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.delete("/products/{product_id}", response_model=dict)
+async def delete_product(product_id: str):
+    """Delete a product"""
+    try:
+        result = await db.products.delete_one({"id": product_id})
+        
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Товар не найден")
+        
+        logger.info(f"Product {product_id} deleted")
+        
+        return {
+            "success": True,
+            "message": "Товар удален"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error deleting product: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
 # INCLUDE API ROUTER (must be after all route definitions)
 # ============================================================================
 app.include_router(api_router)
