@@ -327,48 +327,51 @@ const ProductsPage = () => {
                   </div>
                 )}
 
-                {/* Manual URL Input Section */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label className="text-sm text-gray-600">Или добавьте URL изображений</Label>
+                {/* Manual URL Input Section - Collapsed by default */}
+                <details className="border rounded-md p-3 bg-white">
+                  <summary className="cursor-pointer text-sm font-medium text-gray-700 flex items-center gap-2">
+                    <Plus size={14} />
+                    Добавить изображения через URL (опционально)
+                  </summary>
+                  <div className="space-y-2 mt-3">
                     <Button 
                       type="button" 
                       size="sm" 
                       variant="outline"
                       onClick={handleAddImageUrl}
-                      className="h-7 text-xs"
+                      className="h-8 text-xs w-full"
                     >
                       <Plus size={12} className="mr-1" />
-                      Добавить URL
+                      Добавить поле URL
                     </Button>
+                    {imageUrls.length > 0 && (
+                      <div className="space-y-2">
+                        {imageUrls.map((url, index) => (
+                          <div key={index} className="flex gap-2">
+                            <Input
+                              value={url}
+                              onChange={(e) => handleImageUrlChange(index, e.target.value)}
+                              placeholder="https://example.com/image.jpg"
+                              className="text-xs h-8"
+                            />
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleRemoveImageUrl(index)}
+                              className="flex-shrink-0 text-red-600 hover:bg-red-50 h-8 w-8 p-0"
+                            >
+                              <X size={14} />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  {imageUrls.length > 0 && (
-                    <div className="space-y-2">
-                      {imageUrls.map((url, index) => (
-                        <div key={index} className="flex gap-2">
-                          <Input
-                            value={url}
-                            onChange={(e) => handleImageUrlChange(index, e.target.value)}
-                            placeholder="https://example.com/image.jpg"
-                            className="text-sm"
-                          />
-                          <Button
-                            type="button"
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleRemoveImageUrl(index)}
-                            className="flex-shrink-0 text-red-600 hover:bg-red-50"
-                          >
-                            <X size={16} />
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                </details>
                 
-                <p className="text-xs text-gray-500">
-                  💡 Первое изображение будет использоваться как основное в каталоге
+                <p className="text-xs text-gray-500 bg-blue-50 p-2 rounded border border-blue-200">
+                  💡 <strong>Совет:</strong> Первое изображение будет отображаться как главное в каталоге
                 </p>
               </div>
               
