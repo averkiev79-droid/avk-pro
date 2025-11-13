@@ -74,48 +74,45 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="relative bg-white py-12 md:py-20 lg:py-32 overflow-hidden">
         <div className="container max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center" style={{ border: '3px solid green' }}>
-            <div className="text-center lg:text-left" style={{ border: '2px solid blue', padding: '20px' }}>
-              <p className="text-blue-600 font-bold mb-2">DEBUG: Left column</p>
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-[1.1] tracking-tight">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Text */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
                 Профессиональная <span className="italic font-serif">хоккейная</span> экипировка
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
                 Производим форму для детских и взрослых команд. 
                 Индивидуальный дизайн, быстрые сроки, отличное качество.
               </p>
-              <div className="bg-gray-50 border border-gray-200 p-3 sm:p-4 mb-6 sm:mb-8 rounded-md max-w-xl mx-auto lg:mx-0">
-                <p className="text-xs sm:text-sm text-gray-700">
+              <div className="bg-gray-50 border border-gray-200 p-4 mb-8 rounded-md max-w-xl mx-auto lg:mx-0">
+                <p className="text-sm text-gray-700">
                   Минимальная партия заказа - <span className="font-semibold">от 10 штук</span>
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <Button asChild size="lg" className="bg-gray-900 hover:bg-gray-800 text-white px-8 sm:px-10 py-5 sm:py-7 rounded-md transition-colors font-medium text-sm sm:text-base">
-                  <Link to="/order">Заказать форму</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 sm:px-10 py-5 sm:py-7 rounded-md transition-colors font-medium text-sm sm:text-base">
-                  <Link to="/catalog">Смотреть каталог</Link>
-                </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link to="/order">
+                  <button className="bg-gray-900 hover:bg-gray-800 text-white px-10 py-4 rounded-md font-medium transition-colors w-full sm:w-auto">
+                    Заказать форму
+                  </button>
+                </Link>
+                <Link to="/catalog">
+                  <button className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-10 py-4 rounded-md font-medium transition-colors w-full sm:w-auto">
+                    Смотреть каталог
+                  </button>
+                </Link>
               </div>
             </div>
-            <div className="relative" style={{ border: '2px solid red', minHeight: '500px', backgroundColor: 'pink' }}>
-              <p className="text-red-600 font-bold text-2xl">DEBUG: Right column - Should be visible!</p>
-              <div className="relative bg-blue-100" style={{ padding: '20px' }}>
-                <p className="text-red-600 font-bold mb-4">DEBUG: Image container</p>
-                <div className="overflow-hidden rounded-md bg-gray-200" style={{ minHeight: '400px' }}>
-                  <img
-                    src="https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?auto=compress&cs=tinysrgb&w=1920"
-                    alt="Хоккейная команда"
-                    className="w-full h-auto rounded-md shadow-lg object-cover"
-                    style={{ minHeight: '400px', display: 'block' }}
-                    onLoad={() => console.log('Image loaded successfully')}
-                    onError={(e) => console.error('Image failed to load', e)}
-                  />
-                </div>
-                <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-md shadow-lg border border-gray-200 z-10">
-                  <div className="text-3xl sm:text-5xl font-bold text-gray-900 mb-1">14+</div>
-                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
-                </div>
+
+            {/* Right Column - Image */}
+            <div className="relative">
+              <img
+                src="https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Профессиональная хоккейная команда"
+                className="w-full rounded-lg shadow-xl"
+              />
+              <div className="absolute -bottom-4 -left-4 bg-white p-6 rounded-md shadow-lg border border-gray-200">
+                <div className="text-5xl font-bold text-gray-900">14+</div>
+                <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
               </div>
             </div>
           </div>
