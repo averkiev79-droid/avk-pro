@@ -9,9 +9,6 @@ from models import Order, OrderItem
 
 logger = logging.getLogger(__name__)
 
-# Initialize Resend with API key from environment
-resend.api_key = os.environ.get("RESEND_API_KEY", "")
-
 
 class EmailService:
     """Email service for sending order notifications"""
