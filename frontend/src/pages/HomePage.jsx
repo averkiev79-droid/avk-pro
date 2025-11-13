@@ -232,7 +232,7 @@ const HomePage = () => {
                   <div className="transition-all duration-300 group cursor-pointer">
                     <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md">
                       <ParallaxImage
-                        src={product.image} 
+                        src={product.images && product.images.length > 0 ? product.images[0] : 'https://via.placeholder.com/400'} 
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         speed={0.2}
@@ -242,7 +242,7 @@ const HomePage = () => {
                       <h3 className="text-lg font-semibold mb-2 text-gray-900 group-hover:text-gray-600 transition-colors">{product.name}</h3>
                       <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
                       <div className="flex justify-between items-center">
-                        <span className="text-base font-semibold text-gray-900">от {product.basePrice} ₽</span>
+                        <span className="text-base font-semibold text-gray-900">от {product.base_price} ₽</span>
                         <span className="text-sm font-medium text-gray-900 group-hover:underline">Подробнее →</span>
                       </div>
                     </div>
