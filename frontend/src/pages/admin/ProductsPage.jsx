@@ -105,22 +105,50 @@ const ProductsPage = () => {
       name: product.name,
       category: product.category,
       description: product.description,
-      basePrice: product.basePrice.toString(),
-      image: product.image,
-      features: product.features
+      base_price: product.base_price.toString(),
+      features: product.features || []
     });
+    setImageUrls(product.images && product.images.length > 0 ? product.images : ['']);
     setIsDialogOpen(true);
   };
 
-  const handleDelete = (productId) => {
-    setProducts(products.filter(p => p.id !== productId));
-    toast.success('Товар удален');
+  const handleDelete = async (productId) => {
+    if (!window.confirm('Вы уверены, что хотите удалить этот товар?')) return;
+
+    try {
+      const response = await fetch(`${backendUrl}/api/products/${productId}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) throw new Error('Failed to delete product');
+      
+      toast.success('Товар удален');
+      await fetchProducts();
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      toast.error('Ошибка удаления товара');
+    }
   };
 
   const resetForm = () => {
-    setFormData({ name: '', category: '', description: '', basePrice: '', image: '', features: [] });
+    setFormData({ name: '', category: '', description: '', base_price: '', features: [] });
+    setImageUrls(['']);
     setEditingProduct(null);
     setIsDialogOpen(false);
+  };
+
+  const handleAddImageUrl = () => {
+    setImageUrls([...imageUrls, '']);
+  };
+
+  const handleRemoveImageUrl = (index) => {
+    setImageUrls(imageUrls.filter((_, i) => i !== index));
+  };
+
+  const handleImageUrlChange = (index, value) => {
+    const newUrls = [...imageUrls];
+    newUrls[index] = value;
+    setImageUrls(newUrls);
   };
 
   const getCategoryName = (categoryId) => {
