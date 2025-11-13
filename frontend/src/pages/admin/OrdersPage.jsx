@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Card } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
+import { Card } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { Button } from '../../components/ui/button';
 import { Calendar, User, Phone, Mail, MapPin, Package, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
