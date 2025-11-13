@@ -485,12 +485,18 @@ async def update_order(order_id: str, order_update: OrderUpdate, background_task
             {"$set": update_data}
         )
         
-        # If status changed, send email notification
+        # If status changed, send email and telegram notifications
         if "status" in update_data and update_data["status"] != old_status:
             updated_order = await db.orders.find_one({"id": order_id})
             order_obj = Order(**updated_order)
             background_tasks.add_task(
                 EmailService.send_order_status_update,
+                order_obj,
+                old_status,
+                update_data["status"]
+            )
+            background_tasks.add_task(
+                TelegramService.send_status_update,
                 order_obj,
                 old_status,
                 update_data["status"]
