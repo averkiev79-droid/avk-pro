@@ -4,7 +4,7 @@ import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
-import { products, categories } from '../mock';
+import { categories } from '../mock';
 import { 
   ChevronRight, 
   Plus, 
@@ -22,7 +22,9 @@ import { toast } from 'sonner';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
-  const product = products.find(p => p.id === parseInt(id));
+  const [product, setProduct] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   
   const [quantity, setQuantity] = useState(10);
   const [selectedSizeCategory, setSelectedSizeCategory] = useState('adult');
@@ -30,10 +32,48 @@ const ProductDetailPage = () => {
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImage, setSelectedImage] = useState(0);
 
-  // Scroll to top on mount
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
+
+  // Fetch product on mount
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    fetchProduct();
+    fetchProducts();
   }, [id]);
+
+  const fetchProduct = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${backendUrl}/api/products/${id}`);
+      if (!response.ok) throw new Error('Product not found');
+      const data = await response.json();
+      setProduct(data);
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      toast.error('Ошибка загрузки товара');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/products?is_active=true`);
+      if (!response.ok) throw new Error('Failed to fetch products');
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="container py-20 text-center">
+        <p className="text-gray-500">Загрузка...</p>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -48,13 +88,10 @@ const ProductDetailPage = () => {
 
   const category = categories.find(c => c.id === product.category);
   
-  // Моковые данные для демонстрации
-  const images = [
-    product.image,
-    'https://via.placeholder.com/800x800/2C5282/ffffff?text=View+2',
-    'https://via.placeholder.com/800x800/2C5282/ffffff?text=View+3',
-    'https://via.placeholder.com/800x800/2C5282/ffffff?text=View+4'
-  ];
+  // Use product images or fallback to placeholder
+  const images = product.images && product.images.length > 0 
+    ? product.images 
+    : ['https://via.placeholder.com/800x800/E5E7EB/6B7280?text=No+Image'];
 
   const sizeCategories = [
     { id: 'kids', name: 'Дети 110-140' },
