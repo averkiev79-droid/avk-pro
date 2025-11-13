@@ -29,6 +29,7 @@ import ReviewsManagementPage from './admin/ReviewsManagementPage';
 import SiteSettingsPage from './admin/SiteSettingsPage';
 import LegalPagesPage from './admin/LegalPagesPage';
 import HockeyClubsPage from './admin/HockeyClubsPage';
+import AdminArticlesPage from './AdminArticlesPage';
 import { companyInfo } from '../mock';
 
 const AdminLayout = () => {
