@@ -105,9 +105,9 @@ const HomePage = () => {
                   className="w-full h-auto rounded-md"
                   speed={0.3}
                 />
-                <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-md shadow-lg border border-gray-200 z-10">
-                  <div className="text-5xl font-bold text-gray-900 mb-1">14+</div>
-                  <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
+                <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-white p-4 sm:p-6 rounded-md shadow-lg border border-gray-200 z-10">
+                  <div className="text-3xl sm:text-5xl font-bold text-gray-900 mb-1">14+</div>
+                  <div className="text-xs sm:text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
                 </div>
               </div>
             </AnimatedSection>
