@@ -72,11 +72,11 @@ const HomePage = () => {
   return (
     <div className="home-page">
       {/* Hero Section */}
-      <section className="relative bg-white py-16 md:py-24 lg:py-32 overflow-hidden">
+      <section className="relative bg-white py-12 md:py-20 lg:py-32 overflow-hidden">
         <div className="container max-w-7xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <AnimatedSection className="text-center lg:text-left">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-[1.1] tracking-tight">
                 Профессиональная <span className="italic font-serif">хоккейная</span> экипировка
               </h1>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
