@@ -237,29 +237,23 @@ const ProductDetailPage = () => {
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 Количество (минимум 10 штук)
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <Button 
                   variant="outline" 
                   size="lg"
                   onClick={() => updateQuantity(quantity - 1)}
-                  className="border-2 border-gray-300 hover:bg-gray-100 px-4"
+                  className="border-2 border-gray-300 hover:bg-gray-100 px-3 sm:px-4 h-12 w-12 sm:h-auto sm:w-auto"
                 >
-                  <Minus size={20} />
+                  <Minus size={18} strokeWidth={2.5} />
                 </Button>
-                <Input 
-                  type="number" 
-                  value={quantity}
-                  onChange={(e) => updateQuantity(parseInt(e.target.value) || 10)}
-                  className="w-24 text-center text-lg font-bold border-2 border-gray-300"
-                  min="10"
-                />
+                <span className="text-xl sm:text-2xl font-bold text-gray-900 min-w-[50px] sm:min-w-[60px] text-center">{quantity}</span>
                 <Button 
                   variant="outline" 
                   size="lg"
                   onClick={() => updateQuantity(quantity + 1)}
-                  className="border-2 border-gray-300 hover:bg-gray-100 px-4"
+                  className="border-2 border-gray-300 hover:bg-gray-100 px-3 sm:px-4 h-12 w-12 sm:h-auto sm:w-auto"
                 >
-                  <Plus size={20} />
+                  <Plus size={18} strokeWidth={2.5} />
                 </Button>
               </div>
             </div>
