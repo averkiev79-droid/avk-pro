@@ -272,44 +272,103 @@ const ProductsPage = () => {
                 />
               </div>
               
-              <div className="space-y-2">
-                <div className="flex items-center justify-between mb-2">
-                  <Label>Изображения товара</Label>
-                  <Button 
-                    type="button" 
-                    size="sm" 
-                    variant="outline"
-                    onClick={handleAddImageUrl}
-                    className="h-8"
-                  >
-                    <Plus size={14} className="mr-1" />
-                    Добавить фото
-                  </Button>
+              <div className="space-y-4">
+                <Label>Изображения товара</Label>
+                
+                {/* File Upload Section */}
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                  <input
+                    type="file"
+                    id="file-upload"
+                    multiple
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                    disabled={uploadingFiles}
+                  />
+                  <label htmlFor="file-upload" className="cursor-pointer">
+                    <Upload className="mx-auto h-12 w-12 text-gray-400 mb-3" />
+                    <p className="text-sm text-gray-600 mb-1">
+                      {uploadingFiles ? 'Загрузка...' : 'Нажмите для загрузки изображений'}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      PNG, JPG, GIF до 10MB
+                    </p>
+                  </label>
                 </div>
-                <div className="space-y-2">
-                  {imageUrls.map((url, index) => (
-                    <div key={index} className="flex gap-2">
-                      <Input
-                        value={url}
-                        onChange={(e) => handleImageUrlChange(index, e.target.value)}
-                        placeholder={`URL изображения ${index + 1}`}
-                      />
-                      {imageUrls.length > 1 && (
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleRemoveImageUrl(index)}
-                          className="flex-shrink-0 text-red-600 hover:bg-red-50"
-                        >
-                          <X size={16} />
-                        </Button>
-                      )}
+
+                {/* Uploaded Images Preview */}
+                {uploadedImages.length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium mb-2">Загруженные изображения ({uploadedImages.length})</p>
+                    <div className="grid grid-cols-4 gap-4">
+                      {uploadedImages.map((url, index) => (
+                        <div key={index} className="relative group">
+                          <img 
+                            src={url} 
+                            alt={`Uploaded ${index + 1}`}
+                            className="w-full h-24 object-cover rounded-md border"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveUploadedImage(index)}
+                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X size={14} />
+                          </button>
+                          {index === 0 && (
+                            <Badge className="absolute bottom-1 left-1 text-xs bg-blue-600">
+                              Основное
+                            </Badge>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+                )}
+
+                {/* Manual URL Input Section */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-sm text-gray-600">Или добавьте URL изображений</Label>
+                    <Button 
+                      type="button" 
+                      size="sm" 
+                      variant="outline"
+                      onClick={handleAddImageUrl}
+                      className="h-7 text-xs"
+                    >
+                      <Plus size={12} className="mr-1" />
+                      Добавить URL
+                    </Button>
+                  </div>
+                  {imageUrls.length > 0 && (
+                    <div className="space-y-2">
+                      {imageUrls.map((url, index) => (
+                        <div key={index} className="flex gap-2">
+                          <Input
+                            value={url}
+                            onChange={(e) => handleImageUrlChange(index, e.target.value)}
+                            placeholder="https://example.com/image.jpg"
+                            className="text-sm"
+                          />
+                          <Button
+                            type="button"
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleRemoveImageUrl(index)}
+                            className="flex-shrink-0 text-red-600 hover:bg-red-50"
+                          >
+                            <X size={16} />
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Первое изображение будет использоваться как основное
+                
+                <p className="text-xs text-gray-500">
+                  💡 Первое изображение будет использоваться как основное в каталоге
                 </p>
               </div>
               
