@@ -429,6 +429,9 @@ async def create_order(order: OrderCreate, background_tasks: BackgroundTasks):
         # Send email confirmation in background
         background_tasks.add_task(EmailService.send_order_confirmation, order_data)
         
+        # Send Telegram notification in background
+        background_tasks.add_task(TelegramService.send_order_notification, order_data)
+        
         return {
             "success": True,
             "message": "Заказ создан успешно",
