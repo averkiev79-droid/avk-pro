@@ -15,6 +15,7 @@ import shutil
 import aiofiles
 from models import Order, OrderCreate, OrderUpdate, Article, ArticleCreate, ArticleUpdate, AIGenerateRequest
 from email_service import EmailService
+from telegram_service import TelegramService
 from fastapi import BackgroundTasks
 
 
