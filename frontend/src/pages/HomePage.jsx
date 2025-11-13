@@ -79,20 +79,20 @@ const HomePage = () => {
               <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-[1.1] tracking-tight">
                 Профессиональная <span className="italic font-serif">хоккейная</span> экипировка
               </h1>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Производим форму для детских и взрослых команд. 
                 Индивидуальный дизайн, быстрые сроки, отличное качество.
               </p>
-              <div className="bg-gray-50 border border-gray-200 p-4 mb-8 rounded-md max-w-xl mx-auto lg:mx-0">
-                <p className="text-sm text-gray-700">
+              <div className="bg-gray-50 border border-gray-200 p-3 sm:p-4 mb-6 sm:mb-8 rounded-md max-w-xl mx-auto lg:mx-0">
+                <p className="text-xs sm:text-sm text-gray-700">
                   Минимальная партия заказа - <span className="font-semibold">от 10 штук</span>
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button asChild size="lg" className="bg-gray-900 hover:bg-gray-800 text-white px-10 py-7 rounded-md transition-colors font-medium text-base">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <Button asChild size="lg" className="bg-gray-900 hover:bg-gray-800 text-white px-8 sm:px-10 py-5 sm:py-7 rounded-md transition-colors font-medium text-sm sm:text-base">
                   <Link to="/order">Заказать форму</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-10 py-7 rounded-md transition-colors font-medium text-base">
+                <Button asChild size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 sm:px-10 py-5 sm:py-7 rounded-md transition-colors font-medium text-sm sm:text-base">
                   <Link to="/catalog">Смотреть каталог</Link>
                 </Button>
               </div>
