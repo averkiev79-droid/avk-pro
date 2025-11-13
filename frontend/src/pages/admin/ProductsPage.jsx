@@ -140,7 +140,8 @@ const ProductsPage = () => {
 
   const resetForm = () => {
     setFormData({ name: '', category: '', description: '', base_price: '', features: [] });
-    setImageUrls(['']);
+    setImageUrls([]);
+    setUploadedImages([]);
     setEditingProduct(null);
     setIsDialogOpen(false);
   };
