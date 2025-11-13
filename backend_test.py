@@ -346,6 +346,91 @@ class ProductAPITester:
             
         return False
     
+    def test_file_upload(self):
+        """Test POST /api/upload - File upload endpoint"""
+        print("\n=== Testing File Upload Endpoint ===")
+        
+        try:
+            # Create a test image in memory
+            img = Image.new('RGB', (100, 100), color='red')
+            img_buffer = io.BytesIO()
+            img.save(img_buffer, format='PNG')
+            img_buffer.seek(0)
+            
+            # Prepare file for upload
+            files = {
+                'file': ('test_image.png', img_buffer, 'image/png')
+            }
+            
+            # Upload the file
+            response = requests.post(f"{self.base_url}/upload", files=files, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                
+                # Check if response has required fields
+                if 'url' in result and 'filename' in result:
+                    file_url = result['url']
+                    filename = result['filename']
+                    
+                    # Store for cleanup
+                    self.uploaded_files.append(filename)
+                    
+                    self.log_result(
+                        "File Upload", 
+                        True, 
+                        f"File uploaded successfully: {filename}",
+                        {"url": file_url, "filename": filename}
+                    )
+                    
+                    # Test file accessibility
+                    return self.test_file_accessibility(file_url, filename)
+                else:
+                    self.log_result("File Upload", False, "Invalid response format", {"response": result})
+            else:
+                self.log_result("File Upload", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("File Upload", False, f"Request failed: {str(e)}")
+            
+        return False
+    
+    def test_file_accessibility(self, file_url, filename):
+        """Test that uploaded file is accessible via the returned URL"""
+        print(f"\n=== Testing File Accessibility ({filename}) ===")
+        
+        try:
+            # Construct full URL - the file_url should be relative like /api/uploads/filename
+            if file_url.startswith('/api/uploads/'):
+                full_url = f"{self.base_url.replace('/api', '')}{file_url}"
+            else:
+                full_url = f"{self.base_url}/{file_url}"
+            
+            response = requests.get(full_url, timeout=10)
+            
+            if response.status_code == 200:
+                # Check if it's actually an image
+                content_type = response.headers.get('content-type', '')
+                if content_type.startswith('image/'):
+                    self.log_result(
+                        "File Accessibility", 
+                        True, 
+                        f"File accessible with correct content-type: {content_type}",
+                        {"url": full_url, "content_type": content_type, "size": len(response.content)}
+                    )
+                    return True
+                else:
+                    self.log_result("File Accessibility", False, f"Wrong content-type: {content_type}")
+            elif response.status_code == 404:
+                self.log_result("File Accessibility", False, "File not found (404)")
+            else:
+                self.log_result("File Accessibility", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("File Accessibility", False, f"Request failed: {str(e)}")
+            
+        return False
+    
     def run_all_tests(self):
         """Run all product API tests"""
         print(f"🚀 Starting Product API Tests")
