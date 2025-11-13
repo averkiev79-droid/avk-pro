@@ -114,7 +114,9 @@ const HomePage = () => {
                 src={heroImage}
                 alt="Профессиональная хоккейная команда"
                 className="w-full rounded-lg shadow-xl"
-                loading="lazy"
+                style={{ opacity: 1, display: 'block' }}
+                onLoad={() => console.log('Hero image loaded successfully')}
+                onError={(e) => console.error('Hero image failed to load:', e)}
               />
               <div className="absolute -bottom-4 -left-4 bg-white p-6 rounded-md shadow-lg border border-gray-200">
                 <div className="text-5xl font-bold text-gray-900">14+</div>
