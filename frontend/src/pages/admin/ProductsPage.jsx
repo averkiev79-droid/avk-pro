@@ -55,27 +55,48 @@ const ProductsPage = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (editingProduct) {
-      setProducts(products.map(p => 
-        p.id === editingProduct.id 
-          ? { ...formData, id: editingProduct.id }
-          : p
-      ));
-      toast.success('Товар обновлен');
-    } else {
-      const newProduct = {
-        ...formData,
-        id: Math.max(...products.map(p => p.id)) + 1,
-        basePrice: parseInt(formData.basePrice)
-      };
-      setProducts([...products, newProduct]);
-      toast.success('Товар добавлен');
-    }
+    // Filter out empty image URLs
+    const validImages = imageUrls.filter(url => url.trim() !== '');
     
-    resetForm();
+    const productData = {
+      ...formData,
+      base_price: parseFloat(formData.base_price),
+      images: validImages
+    };
+
+    try {
+      if (editingProduct) {
+        // Update existing product
+        const response = await fetch(`${backendUrl}/api/products/${editingProduct.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(productData)
+        });
+
+        if (!response.ok) throw new Error('Failed to update product');
+        toast.success('Товар обновлен');
+      } else {
+        // Create new product
+        const response = await fetch(`${backendUrl}/api/products`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(productData)
+        });
+
+        if (!response.ok) throw new Error('Failed to create product');
+        toast.success('Товар добавлен');
+      }
+      
+      // Refresh products list
+      await fetchProducts();
+      resetForm();
+    } catch (error) {
+      console.error('Error saving product:', error);
+      toast.error('Ошибка сохранения товара');
+    }
   };
 
   const handleEdit = (product) => {
