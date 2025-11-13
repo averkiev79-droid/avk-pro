@@ -204,8 +204,8 @@ const OrderFormPage = () => {
                       <Input
                         id="name"
                         placeholder="Иван Иванов"
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        value={customerInfo.name}
+                        onChange={(e) => setCustomerInfo({...customerInfo, name: e.target.value})}
                         required
                         className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                       />
@@ -216,21 +216,22 @@ const OrderFormPage = () => {
                         id="phone"
                         type="tel"
                         placeholder="+7 (999) 123-45-67"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        value={customerInfo.phone}
+                        onChange={(e) => setCustomerInfo({...customerInfo, phone: e.target.value})}
                         required
                         className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                       />
                     </div>
                   </div>
                   <div className="space-y-2 mt-4">
-                    <Label htmlFor="email" className="text-sm font-medium text-gray-900">Email</Label>
+                    <Label htmlFor="email" className="text-sm font-medium text-gray-900">Email *</Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="example@mail.ru"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      value={customerInfo.email}
+                      onChange={(e) => setCustomerInfo({...customerInfo, email: e.target.value})}
+                      required
                       className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                     />
                   </div>
@@ -239,8 +240,19 @@ const OrderFormPage = () => {
                     <Input
                       id="teamName"
                       placeholder="Хоккейный клуб СПб"
-                      value={formData.teamName}
-                      onChange={(e) => setFormData({...formData, teamName: e.target.value})}
+                      value={customerInfo.teamName}
+                      onChange={(e) => setCustomerInfo({...customerInfo, teamName: e.target.value})}
+                      className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
+                    />
+                  </div>
+                  <div className="space-y-2 mt-4">
+                    <Label htmlFor="address" className="text-sm font-medium text-gray-900">Адрес доставки *</Label>
+                    <Input
+                      id="address"
+                      placeholder="г. Санкт-Петербург, ул. Ленина, д. 1"
+                      value={customerInfo.address}
+                      onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
+                      required
                       className="border-gray-200 rounded-md focus:border-gray-900 focus:ring-gray-900"
                     />
                   </div>
