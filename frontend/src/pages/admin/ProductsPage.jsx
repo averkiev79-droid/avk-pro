@@ -211,7 +211,7 @@ const ProductsPage = () => {
         
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button onClick={() => resetForm()} className="bg-sport-blue hover:bg-sport-red">
+            <Button onClick={() => resetForm()} className="bg-gray-900 hover:bg-gray-800 text-white">
               <Plus size={16} className="mr-2" />
               Добавить товар
             </Button>
