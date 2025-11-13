@@ -371,11 +371,15 @@ const OrderFormPage = () => {
                 <div className="pt-6">
                   <Button 
                     type="submit" 
-                    className="w-full bg-gray-900 hover:bg-gray-800 text-white py-7 text-base rounded-md transition-colors font-medium"
+                    disabled={isSubmitting || items.length === 0}
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-white py-7 text-base rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="mr-2" size={20} strokeWidth={1.5} />
-                    Отправить заявку
+                    {isSubmitting ? 'Отправка...' : 'Оформить заказ'}
                   </Button>
+                  {items.length === 0 && (
+                    <p className="text-sm text-gray-500 text-center mt-2">Добавьте хотя бы один товар</p>
+                  )}
                   <p className="text-xs text-gray-500 text-center mt-4">
                     Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
                   </p>
