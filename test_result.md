@@ -137,39 +137,48 @@ backend:
 frontend:
   - task: "Hero section desktop layout fix"
     implemented: true
-    working: false
+    working: true
     file: "frontend/src/pages/HomePage.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: false
           agent: "main"
           comment: "Fixed hero section for desktop by adding explicit width classes (w-full lg:w-1/2 flex-shrink-0) to both left and right columns. Changed from grid to flexbox layout. Also updated to use heroImage state variable instead of hardcoded URL. Needs verification on live site."
+        - working: true
+          agent: "testing"
+          comment: "✅ HERO SECTION DESKTOP LAYOUT FULLY WORKING: Comprehensive testing confirmed perfect implementation. Flexbox container (flex flex-col lg:flex-row gap-12 items-center) working correctly. Left column (w-full lg:w-1/2 text-center lg:text-left flex-shrink-0) displays text content properly. Right column (relative w-full lg:w-1/2 flex-shrink-0) shows hero image and '14+ лет на рынке' badge correctly positioned. Desktop layout fix is complete and functional."
   
   - task: "Admin Products Page - Multiple Image Upload"
     implemented: true
-    working: false
+    working: true
     file: "frontend/src/pages/admin/ProductsPage.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: false
           agent: "main"
           comment: "Completely refactored ProductsPage to work with API instead of mock data. Added support for multiple image URLs with dynamic add/remove buttons. Changed from single 'image' field to 'images' array. Updated form to show image count badge on product cards. Connected to /api/products endpoints for CRUD operations. Needs testing."
+        - working: true
+          agent: "testing"
+          comment: "✅ ADMIN PRODUCTS PAGE MULTIPLE IMAGES SUPPORT WORKING: Tested admin page at /admin/products successfully. 'Добавить товар' button opens dialog correctly. Multiple image URL inputs working - found initial input and 'Добавить фото' button successfully adds additional inputs. Form structure is correct with proper image section. API integration working (products loading from backend). Minor issue: Modal overlay blocks category dropdown selection, but core multiple images functionality is implemented and working."
   
   - task: "Public Pages - Product Display with Multiple Images"
     implemented: true
-    working: false
+    working: true
     file: "frontend/src/pages/CatalogPage.jsx, frontend/src/pages/ProductDetailPage.jsx, frontend/src/pages/HomePage.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: false
           agent: "main"
           comment: "Updated all public product pages to fetch from API and display multiple images. CatalogPage: fetches products from API, shows first image with badge for additional photos. ProductDetailPage: updated to fetch product by ID, uses product.images array. HomePage: fetches featured products from API. All pages updated to use base_price instead of basePrice. Needs testing."
+        - working: true
+          agent: "testing"
+          comment: "✅ PUBLIC PAGES API INTEGRATION WORKING: Comprehensive testing confirmed all pages working correctly. HomePage: Featured products section loads 3 products from API with proper names and base_price display (e.g., 'от 1000 ₽'). CatalogPage: Loads 3 products from API, proper navigation and structure. ProductDetailPage: Successfully loads individual products with correct price display (e.g., '1000 ₽'). API endpoints responding correctly, base_price field working, images array structure implemented. Minor: Some test products have invalid image URLs (example.com, via.placeholder.com) causing network errors, but this is test data issue, not code issue."
 
 metadata:
   created_by: "main_agent"
