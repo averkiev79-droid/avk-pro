@@ -111,7 +111,12 @@ const ProductsPage = () => {
       base_price: product.base_price.toString(),
       features: product.features || []
     });
-    setImageUrls(product.images && product.images.length > 0 ? product.images : ['']);
+    // Separate uploaded images (full URLs) from external URLs
+    const images = product.images || [];
+    const uploaded = images.filter(url => url.includes(backendUrl));
+    const external = images.filter(url => !url.includes(backendUrl));
+    setUploadedImages(uploaded);
+    setImageUrls(external.length > 0 ? external : []);
     setIsDialogOpen(true);
   };
 
