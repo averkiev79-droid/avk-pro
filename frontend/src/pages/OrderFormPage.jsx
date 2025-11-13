@@ -48,56 +48,127 @@ const OrderFormPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('Файл слишком большой', {
-          description: 'Максимальный размер файла 5 МБ'
-        });
-        return;
-      }
-      setFormData({...formData, logo: file});
-      setLogoFileName(file.name);
-      toast.success('Логотип загружен', {
-        description: file.name
-      });
+  const addItem = () => {
+    if (!currentItem.productType) {
+      toast.error('Выберите тип товара');
+      return;
     }
+
+    const quantity = parseInt(currentItem.quantity);
+    if (quantity < 10) {
+      toast.error('Минимальное количество - 10 штук');
+      return;
+    }
+
+    const product = productTypes.find(p => p.id === currentItem.productType);
+    const newItem = {
+      id: Date.now(),
+      product_name: product.name,
+      quantity: quantity,
+      size_category: sizeCategories.find(s => s.id === currentItem.sizeCategory)?.name,
+      price: product.basePrice * quantity
+    };
+
+    setItems([...items, newItem]);
+    setCurrentItem({
+      productType: '',
+      sizeCategory: 'adult',
+      quantity: '10',
+      price: 0
+    });
+    toast.success('Товар добавлен');
   };
 
-  const handleSubmit = (e) => {
+  const removeItem = (id) => {
+    setItems(items.filter(item => item.id !== id));
+    toast.success('Товар удален');
+  };
+
+  const calculateTotal = () => {
+    return items.reduce((sum, item) => sum + item.price, 0);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation
-    if (!formData.name || !formData.phone || !formData.productType || !formData.quantity) {
+    if (!customerInfo.name || !customerInfo.phone || !customerInfo.email) {
       toast.error('Заполните обязательные поля', {
-        description: 'Имя, телефон, тип товара и количество обязательны'
+        description: 'Имя, телефон и email обязательны'
       });
       return;
     }
 
-    // Mock submission
-    console.log('Order form data:', formData);
-    setIsSubmitted(true);
-    toast.success('Заявка отправлена!', {
-      description: 'Мы свяжемся с вами в ближайшее время'
-    });
+    if (items.length === 0) {
+      toast.error('Добавьте хотя бы один товар');
+      return;
+    }
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        teamName: '',
-        productType: '',
-        quantity: '',
-        description: '',
-        logo: null
+    if (!customerInfo.address) {
+      toast.error('Укажите адрес доставки');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      
+      const orderData = {
+        customer_name: customerInfo.name,
+        customer_phone: customerInfo.phone,
+        customer_email: customerInfo.email,
+        shipping_address: customerInfo.address,
+        order_notes: customerInfo.notes ? `Команда: ${customerInfo.teamName}. ${customerInfo.notes}` : `Команда: ${customerInfo.teamName}`,
+        items: items.map(item => ({
+          product_name: item.product_name,
+          quantity: item.quantity,
+          size_category: item.size_category,
+          price: item.price / item.quantity
+        })),
+        total_amount: calculateTotal()
+      };
+
+      const response = await fetch(`${backendUrl}/api/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
       });
-      setLogoFileName('');
-      setIsSubmitted(false);
-    }, 3000);
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setIsSubmitted(true);
+        toast.success('Заказ оформлен!', {
+          description: 'Проверьте email для подтверждения'
+        });
+
+        // Reset form after 5 seconds
+        setTimeout(() => {
+          setCustomerInfo({
+            name: '',
+            phone: '',
+            email: '',
+            teamName: '',
+            address: '',
+            notes: ''
+          });
+          setItems([]);
+          setIsSubmitted(false);
+        }, 5000);
+      } else {
+        throw new Error(result.message || 'Ошибка при создании заказа');
+      }
+    } catch (error) {
+      console.error('Order submission error:', error);
+      toast.error('Ошибка отправки заказа', {
+        description: error.message || 'Попробуйте снова'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
