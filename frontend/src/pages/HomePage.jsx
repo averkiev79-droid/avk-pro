@@ -117,13 +117,13 @@ const HomePage = () => {
 
       {/* Hockey Clubs Carousel Section */}
       {hockeyClubs.length > 0 && (
-        <section className="py-20 bg-white border-y border-gray-100 overflow-hidden">
-          <div className="container max-w-7xl mx-auto px-4 mb-12">
+        <section className="py-12 sm:py-16 md:py-20 bg-white border-y border-gray-100 overflow-hidden">
+          <div className="container max-w-7xl mx-auto px-4 mb-8 sm:mb-12">
             <AnimatedSection>
-              <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4 tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4 tracking-tight">
                 Работаем с <span className="italic font-serif">известными</span> клубами
               </h2>
-              <p className="text-center text-gray-600 max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base text-center text-gray-600 max-w-2xl mx-auto">
                 Доверие профессиональных команд — наша лучшая рекомендация
               </p>
             </AnimatedSection>
