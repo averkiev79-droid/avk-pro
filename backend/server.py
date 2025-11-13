@@ -411,9 +411,6 @@ async def shutdown_db_client():
 # ============================================================================
 # ORDERS API - New endpoints for order management and email notifications
 # ============================================================================
-from models import Order, OrderCreate, OrderUpdate
-from email_service import EmailService
-from fastapi import BackgroundTasks
 
 @api_router.post("/orders", response_model=dict, status_code=201)
 async def create_order(order: OrderCreate, background_tasks: BackgroundTasks):
