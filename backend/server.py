@@ -699,6 +699,12 @@ async def generate_article_with_ai(request: AIGenerateRequest):
 
 
 # ============================================================================
+# INCLUDE API ROUTER (must be after all route definitions)
+# ============================================================================
+app.include_router(api_router)
+
+
+# ============================================================================
 # APPLICATION LIFECYCLE EVENTS
 # ============================================================================
 
