@@ -272,11 +272,11 @@ const ProductsPage = () => {
                 />
               </div>
               
-              <div className="space-y-4">
-                <Label>Изображения товара</Label>
+              <div className="space-y-3">
+                <Label className="text-base font-semibold">Изображения товара</Label>
                 
                 {/* File Upload Section */}
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 transition-colors bg-gray-50">
                   <input
                     type="file"
                     id="file-upload"
@@ -286,13 +286,13 @@ const ProductsPage = () => {
                     className="hidden"
                     disabled={uploadingFiles}
                   />
-                  <label htmlFor="file-upload" className="cursor-pointer">
-                    <Upload className="mx-auto h-12 w-12 text-gray-400 mb-3" />
-                    <p className="text-sm text-gray-600 mb-1">
-                      {uploadingFiles ? 'Загрузка...' : 'Нажмите для загрузки изображений'}
+                  <label htmlFor="file-upload" className="cursor-pointer block">
+                    <Upload className="mx-auto h-10 w-10 text-gray-400 mb-2" />
+                    <p className="text-sm font-medium text-gray-700 mb-1">
+                      {uploadingFiles ? '⏳ Загрузка...' : '📁 Загрузить изображения'}
                     </p>
                     <p className="text-xs text-gray-500">
-                      PNG, JPG, GIF до 10MB
+                      PNG, JPG, GIF до 10MB | Можно выбрать несколько
                     </p>
                   </label>
                 </div>
