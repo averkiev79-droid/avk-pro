@@ -118,7 +118,9 @@ class EmailService:
             # For development/testing, use test email address
             # In production, replace with your verified domain
             from_email = os.environ.get("FROM_EMAIL", "onboarding@resend.dev")
+            owner_email = os.environ.get("OWNER_EMAIL", "")
             
+            # Send to customer
             params = {
                 "from": from_email,
                 "to": [order.customer_email],
@@ -129,6 +131,71 @@ class EmailService:
             
             # Send email through Resend
             response = resend.Emails.send(params)
+            
+            # Send copy to owner
+            if owner_email:
+                owner_html = f"""
+                <!DOCTYPE html>
+                <html lang="ru">
+                <body style="font-family: Arial, sans-serif; padding: 20px;">
+                    <div style="background-color: #dc2626; padding: 20px; color: white; text-align: center; border-radius: 8px 8px 0 0;">
+                        <h1 style="margin: 0;">🔔 НОВЫЙ ЗАКАЗ!</h1>
+                    </div>
+                    <div style="border: 2px solid #dc2626; border-top: none; padding: 20px; border-radius: 0 0 8px 8px;">
+                        <h2>Заказ #{order.id[:8].upper()}</h2>
+                        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                            <h3 style="margin-top: 0;">Контакты клиента:</h3>
+                            <p><strong>Имя:</strong> {order.customer_name}</p>
+                            <p><strong>Телефон:</strong> {order.customer_phone}</p>
+                            <p><strong>Email:</strong> {order.customer_email}</p>
+                            <p><strong>Адрес доставки:</strong> {order.shipping_address}</p>
+                        </div>
+                        
+                        <h3>Состав заказа:</h3>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background-color: #1a1a1a; color: white;">
+                                    <th style="padding: 10px; text-align: left;">Товар</th>
+                                    <th style="padding: 10px;">Категория</th>
+                                    <th style="padding: 10px;">Кол-во</th>
+                                    <th style="padding: 10px; text-align: right;">Цена</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {items_html}
+                            </tbody>
+                            <tfoot>
+                                <tr style="background-color: #dc2626; color: white; font-weight: bold;">
+                                    <td colspan="3" style="padding: 15px; text-align: right;">Итого:</td>
+                                    <td style="padding: 15px; text-align: right;">{order.total_amount:.2f} ₽</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        
+                        {f'<div style="margin-top: 20px; background-color: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;"><strong>Комментарий:</strong><br>{order.order_notes}</div>' if order.order_notes else ''}
+                        
+                        <div style="margin-top: 30px; padding: 15px; background-color: #e3f2fd; border-radius: 8px;">
+                            <p style="margin: 0;"><strong>⚡ Действия:</strong></p>
+                            <p style="margin: 10px 0 0 0;">Свяжитесь с клиентом для уточнения деталей заказа</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
+                """
+                
+                owner_params = {
+                    "from": from_email,
+                    "to": [owner_email],
+                    "subject": f"🔔 Новый заказ #{order.id[:8].upper()} - {order.customer_name}",
+                    "html": owner_html,
+                    "reply_to": order.customer_email
+                }
+                
+                try:
+                    resend.Emails.send(owner_params)
+                    logger.info(f"Owner notification sent to {owner_email}")
+                except Exception as e:
+                    logger.error(f"Failed to send owner notification: {str(e)}")
             
             logger.info(f"Order confirmation email sent to {order.customer_email}: {response}")
             
