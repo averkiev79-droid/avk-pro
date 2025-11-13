@@ -42,7 +42,7 @@ const ParallaxImage = ({ src, alt, className = '', speed = 0.3 }) => {
 };
 
 const HomePage = () => {
-  const featuredProducts = products.slice(0, 4);
+  const [featuredProducts, setFeaturedProducts] = React.useState([]);
   const [hockeyClubs, setHockeyClubs] = React.useState([]);
   const [heroImage, setHeroImage] = React.useState("https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?auto=compress&cs=tinysrgb&w=1920");
   const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
@@ -50,6 +50,11 @@ const HomePage = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch products
+        const productsResponse = await fetch(`${backendUrl}/api/products?is_active=true`);
+        const productsData = await productsResponse.json();
+        setFeaturedProducts(productsData.slice(0, 4));
+
         // Fetch hockey clubs
         const clubsResponse = await fetch(`${backendUrl}/api/hockey-clubs`);
         const clubsData = await clubsResponse.json();
