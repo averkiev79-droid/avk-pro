@@ -9,19 +9,39 @@ import { toast } from 'sonner';
 import { Upload, Send, CheckCircle } from 'lucide-react';
 
 const OrderFormPage = () => {
-  const [formData, setFormData] = useState({
+  const [customerInfo, setCustomerInfo] = useState({
     name: '',
     phone: '',
     email: '',
     teamName: '',
-    productType: '',
-    quantity: '',
-    description: '',
-    logo: null
+    address: '',
+    notes: ''
   });
 
-  const [logoFileName, setLogoFileName] = useState('');
+  const [items, setItems] = useState([]);
+  const [currentItem, setCurrentItem] = useState({
+    productType: '',
+    sizeCategory: 'adult',
+    quantity: '10',
+    price: 0
+  });
+
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const productTypes = [
+    { id: 'jersey', name: 'Хоккейное джерси', basePrice: 3500 },
+    { id: 'socks', name: 'Хоккейные гамаши', basePrice: 800 },
+    { id: 'training', name: 'Тренировочная форма', basePrice: 2800 },
+    { id: 'accessories', name: 'Чехлы для шорт', basePrice: 1200 },
+    { id: 'outerwear', name: 'Верхняя одежда', basePrice: 4500 }
+  ];
+
+  const sizeCategories = [
+    { id: 'kids', name: 'Дети 110-140' },
+    { id: 'teens', name: 'Подростки 146-170' },
+    { id: 'adult', name: 'Взрослые' }
+  ];
 
   // Scroll to top on mount
   useEffect(() => {
