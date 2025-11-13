@@ -300,26 +300,26 @@ const ProductsPage = () => {
                 {/* Uploaded Images Preview */}
                 {uploadedImages.length > 0 && (
                   <div>
-                    <p className="text-sm font-medium mb-2">Загруженные изображения ({uploadedImages.length})</p>
-                    <div className="grid grid-cols-4 gap-4">
+                    <p className="text-sm font-medium mb-2">✅ Загружено: {uploadedImages.length} фото</p>
+                    <div className="grid grid-cols-5 gap-2">
                       {uploadedImages.map((url, index) => (
                         <div key={index} className="relative group">
                           <img 
                             src={url} 
-                            alt={`Uploaded ${index + 1}`}
-                            className="w-full h-24 object-cover rounded-md border"
+                            alt={`Фото ${index + 1}`}
+                            className="w-full h-20 object-cover rounded border-2 border-gray-200"
                           />
                           <button
                             type="button"
                             onClick={() => handleRemoveUploadedImage(index)}
-                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600"
                           >
-                            <X size={14} />
+                            <X size={12} />
                           </button>
                           {index === 0 && (
-                            <Badge className="absolute bottom-1 left-1 text-xs bg-blue-600">
-                              Основное
-                            </Badge>
+                            <div className="absolute bottom-0 left-0 right-0 bg-blue-600 text-white text-[10px] text-center py-0.5">
+                              Главное
+                            </div>
                           )}
                         </div>
                       ))}
