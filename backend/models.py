@@ -121,3 +121,43 @@ class AIGenerateRequest(BaseModel):
     topic: str
     category: str
     tone: str = "professional"  # professional, casual, technical
+
+
+# Product Models
+class Product(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    category: str  # jersey, pants, training, jacket, etc.
+    description: str
+    base_price: float
+    images: List[str] = []  # List of image URLs
+    features: Optional[List[str]] = []
+    size_categories: Optional[List[str]] = ["kids", "teens", "adults"]
+    is_featured: bool = False
+    is_active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now())
+    updated_at: datetime = Field(default_factory=lambda: datetime.now())
+
+class ProductCreate(BaseModel):
+    name: str
+    category: str
+    description: str
+    base_price: float
+    images: List[str] = []
+    features: Optional[List[str]] = []
+    size_categories: Optional[List[str]] = ["kids", "teens", "adults"]
+    is_featured: bool = False
+    is_active: bool = True
+
+class ProductUpdate(BaseModel):
+    name: Optional[str] = None
+    category: Optional[str] = None
+    description: Optional[str] = None
+    base_price: Optional[float] = None
+    images: Optional[List[str]] = None
+    features: Optional[List[str]] = None
+    size_categories: Optional[List[str]] = None
+    is_featured: Optional[bool] = None
+    is_active: Optional[bool] = None
