@@ -13,7 +13,7 @@ import uuid
 from datetime import datetime, timezone
 import shutil
 import aiofiles
-from models import Order, OrderCreate, OrderUpdate, Article, ArticleCreate, ArticleUpdate, AIGenerateRequest
+from models import Order, OrderCreate, OrderUpdate, Article, ArticleCreate, ArticleUpdate, AIGenerateRequest, Product, ProductCreate, ProductUpdate
 from email_service import EmailService
 from telegram_service import TelegramService
 from fastapi import BackgroundTasks
