@@ -193,6 +193,7 @@ const LoginPage = () => {
             </Link>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );
