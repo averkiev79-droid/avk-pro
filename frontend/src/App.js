@@ -97,6 +97,7 @@ function App() {
             },
           }}
         />
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );
