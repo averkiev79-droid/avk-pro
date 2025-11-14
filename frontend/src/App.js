@@ -56,6 +56,8 @@ function App() {
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/blog" element={<BlogPage />} />
                   <Route path="/blog/:slug" element={<ArticlePage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
                   <Route path="/privacy" element={<LegalPage />} />
                   <Route path="/terms" element={<LegalPage />} />
                   <Route path="/requisites" element={<LegalPage />} />
