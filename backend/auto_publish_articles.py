@@ -75,8 +75,8 @@ async def generate_topic_with_ai(category_id):
         
         prompt = prompts.get(category_id, prompts["tips"])
         
-        response = client.generate_text(
-            prompt=prompt,
+        response = client.chat(
+            messages=[{"role": "user", "content": prompt}],
             model="gpt-4o-mini",
             max_tokens=100,
             temperature=0.9
