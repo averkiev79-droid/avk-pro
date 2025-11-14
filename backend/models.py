@@ -3,7 +3,7 @@ Pydantic models for orders, users, and blog
 """
 from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
 
 
