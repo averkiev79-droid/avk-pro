@@ -136,26 +136,39 @@ const LegalPage = () => {
     requisites: {
       title: 'Реквизиты компании',
       content: `
-        <h2>Юридическая информация</h2>
-        
-        <p><strong>Полное наименование:</strong> Индивидуальный предприниматель [Укажите ФИО]</p>
-        <p><strong>Сокращенное наименование:</strong> ИП [Укажите ФИО]</p>
-        <p><strong>ИНН:</strong> [Укажите ИНН]</p>
-        <p><strong>ОГРНИП:</strong> [Укажите ОГРНИП]</p>
-        
-        <h2>Банковские реквизиты</h2>
-        <p><strong>Расчётный счёт:</strong> [Укажите номер счета]</p>
-        <p><strong>Банк:</strong> [Название банка]</p>
-        <p><strong>БИК:</strong> [БИК банка]</p>
-        <p><strong>Корр. счёт:</strong> [Корреспондентский счет]</p>
-        
-        <h2>Контактная информация</h2>
-        <p><strong>Юридический адрес:</strong> [Укажите адрес]</p>
-        <p><strong>Фактический адрес:</strong> г. Санкт-Петербург</p>
-        <p><strong>Телефон:</strong> +7 (812) 317-73-19</p>
-        <p><strong>Email:</strong> simplepay@mail.ru</p>
-        
-        <p><em>Примечание: Для получения актуальных реквизитов свяжитесь с нами</em></p>
+        <div class="requisites-section">
+          <h2>Юридическая информация</h2>
+          <div class="info-block">
+            <p><strong>Полное наименование:</strong><br/>Индивидуальный предприниматель [Укажите ФИО]</p>
+            <p><strong>Сокращенное наименование:</strong><br/>ИП [Укажите ФИО]</p>
+            <p><strong>ИНН:</strong><br/>[Укажите ИНН]</p>
+            <p><strong>ОГРНИП:</strong><br/>[Укажите ОГРНИП]</p>
+          </div>
+        </div>
+
+        <div class="requisites-section">
+          <h2>Банковские реквизиты</h2>
+          <div class="info-block">
+            <p><strong>Расчётный счёт:</strong><br/>[Укажите номер счета]</p>
+            <p><strong>Банк:</strong><br/>[Название банка]</p>
+            <p><strong>БИК:</strong><br/>[БИК банка]</p>
+            <p><strong>Корреспондентский счёт:</strong><br/>[Корреспондентский счет]</p>
+          </div>
+        </div>
+
+        <div class="requisites-section">
+          <h2>Контактная информация</h2>
+          <div class="info-block">
+            <p><strong>Юридический адрес:</strong><br/>[Укажите адрес]</p>
+            <p><strong>Фактический адрес:</strong><br/>г. Санкт-Петербург</p>
+            <p><strong>Телефон:</strong><br/>+7 (812) 317-73-19</p>
+            <p><strong>Email:</strong><br/>simplepay@mail.ru</p>
+          </div>
+        </div>
+
+        <div class="note-section">
+          <p><em>Примечание: Для получения актуальных реквизитов свяжитесь с нами</em></p>
+        </div>
       `
     },
     cookies: {
