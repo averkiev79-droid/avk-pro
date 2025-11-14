@@ -147,8 +147,8 @@ async def generate_article_content(topic, category_id, tone="professional"):
         
         # Extract keywords
         keywords_prompt = f"Выдели 3-5 ключевых слов для SEO из этой темы: {topic}. Верни через запятую без нумерации."
-        keywords_response = client.generate_text(
-            prompt=keywords_prompt,
+        keywords_response = client.chat(
+            messages=[{"role": "user", "content": keywords_prompt}],
             model="gpt-4o-mini",
             max_tokens=50
         )
