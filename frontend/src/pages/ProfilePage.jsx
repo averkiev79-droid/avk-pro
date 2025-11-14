@@ -52,7 +52,7 @@ const ProfilePage = () => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    setLoading(true);
+    setSaving(true);
 
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/profile`, {
@@ -77,11 +77,11 @@ const ProfilePage = () => {
       console.error('Profile update error:', err);
       setError(err.message || 'Произошла ошибка при обновлении профиля');
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
 
-  if (loading) {
+  if (authLoading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="text-gray-600">Загрузка...</div>
     </div>;
