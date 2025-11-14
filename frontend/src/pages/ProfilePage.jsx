@@ -6,8 +6,8 @@ import { useAuth } from '../contexts/AuthContext';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const { user, token, isAuthenticated, updateUser } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const { user, token, isAuthenticated, loading: authLoading, updateUser } = useAuth();
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     // Don't redirect while still loading
-    if (loading) {
+    if (authLoading) {
       return;
     }
 
@@ -37,7 +37,7 @@ const ProfilePage = () => {
         city: user.city || ''
       });
     }
-  }, [user, isAuthenticated, loading, navigate]);
+  }, [user, isAuthenticated, authLoading, navigate]);
 
   const handleChange = (e) => {
     setFormData({
