@@ -184,6 +184,16 @@ const Header = () => {
               ))}
               {isAuthenticated ? (
                 <>
+                  {user?.role === 'admin' && (
+                    <Link
+                      to="/admin/products"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="py-3 px-4 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 transition-colors rounded-md flex items-center gap-2 mt-2 border border-blue-200"
+                    >
+                      <Shield size={18} strokeWidth={1.5} />
+                      <span>Админпанель</span>
+                    </Link>
+                  )}
                   <Link
                     to="/profile"
                     onClick={() => setIsMenuOpen(false)}
