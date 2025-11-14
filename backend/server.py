@@ -900,6 +900,128 @@ async def update_profile(
 
 
 # ============================================================================
+# USER MANAGEMENT API - Admin endpoints for managing users
+# ============================================================================
+
+@api_router.get("/users", response_model=List[UserResponse])
+async def get_all_users(
+    current_user: dict = Depends(get_admin_user)
+):
+    """Get all users (Admin only)"""
+    try:
+        users = await db.users.find().to_list(length=None)
+        
+        return [
+            UserResponse(
+                user_id=user.get("user_id"),
+                email=user["email"],
+                full_name=user["full_name"],
+                phone=user.get("phone"),
+                role=user["role"],
+                disabled=user.get("disabled", False),
+                address=user.get("address"),
+                city=user.get("city"),
+                created_at=datetime.fromisoformat(user["created_at"])
+            )
+            for user in users
+        ]
+    except Exception as e:
+        logger.error(f"Error getting users: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.put("/users/{user_id}/role")
+async def update_user_role(
+    user_id: str,
+    role: str,
+    current_user: dict = Depends(get_admin_user)
+):
+    """Update user role (Admin only)"""
+    try:
+        # Validate role
+        valid_roles = ["admin", "employee", "customer"]
+        if role not in valid_roles:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Invalid role. Must be one of: {', '.join(valid_roles)}"
+            )
+        
+        # Check if user exists
+        user = await db.users.find_one({"user_id": user_id})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Prevent admin from demoting themselves
+        if user_id == current_user["user_id"] and role != "admin":
+            raise HTTPException(
+                status_code=400, 
+                detail="Cannot change your own admin role"
+            )
+        
+        # Update role
+        result = await db.users.update_one(
+            {"user_id": user_id},
+            {"$set": {
+                "role": role,
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        return {
+            "message": "User role updated successfully",
+            "user_id": user_id,
+            "new_role": role
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating user role: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.delete("/users/{user_id}")
+async def delete_user(
+    user_id: str,
+    current_user: dict = Depends(get_admin_user)
+):
+    """Delete user (Admin only)"""
+    try:
+        # Check if user exists
+        user = await db.users.find_one({"user_id": user_id})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Prevent admin from deleting themselves
+        if user_id == current_user["user_id"]:
+            raise HTTPException(
+                status_code=400, 
+                detail="Cannot delete your own account"
+            )
+        
+        # Delete user
+        result = await db.users.delete_one({"user_id": user_id})
+        
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        return {
+            "message": "User deleted successfully",
+            "user_id": user_id
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error deleting user: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
+# ============================================================================
 # PRODUCTS API - CRUD endpoints for product management
 # ============================================================================
 
