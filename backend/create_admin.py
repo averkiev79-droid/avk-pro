@@ -32,14 +32,13 @@ async def create_admin():
     
     # Admin credentials
     admin_data = {
-        "id": str(uuid.uuid4()),
-        "email": "admin@avk-sport.ru",
+        "user_id": str(uuid.uuid4()),
+        "email": "simplepay@mail.ru",
         "hashed_password": get_password_hash("admin123"),  # CHANGE THIS!
         "full_name": "Администратор",
         "phone": "+7 (812) 317-73-19",
         "role": "admin",
-        "is_active": True,
-        "email_verified": True,
+        "disabled": False,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "updated_at": datetime.now(timezone.utc).isoformat()
     }
