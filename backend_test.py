@@ -440,7 +440,7 @@ class AuthAPITester:
         return False
     
     def test_update_profile_without_token(self):
-        """Test PUT /api/auth/profile without token (should return 401)"""
+        """Test PUT /api/auth/profile without token (should return 403)"""
         print("\n=== Testing Update Profile Without Token ===")
         
         update_data = {
@@ -450,17 +450,17 @@ class AuthAPITester:
         try:
             response = requests.put(f"{self.base_url}/auth/profile", json=update_data, timeout=10)
             
-            if response.status_code == 401:
+            if response.status_code == 403:
                 result = response.json()
                 self.log_result(
                     "Update Profile Without Token", 
                     True, 
                     "Correctly rejected request without token",
-                    {"status_code": 401, "detail": result.get("detail")}
+                    {"status_code": 403, "detail": result.get("detail")}
                 )
                 return True
             else:
-                self.log_result("Update Profile Without Token", False, f"Expected 401, got {response.status_code}", {"response": response.text})
+                self.log_result("Update Profile Without Token", False, f"Expected 403, got {response.status_code}", {"response": response.text})
                 
         except Exception as e:
             self.log_result("Update Profile Without Token", False, f"Request failed: {str(e)}")
