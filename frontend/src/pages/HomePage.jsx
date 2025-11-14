@@ -64,7 +64,8 @@ const HomePage = () => {
         const settingsResponse = await fetch(`${backendUrl}/api/site-settings`);
         const settingsData = await settingsResponse.json();
         const heroSetting = settingsData.find(s => s.key === 'hero_image');
-        if (heroSetting && heroSetting.value) {
+        // Only use API image if it's a local path (starts with /), otherwise keep local default
+        if (heroSetting && heroSetting.value && heroSetting.value.startsWith('/')) {
           setHeroImage(heroSetting.value);
         }
       } catch (error) {
