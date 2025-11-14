@@ -123,6 +123,61 @@ class AIGenerateRequest(BaseModel):
     tone: str = "professional"  # professional, casual, technical
 
 
+# User Models
+class User(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    email: str
+    hashed_password: str
+    full_name: str
+    phone: Optional[str] = None
+    role: str = "customer"  # admin, staff, customer
+    is_active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    # Customer specific
+    address: Optional[str] = None
+    city: Optional[str] = None
+    
+    # Email verification
+    email_verified: bool = False
+
+class UserCreate(BaseModel):
+    email: str
+    password: str
+    full_name: str
+    phone: Optional[str] = None
+
+class UserUpdate(BaseModel):
+    full_name: Optional[str] = None
+    phone: Optional[str] = None
+    address: Optional[str] = None
+    city: Optional[str] = None
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+class UserResponse(BaseModel):
+    id: str
+    email: str
+    full_name: str
+    phone: Optional[str] = None
+    role: str
+    is_active: bool
+    address: Optional[str] = None
+    city: Optional[str] = None
+    email_verified: bool
+    created_at: datetime
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse
+
+
 # Product Models
 class Product(BaseModel):
     model_config = ConfigDict(extra="ignore")
