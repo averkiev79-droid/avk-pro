@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Mail, ShoppingCart } from 'lucide-react';
+import { Menu, X, Phone, Mail, ShoppingCart, User } from 'lucide-react';
 import { companyInfo } from '../mock';
 import { Button } from './ui/button';
 
