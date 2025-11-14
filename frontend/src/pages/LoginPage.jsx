@@ -38,11 +38,12 @@ const LoginPage = () => {
         body: JSON.stringify(formData)
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.detail || 'Ошибка входа');
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Ошибка входа');
       }
+
+      const data = await response.json();
 
       // Use AuthContext to login
       login(data.access_token, data.user);
