@@ -111,8 +111,8 @@ async def get_admin_user(current_user: dict = Depends(get_current_user)):
 
 
 async def get_staff_user(current_user: dict = Depends(get_current_user)):
-    """Require staff or admin role"""
-    if current_user.get("role") not in ["admin", "staff"]:
+    """Require employee or admin role"""
+    if current_user.get("role") not in ["admin", "employee"]:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Staff access required"
@@ -121,8 +121,8 @@ async def get_staff_user(current_user: dict = Depends(get_current_user)):
 
 
 async def get_customer_user(current_user: dict = Depends(get_current_user)):
-    """Require customer, staff or admin role (any authenticated user)"""
-    if current_user.get("role") not in ["admin", "staff", "customer"]:
+    """Require customer, employee or admin role (any authenticated user)"""
+    if current_user.get("role") not in ["admin", "employee", "customer"]:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Authentication required"
