@@ -57,13 +57,17 @@ const Header = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
       {/* Main header */}
       <div className="container max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between py-6">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3" onClick={scrollToTop}>
             <img src={companyInfo.logo} alt="A.V.K. SPORT" className="h-14 w-auto" />
             <div>
               <div className="text-2xl font-bold text-gray-900 tracking-tight leading-none">A.V.K.</div>
