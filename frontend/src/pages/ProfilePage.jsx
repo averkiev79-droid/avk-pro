@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const { user, token, isAuthenticated, loading: authLoading, updateUser } = useAuth();
+  const { user, token, isAuthenticated, loading: authLoading, updateUser, logout } = useAuth();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
