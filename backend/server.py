@@ -865,7 +865,7 @@ async def update_profile(
         update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
         
         result = await db.users.update_one(
-            {"id": current_user["id"]},
+            {"user_id": current_user["user_id"]},
             {"$set": update_data}
         )
         
@@ -873,18 +873,17 @@ async def update_profile(
             raise HTTPException(status_code=404, detail="User not found")
         
         # Get updated user
-        updated_user = await db.users.find_one({"id": current_user["id"]})
+        updated_user = await db.users.find_one({"user_id": current_user["user_id"]})
         
         return UserResponse(
-            id=updated_user["id"],
+            user_id=updated_user["user_id"],
             email=updated_user["email"],
             full_name=updated_user["full_name"],
             phone=updated_user.get("phone"),
             role=updated_user["role"],
-            is_active=updated_user["is_active"],
+            disabled=updated_user.get("disabled", False),
             address=updated_user.get("address"),
             city=updated_user.get("city"),
-            email_verified=updated_user.get("email_verified", False),
             created_at=datetime.fromisoformat(updated_user["created_at"])
         )
         
