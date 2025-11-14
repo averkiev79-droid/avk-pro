@@ -65,6 +65,7 @@ function App() {
             </>
           } />
         </Routes>
+        <CookieBanner />
         <Toaster 
           position="bottom-right" 
           toastOptions={{
