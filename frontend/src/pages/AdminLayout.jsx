@@ -36,7 +36,36 @@ import { companyInfo } from '../mock';
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Mock auth
+  const navigate = useNavigate();
+  const { user, isAuthenticated, loading } = useAuth();
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      navigate('/login');
+    }
+  }, [loading, isAuthenticated, navigate]);
+
+  // Check if user is admin
+  useEffect(() => {
+    if (!loading && isAuthenticated && user?.role !== 'admin') {
+      navigate('/'); // Redirect non-admins to home
+    }
+  }, [loading, isAuthenticated, user, navigate]);
+
+  // Show loading while checking auth
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-gray-600">Загрузка...</div>
+      </div>
+    );
+  }
+
+  // Don't render admin panel if not authenticated or not admin
+  if (!isAuthenticated || user?.role !== 'admin') {
+    return null;
+  }
 
   const navigation = [
     { name: 'Дашборд', href: '/admin', icon: LayoutDashboard, exact: true },
