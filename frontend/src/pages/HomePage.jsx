@@ -77,15 +77,23 @@ const HomePage = () => {
   return (
     <div className="home-page">
       {/* Hero Section - Full Width with Background */}
-      <section 
-        className="relative bg-gray-900 min-h-[600px] lg:min-h-[700px] flex items-center"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <section className="relative bg-gray-900 min-h-[600px] lg:min-h-[700px] flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={heroImage}
+            alt="Hockey background"
+            className="w-full h-full object-cover"
+            onLoad={() => console.log('✅ Hero background loaded')}
+            onError={(e) => {
+              console.error('❌ Hero background failed');
+              e.target.style.display = 'none';
+            }}
+          />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+
         {/* Overlay Content */}
         <div className="container max-w-7xl mx-auto px-4 py-20 relative z-10">
           <div className="max-w-3xl">
