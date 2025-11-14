@@ -145,15 +145,14 @@ class UserLogin(BaseModel):
     password: str
 
 class UserResponse(BaseModel):
-    id: str
+    user_id: str
     email: str
     full_name: str
     phone: Optional[str] = None
     role: str
-    is_active: bool
+    disabled: bool = False
     address: Optional[str] = None
     city: Optional[str] = None
-    email_verified: bool
     created_at: datetime
 
 class Token(BaseModel):
