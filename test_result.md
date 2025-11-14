@@ -119,6 +119,18 @@ backend:
           agent: "main"
           comment: "Backend working correctly, no changes needed for redesign"
   
+  - task: "Authentication System - User Registration, Login, Profile Management"
+    implemented: true
+    working: true
+    file: "backend/server.py, backend/auth_utils.py, backend/models.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ COMPREHENSIVE AUTHENTICATION TESTING COMPLETED: All 11 authentication endpoints working perfectly. Tested: (1) POST /api/auth/register - Creates users with bcrypt password hashing, default role 'customer', returns JWT token and user info. (2) POST /api/auth/login - Authenticates admin@avk-sport.ru and regular users, returns JWT token with proper user data. (3) GET /api/auth/me - Retrieves current user info with valid JWT token, properly rejects requests without token (403). (4) PUT /api/auth/profile - Updates user profile (phone, address, city) with JWT authentication. Error handling verified: (5) Duplicate email registration returns 400. (6) Wrong password returns 401. (7) Non-existent user returns 401. (8) Requests without tokens return 403. Password security: bcrypt hashing confirmed working. JWT tokens properly generated and validated. Admin user (admin@avk-sport.ru / admin123) with role 'admin' working. Customer registration defaults to role 'customer'. All authentication flows production-ready."
+  
   - task: "Product Model and CRUD API"
     implemented: true
     working: true
