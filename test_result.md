@@ -162,15 +162,18 @@ backend:
 frontend:
   - task: "Frontend Authentication System - Login/Register Pages, AuthContext, Profile Page"
     implemented: true
-    working: "NA"
+    working: false
     file: "frontend/src/pages/LoginPage.jsx, frontend/src/pages/RegisterPage.jsx, frontend/src/pages/ProfilePage.jsx, frontend/src/contexts/AuthContext.jsx, frontend/src/components/Header.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "main"
           comment: "Implemented complete frontend authentication: (1) Added 'Login' button to Header with conditional rendering (shows user name + logout when authenticated). (2) Created LoginPage with email/password form, connects to /api/auth/login. (3) Created RegisterPage with full registration form (name, email, phone, password). (4) Created AuthContext for global auth state management with auto-login on page refresh. (5) Created ProfilePage for viewing/editing user data and order history placeholder. (6) All pages integrated with AuthContext. Needs comprehensive testing of full authentication flow."
+        - working: false
+          agent: "testing"
+          comment: "CRITICAL ISSUE FOUND: Profile page access is broken due to AuthContext timing issue. ✅ WORKING: (1) Registration flow - users can register and get automatically logged in. (2) Login flow - admin and regular users can login successfully, JWT tokens saved, proper redirects (admin→/admin/products, user→/). (3) Header authentication state - correctly shows user name + logout when authenticated, shows 'Вход' when not authenticated. (4) Logout flow - properly clears localStorage and updates header. (5) Protected route access - correctly redirects to /login when accessing /profile while logged out. (6) Auto-login on homepage - user remains logged in after page refresh. ❌ BROKEN: (7) Profile page access - users get redirected to /login even when authenticated due to AuthContext race condition. The useEffect in ProfilePage runs before AuthContext initializes from localStorage. Fixed AuthContext isAuthenticated calculation and added loading state checks, but profile page still redirects. (8) Error handling - JavaScript 'Response clone' errors prevent proper error messages from displaying (likely from monitoring scripts). Minor: Password mismatch validation works on frontend."
   
   - task: "Hero section desktop layout fix"
     implemented: true
