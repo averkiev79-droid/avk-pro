@@ -15,6 +15,8 @@ const LegalPage = () => {
   const pageType = paramPageType || location.pathname.replace('/', '');
 
   useEffect(() => {
+    // Scroll to top when page changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     fetchPage();
   }, [pageType]);
 
