@@ -179,7 +179,7 @@ const ProductsPage = () => {
         if (!response.ok) throw new Error('Upload failed');
         
         const data = await response.json();
-        return `${backendUrl}/api${data.url}`;
+        return `${backendUrl}${data.url}`;
       });
 
       const urls = await Promise.all(uploadPromises);
