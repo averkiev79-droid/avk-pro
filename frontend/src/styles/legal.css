@@ -1,0 +1,93 @@
+/* Legal Pages Styling - Short Par 4 Style */
+
+.legal-content {
+  color: #374151;
+  font-size: 16px;
+}
+
+.legal-content h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+.legal-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.legal-content p {
+  margin-bottom: 16px;
+  line-height: 1.8;
+  color: #4B5563;
+}
+
+.legal-content ul,
+.legal-content ol {
+  margin-left: 24px;
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.legal-content li {
+  margin-bottom: 8px;
+  color: #4B5563;
+}
+
+.legal-content ul li {
+  list-style-type: disc;
+}
+
+.legal-content ol li {
+  list-style-type: decimal;
+}
+
+.legal-content strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.legal-content em {
+  font-style: italic;
+  color: #6B7280;
+  font-size: 14px;
+}
+
+.legal-content a {
+  color: #1D4ED8;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.legal-content a:hover {
+  color: #1E40AF;
+}
+
+/* First paragraph after h2 */
+.legal-content h2 + p {
+  margin-top: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .legal-content {
+    font-size: 15px;
+  }
+
+  .legal-content h2 {
+    font-size: 24px;
+    margin-top: 32px;
+  }
+
+  .legal-content h3 {
+    font-size: 18px;
+    margin-top: 24px;
+  }
+}
