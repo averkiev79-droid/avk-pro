@@ -71,9 +71,9 @@ const LoginPage = () => {
             Вход в систему
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Или{' '}
-            <Link to="/register" className="font-medium text-gray-900 hover:text-gray-700">
-              создайте новый аккаунт
+            Нет аккаунта?{' '}
+            <Link to="/register" className="font-bold text-blue-600 hover:text-blue-700 underline">
+              Зарегистрироваться
             </Link>
           </p>
         </div>
