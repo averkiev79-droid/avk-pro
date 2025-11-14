@@ -783,21 +783,29 @@ async def register(user_data: UserCreate):
 async def login(credentials: UserLogin):
     """Login user"""
     try:
+        logger.info(f"Login attempt for email: {credentials.email}")
+        
         # Find user by email
         user = await db.users.find_one({"email": credentials.email})
         
         if not user:
+            logger.warning(f"User not found: {credentials.email}")
             raise HTTPException(
                 status_code=401,
                 detail="Incorrect email or password"
             )
         
+        logger.info(f"User found: {user.get('email')}, checking password...")
+        
         # Verify password
         if not verify_password(credentials.password, user["hashed_password"]):
+            logger.warning(f"Invalid password for user: {credentials.email}")
             raise HTTPException(
                 status_code=401,
                 detail="Incorrect email or password"
             )
+        
+        logger.info(f"Password verified for: {credentials.email}")
         
         # Check if user is disabled
         if user.get("disabled", False):
