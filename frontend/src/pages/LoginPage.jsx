@@ -44,9 +44,8 @@ const LoginPage = () => {
         throw new Error(data.detail || 'Ошибка входа');
       }
 
-      // Save token and user info to localStorage
-      localStorage.setItem('token', data.access_token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      // Use AuthContext to login
+      login(data.access_token, data.user);
 
       // Redirect to home page or dashboard
       if (data.user.role === 'admin') {
