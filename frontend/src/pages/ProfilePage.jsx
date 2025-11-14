@@ -18,6 +18,11 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
+    // Don't redirect while still loading
+    if (loading) {
+      return;
+    }
+
     if (!isAuthenticated) {
       navigate('/login');
       return;
@@ -32,7 +37,7 @@ const ProfilePage = () => {
         city: user.city || ''
       });
     }
-  }, [user, isAuthenticated, navigate]);
+  }, [user, isAuthenticated, loading, navigate]);
 
   const handleChange = (e) => {
     setFormData({
