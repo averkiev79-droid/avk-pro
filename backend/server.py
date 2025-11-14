@@ -898,6 +898,8 @@ async def update_profile(
     except HTTPException:
         raise
     except Exception as e:
+        logger.error(f"Error updating profile: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ============================================================================
