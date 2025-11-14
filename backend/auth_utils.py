@@ -77,7 +77,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     # Get user from database
     mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
     client = AsyncIOMotorClient(mongo_url)
-    db = client.hockey_shop
+    db = client[os.environ.get('DB_NAME', 'test_database')]
     
     user = await db.users.find_one({"id": user_id})
     
