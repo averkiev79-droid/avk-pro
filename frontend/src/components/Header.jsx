@@ -98,10 +98,29 @@ const Header = () => {
                 </span>
               )}
             </Link>
-            <Link to="/login" className="text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-2">
-              <User size={22} strokeWidth={1.5} />
-              <span className="text-sm font-medium">Вход</span>
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/profile" className="text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-2">
+                  <User size={22} strokeWidth={1.5} />
+                  <span className="text-sm font-medium">{user?.full_name || user?.email}</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    navigate('/');
+                  }}
+                  className="text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-2"
+                >
+                  <LogOut size={20} strokeWidth={1.5} />
+                  <span className="text-sm font-medium">Выход</span>
+                </button>
+              </>
+            ) : (
+              <Link to="/login" className="text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-2">
+                <User size={22} strokeWidth={1.5} />
+                <span className="text-sm font-medium">Вход</span>
+              </Link>
+            )}
             <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-5 rounded-md transition-colors font-medium">
               <Link to="/order">Заказать</Link>
             </Button>
