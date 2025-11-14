@@ -232,6 +232,8 @@ test_plan:
 
 agent_communication:
     - agent: "main"
+      message: "Implemented complete frontend authentication system. Created LoginPage, RegisterPage, ProfilePage, and AuthContext. Updated Header to show login button for guests and user name + logout for authenticated users. All pages integrated with backend API (/api/auth/login, /api/auth/register, /api/auth/profile). Ready for comprehensive testing of registration, login, profile update, logout, and auto-login on refresh."
+    - agent: "main"
       message: "Fixed hero section desktop layout by changing from grid to flexbox with explicit width classes (w-full lg:w-1/2). Both columns now render correctly on desktop."
     - agent: "main"
       message: "Implemented complete Products CRUD system: Backend has Product model with images array field and full API endpoints. Frontend admin page now supports adding/removing multiple image URLs with dynamic UI. All public pages updated to fetch from API and display first image with badge for additional photos."
