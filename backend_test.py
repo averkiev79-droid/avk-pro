@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Backend API Testing Script for Products CRUD endpoints
-Tests all Product API endpoints with comprehensive validation
+Backend API Testing Script for Authentication and Products CRUD endpoints
+Tests all Authentication and Product API endpoints with comprehensive validation
 """
 
 import requests
