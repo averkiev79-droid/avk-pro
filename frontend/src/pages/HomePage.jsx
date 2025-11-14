@@ -44,7 +44,7 @@ const ParallaxImage = ({ src, alt, className = '', speed = 0.3 }) => {
 const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = React.useState([]);
   const [hockeyClubs, setHockeyClubs] = React.useState([]);
-  const [heroImage, setHeroImage] = React.useState("https://images.pexels.com/photos/6847587/pexels-photo-6847587.jpeg?auto=compress&cs=tinysrgb&w=1920");
+  const [heroImage, setHeroImage] = React.useState("/images/hockey-hero.jpg");
   const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
 
   React.useEffect(() => {
