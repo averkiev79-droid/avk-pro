@@ -50,7 +50,7 @@ const LoginPage = () => {
 
       // Redirect to home page or dashboard
       if (data.user.role === 'admin') {
-        navigate('/admin/products');
+        navigate('/admin');
       } else {
         navigate('/');
       }
