@@ -7,6 +7,34 @@ from datetime import datetime, timezone
 import uuid
 
 
+
+# OAuth User and Session Models
+class OAuthUser(BaseModel):
+    """User authenticated via OAuth (Google)"""
+    model_config = ConfigDict(extra="ignore")
+    
+    user_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    oauth_provider: str = "google"  # google, yandex, etc
+    oauth_id: str  # ID from OAuth provider
+    email: EmailStr
+    full_name: str
+    profile_picture: Optional[str] = None
+    role: str = "customer"  # customer, employee, admin
+    disabled: bool = False
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class UserSession(BaseModel):
+    """OAuth session storage"""
+    model_config = ConfigDict(extra="ignore")
+    
+    session_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    session_token: str
+    expires_at: datetime
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
 # Order Models
 class OrderItem(BaseModel):
     product_name: str
