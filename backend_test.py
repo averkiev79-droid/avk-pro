@@ -15,12 +15,15 @@ from PIL import Image
 # Backend URL from environment
 BACKEND_URL = "https://hockey-shop.preview.emergentagent.com/api"
 
-class ProductAPITester:
+class AuthAPITester:
     def __init__(self):
         self.base_url = BACKEND_URL
         self.created_product_ids = []
         self.test_results = []
         self.uploaded_files = []
+        self.access_token = None
+        self.admin_token = None
+        self.test_user_email = None
         
     def log_result(self, test_name, success, message, details=None):
         """Log test result"""
