@@ -104,6 +104,12 @@ const Header = () => {
             </Link>
             {isAuthenticated ? (
               <>
+                {user?.role === 'admin' && (
+                  <Link to="/admin/products" className="text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-2">
+                    <Shield size={20} strokeWidth={1.5} />
+                    <span className="text-sm font-medium">Админ</span>
+                  </Link>
+                )}
                 <Link to="/profile" className="text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-2">
                   <User size={22} strokeWidth={1.5} />
                   <span className="text-sm font-medium">{user?.full_name || user?.email}</span>
