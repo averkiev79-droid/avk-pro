@@ -293,6 +293,7 @@ const RegisterPage = () => {
             </Link>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );
