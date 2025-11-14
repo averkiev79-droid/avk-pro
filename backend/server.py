@@ -837,15 +837,14 @@ async def login(credentials: UserLogin):
 async def get_current_user_info(current_user: dict = Depends(get_current_user)):
     """Get current user info"""
     return UserResponse(
-        id=current_user["id"],
+        user_id=current_user["user_id"],
         email=current_user["email"],
         full_name=current_user["full_name"],
         phone=current_user.get("phone"),
         role=current_user["role"],
-        is_active=current_user["is_active"],
+        disabled=current_user.get("disabled", False),
         address=current_user.get("address"),
         city=current_user.get("city"),
-        email_verified=current_user.get("email_verified", False),
         created_at=datetime.fromisoformat(current_user["created_at"])
     )
 
