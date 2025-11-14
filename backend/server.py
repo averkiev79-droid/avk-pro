@@ -898,6 +898,187 @@ async def update_profile(
     except HTTPException:
         raise
     except Exception as e:
+
+
+# ============================================================================
+# EMERGENT AUTH (GOOGLE OAUTH) API
+# ============================================================================
+
+from emergent_auth import EmergentAuth
+from fastapi.responses import JSONResponse
+
+@api_router.post("/auth/oauth/session")
+async def process_oauth_session(session_id: str):
+    """
+    Process OAuth session_id from Emergent Auth
+    Exchange for session_token and user data
+    """
+    try:
+        # Get session data from Emergent Auth
+        session_data = await EmergentAuth.get_session_data(session_id)
+        
+        oauth_id = session_data.get("id")
+        email = session_data.get("email")
+        name = session_data.get("name", "")
+        picture = session_data.get("picture")
+        session_token = session_data.get("session_token")
+        
+        if not oauth_id or not email or not session_token:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid session data"
+            )
+        
+        # Find or create user
+        user = await db.users.find_one({"oauth_id": oauth_id})
+        
+        if not user:
+            # Create new user
+            user_dict = {
+                "user_id": str(uuid.uuid4()),
+                "oauth_provider": "google",
+                "oauth_id": oauth_id,
+                "email": email,
+                "full_name": name,
+                "profile_picture": picture,
+                "role": "customer",
+                "disabled": False,
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }
+            
+            await db.users.insert_one(user_dict)
+            user = user_dict
+        
+        # Store session
+        session_dict = {
+            "session_id": str(uuid.uuid4()),
+            "user_id": user["user_id"],
+            "session_token": session_token,
+            "expires_at": EmergentAuth.calculate_session_expiry().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        await db.user_sessions.insert_one(session_dict)
+        
+        # Return response with cookie
+        response = JSONResponse(content={
+            "success": True,
+            "user": {
+                "user_id": user["user_id"],
+                "email": user["email"],
+                "full_name": user["full_name"],
+                "profile_picture": user.get("profile_picture"),
+                "role": user["role"]
+            }
+        })
+        
+        # Set httpOnly cookie
+        response.set_cookie(
+            key="session_token",
+            value=session_token,
+            httponly=True,
+            secure=True,  # HTTPS only
+            samesite="none",  # Allow cross-site
+            max_age=7*24*60*60,  # 7 days
+            path="/"
+        )
+        
+        return response
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error processing OAuth session: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/auth/me")
+async def get_current_user_oauth(
+    request: Request
+):
+    """
+    Get current authenticated user from session_token
+    Checks cookie first, then Authorization header
+    """
+    try:
+        # Try to get token from cookie
+        session_token = request.cookies.get("session_token")
+        
+        # Fallback to Authorization header
+        if not session_token:
+            auth_header = request.headers.get("Authorization")
+            if auth_header and auth_header.startswith("Bearer "):
+                session_token = auth_header[7:]
+        
+        if not session_token:
+            raise HTTPException(
+                status_code=401,
+                detail="Not authenticated"
+            )
+        
+        # Find session
+        session = await db.user_sessions.find_one({"session_token": session_token})
+        
+        if not session:
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid or expired session"
+            )
+        
+        # Check expiration
+        expires_at = datetime.fromisoformat(session["expires_at"])
+        if expires_at < datetime.now(timezone.utc):
+            # Delete expired session
+            await db.user_sessions.delete_one({"session_token": session_token})
+            raise HTTPException(
+                status_code=401,
+                detail="Session expired"
+            )
+        
+        # Get user
+        user = await db.users.find_one({"user_id": session["user_id"]})
+        
+        if not user or user.get("disabled", False):
+            raise HTTPException(
+                status_code=401,
+                detail="User not found or disabled"
+            )
+        
+        return {
+            "user_id": user["user_id"],
+            "email": user["email"],
+            "full_name": user["full_name"],
+            "profile_picture": user.get("profile_picture"),
+            "role": user["role"]
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting current user: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/auth/logout")
+async def logout_oauth(request: Request):
+    """Logout user by deleting session"""
+    try:
+        session_token = request.cookies.get("session_token")
+        
+        if session_token:
+            await db.user_sessions.delete_one({"session_token": session_token})
+        
+        response = JSONResponse(content={"success": True})
+        response.delete_cookie(key="session_token", path="/")
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Error during logout: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
         logger.error(f"Error updating profile: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
