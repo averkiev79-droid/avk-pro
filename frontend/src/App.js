@@ -61,6 +61,7 @@ function App() {
                   <Route path="/blog/:slug" element={<ArticlePage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
                   <Route path="/privacy" element={<LegalPage />} />
                   <Route path="/terms" element={<LegalPage />} />
                   <Route path="/requisites" element={<LegalPage />} />
