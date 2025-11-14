@@ -96,49 +96,51 @@ const ProfilePage = () => {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm p-8 mb-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                {user.full_name ? user.full_name[0].toUpperCase() : user.email[0].toUpperCase()}
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  {user.full_name || 'Профиль пользователя'}
-                </h1>
-                <p className="text-gray-600 flex items-center gap-2 mt-1">
-                  <Mail className="w-4 h-4" />
-                  {user.email}
+        <div className="bg-white rounded-lg shadow-sm p-4 sm:p-8 mb-6">
+          {/* User Info */}
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+              {user.full_name ? user.full_name[0].toUpperCase() : user.email[0].toUpperCase()}
+            </div>
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 truncate">
+                {user.full_name || 'Профиль пользователя'}
+              </h1>
+              <p className="text-gray-600 flex items-center gap-2 mt-1 text-sm">
+                <Mail className="w-4 h-4 flex-shrink-0" />
+                <span className="truncate">{user.email}</span>
+              </p>
+              {user.role && (
+                <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
+                  <Shield className="w-4 h-4 flex-shrink-0" />
+                  Роль: {user.role === 'admin' ? 'Администратор' : user.role === 'employee' ? 'Сотрудник' : 'Клиент'}
                 </p>
-                {user.role && (
-                  <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
-                    <Shield className="w-4 h-4" />
-                    Роль: {user.role === 'admin' ? 'Администратор' : user.role === 'employee' ? 'Сотрудник' : 'Клиент'}
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              {user.role === 'admin' && (
-                <Button 
-                  onClick={() => navigate('/admin/products')}
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                  <Shield className="w-4 h-4 mr-2" />
-                  Админпанель
-                </Button>
               )}
-              <Button 
-                onClick={() => {
-                  logout();
-                  navigate('/');
-                }}
-                variant="outline"
-                className="text-red-600 hover:bg-red-50 border-red-200"
-              >
-                Выйти
-              </Button>
             </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-2">
+            {user.role === 'admin' && (
+              <Button 
+                onClick={() => navigate('/admin/products')}
+                className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
+              >
+                <Shield className="w-4 h-4 mr-2" />
+                Админпанель
+              </Button>
+            )}
+            <Button 
+              onClick={() => {
+                logout();
+                navigate('/');
+              }}
+              variant="outline"
+              className="text-red-600 hover:bg-red-50 border-red-200 w-full sm:w-auto"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Выйти
+            </Button>
           </div>
         </div>
 
