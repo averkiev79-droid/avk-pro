@@ -23,11 +23,13 @@ import AdminLayout from './pages/AdminLayout';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import { Toaster } from './components/ui/sonner';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <AuthProvider>
         <Routes>
           {/* Admin Routes */}
           <Route path="/admin/*" element={<AdminLayout />} />
