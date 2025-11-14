@@ -217,10 +217,13 @@ const ProductsPage = () => {
             </Button>
           </DialogTrigger>
           
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto" aria-describedby="product-form-description">
             <DialogHeader>
               <DialogTitle>{editingProduct ? 'Редактировать товар' : 'Добавить новый товар'}</DialogTitle>
             </DialogHeader>
+            <p id="product-form-description" className="sr-only">
+              Форма для добавления или редактирования товара в каталоге
+            </p>
             
             <form onSubmit={handleSubmit} className="space-y-4 py-4">
               <div className="grid grid-cols-2 gap-4">
