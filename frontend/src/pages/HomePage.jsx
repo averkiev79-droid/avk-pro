@@ -76,65 +76,63 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      {/* Hero Section */}
-      <section className="relative bg-white py-12 md:py-20 lg:py-32 overflow-hidden">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-12 items-center">
-            {/* Left Column - Text */}
-            <div className="w-full lg:w-1/2 text-center lg:text-left flex-shrink-0">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
-                Профессиональная <span className="italic font-serif">хоккейная</span> экипировка
-              </h1>
-              <p className="text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
-                Производим форму для детских и взрослых команд. 
-                Индивидуальный дизайн, быстрые сроки, отличное качество.
-              </p>
-              <div className="bg-gray-50 border border-gray-200 p-4 mb-8 rounded-md max-w-xl mx-auto lg:mx-0">
-                <p className="text-sm text-gray-700">
-                  Минимальная партия заказа - <span className="font-semibold">от 10 штук</span>
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link to="/order">
-                  <button className="bg-gray-900 hover:bg-gray-800 text-white px-10 py-4 rounded-md font-medium transition-colors w-full sm:w-auto">
-                    Заказать форму
-                  </button>
-                </Link>
-                <Link to="/catalog">
-                  <button className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-10 py-4 rounded-md font-medium transition-colors w-full sm:w-auto">
-                    Смотреть каталог
-                  </button>
-                </Link>
-              </div>
+      {/* Hero Section - Full Width with Background */}
+      <section 
+        className="relative bg-gray-900 min-h-[600px] lg:min-h-[700px] flex items-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        {/* Overlay Content */}
+        <div className="container max-w-7xl mx-auto px-4 py-20 relative z-10">
+          <div className="max-w-3xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-white text-sm font-medium">14+ лет на рынке</span>
             </div>
 
-            {/* Right Column - Image */}
-            <div className="relative w-full lg:w-1/2 flex-shrink-0" style={{ minHeight: '400px' }}>
-              <img
-                src={heroImage}
-                alt="Профессиональная хоккейная команда"
-                className="w-full h-auto rounded-lg shadow-xl object-cover"
-                style={{ 
-                  opacity: 1, 
-                  display: 'block',
-                  minHeight: '400px',
-                  maxHeight: '600px',
-                  visibility: 'visible',
-                  zIndex: 1
-                }}
-                onLoad={() => console.log('✅ Hero image loaded:', heroImage)}
-                onError={(e) => {
-                  console.error('❌ Hero image failed to load:', heroImage);
-                  console.error('Error:', e);
-                }}
-              />
-              <div className="absolute -bottom-4 -left-4 bg-white p-6 rounded-md shadow-lg border border-gray-200" style={{ zIndex: 10 }}>
-                <div className="text-5xl font-bold text-gray-900">14+</div>
-                <div className="text-sm text-gray-600 uppercase tracking-wider font-medium">лет на рынке</div>
-              </div>
+            {/* Main Heading */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-white leading-tight">
+              Профессиональная{' '}
+              <span className="italic font-serif text-blue-400">хоккейная</span>{' '}
+              экипировка
+            </h1>
+            
+            {/* Description */}
+            <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed">
+              Производим форму для детских и взрослых команд. 
+              Индивидуальный дизайн, быстрые сроки, отличное качество.
+            </p>
+
+            {/* Info Box */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-5 mb-10 max-w-xl">
+              <p className="text-white text-base">
+                💪 Минимальная партия заказа - <span className="font-bold">от 10 штук</span>
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/order">
+                <button className="bg-white text-gray-900 hover:bg-gray-100 px-10 py-4 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg w-full sm:w-auto text-lg">
+                  Заказать форму
+                </button>
+              </Link>
+              <Link to="/catalog">
+                <button className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-gray-900 px-10 py-4 rounded-lg font-semibold transition-all w-full sm:w-auto text-lg">
+                  Смотреть каталог
+                </button>
+              </Link>
             </div>
           </div>
         </div>
+
+        {/* Decorative Elements */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
       </section>
 
       {/* Hockey Clubs Carousel Section */}
