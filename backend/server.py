@@ -736,14 +736,13 @@ async def register(user_data: UserCreate):
         
         # Create new user
         user_dict = {
-            "id": str(uuid.uuid4()),
+            "user_id": str(uuid.uuid4()),
             "email": user_data.email,
             "hashed_password": get_password_hash(user_data.password),
             "full_name": user_data.full_name,
             "phone": user_data.phone,
             "role": "customer",  # Default role
-            "is_active": True,
-            "email_verified": False,
+            "disabled": False,
             "created_at": datetime.now(timezone.utc).isoformat(),
             "updated_at": datetime.now(timezone.utc).isoformat()
         }
@@ -754,19 +753,18 @@ async def register(user_data: UserCreate):
             raise HTTPException(status_code=500, detail="Failed to create user")
         
         # Create access token
-        access_token = create_access_token(data={"sub": user_dict["id"]})
+        access_token = create_access_token(data={"sub": user_dict["user_id"]})
         
         # Return token and user info
         user_response = UserResponse(
-            id=user_dict["id"],
+            user_id=user_dict["user_id"],
             email=user_dict["email"],
             full_name=user_dict["full_name"],
             phone=user_dict.get("phone"),
             role=user_dict["role"],
-            is_active=user_dict["is_active"],
+            disabled=user_dict["disabled"],
             address=user_dict.get("address"),
             city=user_dict.get("city"),
-            email_verified=user_dict["email_verified"],
             created_at=datetime.fromisoformat(user_dict["created_at"])
         )
         
