@@ -91,7 +91,7 @@ const ProductDetailPage = () => {
   // Use product images or fallback to placeholder
   const images = product.images && product.images.length > 0 
     ? product.images 
-    : ['https://via.placeholder.com/800x800/E5E7EB/6B7280?text=No+Image'];
+    : ['/images/placeholder.svg'];
 
   const sizeCategories = [
     { id: 'kids', name: 'Дети 110-140' },
