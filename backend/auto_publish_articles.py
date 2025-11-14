@@ -95,14 +95,12 @@ async def generate_topic_with_ai(category_id):
 async def generate_article_content(topic, category_id, tone="professional"):
     """Generate article content using AI"""
     try:
-        from emergentintegrations import ChatClient
+        from emergentintegrations.llm.chat import LlmChat, UserMessage
         
         api_key = os.environ.get('EMERGENT_LLM_KEY')
         if not api_key:
             logger.error("EMERGENT_LLM_KEY not found")
             return None
-        
-        client = ChatClient(api_key=api_key, provider="openai")
         
         category_names = {
             "tips": "советов и гайдов",
@@ -128,16 +126,18 @@ async def generate_article_content(topic, category_id, tone="professional"):
 
 Верни ТОЛЬКО HTML-контент статьи без дополнительных комментариев."""
 
-        response = client.chat(
-            messages=[{"role": "user", "content": prompt}],
-            model="gpt-4o-mini",
-            max_tokens=2000,
-            temperature=0.7
-        )
+        # Initialize chat for article generation
+        chat = LlmChat(
+            api_key=api_key,
+            session_id=f"article-gen-{category_id}",
+            system_message="Ты профессиональный копирайтер, специализирующийся на спортивной тематике."
+        ).with_model("openai", "gpt-4o-mini")
         
+        user_message = UserMessage(text=prompt)
+        response = await chat.send_message(user_message)
         content = response.strip()
         
-        # Generate excerpt (first 150 chars)
+        # Generate excerpt (first 200 chars)
         import re
         text_only = re.sub('<[^<]+?>', '', content)
         excerpt = text_only[:200].strip() + "..."
@@ -147,12 +147,15 @@ async def generate_article_content(topic, category_id, tone="professional"):
         seo_description = excerpt[:160]
         
         # Extract keywords
+        keywords_chat = LlmChat(
+            api_key=api_key,
+            session_id="keywords-gen",
+            system_message="Ты SEO-эксперт."
+        ).with_model("openai", "gpt-4o-mini")
+        
         keywords_prompt = f"Выдели 3-5 ключевых слов для SEO из этой темы: {topic}. Верни через запятую без нумерации."
-        keywords_response = client.chat(
-            messages=[{"role": "user", "content": keywords_prompt}],
-            model="gpt-4o-mini",
-            max_tokens=50
-        )
+        keywords_msg = UserMessage(text=keywords_prompt)
+        keywords_response = await keywords_chat.send_message(keywords_msg)
         seo_keywords = keywords_response.strip()
         
         return {
