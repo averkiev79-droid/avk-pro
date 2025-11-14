@@ -719,6 +719,187 @@ async def generate_article_with_ai(request: AIGenerateRequest):
 
 
 # ============================================================================
+# AUTHENTICATION API - User registration, login, profile
+# ============================================================================
+
+@api_router.post("/auth/register", response_model=Token, status_code=201)
+async def register(user_data: UserCreate):
+    """Register a new user"""
+    try:
+        # Check if user already exists
+        existing_user = await db.users.find_one({"email": user_data.email})
+        if existing_user:
+            raise HTTPException(
+                status_code=400,
+                detail="Email already registered"
+            )
+        
+        # Create new user
+        user_dict = {
+            "id": str(uuid.uuid4()),
+            "email": user_data.email,
+            "hashed_password": get_password_hash(user_data.password),
+            "full_name": user_data.full_name,
+            "phone": user_data.phone,
+            "role": "customer",  # Default role
+            "is_active": True,
+            "email_verified": False,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        result = await db.users.insert_one(user_dict)
+        
+        if not result.inserted_id:
+            raise HTTPException(status_code=500, detail="Failed to create user")
+        
+        # Create access token
+        access_token = create_access_token(data={"sub": user_dict["id"]})
+        
+        # Return token and user info
+        user_response = UserResponse(
+            id=user_dict["id"],
+            email=user_dict["email"],
+            full_name=user_dict["full_name"],
+            phone=user_dict.get("phone"),
+            role=user_dict["role"],
+            is_active=user_dict["is_active"],
+            address=user_dict.get("address"),
+            city=user_dict.get("city"),
+            email_verified=user_dict["email_verified"],
+            created_at=datetime.fromisoformat(user_dict["created_at"])
+        )
+        
+        logger.info(f"User registered: {user_dict['email']}")
+        
+        return Token(access_token=access_token, user=user_response)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error registering user: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.post("/auth/login", response_model=Token)
+async def login(credentials: UserLogin):
+    """Login user"""
+    try:
+        # Find user by email
+        user = await db.users.find_one({"email": credentials.email})
+        
+        if not user:
+            raise HTTPException(
+                status_code=401,
+                detail="Incorrect email or password"
+            )
+        
+        # Verify password
+        if not verify_password(credentials.password, user["hashed_password"]):
+            raise HTTPException(
+                status_code=401,
+                detail="Incorrect email or password"
+            )
+        
+        # Check if user is active
+        if not user.get("is_active", True):
+            raise HTTPException(
+                status_code=403,
+                detail="Account is deactivated"
+            )
+        
+        # Create access token
+        access_token = create_access_token(data={"sub": user["id"]})
+        
+        # Return token and user info
+        user_response = UserResponse(
+            id=user["id"],
+            email=user["email"],
+            full_name=user["full_name"],
+            phone=user.get("phone"),
+            role=user["role"],
+            is_active=user["is_active"],
+            address=user.get("address"),
+            city=user.get("city"),
+            email_verified=user.get("email_verified", False),
+            created_at=datetime.fromisoformat(user["created_at"])
+        )
+        
+        logger.info(f"User logged in: {user['email']}")
+        
+        return Token(access_token=access_token, user=user_response)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error logging in: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/auth/me", response_model=UserResponse)
+async def get_current_user_info(current_user: dict = Depends(get_current_user)):
+    """Get current user info"""
+    return UserResponse(
+        id=current_user["id"],
+        email=current_user["email"],
+        full_name=current_user["full_name"],
+        phone=current_user.get("phone"),
+        role=current_user["role"],
+        is_active=current_user["is_active"],
+        address=current_user.get("address"),
+        city=current_user.get("city"),
+        email_verified=current_user.get("email_verified", False),
+        created_at=datetime.fromisoformat(current_user["created_at"])
+    )
+
+
+@api_router.put("/auth/profile", response_model=UserResponse)
+async def update_profile(
+    user_update: UserUpdate,
+    current_user: dict = Depends(get_current_user)
+):
+    """Update user profile"""
+    try:
+        # Only update provided fields
+        update_data = {k: v for k, v in user_update.model_dump().items() if v is not None}
+        
+        if not update_data:
+            raise HTTPException(status_code=400, detail="No fields to update")
+        
+        update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+        
+        result = await db.users.update_one(
+            {"id": current_user["id"]},
+            {"$set": update_data}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Get updated user
+        updated_user = await db.users.find_one({"id": current_user["id"]})
+        
+        return UserResponse(
+            id=updated_user["id"],
+            email=updated_user["email"],
+            full_name=updated_user["full_name"],
+            phone=updated_user.get("phone"),
+            role=updated_user["role"],
+            is_active=updated_user["is_active"],
+            address=updated_user.get("address"),
+            city=updated_user.get("city"),
+            email_verified=updated_user.get("email_verified", False),
+            created_at=datetime.fromisoformat(updated_user["created_at"])
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating profile: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
 # PRODUCTS API - CRUD endpoints for product management
 # ============================================================================
 
