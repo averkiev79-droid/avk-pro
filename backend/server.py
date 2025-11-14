@@ -13,7 +13,17 @@ import uuid
 from datetime import datetime, timezone
 import shutil
 import aiofiles
-from models import Order, OrderCreate, OrderUpdate, Article, ArticleCreate, ArticleUpdate, AIGenerateRequest, Product, ProductCreate, ProductUpdate
+from models import (
+    Order, OrderCreate, OrderUpdate, 
+    Article, ArticleCreate, ArticleUpdate, 
+    AIGenerateRequest, 
+    Product, ProductCreate, ProductUpdate,
+    User, UserCreate, UserUpdate, UserLogin, UserResponse, Token
+)
+from auth_utils import (
+    get_password_hash, verify_password, create_access_token,
+    get_current_user, get_admin_user, get_staff_user, get_customer_user
+)
 from email_service import EmailService
 from telegram_service import TelegramService
 from fastapi import BackgroundTasks
