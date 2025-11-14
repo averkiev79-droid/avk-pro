@@ -127,8 +127,8 @@ async def generate_article_content(topic, category_id, tone="professional"):
 
 Верни ТОЛЬКО HTML-контент статьи без дополнительных комментариев."""
 
-        response = client.generate_text(
-            prompt=prompt,
+        response = client.chat(
+            messages=[{"role": "user", "content": prompt}],
             model="gpt-4o-mini",
             max_tokens=2000,
             temperature=0.7
