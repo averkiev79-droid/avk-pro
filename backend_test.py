@@ -883,34 +883,75 @@ class AuthAPITester:
         return False
     
     def run_all_tests(self):
-        """Run all product API tests"""
-        print(f"🚀 Starting Product API Tests")
+        """Run all authentication and product API tests"""
+        print(f"🚀 Starting Authentication & Product API Tests")
         print(f"Backend URL: {self.base_url}")
-        print("=" * 60)
+        print("=" * 80)
         
-        # Test 1: Create product
+        # ==================== AUTHENTICATION TESTS ====================
+        print("\n🔐 AUTHENTICATION TESTS")
+        print("=" * 40)
+        
+        # Auth Test 1: User Registration
+        self.test_user_registration()
+        
+        # Auth Test 2: Duplicate Registration (Error Case)
+        self.test_duplicate_registration()
+        
+        # Auth Test 3: Admin Login
+        self.test_admin_login()
+        
+        # Auth Test 4: User Login
+        self.test_user_login()
+        
+        # Auth Test 5: Wrong Password Login (Error Case)
+        self.test_wrong_password_login()
+        
+        # Auth Test 6: Non-existent User Login (Error Case)
+        self.test_nonexistent_user_login()
+        
+        # Auth Test 7: Get Current User Info (with token)
+        self.test_get_current_user_info()
+        
+        # Auth Test 8: Get Current User Info without token (Error Case)
+        self.test_get_current_user_without_token()
+        
+        # Auth Test 9: Update User Profile (with token)
+        self.test_update_user_profile()
+        
+        # Auth Test 10: Update Profile without token (Error Case)
+        self.test_update_profile_without_token()
+        
+        # Auth Test 11: Password Hashing Verification
+        self.test_password_hashing()
+        
+        # ==================== PRODUCT TESTS ====================
+        print("\n📦 PRODUCT TESTS")
+        print("=" * 40)
+        
+        # Product Test 1: Create product
         product_id = self.test_create_product()
         
-        # Test 2: Get all products
+        # Product Test 2: Get all products
         self.test_get_all_products()
         
-        # Test 3: Get products with filters
+        # Product Test 3: Get products with filters
         self.test_get_products_with_filters()
         
-        # Test 4: Get single product
+        # Product Test 4: Get single product
         if product_id:
             self.test_get_single_product(product_id)
             
-            # Test 5: Update product
+            # Product Test 5: Update product
             self.test_update_product(product_id)
             
-            # Test 6: Delete product
+            # Product Test 6: Delete product
             self.test_delete_product(product_id)
         
-        # Test 7: Datetime serialization
+        # Product Test 7: Datetime serialization
         self.test_datetime_serialization()
         
-        # Test 8: File upload endpoint
+        # Product Test 8: File upload endpoint
         self.test_file_upload()
         
         # Summary
