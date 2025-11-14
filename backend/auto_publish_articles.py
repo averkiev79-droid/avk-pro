@@ -94,14 +94,14 @@ async def generate_topic_with_ai(category_id):
 async def generate_article_content(topic, category_id, tone="professional"):
     """Generate article content using AI"""
     try:
-        from emergentintegrations.openai import OpenAIChat
+        from emergentintegrations import ChatClient
         
         api_key = os.environ.get('EMERGENT_LLM_KEY')
         if not api_key:
             logger.error("EMERGENT_LLM_KEY not found")
             return None
         
-        client = OpenAIChat(api_key=api_key)
+        client = ChatClient(api_key=api_key, provider="openai")
         
         category_names = {
             "tips": "советов и гайдов",
