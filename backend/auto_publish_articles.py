@@ -56,15 +56,13 @@ def transliterate(text):
 async def generate_topic_with_ai(category_id):
     """Use AI to generate a relevant article topic"""
     try:
-        from emergentintegrations import ChatClient
+        from emergentintegrations.llm.chat import LlmChat, UserMessage
         
         # Get universal key
         api_key = os.environ.get('EMERGENT_LLM_KEY')
         if not api_key:
             logger.error("EMERGENT_LLM_KEY not found in environment")
             return None
-        
-        client = ChatClient(api_key=api_key, provider="openai")
         
         # Category-specific prompts
         prompts = {
@@ -75,12 +73,15 @@ async def generate_topic_with_ai(category_id):
         
         prompt = prompts.get(category_id, prompts["tips"])
         
-        response = client.chat(
-            messages=[{"role": "user", "content": prompt}],
-            model="gpt-4o-mini",
-            max_tokens=100,
-            temperature=0.9
-        )
+        # Initialize chat
+        chat = LlmChat(
+            api_key=api_key,
+            session_id=f"topic-gen-{category_id}",
+            system_message="Ты генератор тем для блога о хоккейной экипировке."
+        ).with_model("openai", "gpt-4o-mini")
+        
+        user_message = UserMessage(text=prompt)
+        response = await chat.send_message(user_message)
         
         topic = response.strip().strip('"').strip("'")
         logger.info(f"Generated topic for {category_id}: {topic}")
