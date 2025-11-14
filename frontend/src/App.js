@@ -20,6 +20,8 @@ import ArticlePage from './pages/ArticlePage';
 import AdminArticlesPage from './pages/AdminArticlesPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
 import AdminLayout from './pages/AdminLayout';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import { Toaster } from './components/ui/sonner';
 
 function App() {
