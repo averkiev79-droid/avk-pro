@@ -22,6 +22,7 @@ import AdminOrdersPage from './pages/AdminOrdersPage';
 import AdminLayout from './pages/AdminLayout';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
 import { Toaster } from './components/ui/sonner';
 import { AuthProvider } from './contexts/AuthContext';
 
