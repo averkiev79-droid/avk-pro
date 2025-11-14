@@ -141,6 +141,14 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              <Link
+                to="/login"
+                onClick={() => setIsMenuOpen(false)}
+                className="py-3 px-4 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors rounded-md flex items-center gap-2 mt-2"
+              >
+                <User size={18} strokeWidth={1.5} />
+                <span>Вход</span>
+              </Link>
               <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white w-full mt-4 py-6">
                 <Link to="/order" onClick={() => setIsMenuOpen(false)}>Заказать</Link>
               </Button>
