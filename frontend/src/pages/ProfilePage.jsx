@@ -64,11 +64,12 @@ const ProfilePage = () => {
         body: JSON.stringify(formData)
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.detail || 'Ошибка обновления профиля');
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Ошибка обновления профиля');
       }
+
+      const data = await response.json();
 
       // Update user in context
       updateUser(data);
