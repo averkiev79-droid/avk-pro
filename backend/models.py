@@ -43,8 +43,8 @@ class OrderUpdate(BaseModel):
     order_notes: Optional[str] = None
 
 
-# User Models
-class User(BaseModel):
+# Legacy User Models (keeping for compatibility)
+class LegacyUser(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -54,22 +54,6 @@ class User(BaseModel):
     role: str = "user"  # user, admin
     is_active: bool = True
     created_at: datetime = Field(default_factory=lambda: datetime.now())
-
-class UserCreate(BaseModel):
-    email: EmailStr
-    full_name: str
-    password: str
-
-class UserLogin(BaseModel):
-    email: EmailStr
-    password: str
-
-class UserResponse(BaseModel):
-    id: str
-    email: EmailStr
-    full_name: str
-    role: str
-    is_active: bool
 
 
 # Blog/Article Models
