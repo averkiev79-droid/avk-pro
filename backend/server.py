@@ -799,27 +799,26 @@ async def login(credentials: UserLogin):
                 detail="Incorrect email or password"
             )
         
-        # Check if user is active
-        if not user.get("is_active", True):
+        # Check if user is disabled
+        if user.get("disabled", False):
             raise HTTPException(
                 status_code=403,
                 detail="Account is deactivated"
             )
         
         # Create access token
-        access_token = create_access_token(data={"sub": user["id"]})
+        access_token = create_access_token(data={"sub": user["user_id"]})
         
         # Return token and user info
         user_response = UserResponse(
-            id=user["id"],
+            user_id=user["user_id"],
             email=user["email"],
             full_name=user["full_name"],
             phone=user.get("phone"),
             role=user["role"],
-            is_active=user["is_active"],
+            disabled=user.get("disabled", False),
             address=user.get("address"),
             city=user.get("city"),
-            email_verified=user.get("email_verified", False),
             created_at=datetime.fromisoformat(user["created_at"])
         )
         
