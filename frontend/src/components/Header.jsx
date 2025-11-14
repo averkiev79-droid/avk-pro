@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Phone, Mail, ShoppingCart, User, LogOut } from 'lucide-react';
+import { Menu, X, Phone, Mail, ShoppingCart, User, LogOut, Shield } from 'lucide-react';
 import { companyInfo } from '../mock';
 import { Button } from './ui/button';
 import { useAuth } from '../contexts/AuthContext';
