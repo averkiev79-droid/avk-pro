@@ -186,7 +186,7 @@ const Header = () => {
                 <>
                   {user?.role === 'admin' && (
                     <Link
-                      to="/admin/products"
+                      to="/admin"
                       onClick={() => setIsMenuOpen(false)}
                       className="py-3 px-4 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 transition-colors rounded-md flex items-center gap-2 mt-2 border border-blue-200"
                     >
