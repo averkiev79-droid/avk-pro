@@ -231,31 +231,29 @@ const LegalPage = () => {
   return (
     <div className="legal-page bg-white min-h-screen">
       {/* Header */}
-      <section className="bg-sport-blue text-white py-16">
-        <div className="container px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl font-light mb-4">{displayPage.title}</h1>
+      <section className="bg-gray-900 text-white py-20">
+        <div className="container max-w-4xl mx-auto px-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-center">{displayPage.title}</h1>
         </div>
       </section>
 
       {/* Content */}
-      <div className="container py-12 px-4 sm:px-6">
-        <Card className="p-8 border border-gray-200 max-w-4xl mx-auto">
-          <div className="prose max-w-none">
-            {displayPage.content ? (
-              <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                {displayPage.content.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="mb-4">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500">Содержимое страницы не заполнено</p>
-              </div>
-            )}
-          </div>
-        </Card>
+      <div className="container max-w-4xl mx-auto py-16 px-4">
+        <div className="bg-white">
+          {displayPage.content ? (
+            <div 
+              className="legal-content prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: displayPage.content }}
+              style={{
+                lineHeight: '1.8'
+              }}
+            />
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500">Содержимое страницы не заполнено</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
