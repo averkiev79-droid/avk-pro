@@ -105,7 +105,7 @@ const Header = () => {
             {isAuthenticated ? (
               <>
                 {user?.role === 'admin' && (
-                  <Link to="/admin/products" className="text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-2">
+                  <Link to="/admin" className="text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-2">
                     <Shield size={20} strokeWidth={1.5} />
                     <span className="text-sm font-medium">Админ</span>
                   </Link>
