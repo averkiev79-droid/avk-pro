@@ -79,7 +79,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     client = AsyncIOMotorClient(mongo_url)
     db = client[os.environ.get('DB_NAME', 'test_database')]
     
-    user = await db.users.find_one({"id": user_id})
+    user = await db.users.find_one({"user_id": user_id})
     
     if user is None:
         raise credentials_exception
