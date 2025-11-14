@@ -122,7 +122,7 @@ const CatalogPage = () => {
                     <div className="transition-all duration-300 group cursor-pointer h-full">
                       <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md relative">
                         <img
-                          src={product.images && product.images.length > 0 ? product.images[0] : 'https://via.placeholder.com/400'}
+                          src={product.images && product.images.length > 0 ? product.images[0] : '/images/placeholder.svg'}
                           alt={product.name}
                           loading="lazy"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
