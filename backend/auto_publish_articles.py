@@ -56,7 +56,7 @@ def transliterate(text):
 async def generate_topic_with_ai(category_id):
     """Use AI to generate a relevant article topic"""
     try:
-        from emergentintegrations.openai import OpenAIChat
+        from emergentintegrations import ChatClient
         
         # Get universal key
         api_key = os.environ.get('EMERGENT_LLM_KEY')
@@ -64,7 +64,7 @@ async def generate_topic_with_ai(category_id):
             logger.error("EMERGENT_LLM_KEY not found in environment")
             return None
         
-        client = OpenAIChat(api_key=api_key)
+        client = ChatClient(api_key=api_key, provider="openai")
         
         # Category-specific prompts
         prompts = {
