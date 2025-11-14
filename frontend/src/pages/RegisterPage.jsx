@@ -66,9 +66,8 @@ const RegisterPage = () => {
         throw new Error(data.detail || 'Ошибка регистрации');
       }
 
-      // Save token and user info to localStorage
-      localStorage.setItem('token', data.access_token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      // Use AuthContext to login
+      login(data.access_token, data.user);
 
       // Redirect to home page
       navigate('/');
