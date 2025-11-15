@@ -1040,6 +1040,98 @@ class AuthAPITester:
             
         return False
     
+    def test_article_generation_with_ai(self):
+        """Test POST /api/articles/generate - Generate article content using AI"""
+        print("\n=== Testing Article Generation with AI ===")
+        
+        # Test data as specified in the request
+        article_request = {
+            "topic": "Как выбрать хоккейную форму",
+            "category": "tips",
+            "tone": "professional"
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/articles/generate", json=article_request, timeout=30)
+            
+            if response.status_code == 200:
+                result = response.json()
+                
+                # Check if response has success field
+                if result.get("success"):
+                    data = result.get("data", {})
+                    
+                    # Validate required fields in the generated article data
+                    required_fields = ["title", "content", "excerpt", "seo_title", "seo_description", "seo_keywords"]
+                    missing_fields = [field for field in required_fields if field not in data]
+                    
+                    if not missing_fields:
+                        # Validate content quality
+                        title = data.get("title", "")
+                        content = data.get("content", "")
+                        excerpt = data.get("excerpt", "")
+                        seo_title = data.get("seo_title", "")
+                        seo_description = data.get("seo_description", "")
+                        seo_keywords = data.get("seo_keywords", "")
+                        
+                        # Check if content is substantial and in Russian
+                        if (len(title) > 10 and len(content) > 100 and len(excerpt) > 20 and
+                            len(seo_title) > 10 and len(seo_description) > 20 and len(seo_keywords) > 5):
+                            
+                            # Check if content contains Russian characters (basic check)
+                            russian_chars = any(ord(char) >= 1040 and ord(char) <= 1103 for char in title + content)
+                            
+                            if russian_chars:
+                                self.log_result(
+                                    "Article Generation with AI", 
+                                    True, 
+                                    f"AI article generated successfully with all required fields",
+                                    {
+                                        "title": title[:50] + "..." if len(title) > 50 else title,
+                                        "content_length": len(content),
+                                        "excerpt_length": len(excerpt),
+                                        "seo_title": seo_title[:50] + "..." if len(seo_title) > 50 else seo_title,
+                                        "seo_description_length": len(seo_description),
+                                        "seo_keywords": seo_keywords,
+                                        "has_russian_content": True,
+                                        "emergent_llm_working": True
+                                    }
+                                )
+                                return True
+                            else:
+                                self.log_result("Article Generation with AI", False, "Generated content doesn't contain Russian text", {"data": data})
+                        else:
+                            self.log_result("Article Generation with AI", False, "Generated content is too short or incomplete", {
+                                "title_length": len(title),
+                                "content_length": len(content),
+                                "excerpt_length": len(excerpt),
+                                "seo_title_length": len(seo_title),
+                                "seo_description_length": len(seo_description),
+                                "seo_keywords_length": len(seo_keywords)
+                            })
+                    else:
+                        self.log_result("Article Generation with AI", False, f"Missing required fields in generated data: {missing_fields}", {"data": data})
+                else:
+                    self.log_result("Article Generation with AI", False, "Response doesn't indicate success", {"response": result})
+            elif response.status_code == 500:
+                result = response.json() if response.headers.get('content-type', '').startswith('application/json') else {"detail": response.text}
+                error_detail = result.get("detail", "Unknown error")
+                
+                # Check for specific AI-related errors
+                if "AI ключ не настроен" in error_detail or "EMERGENT_LLM_KEY" in error_detail:
+                    self.log_result("Article Generation with AI", False, "EMERGENT_LLM_KEY not configured properly", {"error": error_detail})
+                elif "emergentintegrations" in error_detail.lower():
+                    self.log_result("Article Generation with AI", False, "emergentintegrations library issue", {"error": error_detail})
+                else:
+                    self.log_result("Article Generation with AI", False, f"AI generation failed: {error_detail}", {"error": error_detail})
+            else:
+                self.log_result("Article Generation with AI", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Article Generation with AI", False, f"Request failed: {str(e)}")
+            
+        return False
+    
     def run_all_tests(self):
         """Run all authentication and product API tests"""
         print(f"🚀 Starting Authentication & Product API Tests")
