@@ -1213,6 +1213,13 @@ class AuthAPITester:
         # Product Test 8: File upload endpoint
         self.test_file_upload()
         
+        # ==================== ARTICLE GENERATION TESTS ====================
+        print("\n📝 ARTICLE GENERATION TESTS")
+        print("=" * 40)
+        
+        # Article Test 1: AI Article Generation
+        self.test_article_generation_with_ai()
+        
         # Summary
         self.print_summary()
     
