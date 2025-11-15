@@ -44,7 +44,7 @@ const ParallaxImage = ({ src, alt, className = '', speed = 0.3 }) => {
 const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = React.useState([]);
   const [hockeyClubs, setHockeyClubs] = React.useState([]);
-  const [heroImage, setHeroImage] = React.useState("https://customer-assets.emergentagent.com/job_authsportal/artifacts/ek7dr625_image.png");
+  const [heroImage, setHeroImage] = React.useState("/images/hockey-hero.jpg");
   const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
 
   React.useEffect(() => {
