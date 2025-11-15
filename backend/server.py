@@ -903,6 +903,97 @@ async def update_profile(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@api_router.post("/auth/forgot-password")
+async def forgot_password(request: ForgotPasswordRequest, bg_tasks: BackgroundTasks):
+    """Request password reset - sends email with reset token"""
+    try:
+        # Check if user exists
+        user = await db.users.find_one({"email": request.email})
+        
+        # Always return success (security best practice - don't reveal if email exists)
+        if not user:
+            logger.warning(f"Password reset requested for non-existent email: {request.email}")
+            return {"message": "Если email существует, на него будет отправлено письмо с инструкциями"}
+        
+        # Generate reset token (JWT valid for 1 hour)
+        from datetime import timedelta
+        reset_token = create_access_token(
+            data={"sub": user["user_id"], "type": "password_reset"},
+            expires_delta=timedelta(hours=1)
+        )
+        
+        # Get frontend base URL
+        frontend_url = os.environ.get("FRONTEND_URL", "https://avk-pro.ru")
+        
+        # Send reset email
+        bg_tasks.add_task(
+            EmailService.send_password_reset_email,
+            request.email,
+            reset_token,
+            frontend_url
+        )
+        
+        logger.info(f"Password reset email sent to {request.email}")
+        
+        return {"message": "Если email существует, на него будет отправлено письмо с инструкциями"}
+        
+    except Exception as e:
+        logger.error(f"Error in forgot password: {str(e)}")
+        raise HTTPException(status_code=500, detail="Ошибка при обработке запроса")
+
+
+@api_router.post("/auth/reset-password")
+async def reset_password(request: ResetPasswordRequest):
+    """Reset password using token from email"""
+    try:
+        # Verify token
+        from jose import jwt, JWTError
+        
+        try:
+            secret_key = os.environ.get("JWT_SECRET_KEY")
+            payload = jwt.decode(request.token, secret_key, algorithms=["HS256"])
+            user_id = payload.get("sub")
+            token_type = payload.get("type")
+            
+            if not user_id or token_type != "password_reset":
+                raise HTTPException(status_code=400, detail="Недействительный токен")
+                
+        except JWTError:
+            raise HTTPException(status_code=400, detail="Токен истёк или недействителен")
+        
+        # Find user
+        user = await db.users.find_one({"user_id": user_id})
+        if not user:
+            raise HTTPException(status_code=404, detail="Пользователь не найден")
+        
+        # Hash new password
+        hashed_password = get_password_hash(request.new_password)
+        
+        # Update password
+        result = await db.users.update_one(
+            {"user_id": user_id},
+            {
+                "$set": {
+                    "hashed_password": hashed_password,
+                    "updated_at": datetime.now(timezone.utc).isoformat()
+                }
+            }
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Не удалось обновить пароль")
+        
+        logger.info(f"Password reset successful for user: {user['email']}")
+        
+        return {"message": "Пароль успешно изменён"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error resetting password: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ============================================================================
 # EMERGENT AUTH (GOOGLE OAUTH) API
 # ============================================================================
