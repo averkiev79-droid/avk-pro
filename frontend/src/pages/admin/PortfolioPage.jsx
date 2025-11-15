@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Plus, Edit, Trash2, Search } from 'lucide-react';
 import { portfolio as mockPortfolio } from '../../mock';
 import { toast } from 'sonner';
+import ImageUploadGuidelines from '../../components/ImageUploadGuidelines';
 
 const PortfolioPage = () => {
   const [portfolio, setPortfolio] = useState(mockPortfolio);
