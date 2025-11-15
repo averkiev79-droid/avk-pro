@@ -59,7 +59,10 @@ const PageLoader = () => (
   </div>
 );
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  
   const [showCookieBanner, setShowCookieBanner] = useState(() => {
     return localStorage.getItem('cookiesAccepted') !== 'true';
   });
@@ -70,12 +73,10 @@ function App() {
   };
 
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <div className="App flex flex-col min-h-screen">
-          <Header />
-          <Breadcrumbs />
-          <main className="flex-grow">
+    <div className="App flex flex-col min-h-screen">
+      {!isAdminRoute && <Header />}
+      {!isAdminRoute && <Breadcrumbs />}
+      <main className="flex-grow">
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 {/* Public routes */}
