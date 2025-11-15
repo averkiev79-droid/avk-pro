@@ -29,7 +29,8 @@ const AdminArticlesPage = () => {
     setGenerating(true);
     try {
       const backendUrl = process.env.REACT_APP_BACKEND_URL;
-      const response = await fetch(`${backendUrl}/api/articles/generate`, {
+      const fetchFn = window.__originalFetch || fetch;
+      const response = await fetchFn(`${backendUrl}/api/articles/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
