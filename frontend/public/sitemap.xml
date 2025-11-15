@@ -1,63 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-  <!-- Главная страница -->
+<?xml version="1.0" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
-    <loc>https://avk-sport.ru/</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://avk-pro.ru/</loc>
+    <lastmod>2025-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Каталог -->
   <url>
-    <loc>https://avk-sport.ru/catalog</loc>
-    <lastmod>2025-11-12</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://avk-pro.ru/catalog</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Калькулятор -->
   <url>
-    <loc>https://avk-sport.ru/calculator</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://avk-pro.ru/calculator</loc>
+    <lastmod>2025-11-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
-
-  <!-- Портфолио -->
   <url>
-    <loc>https://avk-sport.ru/portfolio</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://avk-pro.ru/portfolio</loc>
+    <lastmod>2025-11-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- О компании -->
   <url>
-    <loc>https://avk-sport.ru/about</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://avk-pro.ru/about</loc>
+    <lastmod>2025-11-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Контакты -->
   <url>
-    <loc>https://avk-sport.ru/contacts</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://avk-pro.ru/contacts</loc>
+    <lastmod>2025-11-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Форма заказа -->
   <url>
-    <loc>https://avk-sport.ru/order</loc>
-    <lastmod>2025-11-12</lastmod>
+    <loc>https://avk-pro.ru/order</loc>
+    <lastmod>2025-11-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
-
+  <url>
+    <loc>https://avk-pro.ru/blog</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avk-pro.ru/product/dfe28f9e-1e03-45f2-bdca-40599af6c912</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avk-pro.ru/product/147f899a-2e17-4596-bdd1-18a80ecceb4f</loc>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avk-pro.ru/product/79d027ab-ebab-4488-889f-b9cdbcb286d8</loc>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avk-pro.ru/blog/как-выбрать-хоккейную-форму-для-ребенка</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://avk-pro.ru/blog/как-правильно-стирать-хоккейную-форму-советы-по-уходу</loc>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
