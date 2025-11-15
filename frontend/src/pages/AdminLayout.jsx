@@ -180,16 +180,17 @@ const AdminLayout = () => {
               <Menu size={20} />
             </button>
             
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-500">Добро пожаловать в админ-панель</span>
+            <div className="flex items-center gap-2 md:gap-4 flex-1 justify-end">
+              <span className="hidden sm:block text-sm text-gray-500 truncate">Добро пожаловать в админ-панель</span>
               <a
                 href="/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                className="flex items-center gap-2 px-3 md:px-4 py-2 bg-blue-600 text-white text-xs md:text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
               >
-                <ExternalLink size={16} />
-                Перейти на сайт
+                <ExternalLink size={16} className="hidden sm:inline" />
+                <span className="hidden sm:inline">Перейти на сайт</span>
+                <span className="sm:hidden">Сайт</span>
               </a>
             </div>
           </div>
