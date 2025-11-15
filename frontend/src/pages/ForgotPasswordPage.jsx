@@ -24,12 +24,12 @@ const ForgotPasswordPage = () => {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Произошла ошибка');
+        throw new Error(data.detail || 'Произошла ошибка');
       }
 
-      const data = await response.json();
       setMessage(data.message);
       setEmail('');
     } catch (err) {
