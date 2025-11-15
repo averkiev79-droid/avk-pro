@@ -30,7 +30,9 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
+      // Use original fetch to avoid rrweb recorder issues with Response cloning
+      const fetchFn = window.__originalFetch || fetch;
+      const response = await fetchFn(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
