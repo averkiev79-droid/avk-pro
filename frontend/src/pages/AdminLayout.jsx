@@ -147,7 +147,16 @@ const AdminLayout = () => {
             })}
           </div>
           
-          <div className="mt-8 pt-8 border-t border-gray-200">
+          <div className="mt-8 pt-8 border-t border-gray-200 space-y-2">
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-3 py-2 w-full rounded-lg text-sm font-medium text-blue-700 hover:bg-blue-50 transition-colors"
+            >
+              <ExternalLink size={18} />
+              Перейти на сайт
+            </a>
             <button
               onClick={handleLogout}
               className="flex items-center gap-3 px-3 py-2 w-full rounded-lg text-sm font-medium text-red-700 hover:bg-red-50 transition-colors"
