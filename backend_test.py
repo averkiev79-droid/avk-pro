@@ -1083,6 +1083,15 @@ class AuthAPITester:
         # Auth Test 11: Password Hashing Verification
         self.test_password_hashing()
         
+        # Auth Test 12: Specific Admin Login (simplepay@mail.ru)
+        self.test_specific_admin_login()
+        
+        # Auth Test 13: Forgot Password
+        self.test_forgot_password()
+        
+        # Auth Test 14: Reset Password Flow
+        self.test_reset_password_flow()
+        
         # ==================== PRODUCT TESTS ====================
         print("\n📦 PRODUCT TESTS")
         print("=" * 40)
