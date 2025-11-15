@@ -70,8 +70,8 @@ const Header = () => {
           <Link to="/" className="flex items-center gap-3" onClick={scrollToTop}>
             <img src={companyInfo.logo} alt="A.V.K. SPORT" className="h-14 w-auto" />
             <div>
-              <div className="text-2xl font-bold tracking-tight leading-none" style={{color: '#DC2626'}}>A.V.K.</div>
-              <div className="text-sm font-semibold tracking-widest uppercase" style={{color: '#DC2626'}}>SPORT</div>
+              <div className="text-2xl font-bold tracking-tight leading-none" style={{color: '#1E3A8A'}}>A.V.K.</div>
+              <div className="text-sm font-semibold tracking-widest uppercase" style={{color: '#1E3A8A'}}>SPORT</div>
             </div>
           </Link>
 
