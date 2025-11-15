@@ -276,6 +276,8 @@ const ProductsPage = () => {
                 />
               </div>
               
+              <ImageUploadGuidelines variant="product" />
+              
               <div className="space-y-3">
                 <Label className="text-base font-semibold">Изображения товара</Label>
                 
