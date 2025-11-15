@@ -301,3 +301,94 @@ class EmailService:
                 "success": False,
                 "message": str(e)
             }
+    
+    @staticmethod
+    def send_password_reset_email(email: str, reset_token: str, base_url: str) -> Dict[str, Any]:
+        """
+        Send password reset email with reset link
+        
+        Args:
+            email: User's email address
+            reset_token: Password reset token
+            base_url: Base URL of the frontend application
+            
+        Returns:
+            Dictionary with success status
+        """
+        try:
+            resend.api_key = os.environ.get("RESEND_API_KEY", "")
+            
+            reset_link = f"{base_url}/reset-password?token={reset_token}"
+            
+            html_content = f"""
+            <!DOCTYPE html>
+            <html lang="ru">
+            <head>
+                <meta charset="UTF-8">
+                <title>Восстановление пароля</title>
+            </head>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="background-color: #1a1a1a; padding: 20px; text-align: center;">
+                    <h1 style="color: #fff; margin: 0;">A.V.K. SPORT</h1>
+                </div>
+                
+                <div style="padding: 30px 20px;">
+                    <h2 style="color: #1a1a1a;">Восстановление пароля</h2>
+                    <p>Вы запросили восстановление пароля для вашей учетной записи.</p>
+                    
+                    <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin: 20px 0;">
+                        <p style="margin: 0;">Если вы не запрашивали сброс пароля, просто проигнорируйте это письмо.</p>
+                    </div>
+                    
+                    <p>Нажмите на кнопку ниже, чтобы сбросить пароль:</p>
+                    
+                    <div style="text-align: center; margin: 30px 0;">
+                        <a href="{reset_link}" 
+                           style="display: inline-block; background-color: #2563eb; color: white; padding: 15px 40px; 
+                                  text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+                            Сбросить пароль
+                        </a>
+                    </div>
+                    
+                    <p style="color: #666; font-size: 14px;">Или скопируйте и вставьте эту ссылку в браузер:</p>
+                    <p style="background-color: #f5f5f5; padding: 15px; border-radius: 8px; word-break: break-all; font-size: 12px;">
+                        {reset_link}
+                    </p>
+                    
+                    <div style="margin-top: 30px; padding: 15px; background-color: #fee; border-left: 4px solid #dc2626; border-radius: 4px;">
+                        <p style="margin: 0; color: #dc2626;"><strong>⚠️ Важно:</strong> Ссылка действительна в течение 1 часа.</p>
+                    </div>
+                </div>
+                
+                <div style="background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #666;">
+                    <p>Это автоматическое письмо. Пожалуйста, не отвечайте на него.</p>
+                    <p>&copy; 2025 A.V.K. SPORT. Все права защищены.</p>
+                </div>
+            </body>
+            </html>
+            """
+            
+            from_email = os.environ.get("FROM_EMAIL", "onboarding@resend.dev")
+            
+            params = {
+                "from": from_email,
+                "to": [email],
+                "subject": "Восстановление пароля - A.V.K. SPORT",
+                "html": html_content,
+                "reply_to": "info@avk-hockey.ru"
+            }
+            
+            response = resend.Emails.send(params)
+            logger.info(f"Password reset email sent to {email}")
+            
+            return {
+                "success": True,
+                "email_id": response.get("id")
+            }
+            
+        except Exception as e:
+            logger.error(f"Failed to send password reset email: {str(e)}")
+            return {
+                "success": False,
+                "message": str(e)
+            }
