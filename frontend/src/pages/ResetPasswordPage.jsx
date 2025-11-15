@@ -47,9 +47,10 @@ const ResetPasswordPage = () => {
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Произошла ошибка');
+        throw new Error(data.detail || 'Произошла ошибка');
       }
 
       setSuccess(true);
