@@ -126,7 +126,7 @@ function AppContent() {
               </Routes>
             </Suspense>
           </main>
-          <Footer />
+          {!isAdminRoute && <Footer />}
           <Toaster 
             position="top-right"
             toastOptions={{
