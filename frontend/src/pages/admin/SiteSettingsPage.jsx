@@ -114,6 +114,8 @@ const SiteSettingsPage = () => {
         <p className="text-gray-600">Управление изображениями на страницах сайта</p>
       </div>
 
+      <ImageUploadGuidelines variant="general" />
+
       <div className="space-y-6">
         {settingsConfig.map(config => (
           <Card key={config.key} className="p-6 border border-gray-200">
