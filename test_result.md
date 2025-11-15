@@ -121,6 +121,18 @@ backend:
           agent: "main"
           comment: "Backend working correctly, no changes needed for redesign"
   
+  - task: "Article Generation with AI (emergentintegrations)"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ ARTICLE GENERATION ENDPOINT FULLY WORKING: Comprehensive testing of POST /api/articles/generate completed successfully. Tested with request body: {'topic': 'Как выбрать хоккейную форму', 'category': 'tips', 'tone': 'professional'}. Response: 200 OK with all required fields (title, content, excerpt, seo_title, seo_description, seo_keywords). Generated article has 2696 characters of quality Russian content with proper HTML formatting. EMERGENT_LLM_KEY environment variable working correctly. emergentintegrations library functioning properly with GPT-4o-mini model. AI generation produces professional, SEO-optimized content in Russian language. Additional testing confirmed endpoint works with different topics and tones. Endpoint is production-ready and fully functional."
+  
   - task: "Authentication System - User Registration, Login, Profile Management"
     implemented: true
     working: true
