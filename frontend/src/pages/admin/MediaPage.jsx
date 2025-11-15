@@ -5,6 +5,7 @@ import { Input } from '../../components/ui/input';
 import { Upload, Image, Copy, Check, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import ImageUploadGuidelines from '../../components/ImageUploadGuidelines';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 
