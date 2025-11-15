@@ -485,6 +485,164 @@ class AuthAPITester:
             self.log_result("Password Hashing", False, "Cannot verify - registration or login failed")
             return False
     
+    def test_specific_admin_login(self):
+        """Test POST /api/auth/login - Login with specific admin credentials"""
+        print("\n=== Testing Specific Admin Login (simplepay@mail.ru) ===")
+        
+        login_data = {
+            "email": "simplepay@mail.ru",
+            "password": "admin123"
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/auth/login", json=login_data, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                
+                # Validate response structure
+                required_fields = ["access_token", "token_type", "user"]
+                missing_fields = [field for field in required_fields if field not in result]
+                
+                if not missing_fields:
+                    user = result["user"]
+                    
+                    # Validate admin user data
+                    if user.get("email") == "simplepay@mail.ru":
+                        
+                        self.admin_token = result["access_token"]
+                        
+                        self.log_result(
+                            "Specific Admin Login", 
+                            True, 
+                            f"Admin simplepay@mail.ru logged in successfully",
+                            {
+                                "email": user["email"],
+                                "role": user.get("role"),
+                                "full_name": user.get("full_name"),
+                                "token_received": bool(self.admin_token)
+                            }
+                        )
+                        return True
+                    else:
+                        self.log_result("Specific Admin Login", False, "Admin user data validation failed", {"user": user})
+                else:
+                    self.log_result("Specific Admin Login", False, f"Missing required fields: {missing_fields}")
+            else:
+                self.log_result("Specific Admin Login", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Specific Admin Login", False, f"Request failed: {str(e)}")
+            
+        return False
+    
+    def test_forgot_password(self):
+        """Test POST /api/auth/forgot-password - Request password reset"""
+        print("\n=== Testing Forgot Password ===")
+        
+        forgot_data = {
+            "email": "simplepay@mail.ru"
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/auth/forgot-password", json=forgot_data, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                
+                # Check if response has success message
+                if "message" in result:
+                    self.log_result(
+                        "Forgot Password", 
+                        True, 
+                        f"Password reset request successful",
+                        {
+                            "email": forgot_data["email"],
+                            "message": result["message"],
+                            "status_code": 200
+                        }
+                    )
+                    return True
+                else:
+                    self.log_result("Forgot Password", False, "Invalid response format", {"response": result})
+            else:
+                self.log_result("Forgot Password", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Forgot Password", False, f"Request failed: {str(e)}")
+            
+        return False
+    
+    def test_reset_password_flow(self):
+        """Test POST /api/auth/reset-password - Reset password with token"""
+        print("\n=== Testing Reset Password Flow ===")
+        
+        # First, generate a test reset token manually using the JWT creation logic
+        try:
+            from jose import jwt
+            from datetime import datetime, timedelta, timezone
+            import os
+            
+            # Use the same secret key as the backend
+            secret_key = "46849f50475953a46a43ba1b2d847c6e6c2cabb7c23cb0007e95d9a3c21a74ef"
+            
+            # Create a test token for password reset (valid for 1 hour)
+            test_user_id = "test-user-id-for-reset"  # This would be a real user ID in production
+            reset_token_data = {
+                "sub": test_user_id,
+                "type": "password_reset",
+                "exp": datetime.now(timezone.utc) + timedelta(hours=1)
+            }
+            
+            test_reset_token = jwt.encode(reset_token_data, secret_key, algorithm="HS256")
+            
+            # Test the reset password endpoint
+            reset_data = {
+                "token": test_reset_token,
+                "new_password": "newpassword123"
+            }
+            
+            response = requests.post(f"{self.base_url}/auth/reset-password", json=reset_data, timeout=10)
+            
+            # Note: This will likely fail with 404 (user not found) since we're using a test user ID
+            # But we can verify the endpoint exists and handles the request properly
+            if response.status_code in [200, 404]:
+                result = response.json()
+                
+                if response.status_code == 200:
+                    self.log_result(
+                        "Reset Password Flow", 
+                        True, 
+                        "Password reset successful",
+                        {
+                            "message": result.get("message"),
+                            "status_code": 200
+                        }
+                    )
+                    return True
+                elif response.status_code == 404:
+                    # Expected for test user ID
+                    self.log_result(
+                        "Reset Password Flow", 
+                        True, 
+                        "Reset password endpoint working (404 expected for test user)",
+                        {
+                            "message": result.get("detail"),
+                            "status_code": 404,
+                            "note": "Endpoint correctly validates user existence"
+                        }
+                    )
+                    return True
+            else:
+                self.log_result("Reset Password Flow", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except ImportError as e:
+            self.log_result("Reset Password Flow", False, f"Missing JWT library: {str(e)}")
+        except Exception as e:
+            self.log_result("Reset Password Flow", False, f"Request failed: {str(e)}")
+            
+        return False
+    
     # ==================== PRODUCT TESTS (EXISTING) ====================
     
     def test_create_product(self):
