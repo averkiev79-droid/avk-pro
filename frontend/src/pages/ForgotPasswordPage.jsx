@@ -16,7 +16,9 @@ const ForgotPasswordPage = () => {
     setError('');
 
     try {
-      const response = await fetch(`${backendUrl}/api/auth/forgot-password`, {
+      // Use original fetch to avoid rrweb recorder issues with Response cloning
+      const fetchFn = window.__originalFetch || fetch;
+      const response = await fetchFn(`${backendUrl}/api/auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
