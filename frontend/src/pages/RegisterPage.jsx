@@ -60,12 +60,11 @@ const RegisterPage = () => {
         })
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Ошибка регистрации');
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Ошибка регистрации');
+      }
 
       // Use AuthContext to login
       login(data.access_token, data.user);
