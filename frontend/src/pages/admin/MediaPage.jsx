@@ -62,6 +62,8 @@ const MediaPage = () => {
         <p className="text-gray-600">Загрузка и управление изображениями сайта</p>
       </div>
 
+      <ImageUploadGuidelines variant="general" />
+
       {/* Upload Area */}
       <Card className="p-8 mb-8 border-2 border-dashed border-gray-300 hover:border-gray-400 transition-colors">
         <div className="text-center">
