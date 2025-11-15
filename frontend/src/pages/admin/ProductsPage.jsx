@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Plus, Edit, Trash2, Search, X, Upload, Image as ImageIcon } from 'lucide-react';
 import { categories } from '../../mock';
 import { toast } from 'sonner';
+import ImageUploadGuidelines from '../../components/ImageUploadGuidelines';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
