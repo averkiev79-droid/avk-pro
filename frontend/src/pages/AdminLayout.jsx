@@ -14,7 +14,8 @@ import {
   MessageSquare,
   FileText,
   Shield,
-  BookOpen
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
