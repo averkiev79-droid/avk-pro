@@ -121,6 +121,8 @@ const PortfolioPage = () => {
             </DialogHeader>
             
             <form onSubmit={handleSubmit} className="space-y-4 max-h-[70vh] overflow-y-auto">
+              <ImageUploadGuidelines variant="portfolio" />
+              
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="teamName">Название команды</Label>
