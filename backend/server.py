@@ -903,6 +903,52 @@ async def update_profile(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@api_router.post("/auth/init-admin")
+async def init_admin(request: UserLogin):
+    """
+    Initialize first admin user - ONE TIME USE ONLY
+    This endpoint allows making the first registered user an admin
+    Should be removed after initial setup for security
+    """
+    try:
+        # Find user by email
+        user = await db.users.find_one({"email": request.email})
+        
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Verify password
+        if not verify_password(request.password, user["hashed_password"]):
+            raise HTTPException(status_code=401, detail="Incorrect password")
+        
+        # Check if any admin already exists
+        existing_admin = await db.users.find_one({"role": "admin"})
+        if existing_admin and existing_admin["email"] != request.email:
+            raise HTTPException(
+                status_code=403, 
+                detail="Admin already exists. This endpoint can only be used for initial setup."
+            )
+        
+        # Update user role to admin
+        result = await db.users.update_one(
+            {"email": request.email},
+            {"$set": {"role": "admin", "updated_at": datetime.now(timezone.utc).isoformat()}}
+        )
+        
+        if result.modified_count == 0 and user["role"] == "admin":
+            return {"message": "User is already an admin"}
+        
+        logger.info(f"Admin initialized: {request.email}")
+        
+        return {"message": f"User {request.email} is now an admin"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error initializing admin: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @api_router.post("/auth/forgot-password")
 async def forgot_password(request: ForgotPasswordRequest, bg_tasks: BackgroundTasks):
     """Request password reset - sends email with reset token"""
