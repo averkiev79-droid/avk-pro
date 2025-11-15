@@ -27,6 +27,7 @@ import AuthCallbackPage from './pages/AuthCallbackPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import MakeAdminPage from './pages/MakeAdminPage';
+import TestUploadPage from './pages/TestUploadPage';
 import { Toaster } from './components/ui/sonner';
 import { AuthProvider } from './contexts/AuthContext';
 
