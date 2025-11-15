@@ -19,8 +19,9 @@
 
 2. **Подтвердите в Google Search Console:**
    - Откройте https://search.google.com/search-console
+   - Выберите метод "HTML-тег" (если файл не сработал)
    - Нажмите "Подтвердить"
-   - Google проверит файл по адресу: `https://avk-pro.ru/google86898ce6a0df5c6a.html`
+   - Google найдёт meta-тег в `<head>` главной страницы
    - Вы получите подтверждение ✅
 
 3. **Отправьте Sitemap:**
