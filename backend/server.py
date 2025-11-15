@@ -18,7 +18,8 @@ from models import (
     Article, ArticleCreate, ArticleUpdate, 
     AIGenerateRequest, 
     Product, ProductCreate, ProductUpdate,
-    User, UserCreate, UserUpdate, UserLogin, UserResponse, Token
+    User, UserCreate, UserUpdate, UserLogin, UserResponse, Token,
+    ForgotPasswordRequest, ResetPasswordRequest
 )
 from auth_utils import (
     get_password_hash, verify_password, create_access_token,
