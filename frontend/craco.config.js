@@ -34,7 +34,46 @@ const webpackConfig = {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
-    configure: (webpackConfig) => {
+    configure: (webpackConfig, { env }) => {
+
+      // Production оптимизации
+      if (env === 'production') {
+        // Code splitting для оптимизации размера бандла
+        webpackConfig.optimization = {
+          ...webpackConfig.optimization,
+          splitChunks: {
+            chunks: 'all',
+            maxInitialRequests: 25,
+            maxAsyncRequests: 25,
+            cacheGroups: {
+              // React и core библиотеки
+              react: {
+                test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom|react-router)[\\/]/,
+                name: 'react-vendor',
+                priority: 40,
+              },
+              // Radix UI компоненты
+              radix: {
+                test: /[\\/]node_modules[\\/]@radix-ui[\\/]/,
+                name: 'radix-vendor',
+                priority: 30,
+              },
+              // Остальные vendor библиотеки
+              vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                priority: 20,
+              },
+              // Общий код
+              common: {
+                minChunks: 2,
+                priority: 10,
+                reuseExistingChunk: true,
+              },
+            },
+          },
+        };
+      }
 
       // Disable hot reload completely if environment variable is set
       if (config.disableHotReload) {
