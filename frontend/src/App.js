@@ -99,6 +99,7 @@ function App() {
                 <Route path="/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/make-admin" element={<MakeAdminPage />} />
                 <Route path="/test-upload" element={<TestUploadPage />} />
+                <Route path="/test-guidelines" element={<TestGuidelinesPage />} />
                 <Route path="/auth/callback" element={<AuthCallbackPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 
