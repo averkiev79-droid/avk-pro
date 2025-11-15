@@ -5,6 +5,7 @@ import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import { Trash2, Edit, Plus, Upload, Save, X } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
+import ImageUploadGuidelines from '../../components/ImageUploadGuidelines';
 
 const HockeyClubsPage = () => {
   const [clubs, setClubs] = useState([]);
