@@ -1466,6 +1466,43 @@ async def delete_product(product_id: str):
 
 
 # ============================================================================
+# SEO & SITEMAP API
+# ============================================================================
+
+@api_router.post("/sitemap/generate")
+async def regenerate_sitemap():
+    """Регенерирует sitemap.xml (требует права администратора)"""
+    try:
+        import subprocess
+        
+        # Запускаем скрипт генерации sitemap
+        result = subprocess.run(
+            ['python', '/app/backend/generate_sitemap.py'],
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        
+        if result.returncode == 0:
+            return {
+                "success": True,
+                "message": "Sitemap успешно обновлён",
+                "output": result.stdout
+            }
+        else:
+            raise HTTPException(
+                status_code=500,
+                detail=f"Ошибка генерации sitemap: {result.stderr}"
+            )
+            
+    except subprocess.TimeoutExpired:
+        raise HTTPException(status_code=500, detail="Превышено время ожидания генерации sitemap")
+    except Exception as e:
+        logger.error(f"Error regenerating sitemap: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
 # INCLUDE API ROUTER (must be after all route definitions)
 # ============================================================================
 app.include_router(api_router)
