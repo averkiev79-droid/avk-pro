@@ -156,10 +156,18 @@ function AppContent() {
               },
             }}
           />
-          {showCookieBanner && (
+          {showCookieBanner && !isAdminRoute && (
             <CookieBanner onAccept={handleAcceptCookies} />
           )}
         </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <AppContent />
       </BrowserRouter>
     </AuthProvider>
   );
