@@ -47,6 +47,7 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 const MakeAdminPage = lazy(() => import('./pages/MakeAdminPage'));
 const TestUploadPage = lazy(() => import('./pages/TestUploadPage'));
+const TestGuidelinesPage = lazy(() => import('./pages/TestGuidelinesPage'));
 
 import { Toaster } from './components/ui/sonner';
 import { AuthProvider } from './contexts/AuthContext';
