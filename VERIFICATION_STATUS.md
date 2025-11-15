@@ -2,11 +2,14 @@
 
 ## ✅ Google Search Console
 
-**Статус:** Файл верификации добавлен ✅
+**Статус:** Meta-тег верификации добавлен ✅
 
-**Файл:** `google86898ce6a0df5c6a.html`
-**Расположение:** `/app/frontend/public/google86898ce6a0df5c6a.html`
-**URL для проверки:** `https://avk-pro.ru/google86898ce6a0df5c6a.html`
+**Meta-тег:** `<meta name="google-site-verification" content="MSc41n_eX-caHs9_zIsGrbATyEUKLBYzFv3MXMJwaac" />`
+**Расположение:** `/app/frontend/public/index.html` (в секции `<head>`)
+
+**Дополнительно:** HTML-файл верификации также доступен:
+- **Файл:** `google86898ce6a0df5c6a.html`
+- **URL:** `https://avk-pro.ru/google86898ce6a0df5c6a.html`
 
 ### Следующие шаги:
 
