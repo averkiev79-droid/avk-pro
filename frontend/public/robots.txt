@@ -27,7 +27,7 @@ Allow: /*.svg
 Allow: /*.webp
 
 # Sitemap
-Sitemap: https://avk-sport.ru/sitemap.xml
+Sitemap: https://avk-pro.ru/sitemap.xml
 
 # Основные поисковые боты
 User-agent: Googlebot
