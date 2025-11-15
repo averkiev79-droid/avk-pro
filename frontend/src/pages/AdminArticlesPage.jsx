@@ -89,7 +89,8 @@ const AdminArticlesPage = () => {
         is_published: true
       };
 
-      const response = await fetch(`${backendUrl}/api/articles`, {
+      const fetchFn = window.__originalFetch || fetch;
+      const response = await fetchFn(`${backendUrl}/api/articles`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(articleData)
