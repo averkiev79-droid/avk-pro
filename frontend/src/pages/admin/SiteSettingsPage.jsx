@@ -6,6 +6,7 @@ import { Label } from '../../components/ui/label';
 import { Upload, Save, Image as ImageIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import ImageUploadGuidelines from '../../components/ImageUploadGuidelines';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 
