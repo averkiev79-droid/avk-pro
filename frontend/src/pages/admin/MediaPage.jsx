@@ -148,7 +148,12 @@ const MediaPage = () => {
       <div>
         <h2 className="text-2xl font-semibold mb-6 text-gray-900">Загруженные файлы ({uploadedFiles.length})</h2>
         
-        {uploadedFiles.length === 0 ? (
+        {loading ? (
+          <div className="p-12 text-center border border-gray-200 rounded-md bg-gray-50">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-4"></div>
+            <p className="text-gray-500">Загрузка файлов...</p>
+          </div>
+        ) : uploadedFiles.length === 0 ? (
           <div className="p-12 text-center border border-gray-200 rounded-md bg-gray-50">
             <Image className="mx-auto mb-4 text-gray-400" size={64} strokeWidth={1.5} />
             <p className="text-gray-500">Нет загруженных файлов</p>
