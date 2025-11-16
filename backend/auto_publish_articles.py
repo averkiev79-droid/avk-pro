@@ -180,8 +180,9 @@ async def publish_articles():
     
     # Connect to MongoDB
     mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+    db_name = os.environ.get('DB_NAME', 'test_database')
     client = AsyncIOMotorClient(mongo_url)
-    db = client.hockey_shop
+    db = client[db_name]
     
     try:
         # Determine number of articles (2 or 3)
