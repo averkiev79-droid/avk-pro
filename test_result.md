@@ -294,6 +294,19 @@ metadata:
   test_sequence: 2
   run_ui: true
 
+frontend:
+  - task: "Admin Articles Management - Delete and Publish Status Control"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/AdminArticlesPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ COMPREHENSIVE ARTICLES MANAGEMENT TESTING COMPLETED: Successfully tested all requested functionality for article management in admin panel. (1) Admin Login: Successfully logged in with simplepay@mail.ru/admin123 credentials and accessed admin panel. (2) Articles Page Access: Successfully navigated to /admin/articles page, confirmed 'Генератор статей с AI' interface is working. (3) Article Listing: Found existing articles displaying correctly with title, excerpt, creation date, and publication status ('Опубликовано'/'Черновик'). (4) Status Toggle Functionality: Successfully tested publish/unpublish buttons with Eye/EyeOff icons - 'Снять' and 'Опубликовать' buttons are functional and clickable. (5) Delete Functionality: Confirmed delete buttons with Trash2 icons are present and functional. (6) Empty State: When no articles exist, proper empty state message 'Статей пока нет' is displayed with helpful text 'Создайте первую статью с помощью генератора выше'. (7) Article Generation Form: Confirmed topic input field, category selector, and 'Сгенерировать статью' button are all functional. (8) Backend Integration: PUT /api/articles/{id} and DELETE /api/articles/{id} endpoints are working correctly. All requested functionality is implemented and working as expected. User can now successfully delete old articles and manage publication status as requested."
+
 test_plan:
   current_focus: []
   stuck_tasks: []
