@@ -188,6 +188,25 @@ async def upload_file(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"File upload failed: {str(e)}")
 
+@api_router.get("/uploads")
+async def get_uploaded_files():
+    """Get list of all uploaded files"""
+    try:
+        files = []
+        if UPLOAD_DIR.exists():
+            for file_path in sorted(UPLOAD_DIR.iterdir(), key=lambda x: x.stat().st_mtime, reverse=True):
+                if file_path.is_file() and file_path.suffix.lower() in ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']:
+                    stat = file_path.stat()
+                    files.append({
+                        "filename": file_path.name,
+                        "url": f"/api/uploads/{file_path.name}",
+                        "size": stat.st_size,
+                        "uploadedAt": datetime.fromtimestamp(stat.st_mtime, tz=timezone.utc).isoformat()
+                    })
+        return files
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get files: {str(e)}")
+
 # ==================== REVIEWS API ====================
 @api_router.get("/reviews", response_model=List[Review])
 async def get_reviews():
