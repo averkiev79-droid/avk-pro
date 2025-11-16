@@ -1329,8 +1329,18 @@ class AuthAPITester:
         # Product Test 7: Datetime serialization
         self.test_datetime_serialization()
         
-        # Product Test 8: File upload endpoint
+        # ==================== FILE UPLOAD TESTS ====================
+        print("\n📁 FILE UPLOAD TESTS")
+        print("=" * 40)
+        
+        # File Test 1: Get uploaded files list
+        self.test_get_uploaded_files_list()
+        
+        # File Test 2: File upload endpoint
         self.test_file_upload()
+        
+        # File Test 3: File upload integration test
+        self.test_file_upload_integration()
         
         # ==================== ARTICLE GENERATION TESTS ====================
         print("\n📝 ARTICLE GENERATION TESTS")
