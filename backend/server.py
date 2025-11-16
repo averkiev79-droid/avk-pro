@@ -729,6 +729,35 @@ async def update_article(article_id: str, article_update: ArticleUpdate):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@api_router.put("/articles/{article_id}", response_model=dict)
+async def update_article(article_id: str, article: dict):
+    """Update article"""
+    try:
+        # Remove _id if present
+        article.pop('_id', None)
+        
+        # Update timestamp
+        article['updated_at'] = datetime.now(timezone.utc).isoformat()
+        
+        result = await db.articles.update_one(
+            {"id": article_id},
+            {"$set": article}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Статья не найдена")
+        
+        return {
+            "success": True,
+            "message": "Статья обновлена"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating article: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @api_router.delete("/articles/{article_id}", response_model=dict)
 async def delete_article(article_id: str):
     """Delete article"""
