@@ -89,6 +89,53 @@ const AdminArticlesPage = () => {
       .replace(/^-|-$/g, '');
   };
 
+  const handleDeleteArticle = async (articleId) => {
+    if (!window.confirm('Вы уверены, что хотите удалить эту статью?')) {
+      return;
+    }
+
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/articles/${articleId}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        toast.success('Статья удалена');
+        fetchArticles();
+      } else {
+        toast.error('Ошибка при удалении статьи');
+      }
+    } catch (error) {
+      console.error('Error deleting article:', error);
+      toast.error('Ошибка при удалении статьи');
+    }
+  };
+
+  const handleTogglePublish = async (article) => {
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/articles/${article.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...article,
+          is_published: !article.is_published
+        })
+      });
+
+      if (response.ok) {
+        toast.success(article.is_published ? 'Статья снята с публикации' : 'Статья опубликована');
+        fetchArticles();
+      } else {
+        toast.error('Ошибка при изменении статуса');
+      }
+    } catch (error) {
+      console.error('Error toggling publish:', error);
+      toast.error('Ошибка при изменении статуса');
+    }
+  };
+
   const handleSave = async () => {
     if (!generatedArticle) return;
 
