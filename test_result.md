@@ -293,7 +293,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Frontend Authentication System - Login/Register Pages, AuthContext, Profile Page"
+    - "Shopping Cart Functionality - Add to Cart, localStorage, Counter Updates"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
