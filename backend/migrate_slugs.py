@@ -35,8 +35,9 @@ async def migrate_slugs():
     """Update all articles with Cyrillic slugs to transliterated ones"""
     # Connect to MongoDB
     mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+    db_name = os.environ.get('DB_NAME', 'test_database')
     client = AsyncIOMotorClient(mongo_url)
-    db = client.hockey_shop
+    db = client[db_name]
     
     print("🔄 Starting slug migration...")
     
