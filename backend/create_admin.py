@@ -16,11 +16,12 @@ async def create_admin():
     """Create admin user"""
     # Connect to MongoDB
     mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+    db_name = os.environ.get('DB_NAME', 'test_database')
     client = AsyncIOMotorClient(mongo_url)
-    db = client.avk_sport
+    db = client[db_name]
     
     print("=" * 60)
-    print("Creating Admin User")
+    print(f"Creating Admin User in database: {db_name}")
     print("=" * 60)
     
     # Check if admin already exists
