@@ -15,6 +15,30 @@ const MediaPage = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [copiedUrl, setCopiedUrl] = useState('');
 
+  // Load existing files on mount
+  useEffect(() => {
+    fetchUploadedFiles();
+  }, []);
+
+  const fetchUploadedFiles = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${BACKEND_URL}/api/uploads`);
+      const files = response.data.map(file => ({
+        url: `${BACKEND_URL}${file.url}`,
+        filename: file.filename,
+        uploadedAt: file.uploadedAt,
+        size: file.size
+      }));
+      setUploadedFiles(files);
+    } catch (error) {
+      console.error('Failed to fetch files:', error);
+      toast.error('Ошибка при загрузке списка файлов');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleFileUpload = async (event) => {
     const files = Array.from(event.target.files);
     if (files.length === 0) return;
