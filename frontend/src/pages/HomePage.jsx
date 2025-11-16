@@ -8,6 +8,8 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { useParallax } from '../hooks/useParallax';
 import FAQ from '../components/FAQ';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+
 const AnimatedSection = ({ children, className = '', delay = 0 }) => {
   const [ref, isVisible] = useScrollAnimation({ threshold: 0.1 });
   
