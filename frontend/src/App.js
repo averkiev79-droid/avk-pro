@@ -111,7 +111,8 @@ function AppContent() {
                   <Route path="users" element={<UsersPage />} />
                   <Route path="products" element={<ProductsPage />} />
                   <Route path="orders" element={<OrdersPage />} />
-                  <Route path="clubs" element={<HockeyClubsPage />} />
+                  <Route path="articles" element={<AdminArticlesPage />} />
+                  <Route path="hockey-clubs" element={<HockeyClubsPage />} />
                   <Route path="portfolio" element={<PortfolioAdminPage />} />
                   <Route path="reviews" element={<ReviewsManagementPage />} />
                   <Route path="settings" element={<SettingsPage />} />
