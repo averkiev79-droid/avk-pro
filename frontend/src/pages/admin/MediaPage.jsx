@@ -63,9 +63,10 @@ const MediaPage = () => {
         };
       });
 
-      const results = await Promise.all(uploadPromises);
-      setUploadedFiles([...results, ...uploadedFiles]);
+      await Promise.all(uploadPromises);
       toast.success(`${files.length} файл(ов) загружено успешно`);
+      // Reload the file list to show all files including newly uploaded ones
+      await fetchUploadedFiles();
     } catch (error) {
       console.error('Upload error:', error);
       toast.error('Ошибка при загрузке файлов');
