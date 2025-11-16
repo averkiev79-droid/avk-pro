@@ -89,8 +89,9 @@ const ProductDetailPage = () => {
   const category = categories.find(c => c.id === product.category);
   
   // Use product images or fallback to placeholder
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
   const images = product.images && product.images.length > 0 
-    ? product.images 
+    ? product.images.map(img => img.startsWith('http') ? img : `${BACKEND_URL}${img}`)
     : ['/images/placeholder.svg'];
 
   const sizeCategories = [
