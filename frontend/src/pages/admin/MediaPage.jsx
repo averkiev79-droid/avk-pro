@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from '../../components/ui/card';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
@@ -11,6 +11,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 
 const MediaPage = () => {
   const [uploading, setUploading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [copiedUrl, setCopiedUrl] = useState('');
 
