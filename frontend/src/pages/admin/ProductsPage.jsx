@@ -12,6 +12,8 @@ import { categories } from '../../mock';
 import { toast } from 'sonner';
 import ImageUploadGuidelines from '../../components/ImageUploadGuidelines';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
