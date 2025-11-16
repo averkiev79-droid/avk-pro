@@ -620,6 +620,88 @@ async def get_article_by_slug(slug: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@api_router.get("/rss", response_class=FileResponse)
+async def get_rss_feed():
+    """Generate RSS feed for blog articles"""
+    from xml.etree.ElementTree import Element, SubElement, tostring
+    from datetime import datetime
+    import xml.dom.minidom as minidom
+    
+    try:
+        # Get published articles
+        articles = await db.articles.find({"is_published": True}).sort("created_at", -1).limit(50).to_list(length=50)
+        
+        # Create RSS feed
+        rss = Element('rss', version='2.0', attrib={'xmlns:atom': 'http://www.w3.org/2005/Atom'})
+        channel = SubElement(rss, 'channel')
+        
+        # Channel info
+        SubElement(channel, 'title').text = 'A.V.K. SPORT - Блог'
+        SubElement(channel, 'link').text = 'https://avk-pro.ru/blog'
+        SubElement(channel, 'description').text = 'Статьи о хоккейной экипировке, советы и рекомендации'
+        SubElement(channel, 'language').text = 'ru'
+        
+        # Self link
+        atom_link = SubElement(channel, '{http://www.w3.org/2005/Atom}link')
+        atom_link.set('href', 'https://avk-pro.ru/api/rss')
+        atom_link.set('rel', 'self')
+        atom_link.set('type', 'application/rss+xml')
+        
+        # Add articles
+        for article in articles:
+            item = SubElement(channel, 'item')
+            
+            # Title
+            SubElement(item, 'title').text = article.get('title', '')
+            
+            # Link
+            slug = article.get('slug', '')
+            SubElement(item, 'link').text = f"https://avk-pro.ru/blog/{slug}"
+            
+            # Description
+            excerpt = article.get('excerpt', article.get('content', '')[:200])
+            SubElement(item, 'description').text = excerpt
+            
+            # Publication date
+            created_at = article.get('created_at')
+            if isinstance(created_at, str):
+                try:
+                    pub_date = datetime.fromisoformat(created_at).strftime('%a, %d %b %Y %H:%M:%S GMT')
+                    SubElement(item, 'pubDate').text = pub_date
+                except:
+                    pass
+            
+            # GUID
+            SubElement(item, 'guid', isPermaLink='true').text = f"https://avk-pro.ru/blog/{slug}"
+            
+            # Category
+            category = article.get('category', '')
+            if category:
+                SubElement(item, 'category').text = category
+        
+        # Convert to string and prettify
+        xml_str = tostring(rss, encoding='utf-8')
+        dom = minidom.parseString(xml_str)
+        pretty_xml = dom.toprettyxml(indent='  ', encoding='utf-8')
+        
+        # Save to file
+        rss_path = UPLOAD_DIR.parent / "rss.xml"
+        with open(rss_path, 'wb') as f:
+            f.write(pretty_xml)
+        
+        return FileResponse(
+            rss_path,
+            media_type='application/rss+xml',
+            headers={
+                'Content-Type': 'application/rss+xml; charset=utf-8',
+                'Cache-Control': 'public, max-age=3600'
+            }
+        )
+    except Exception as e:
+        logger.error(f"Error generating RSS feed: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @api_router.patch("/articles/{article_id}", response_model=dict)
 async def update_article(article_id: str, article_update: ArticleUpdate):
     """Update article"""
