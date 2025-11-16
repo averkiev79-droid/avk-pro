@@ -437,7 +437,7 @@ const ProductsPage = () => {
                 {product.images && product.images.length > 0 ? (
                   <>
                     <img 
-                      src={product.images[0]} 
+                      src={product.images[0].startsWith('http') ? product.images[0] : `${BACKEND_URL}${product.images[0]}`} 
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
