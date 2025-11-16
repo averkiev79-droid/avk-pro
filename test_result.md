@@ -235,6 +235,18 @@ frontend:
         - working: true
           agent: "testing"
           comment: "✅ PUBLIC PAGES API INTEGRATION WORKING: Comprehensive testing confirmed all pages working correctly. HomePage: Featured products section loads 3 products from API with proper names and base_price display (e.g., 'от 1000 ₽'). CatalogPage: Loads 3 products from API, proper navigation and structure. ProductDetailPage: Successfully loads individual products with correct price display (e.g., '1000 ₽'). API endpoints responding correctly, base_price field working, images array structure implemented. Minor: Some test products have invalid image URLs (example.com, via.placeholder.com) causing network errors, but this is test data issue, not code issue."
+  
+  - task: "Admin Panel Navigation - Articles and Hockey Clubs Pages"
+    implemented: true
+    working: true
+    file: "frontend/src/App.js, frontend/src/pages/AdminLayout.jsx, frontend/src/pages/AdminArticlesPage.jsx, frontend/src/pages/admin/HockeyClubsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ ADMIN PANEL NAVIGATION FULLY WORKING: Comprehensive testing of admin panel access and navigation completed successfully. (1) Admin Authentication: Successfully logged in with simplepay@mail.ru/admin123 credentials to admin panel. (2) Navigation Menu: Both 'Статьи (AI)' and 'Хоккейные клубы' menu items are visible and accessible in admin sidebar navigation. (3) Articles Page (/admin/articles): WORKING - Successfully navigated to page, displays complete 'Генератор статей с AI' interface with form fields for topic, category, and style selection. Page contains proper AI article generation functionality and is not empty. (4) Hockey Clubs Page (/admin/hockey-clubs): WORKING - Successfully navigated to page, displays 'Хоккейные клубы' management interface with existing clubs (СКА, ХК teams) and 'Добавить клуб' functionality. Page contains proper hockey clubs management interface and is not empty. Both pages are accessible, load correctly, and contain expected content. Admin panel routes are working as intended after the main agent's fixes."
 
 metadata:
   created_by: "main_agent"
