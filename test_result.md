@@ -187,6 +187,18 @@ backend:
           agent: "testing"
           comment: "✅ GET UPLOADED FILES LIST ENDPOINT FULLY WORKING: Comprehensive testing of GET /api/uploads endpoint completed successfully as requested. Tested all scenarios: (1) GET /api/uploads - Successfully returns array of file objects with all required fields: filename, url, size, uploadedAt. Retrieved list of 18 existing uploaded files. (2) POST /api/upload integration - File upload working correctly, new files get UUID filenames and proper URLs. (3) Integration test - After uploading new file, GET /api/uploads correctly shows increased count (19→20 files) and new file appears in list with proper metadata. (4) File structure validation - All file objects contain required fields: filename (UUID-based), url (/api/uploads/filename), size (bytes), uploadedAt (ISO timestamp). Files are sorted by upload time (newest first). Only image files (.jpg, .jpeg, .png, .gif, .webp, .svg) are included in list as expected. Endpoint handles empty uploads directory gracefully. MediaPage file persistence issue is resolved - uploaded files no longer 'disappear' because frontend can now load existing files from server on component mount. API ready for production use."
 
+  - task: "Media Page File Persistence Fix - Files No Longer Disappear on Upload"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/admin/MediaPage.jsx, backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ MEDIA PAGE FILE PERSISTENCE FIX FULLY WORKING: Comprehensive testing of the reported issue 'при загрузке фотографии слетают' completed successfully. Tested complete user scenario: (1) Initial State: Media page loaded with 20 existing files displayed correctly (exceeded expected ≥18 files). (2) File Upload: Successfully uploaded new test image via 'Выбрать файлы' button. (3) File Count Verification: File count increased from 20 to 21 files - OLD FILES DID NOT DISAPPEAR. (4) Persistence Test: After page reload (F5), all 21 files remained visible and accessible. (5) Backend Integration: GET /api/uploads endpoint working correctly, returning proper file metadata. (6) Frontend Implementation: useEffect in MediaPage.jsx correctly calls fetchUploadedFiles() on component mount and after successful uploads. The fix is working perfectly - files no longer 'слетают' (disappear) when uploading new photos. Users can now upload new files while preserving all existing files. Screenshots captured showing before/after states confirming the fix. Issue resolved completely."
+
 frontend:
   - task: "Frontend Authentication System - Login/Register Pages, AuthContext, Profile Page"
     implemented: true
