@@ -955,6 +955,59 @@ class AuthAPITester:
             
         return False
     
+    def test_get_uploaded_files_list(self):
+        """Test GET /api/uploads - Get list of all uploaded files"""
+        print("\n=== Testing Get Uploaded Files List ===")
+        
+        try:
+            response = requests.get(f"{self.base_url}/uploads", timeout=10)
+            
+            if response.status_code == 200:
+                files_list = response.json()
+                
+                # Check if response is a list
+                if isinstance(files_list, list):
+                    self.log_result(
+                        "Get Uploaded Files List", 
+                        True, 
+                        f"Retrieved list of {len(files_list)} uploaded files",
+                        {"files_count": len(files_list)}
+                    )
+                    
+                    # If there are files, validate the structure
+                    if len(files_list) > 0:
+                        first_file = files_list[0]
+                        required_fields = ["filename", "url", "size", "uploadedAt"]
+                        missing_fields = [field for field in required_fields if field not in first_file]
+                        
+                        if not missing_fields:
+                            self.log_result(
+                                "Validate File List Structure", 
+                                True, 
+                                "File objects have all required fields",
+                                {
+                                    "sample_file": {
+                                        "filename": first_file.get("filename"),
+                                        "url": first_file.get("url"),
+                                        "size": first_file.get("size"),
+                                        "uploadedAt": first_file.get("uploadedAt")
+                                    }
+                                }
+                            )
+                        else:
+                            self.log_result("Validate File List Structure", False, f"Missing required fields: {missing_fields}")
+                    
+                    return files_list
+                else:
+                    self.log_result("Get Uploaded Files List", False, "Response is not a list", {"response": files_list})
+            else:
+                self.log_result("Get Uploaded Files List", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Get Uploaded Files List", False, f"Request failed: {str(e)}")
+            
+        return []
+
     def test_file_upload(self):
         """Test POST /api/upload - File upload endpoint"""
         print("\n=== Testing File Upload Endpoint ===")
@@ -1001,6 +1054,72 @@ class AuthAPITester:
                 
         except Exception as e:
             self.log_result("File Upload", False, f"Request failed: {str(e)}")
+            
+        return False
+
+    def test_file_upload_integration(self):
+        """Test integration: upload file and verify it appears in files list"""
+        print("\n=== Testing File Upload Integration ===")
+        
+        try:
+            # Get initial files count
+            initial_files = self.test_get_uploaded_files_list()
+            initial_count = len(initial_files) if initial_files else 0
+            
+            # Create and upload a new test image
+            img = Image.new('RGB', (150, 150), color='blue')
+            img_buffer = io.BytesIO()
+            img.save(img_buffer, format='JPEG')
+            img_buffer.seek(0)
+            
+            files = {
+                'file': ('integration_test.jpg', img_buffer, 'image/jpeg')
+            }
+            
+            # Upload the file
+            upload_response = requests.post(f"{self.base_url}/upload", files=files, timeout=10)
+            
+            if upload_response.status_code == 200:
+                upload_result = upload_response.json()
+                uploaded_filename = upload_result.get('filename')
+                
+                if uploaded_filename:
+                    # Store for cleanup
+                    self.uploaded_files.append(uploaded_filename)
+                    
+                    # Get updated files list
+                    updated_files = self.test_get_uploaded_files_list()
+                    updated_count = len(updated_files) if updated_files else 0
+                    
+                    # Check if count increased by 1
+                    if updated_count == initial_count + 1:
+                        # Check if the new file is in the list
+                        new_file_found = any(f.get('filename') == uploaded_filename for f in updated_files)
+                        
+                        if new_file_found:
+                            self.log_result(
+                                "File Upload Integration", 
+                                True, 
+                                f"File upload integration successful - new file appears in list",
+                                {
+                                    "initial_count": initial_count,
+                                    "updated_count": updated_count,
+                                    "uploaded_filename": uploaded_filename,
+                                    "found_in_list": True
+                                }
+                            )
+                            return True
+                        else:
+                            self.log_result("File Upload Integration", False, "New file not found in updated list")
+                    else:
+                        self.log_result("File Upload Integration", False, f"Files count didn't increase correctly: {initial_count} -> {updated_count}")
+                else:
+                    self.log_result("File Upload Integration", False, "Upload didn't return filename")
+            else:
+                self.log_result("File Upload Integration", False, f"Upload failed: HTTP {upload_response.status_code}")
+                
+        except Exception as e:
+            self.log_result("File Upload Integration", False, f"Integration test failed: {str(e)}")
             
         return False
     
