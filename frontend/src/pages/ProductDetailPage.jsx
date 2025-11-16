@@ -128,10 +128,54 @@ const ProductDetailPage = () => {
       toast.error('Минимальное количество для заказа - 10 штук');
       return;
     }
+    
     const sizeCategoryName = sizeCategories.find(s => s.id === selectedSizeCategory)?.name;
-    toast.success(`${product.name} добавлен в корзину`, {
-      description: `Количество: ${quantity} шт, категория: ${sizeCategoryName}, цвет: ${selectedColor}`
-    });
+    
+    // Получить существующую корзину из localStorage
+    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    
+    // Создать уникальный ID для товара с учетом параметров
+    const cartItemId = `${product.id}_${selectedSizeCategory}_${selectedColor}`;
+    
+    // Проверить, есть ли уже такой товар в корзине
+    const existingItemIndex = existingCart.findIndex(item => 
+      item.id === cartItemId
+    );
+    
+    if (existingItemIndex !== -1) {
+      // Если товар уже есть, увеличить количество
+      existingCart[existingItemIndex].quantity += quantity;
+      toast.success(`Количество обновлено в корзине`, {
+        description: `${product.name}: ${existingCart[existingItemIndex].quantity} шт`
+      });
+    } else {
+      // Добавить новый товар в корзину
+      const cartItem = {
+        id: cartItemId,
+        productId: product.id,
+        name: product.name,
+        price: product.base_price,
+        quantity: quantity,
+        sizeCategory: selectedSizeCategory,
+        sizeCategoryName: sizeCategoryName,
+        color: selectedColor,
+        image: product.images && product.images.length > 0 
+          ? `${process.env.REACT_APP_BACKEND_URL}${product.images[0]}`
+          : null
+      };
+      
+      existingCart.push(cartItem);
+      
+      toast.success(`${product.name} добавлен в корзину`, {
+        description: `Количество: ${quantity} шт, категория: ${sizeCategoryName}, цвет: ${selectedColor}`
+      });
+    }
+    
+    // Сохранить обновленную корзину в localStorage
+    localStorage.setItem('cart', JSON.stringify(existingCart));
+    
+    // Dispatch event to update header cart count
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const updateQuantity = (newQuantity) => {
