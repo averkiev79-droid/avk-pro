@@ -13,7 +13,7 @@ import io
 from PIL import Image
 
 # Backend URL from environment
-BACKEND_URL = "https://avk-pro.ru/api"
+BACKEND_URL = "https://sportstore-app.preview.emergentagent.com/api"
 
 class AuthAPITester:
     def __init__(self):
