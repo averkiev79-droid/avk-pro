@@ -1,85 +1,90 @@
 <analysis>
-The trajectory chronicles an extensive development sprint focused on implementing a full-featured, role-based authentication system on top of an existing e-commerce MVP. The work began by building the basic frontend components: Login, Register, and Profile pages, and integrating them into the navigation. A React Context () was established to manage global authentication state, conditionally rendering UI elements like user information and logout buttons.
+The trajectory details an extensive and complex development cycle on a full-stack e-commerce application. The work began by debugging a persistent authentication failure on the production server. A methodical experiment proved that code deployment was functional, leading to the discovery of an incorrect backend URL in the frontend's environment file—a critical fix.
 
-A significant portion of the work involved responding to iterative user feedback. This led to the creation of a backend and frontend for an admin-only user management page, allowing role changes. This phase surfaced several bugs, including a critical security flaw where the admin panel was publicly accessible (due to a mocked auth state), incorrect API response handling ( error), and a misconfigured database connection. The AI successfully debugged and resolved all these issues locally.
+Following this, the AI engineer implemented a full password-reset feature (backend endpoints, email service integration, frontend pages). The development was then severely hampered by a recurring  error. After an initial code-level fix proved insufficient, the engineer correctly identified the true root cause: a session-recording script () from the hosting platform was monkey-patching the global  API. The engineer implemented a robust workaround by preserving and using the original  function for all authentication-related requests.
 
-The latter half of the trajectory is dominated by a persistent and frustrating deployment problem. Despite the AI correctly fixing bugs locally—including the critical  error and the unprotected admin route—the changes were not reflected on the user's preview/production URL. The user repeatedly reported the same login error. The AI correctly diagnosed the root cause as a build-and-deploy issue, not a code issue. It discovered the frontend build was failing, manually ran the build process successfully (yarn run v1.22.22
-info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.), and concluded that a new deployment was the only remaining step. An attempt to add Google/Yandex OAuth was initiated but then reverted at the user's request to focus on the core login problem. The work concluded with the AI providing clear, final instructions for the user to Re-Deploy the now-fixed and build-ready application.
+Subsequent tasks included a full SEO implementation (sitemap, robots.txt, Google/Yandex verification), site performance optimization via code-splitting () and Gzip compression, creating a reusable image uploader, and numerous UI/UX fixes based on user feedback. A recurring theme was data persistence issues, where the application was pointed at the wrong database and product data was later found to be missing, prompting the final user request for a database backup guide.
+
+The user's primary language is **Russian**. The next agent must communicate in Russian.
 </analysis>
 
 <product_requirements>
-The project is to build and enhance a full-stack e-commerce application for A.V.K. SPORT, a hockey equipment supplier. The primary goal of the recent work was to implement a complete, secure, and role-based user authentication system.
+The project is an e-commerce application for A.V.K. SPORT, a hockey equipment supplier. The primary objective of the work was to build, debug, and enhance a secure, role-based user authentication system and improve the overall application quality.
 
-**Implemented Features:**
-*   **Full Authentication System:** A complete frontend and backend for user registration, login (with JWT), and session management.
-*   **Role-Based Access Control (RBAC):** The system supports Admin, Employee/Content Manager, and Customer roles.
-*   **Admin Panel:**
-    *   A protected  route accessible only to administrators.
-    *   A central **Dashboard** as the admin landing page, showing key site statistics.
-    *   A **User Management** page where admins can view all users and change their roles.
-*   **User Profile Page:** A dedicated  page where users can view their information. Admins see an Admin Panel link and all users have a Logout button.
-*   **UI/UX Improvements:**
-    *   The main header dynamically updates to show user info and a Logout button when authenticated, or a Login button otherwise. This is implemented for both desktop and mobile views.
-    *   Login and Register pages were updated with clearer, more visible links between them.
-    *   Layout issues on the mobile profile page were fixed.
-    *   Clicking the site logo now correctly scrolls the page to the top.
+**Implemented Features & Fixes:**
+*   **Authentication System:** A full-stack solution for user registration, login (JWT), and a complete Forgot Password flow with email-based reset tokens.
+*   **Critical Bug Fixes:**
+    *   Resolved production login failures by correcting the  in the frontend  file.
+    *   Fixed a persistent Response body is already used error by identifying and bypassing a conflict with a platform-injected  script.
+*   **Admin Functionality:**
+    *   Created a secure, one-time endpoint and a dedicated UI page () to simplify the process of creating the initial administrator account on a new deployment.
+    *   Added image upload guidelines and a Go to Site button within the admin panel for better usability.
+*   **Performance Optimization:** Implemented code-splitting () and server-side Gzip compression to significantly reduce initial page load times.
+*   **SEO:** Integrated a full SEO setup, including a dynamically generated , a configured , and support for Google and Yandex verification via both meta tags and HTML files.
+*   **Branding:** Replaced the site-wide logo and favicon with new assets provided by the user.
 </product_requirements>
 
 <key_technical_concepts>
-- **Full-stack:** React (Vite/CRA) frontend, FastAPI (Python) backend, MongoDB database.
-- **Authentication:** JWT-based using  and  for password hashing.
-- **State Management:** React Context API () for global user state.
-- **Styling:** Tailwind CSS.
-- **API Communication:**  API for frontend-backend interaction.
-- **Deployment:** Emergent platform with GitHub integration, involving a build step (yarn run v1.22.22
-info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.) and a deploy/re-deploy process. Cloudflare is used for CDN and caching.
+- **Frameworks:** React (with Craco) frontend, FastAPI (Python) backend.
+- **Database:** MongoDB.
+- **Authentication:** JWT,  for hashing, email-based password reset.
+- **Frontend:**
+    - React Context API for global state.
+    -  for code-splitting and performance optimization.
+    - Tailwind CSS for styling.
+- **Backend:**
+    -  for JWTs.
+    -  for sending emails.
+- **Deployment & Environment:**
+    - Nginx for serving and Gzip compression.
+    - Critical debugging involved environment variables () and platform-specific script conflicts ().
 </key_technical_concepts>
 
 <code_architecture>
-The application uses a monorepo structure with distinct  and  directories.
+The application follows a standard monorepo structure with  and  directories.
 
 
 
 - ****
-  - **Importance:** This is a critical new component that acts as a protected wrapper for all admin-related pages ().
-  - **Changes:** It was created to provide a consistent layout for the admin panel. A major security fix was implemented here, changing a mocked  to use the real  hook, which properly secures the admin section against unauthorized access.
-
-- ** & **
-  - **Importance:** These files are the entry points for the entire authentication flow.
-  - **Changes:** They were created from scratch. A critical bug fix was applied to the  function in both files to check  *before* attempting to parse the JSON body, resolving the  error. The UI was also significantly improved to make the links between the two pages more prominent. The Google OAuth button was added and subsequently removed per the user's request.
+    - **Importance:** The main HTML entry point.
+    - **Changes:** A script was added to save a reference to the native  as  before the platform's  script could modify it. This was a critical fix for the Response body is already used error. It was also updated to include meta tags for Google and Yandex site verification and links to the new favicons and .
 
 - ****
-  - **Importance:** This new file centralizes all authentication-related state and logic for the frontend.
-  - **Changes:** It provides user data, authentication status (), and functions like  and  to the entire application. It also handles persisting the session by checking  for a token on initial load.
+    - **Importance:** The root component containing all routing logic.
+    - **Changes:** Major refactoring to use  and  for code-splitting, which significantly improved performance. It was also modified to conditionally render the main  and  based on the URL path, preventing them from appearing in the  section.
+
+- **** (and , , )
+    - **Importance:** Core authentication pages.
+    - **Changes:** The  calls in these files were updated to use the saved  to bypass the  issue. The logic was also refactored to ensure  is only called once per request.
 
 - ****
-  - **Importance:** The main FastAPI application file, containing all API routes.
-  - **Changes:** It was heavily modified to add user management endpoints for admins (, ). A logging statement was temporarily added to debug a login issue, which helped uncover that the server was connecting to the wrong database. The  setting was also verified here.
+    - **Importance:** The main FastAPI application file defining all API endpoints.
+    - **Changes:** Multiple endpoints were added:  and  for the password reset flow; a secure, single-use  to promote a user to admin post-deployment; and  to update the sitemap.xml.
 
 - ****
-  - **Importance:** The global navigation bar.
-  - **Changes:** It was significantly updated to be dynamic. It now uses  to conditionally render either a Login link or a user dropdown with Profile, Admin (for admins), and Logout links. Fixes were also applied for mobile responsiveness, adding the user menu and ensuring the logo click scrolls to the top.
+    - **Importance:** Stores backend configuration, including the database name.
+    - **Changes:** The  was changed from  to  to resolve an issue where product data was not appearing because it was stored in a different database.
 
 - ****
-  - **Importance:** This directory contains the optimized, static production build of the React frontend. Its absence was the root cause of the final deployment failures.
-  - **Changes:** The directory was non-existent. The AI engineer successfully generated it by running the yarn run v1.22.22
-info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command. command, which fixed the build process and unblocked the path to a successful deployment.
+    - **Importance:** Customizes the Create React App build process.
+    - **Changes:** The  was added to generate Gzip () compressed versions of assets, and the Webpack config was updated to optimize code-splitting for better performance.
 </code_architecture>
 
 <pending_tasks>
-- **OAuth Integration:** Implement social login via Google and/or Yandex. This was started but paused. The next step would be to get API credentials from the user and implement a standard OAuth 2.0 flow.
-- **Forgotten Password:** Implement a Forgot Password flow, which would likely involve sending a password reset link via email.
+- **Create MongoDB Backup Guide:** The user explicitly requested instructions on how to back up the MongoDB database after experiencing data loss. This task was acknowledged but not completed.
+- **OAuth Integration:** The initial plan mentioned Google/Yandex OAuth, but this feature was paused and never implemented.
 </pending_tasks>
 
 <current_work>
-The most recent and critical work was diagnosing and resolving a persistent deployment failure that prevented any of the new authentication features from working on the live user-facing URLs ( and the preview URL). The user reported a Failed to execute clone on Response: Response body is already used error when trying to log in, despite the AI having already fixed this bug in the local codebase.
+The immediate preceding task was investigating why product images had disappeared from the public-facing site 12 hours after a successful deployment. The AI engineer conducted a thorough investigation and determined the following:
+1.  The application was correctly configured to use the .
+2.  The image files still existed in the  directory.
+3.  The backend file-serving endpoint was functional.
+4.  A direct query of the  revealed that the product documents themselves had lost their associated image URLs; only two products remained, each with a single image.
 
-After confirming the local code was correct and that the issue was not browser cache, the AI correctly deduced the problem lay in the deployment build process. A  confirmed a build failure. The AI then investigated and discovered that the  directory was missing, indicating the production build command was failing silently during deployment.
-
-**The very last action was successfully running yarn run v1.22.22
-info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command. locally.** This generated the production assets and confirmed the codebase was now buildable. The immediate task was to inform the user that the root cause of the deployment failure was found and fixed, and that they needed to perform a final Re-Deploy to push the working build to the live server. All local fixes for the authentication system, security vulnerabilities, and UI improvements are complete and included in this buildable state.
+The conclusion was that the data in the database had been altered or reset, unrelated to a code or deployment fault. This led directly to the user's final request: to provide instructions on how to create backups for the MongoDB database to prevent future data loss. The AI was in the process of acknowledging this request and preparing to create the guide when the session concluded.
 </current_work>
 
 <optional_next_step>
-Instruct the user to perform a final Save to GitHub followed by a Re-Deploy to push the now-buildable and corrected application to their live server, which will resolve the login and registration issues.
+Create a markdown file named  with instructions for the user on how to back up their MongoDB database using  and .
 </optional_next_step>
