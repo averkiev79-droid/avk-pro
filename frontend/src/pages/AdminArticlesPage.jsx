@@ -167,6 +167,7 @@ const AdminArticlesPage = () => {
         toast.success('Статья сохранена!');
         setGeneratedArticle(null);
         setFormData({ topic: '', category: 'tips', tone: 'professional' });
+        fetchArticles(); // Обновить список статей
       } else {
         toast.error('Ошибка сохранения');
       }
