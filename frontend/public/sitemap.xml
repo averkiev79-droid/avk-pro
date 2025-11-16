@@ -49,6 +49,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://avk-pro.ru/api/rss</loc>
+    <lastmod>2025-11-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://avk-pro.ru/product/dfe28f9e-1e03-45f2-bdca-40599af6c912</loc>
     <lastmod>2025-11-13</lastmod>
     <changefreq>weekly</changefreq>
