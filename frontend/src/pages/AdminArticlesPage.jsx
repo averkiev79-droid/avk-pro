@@ -322,6 +322,74 @@ const AdminArticlesPage = () => {
               </div>
             )}
           </Card>
+
+          {/* Existing Articles List */}
+          <Card className="p-6 mt-8">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900">Опубликованные статьи</h2>
+            
+            {loadingArticles ? (
+              <div className="flex justify-center py-12">
+                <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
+              </div>
+            ) : articles.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-500">Статей пока нет</p>
+                <p className="text-sm text-gray-400 mt-2">Создайте первую статью с помощью генератора выше</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {articles.map((article) => (
+                  <div key={article.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{article.title}</h3>
+                        <p className="text-sm text-gray-600 line-clamp-2 mb-3">{article.excerpt}</p>
+                        <div className="flex items-center gap-4 text-xs text-gray-500">
+                          <span>Категория: {article.category}</span>
+                          <span>•</span>
+                          <span>Создано: {new Date(article.created_at).toLocaleDateString('ru-RU')}</span>
+                          <span>•</span>
+                          <span className={article.is_published ? 'text-green-600 font-medium' : 'text-gray-400'}>
+                            {article.is_published ? 'Опубликовано' : 'Черновик'}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <Button
+                          onClick={() => handleTogglePublish(article)}
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-2"
+                        >
+                          {article.is_published ? (
+                            <>
+                              <EyeOff className="h-4 w-4" />
+                              Снять
+                            </>
+                          ) : (
+                            <>
+                              <Eye className="h-4 w-4" />
+                              Опубликовать
+                            </>
+                          )}
+                        </Button>
+                        
+                        <Button
+                          onClick={() => handleDeleteArticle(article.id)}
+                          variant="outline"
+                          size="sm"
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Card>
         </div>
       </div>
     </div>
