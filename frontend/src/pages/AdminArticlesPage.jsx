@@ -3,12 +3,14 @@ import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { Sparkles, Save, Loader2 } from 'lucide-react';
+import { Sparkles, Save, Loader2, Trash2, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 
 const AdminArticlesPage = () => {
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [articles, setArticles] = useState([]);
+  const [loadingArticles, setLoadingArticles] = useState(true);
   const [formData, setFormData] = useState({
     topic: '',
     category: 'tips',
@@ -18,7 +20,23 @@ const AdminArticlesPage = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    fetchArticles();
   }, []);
+
+  const fetchArticles = async () => {
+    try {
+      setLoadingArticles(true);
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/articles`);
+      const data = await response.json();
+      setArticles(data);
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+      toast.error('Ошибка при загрузке статей');
+    } finally {
+      setLoadingArticles(false);
+    }
+  };
 
   const handleGenerate = async () => {
     if (!formData.topic.trim()) {
