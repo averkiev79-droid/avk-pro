@@ -334,7 +334,7 @@ frontend:
 
 test_plan:
   current_focus:
-    - "Cart and Checkout Functionality - Image Display and Order Processing"
+    - "Order Creation API Endpoint - Field Mapping Fix"
   stuck_tasks:
     - "Cart and Checkout Functionality - Image Display and Order Processing"
   test_all: false
