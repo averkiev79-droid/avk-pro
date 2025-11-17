@@ -68,7 +68,11 @@ const CheckoutPage = () => {
 
     try {
       const orderData = {
-        ...formData,
+        customer_name: formData.customerName,
+        customer_phone: formData.customerPhone,
+        customer_email: formData.customerEmail || '',
+        shipping_address: formData.deliveryAddress || '',
+        order_notes: `Команда: ${formData.teamName || 'Не указана'}. ${formData.notes || ''}`,
         items: cartItems.map(item => ({
           product_name: item.name,
           quantity: item.quantity,
@@ -76,8 +80,7 @@ const CheckoutPage = () => {
           size_category: item.sizeCategoryName || item.sizeCategory,
           color: item.color
         })),
-        total_amount: totalAmount,
-        status: 'pending'
+        total_amount: totalAmount
       };
 
       const response = await fetch(`${BACKEND_URL}/api/orders`, {
