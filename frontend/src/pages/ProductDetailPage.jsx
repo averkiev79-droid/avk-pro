@@ -24,6 +24,7 @@ import { useBreadcrumbs } from '../context/BreadcrumbsContext';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
+  const { setBreadcrumb, clearBreadcrumb } = useBreadcrumbs();
   const [product, setProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
