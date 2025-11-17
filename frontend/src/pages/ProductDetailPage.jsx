@@ -6,6 +6,7 @@ import { Input } from '../components/ui/input';
 import { Badge } from '../components/ui/badge';
 import { categories } from '../mock';
 import { 
+  ChevronLeft,
   ChevronRight, 
   Plus, 
   Minus, 
