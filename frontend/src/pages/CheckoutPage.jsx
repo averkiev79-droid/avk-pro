@@ -242,7 +242,7 @@ const CheckoutPage = () => {
                   {cartItems.map((item) => (
                     <div key={item.id} className="flex gap-3 pb-4 border-b">
                       <img 
-                        src={item.image && item.image.startsWith('http') ? item.image : item.image ? `${BACKEND_URL}${item.image}` : '/images/placeholder.svg'}
+                        src={item.image || '/images/placeholder.svg'}
                         alt={item.name}
                         className="w-16 h-16 object-cover rounded-md bg-gray-100"
                       />
