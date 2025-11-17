@@ -151,6 +151,12 @@ const ProductDetailPage = () => {
       });
     } else {
       // Добавить новый товар в корзину
+      const imageUrl = product.images && product.images.length > 0 
+        ? (product.images[0].startsWith('http') 
+            ? product.images[0] 
+            : `${process.env.REACT_APP_BACKEND_URL}${product.images[0]}`)
+        : null;
+      
       const cartItem = {
         id: cartItemId,
         productId: product.id,
@@ -160,9 +166,7 @@ const ProductDetailPage = () => {
         sizeCategory: selectedSizeCategory,
         sizeCategoryName: sizeCategoryName,
         color: selectedColor,
-        image: product.images && product.images.length > 0 
-          ? `${process.env.REACT_APP_BACKEND_URL}${product.images[0]}`
-          : null
+        image: imageUrl
       };
       
       existingCart.push(cartItem);
