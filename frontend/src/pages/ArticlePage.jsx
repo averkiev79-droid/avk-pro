@@ -13,6 +13,11 @@ const ArticlePage = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     fetchArticle();
+    
+    // Cleanup breadcrumb on unmount
+    return () => {
+      clearBreadcrumb(`/blog/${slug}`);
+    };
   }, [slug]);
 
   const fetchArticle = async () => {
