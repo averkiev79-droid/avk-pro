@@ -31,6 +31,36 @@ const ProductDetailPage = () => {
   const [selectedColor, setSelectedColor] = useState('Синий');
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImage, setSelectedImage] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  // Handle swipe gestures on mobile
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      // Swipe left - next image
+      setSelectedImage((prev) => (prev + 1) % images.length);
+    }
+    if (touchStart - touchEnd < -75) {
+      // Swipe right - previous image
+      setSelectedImage((prev) => (prev - 1 + images.length) % images.length);
+    }
+  };
+
+  const handlePrevImage = () => {
+    setSelectedImage((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleNextImage = () => {
+    setSelectedImage((prev) => (prev + 1) % images.length);
+  };
 
   const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
 
