@@ -59,7 +59,7 @@ async def clean_product_images():
                 cleaned_images.append(img)
                 seen.add(img)
                 print(f"  ✓ Kept: external URL - {img[:50]}...")
-            elif img.startsWith('/api/uploads/'):
+            elif img.startswith('/api/uploads/'):
                 filename = img.split('/')[-1]
                 file_path = UPLOAD_DIR / filename
                 
