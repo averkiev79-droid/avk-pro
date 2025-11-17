@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Breadcrumbs from './components/Breadcrumbs';
 import CookieBanner from './components/CookieBanner';
 import ScrollToTop from './components/ScrollToTop';
+import { BreadcrumbsProvider } from './context/BreadcrumbsContext';
 
 // Загружаем только главную страницу сразу
 import HomePage from './pages/HomePage';
