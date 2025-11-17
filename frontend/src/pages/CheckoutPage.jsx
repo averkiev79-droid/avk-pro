@@ -59,8 +59,8 @@ const CheckoutPage = () => {
     e.preventDefault();
 
     // Валидация
-    if (!formData.customerName || !formData.customerPhone) {
-      toast.error('Заполните обязательные поля');
+    if (!formData.customerName || !formData.customerPhone || !formData.customerEmail) {
+      toast.error('Заполните обязательные поля: имя, телефон и email');
       return;
     }
 
