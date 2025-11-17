@@ -187,13 +187,14 @@ const CheckoutPage = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="customerEmail">Email</Label>
+                    <Label htmlFor="customerEmail">Email *</Label>
                     <Input
                       id="customerEmail"
                       name="customerEmail"
                       type="email"
                       value={formData.customerEmail}
                       onChange={handleInputChange}
+                      required
                       placeholder="email@example.com"
                     />
                   </div>
