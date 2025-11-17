@@ -5,7 +5,6 @@ import { products, advantages, reviews } from '../mock';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import { useParallax } from '../hooks/useParallax';
 import FAQ from '../components/FAQ';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
@@ -20,25 +19,6 @@ const AnimatedSection = ({ children, className = '', delay = 0 }) => {
       style={{ animationDelay: `${delay}s` }}
     >
       {children}
-    </div>
-  );
-};
-
-const ParallaxImage = ({ src, alt, className = '', speed = 0.3 }) => {
-  const [ref, offset] = useParallax(speed);
-  
-  return (
-    <div ref={ref} className="overflow-hidden rounded-md">
-      <img 
-        src={src}
-        alt={alt}
-        loading="lazy"
-        className={className}
-        style={{
-          transform: `translateY(${offset}px)`,
-          transition: 'transform 0.1s ease-out',
-        }}
-      />
     </div>
   );
 };
