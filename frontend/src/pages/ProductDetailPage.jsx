@@ -81,6 +81,8 @@ const ProductDetailPage = () => {
       if (!response.ok) throw new Error('Product not found');
       const data = await response.json();
       setProduct(data);
+      // Set breadcrumb with product name
+      setBreadcrumb(`/product/${id}`, data.name);
     } catch (error) {
       console.error('Error fetching product:', error);
       toast.error('Ошибка загрузки товара');
