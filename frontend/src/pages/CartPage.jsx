@@ -169,7 +169,7 @@ const CartPage = () => {
                   asChild
                   className="w-full bg-gray-900 hover:bg-gray-800 text-white py-6 text-lg transition-all duration-300 mb-3 rounded-md font-medium"
                 >
-                  <Link to="/order" className="flex items-center justify-center gap-2">
+                  <Link to="/checkout" className="flex items-center justify-center gap-2">
                     Оформить заказ <ArrowRight size={20} />
                   </Link>
                 </Button>
