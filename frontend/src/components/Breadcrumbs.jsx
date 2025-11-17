@@ -43,7 +43,8 @@ const Breadcrumbs = () => {
           {pathnames.map((value, index) => {
             const to = `/${pathnames.slice(0, index + 1).join('/')}`;
             const isLast = index === pathnames.length - 1;
-            const name = breadcrumbNames[value] || value;
+            // Check custom breadcrumbs first, then dictionary, then value
+            const name = customBreadcrumbs[to] || breadcrumbNames[value] || value;
 
             return (
               <li
