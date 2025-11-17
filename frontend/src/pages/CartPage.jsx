@@ -86,7 +86,7 @@ const CartPage = () => {
                 <Card key={item.id} className="p-4 sm:p-6 border border-gray-200 bg-white shadow-sm">
                   <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                     <img 
-                      src={item.image} 
+                      src={item.image && item.image.startsWith('http') ? item.image : item.image ? `${BACKEND_URL}${item.image}` : '/images/placeholder.svg'} 
                       alt={item.name}
                       className="w-24 h-24 object-cover rounded-md bg-gray-100"
                     />
