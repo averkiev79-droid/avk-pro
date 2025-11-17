@@ -173,7 +173,9 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <AppContent />
+        <BreadcrumbsProvider>
+          <AppContent />
+        </BreadcrumbsProvider>
       </BrowserRouter>
     </AuthProvider>
   );
