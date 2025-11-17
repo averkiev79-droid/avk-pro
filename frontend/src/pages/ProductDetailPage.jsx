@@ -72,6 +72,11 @@ const ProductDetailPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     fetchProduct();
     fetchProducts();
+    
+    // Cleanup breadcrumb on unmount
+    return () => {
+      clearBreadcrumb(`/product/${id}`);
+    };
   }, [id]);
 
   const fetchProduct = async () => {
