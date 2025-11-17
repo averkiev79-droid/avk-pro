@@ -1,8 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
+import { useBreadcrumbs } from '../context/BreadcrumbsContext';
 
 const Breadcrumbs = () => {
   const location = useLocation();
+  const { customBreadcrumbs } = useBreadcrumbs();
   const pathnames = location.pathname.split('/').filter((x) => x);
 
   const breadcrumbNames = {
@@ -12,7 +14,11 @@ const Breadcrumbs = () => {
     about: 'О компании',
     contacts: 'Контакты',
     order: 'Заказать форму',
-    cart: 'Корзина'
+    cart: 'Корзина',
+    checkout: 'Оформление заказа',
+    blog: 'Блог',
+    product: 'Товар',
+    legal: 'Юридическая информация'
   };
 
   // Don't show breadcrumbs on homepage
