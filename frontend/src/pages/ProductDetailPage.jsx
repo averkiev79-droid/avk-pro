@@ -227,14 +227,51 @@ const ProductDetailPage = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           {/* Image Gallery */}
           <div className="space-y-4">
-            {/* Main Image */}
-            <div className="aspect-square rounded-lg overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-lg">
+            {/* Main Image with Navigation */}
+            <div 
+              className="aspect-square rounded-lg overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-lg relative group"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
               <img 
                 src={images[selectedImage]} 
                 alt={product.name}
                 loading="eager"
                 className="w-full h-full object-cover"
               />
+              
+              {/* Desktop Navigation Arrows */}
+              {images.length > 1 && (
+                <>
+                  <button
+                    onClick={handlePrevImage}
+                    className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    aria-label="Предыдущее изображение"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button
+                    onClick={handleNextImage}
+                    className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-900 rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    aria-label="Следующее изображение"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </>
+              )}
+              
+              {/* Mobile Swipe Indicator */}
+              <div className="md:hidden absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                {images.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      selectedImage === index ? 'bg-white w-6' : 'bg-white/50'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
             
             {/* Thumbnails */}
