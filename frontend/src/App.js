@@ -163,6 +163,7 @@ function AppContent() {
           {showCookieBanner && !isAdminRoute && (
             <CookieBanner onAccept={handleAcceptCookies} />
           )}
+          <ScrollToTop />
         </div>
   );
 }
