@@ -1251,6 +1251,255 @@ class AuthAPITester:
             
         return False
     
+    # ==================== ORDER TESTS ====================
+    
+    def test_create_order_success(self):
+        """Test POST /api/orders - Create order with correct field mapping"""
+        print("\n=== Testing Order Creation (Success Case) ===")
+        
+        # Test data with correct field mapping as specified in the review
+        order_data = {
+            "customer_name": "Тестовый Покупатель",
+            "customer_phone": "+7 999 123 4567",
+            "customer_email": "test@example.com",
+            "shipping_address": "Москва, ул. Тестовая, д. 1",
+            "order_notes": "Команда: Хоккейная команда. Срочная доставка",
+            "items": [
+                {
+                    "product_name": "Хоккейный свитер",
+                    "quantity": 10,
+                    "price": 1500,
+                    "size_category": "Взрослые",
+                    "color": "синий"
+                }
+            ],
+            "total_amount": 15000
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/orders", json=order_data, timeout=10)
+            
+            if response.status_code == 201:
+                result = response.json()
+                
+                # Validate response structure
+                required_fields = ["success", "message", "order_id"]
+                missing_fields = [field for field in required_fields if field not in result]
+                
+                if not missing_fields:
+                    if (result.get("success") == True and 
+                        "успешно" in result.get("message", "").lower() and 
+                        result.get("order_id")):
+                        
+                        order_id = result["order_id"]
+                        
+                        self.log_result(
+                            "Create Order Success", 
+                            True, 
+                            f"Order created successfully with ID: {order_id}",
+                            {
+                                "order_id": order_id,
+                                "message": result["message"],
+                                "status_code": 201,
+                                "field_mapping": "correct"
+                            }
+                        )
+                        
+                        # Verify order in database
+                        return self.verify_order_in_database(order_id, order_data)
+                    else:
+                        self.log_result("Create Order Success", False, "Invalid response content", {"response": result})
+                else:
+                    self.log_result("Create Order Success", False, f"Missing required fields: {missing_fields}")
+            else:
+                self.log_result("Create Order Success", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Create Order Success", False, f"Request failed: {str(e)}")
+            
+        return False
+    
+    def test_create_order_minimal_fields(self):
+        """Test POST /api/orders - Create order with minimal required fields"""
+        print("\n=== Testing Order Creation (Minimal Fields) ===")
+        
+        # Test data with minimal fields
+        order_data = {
+            "customer_name": "Минималист",
+            "customer_phone": "+7 900 000 0000",
+            "customer_email": "min@test.com",
+            "shipping_address": "",
+            "order_notes": "",
+            "items": [
+                {
+                    "product_name": "Товар",
+                    "quantity": 10,
+                    "price": 100,
+                    "size_category": "M",
+                    "color": "черный"
+                }
+            ],
+            "total_amount": 1000
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/orders", json=order_data, timeout=10)
+            
+            if response.status_code == 201:
+                result = response.json()
+                
+                if (result.get("success") == True and 
+                    result.get("order_id")):
+                    
+                    order_id = result["order_id"]
+                    
+                    self.log_result(
+                        "Create Order Minimal Fields", 
+                        True, 
+                        f"Order created with minimal fields, ID: {order_id}",
+                        {
+                            "order_id": order_id,
+                            "empty_fields_accepted": True,
+                            "status_code": 201
+                        }
+                    )
+                    return True
+                else:
+                    self.log_result("Create Order Minimal Fields", False, "Invalid response content", {"response": result})
+            else:
+                self.log_result("Create Order Minimal Fields", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Create Order Minimal Fields", False, f"Request failed: {str(e)}")
+            
+        return False
+    
+    def test_create_order_missing_required_field(self):
+        """Test POST /api/orders - Create order without required field (should return 422)"""
+        print("\n=== Testing Order Creation (Missing Required Field) ===")
+        
+        # Test data without customer_email (required field)
+        order_data = {
+            "customer_name": "Тест без Email",
+            "customer_phone": "+7 900 000 0001",
+            # "customer_email": "missing@test.com",  # Missing required field
+            "shipping_address": "Адрес",
+            "order_notes": "Заметки",
+            "items": [
+                {
+                    "product_name": "Товар",
+                    "quantity": 10,
+                    "price": 100,
+                    "size_category": "L",
+                    "color": "красный"
+                }
+            ],
+            "total_amount": 1000
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/orders", json=order_data, timeout=10)
+            
+            if response.status_code == 422:
+                result = response.json()
+                self.log_result(
+                    "Create Order Missing Required Field", 
+                    True, 
+                    "Correctly rejected order without required field",
+                    {
+                        "status_code": 422,
+                        "validation_error": True,
+                        "detail": result.get("detail", "No detail provided")
+                    }
+                )
+                return True
+            else:
+                self.log_result("Create Order Missing Required Field", False, f"Expected 422, got {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Create Order Missing Required Field", False, f"Request failed: {str(e)}")
+            
+        return False
+    
+    def verify_order_in_database(self, order_id, original_data):
+        """Verify that order was saved correctly in database by fetching it"""
+        print(f"\n=== Verifying Order in Database (ID: {order_id}) ===")
+        
+        try:
+            # Try to fetch the order by ID
+            response = requests.get(f"{self.base_url}/orders/{order_id}", timeout=10)
+            
+            if response.status_code == 200:
+                order = response.json()
+                
+                # Validate that saved data matches original data
+                if (order.get("customer_name") == original_data["customer_name"] and
+                    order.get("customer_email") == original_data["customer_email"] and
+                    order.get("customer_phone") == original_data["customer_phone"] and
+                    order.get("shipping_address") == original_data["shipping_address"] and
+                    order.get("order_notes") == original_data["order_notes"] and
+                    order.get("total_amount") == original_data["total_amount"]):
+                    
+                    self.log_result(
+                        "Verify Order in Database", 
+                        True, 
+                        "Order data saved correctly in database",
+                        {
+                            "order_id": order_id,
+                            "customer_name": order["customer_name"],
+                            "customer_email": order["customer_email"],
+                            "total_amount": order["total_amount"],
+                            "items_count": len(order.get("items", [])),
+                            "status": order.get("status", "unknown")
+                        }
+                    )
+                    return True
+                else:
+                    self.log_result("Verify Order in Database", False, "Order data mismatch", {
+                        "expected": original_data,
+                        "actual": order
+                    })
+            elif response.status_code == 404:
+                self.log_result("Verify Order in Database", False, "Order not found in database (404)")
+            else:
+                self.log_result("Verify Order in Database", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Verify Order in Database", False, f"Database verification failed: {str(e)}")
+            
+        return False
+    
+    def test_get_orders_list(self):
+        """Test GET /api/orders - Get all orders"""
+        print("\n=== Testing Get Orders List ===")
+        
+        try:
+            response = requests.get(f"{self.base_url}/orders", timeout=10)
+            
+            if response.status_code == 200:
+                orders = response.json()
+                
+                if isinstance(orders, list):
+                    self.log_result(
+                        "Get Orders List", 
+                        True, 
+                        f"Retrieved {len(orders)} orders from database",
+                        {
+                            "orders_count": len(orders),
+                            "status_code": 200
+                        }
+                    )
+                    return orders
+                else:
+                    self.log_result("Get Orders List", False, "Response is not a list", {"response": orders})
+            else:
+                self.log_result("Get Orders List", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Get Orders List", False, f"Request failed: {str(e)}")
+            
+        return []
+    
     def run_all_tests(self):
         """Run all authentication and product API tests"""
         print(f"🚀 Starting Authentication & Product API Tests")
