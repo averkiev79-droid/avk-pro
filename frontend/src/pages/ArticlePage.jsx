@@ -22,6 +22,8 @@ const ArticlePage = () => {
       if (response.ok) {
         const data = await response.json();
         setArticle(data);
+        // Set breadcrumb with article title
+        setBreadcrumb(`/blog/${slug}`, data.title);
       }
       setLoading(false);
     } catch (error) {
