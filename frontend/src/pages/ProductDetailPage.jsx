@@ -20,6 +20,7 @@ import {
   Clock
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useBreadcrumbs } from '../context/BreadcrumbsContext';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
