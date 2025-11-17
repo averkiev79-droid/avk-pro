@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronRight, Calendar, User, Clock } from 'lucide-react';
 import { Badge } from '../components/ui/badge';
+import { useBreadcrumbs } from '../context/BreadcrumbsContext';
 
 const ArticlePage = () => {
   const { slug } = useParams();
+  const { setBreadcrumb, clearBreadcrumb } = useBreadcrumbs();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
 
