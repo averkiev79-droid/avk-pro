@@ -188,6 +188,18 @@ backend:
           agent: "testing"
           comment: "✅ GET UPLOADED FILES LIST ENDPOINT FULLY WORKING: Comprehensive testing of GET /api/uploads endpoint completed successfully as requested. Tested all scenarios: (1) GET /api/uploads - Successfully returns array of file objects with all required fields: filename, url, size, uploadedAt. Retrieved list of 18 existing uploaded files. (2) POST /api/upload integration - File upload working correctly, new files get UUID filenames and proper URLs. (3) Integration test - After uploading new file, GET /api/uploads correctly shows increased count (19→20 files) and new file appears in list with proper metadata. (4) File structure validation - All file objects contain required fields: filename (UUID-based), url (/api/uploads/filename), size (bytes), uploadedAt (ISO timestamp). Files are sorted by upload time (newest first). Only image files (.jpg, .jpeg, .png, .gif, .webp, .svg) are included in list as expected. Endpoint handles empty uploads directory gracefully. MediaPage file persistence issue is resolved - uploaded files no longer 'disappear' because frontend can now load existing files from server on component mount. API ready for production use."
 
+  - task: "Order Creation API Endpoint - Field Mapping Fix"
+    implemented: true
+    working: true
+    file: "backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "✅ ORDER CREATION ENDPOINT FULLY WORKING AFTER FIELD MAPPING FIX: Comprehensive testing of POST /api/orders completed successfully after fixing frontend field mapping issue. Tested all scenarios: (1) SUCCESS CASE: Order creation with correct field mapping (customer_name, customer_phone, customer_email, shipping_address, order_notes) returns HTTP 201 with proper response {'success': true, 'message': 'Заказ создан успешно', 'order_id': '...'} as specified. (2) DATABASE VERIFICATION: Orders are correctly saved in MongoDB with all fields properly mapped and stored. Verified order data matches input data exactly. (3) MINIMAL FIELDS TEST: Order creation works with empty shipping_address and order_notes fields. (4) VALIDATION TEST: Missing required field (customer_email) correctly returns HTTP 422 validation error. (5) ORDER RETRIEVAL: GET /api/orders/{id} and GET /api/orders endpoints working correctly. (6) FIELD MAPPING CONFIRMED: Backend properly accepts customer_name, customer_phone, customer_email, shipping_address, order_notes (not the old camelCase versions). The reported cart submission error 'всплывает ошибка при отправке заказа' has been resolved through proper field mapping. Order creation API is production-ready and fully functional."
+
   - task: "Media Page File Persistence Fix - Files No Longer Disappear on Upload"
     implemented: true
     working: true
