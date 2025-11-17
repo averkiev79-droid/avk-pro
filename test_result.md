@@ -307,9 +307,24 @@ frontend:
           agent: "testing"
           comment: "✅ COMPREHENSIVE ARTICLES MANAGEMENT TESTING COMPLETED: Successfully tested all requested functionality for article management in admin panel. (1) Admin Login: Successfully logged in with simplepay@mail.ru/admin123 credentials and accessed admin panel. (2) Articles Page Access: Successfully navigated to /admin/articles page, confirmed 'Генератор статей с AI' interface is working. (3) Article Listing: Found existing articles displaying correctly with title, excerpt, creation date, and publication status ('Опубликовано'/'Черновик'). (4) Status Toggle Functionality: Successfully tested publish/unpublish buttons with Eye/EyeOff icons - 'Снять' and 'Опубликовать' buttons are functional and clickable. (5) Delete Functionality: Confirmed delete buttons with Trash2 icons are present and functional. (6) Empty State: When no articles exist, proper empty state message 'Статей пока нет' is displayed with helpful text 'Создайте первую статью с помощью генератора выше'. (7) Article Generation Form: Confirmed topic input field, category selector, and 'Сгенерировать статью' button are all functional. (8) Backend Integration: PUT /api/articles/{id} and DELETE /api/articles/{id} endpoints are working correctly. All requested functionality is implemented and working as expected. User can now successfully delete old articles and manage publication status as requested."
 
+frontend:
+  - task: "Cart and Checkout Functionality - Image Display and Order Processing"
+    implemented: true
+    working: false
+    file: "frontend/src/pages/CartPage.jsx, frontend/src/pages/CheckoutPage.jsx, frontend/src/pages/ProductDetailPage.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUES FOUND IN CART AND CHECKOUT: Comprehensive testing revealed 2 major problems reported by user are NOT fully fixed: (1) IMAGE URL MALFORMATION: Cart items store malformed image URLs like 'https://apparel-platform-2.emergent.hosthttps://avk-pro.ru/api/uploads/...' with double protocol concatenation. This causes images to fail loading with ERR_NAME_NOT_RESOLVED. Root cause: ProductDetailPage.jsx is incorrectly concatenating image URLs when adding to cart. (2) CHECKOUT BUTTON WRONG DESTINATION: Cart page 'Оформить заказ' button still links to '/order' instead of '/checkout' as claimed to be fixed. Testing confirmed button href='/order' leads to non-existent page. (3) CART PERSISTENCE ISSUE: Items added to cart don't display on cart page despite being saved in localStorage correctly. Cart shows 'Корзина пуста' even when localStorage contains cart data. (4) PARTIAL SUCCESS: CheckoutPage.jsx exists and has proper form fields, but unreachable due to wrong button link. Cart localStorage saving works correctly with proper item structure. URGENT: Need to fix image URL formation in ProductDetailPage and update cart button link to /checkout."
+
 test_plan:
-  current_focus: []
-  stuck_tasks: []
+  current_focus:
+    - "Cart and Checkout Functionality - Image Display and Order Processing"
+  stuck_tasks:
+    - "Cart and Checkout Functionality - Image Display and Order Processing"
   test_all: false
   test_priority: "high_first"
 
