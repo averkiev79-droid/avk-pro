@@ -1598,6 +1598,22 @@ class AuthAPITester:
         # Article Test 1: AI Article Generation
         self.test_article_generation_with_ai()
         
+        # ==================== ORDER TESTS ====================
+        print("\n🛒 ORDER TESTS")
+        print("=" * 40)
+        
+        # Order Test 1: Create order with correct field mapping
+        self.test_create_order_success()
+        
+        # Order Test 2: Create order with minimal fields
+        self.test_create_order_minimal_fields()
+        
+        # Order Test 3: Create order missing required field (validation test)
+        self.test_create_order_missing_required_field()
+        
+        # Order Test 4: Get orders list
+        self.test_get_orders_list()
+        
         # Summary
         self.print_summary()
     
