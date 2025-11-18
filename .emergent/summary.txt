@@ -1,90 +1,97 @@
 <analysis>
-The trajectory details an extensive and complex development cycle on a full-stack e-commerce application. The work began by debugging a persistent authentication failure on the production server. A methodical experiment proved that code deployment was functional, leading to the discovery of an incorrect backend URL in the frontend's environment file—a critical fix.
+The trajectory documents a comprehensive, multi-faceted development and debugging cycle on a full-stack e-commerce application. The work was characterized by a high volume of user-requested features and bug fixes, often interrupted by a persistent and critical underlying environmental issue.
 
-Following this, the AI engineer implemented a full password-reset feature (backend endpoints, email service integration, frontend pages). The development was then severely hampered by a recurring  error. After an initial code-level fix proved insufficient, the engineer correctly identified the true root cause: a session-recording script () from the hosting platform was monkey-patching the global  API. The engineer implemented a robust workaround by preserving and using the original  function for all authentication-related requests.
+The AI engineer successfully implemented numerous features, including a media manager, an RSS feed, a complete shopping cart and checkout flow, enhanced article management in the admin panel, and UI/UX improvements like a new product image gallery and human-readable breadcrumbs.
 
-Subsequent tasks included a full SEO implementation (sitemap, robots.txt, Google/Yandex verification), site performance optimization via code-splitting () and Gzip compression, creating a reusable image uploader, and numerous UI/UX fixes based on user feedback. A recurring theme was data persistence issues, where the application was pointed at the wrong database and product data was later found to be missing, prompting the final user request for a database backup guide.
+However, a significant portion of the work involved repeatedly fixing the same symptom: product images disappearing after deployment. The engineer initially addressed this by fixing broken image paths in the code, then by normalizing inconsistent URL formats in the database. The true root cause was only definitively identified near the end of the trajectory: the deployment process was consistently overwriting the  file, resetting the  to a non-production preview domain. This environmental flaw undid the frontend fixes with every new deploy, creating a frustrating loop for both the user and the engineer.
 
-The user's primary language is **Russian**. The next agent must communicate in Russian.
+The final user request concerned a DNS error reported by Yandex Webmaster, which the engineer had just begun to investigate when the session concluded.
+
+The user's primary language is **Russian**. The next agent must respond in Russian.
 </analysis>
 
 <product_requirements>
-The project is an e-commerce application for A.V.K. SPORT, a hockey equipment supplier. The primary objective of the work was to build, debug, and enhance a secure, role-based user authentication system and improve the overall application quality.
+The project is a full-stack e-commerce application for A.V.K. SPORT, a hockey equipment supplier. The development focused on bug fixing, feature implementation, and resolving critical deployment-related issues.
 
 **Implemented Features & Fixes:**
-*   **Authentication System:** A full-stack solution for user registration, login (JWT), and a complete Forgot Password flow with email-based reset tokens.
-*   **Critical Bug Fixes:**
-    *   Resolved production login failures by correcting the  in the frontend  file.
-    *   Fixed a persistent Response body is already used error by identifying and bypassing a conflict with a platform-injected  script.
-*   **Admin Functionality:**
-    *   Created a secure, one-time endpoint and a dedicated UI page () to simplify the process of creating the initial administrator account on a new deployment.
-    *   Added image upload guidelines and a Go to Site button within the admin panel for better usability.
-*   **Performance Optimization:** Implemented code-splitting () and server-side Gzip compression to significantly reduce initial page load times.
-*   **SEO:** Integrated a full SEO setup, including a dynamically generated , a configured , and support for Google and Yandex verification via both meta tags and HTML files.
-*   **Branding:** Replaced the site-wide logo and favicon with new assets provided by the user.
+*   **Admin Panel:** Restored missing Articles and Clubs pages. Implemented full CRUD (Create, Read, Update, Delete) functionality for blog articles, including publish/unpublish toggles. Fixed the media manager to correctly display and persist all uploaded images.
+*   **Shopping Cart:** Implemented a fully functional shopping cart using . Created a new checkout page and fixed bugs related to adding items, displaying images in the cart, and submitting orders to the backend.
+*   **Data & Deployment:**
+    *   Diagnosed and fixed multiple data integrity issues, including product data loss caused by hardcoded database names in utility scripts.
+    *   Identified and provided a workaround for a critical deployment issue where the frontend  file was being overwritten, causing images to break.
+    *   Created MongoDB backup/restore scripts and documentation.
+*   **UX/UI:**
+    *   Replaced static product image display with an interactive gallery featuring swipe on mobile and navigation arrows on desktop.
+    *   Implemented human-readable breadcrumbs instead of UUIDs.
+    *   Added a scroll to top button and populated the site's footer with templated legal pages.
+*   **SEO/Content:** Generated an RSS feed for the blog and linked it appropriately.
 </product_requirements>
 
 <key_technical_concepts>
-- **Frameworks:** React (with Craco) frontend, FastAPI (Python) backend.
-- **Database:** MongoDB.
-- **Authentication:** JWT,  for hashing, email-based password reset.
-- **Frontend:**
-    - React Context API for global state.
-    -  for code-splitting and performance optimization.
-    - Tailwind CSS for styling.
-- **Backend:**
-    -  for JWTs.
-    -  for sending emails.
-- **Deployment & Environment:**
-    - Nginx for serving and Gzip compression.
-    - Critical debugging involved environment variables () and platform-specific script conflicts ().
+- **Frameworks:** React (with Craco) on the frontend, FastAPI (Python) on the backend.
+- **Database:** MongoDB, with database access controlled by environment variables.
+- **State Management:** React Context API (for breadcrumbs),  (for shopping cart).
+- **Frontend:**  for code-splitting,  for touch gestures, Tailwind CSS for styling.
+- **Backend:**  for JWTs, Pydantic for data modeling, dynamic generation of XML for RSS feeds.
+- **Core Issue:** Debugging focused heavily on environment configuration ( files), data persistence across deployments, and distinguishing between code-level bugs and platform/environment-level issues.
 </key_technical_concepts>
 
 <code_architecture>
-The application follows a standard monorepo structure with  and  directories.
+The application uses a standard monorepo structure with distinct  and  directories.
 
 
 
 - ****
-    - **Importance:** The main HTML entry point.
-    - **Changes:** A script was added to save a reference to the native  as  before the platform's  script could modify it. This was a critical fix for the Response body is already used error. It was also updated to include meta tags for Google and Yandex site verification and links to the new favicons and .
+    - **Importance:** Crucial for frontend-backend communication. It defines .
+    - **Summary of Changes:** This file was the root of a recurring, critical issue. It was repeatedly being reset to a preview URL by the deployment process. The final fix involved manually editing it to point to the correct production URL () and documenting this as a required post-deployment step.
 
 - ****
-    - **Importance:** The root component containing all routing logic.
-    - **Changes:** Major refactoring to use  and  for code-splitting, which significantly improved performance. It was also modified to conditionally render the main  and  based on the URL path, preventing them from appearing in the  section.
-
-- **** (and , , )
-    - **Importance:** Core authentication pages.
-    - **Changes:** The  calls in these files were updated to use the saved  to bypass the  issue. The logic was also refactored to ensure  is only called once per request.
+    - **Importance:** The main FastAPI application file containing all API endpoints.
+    - **Summary of Changes:** Heavily modified to support new features. New endpoints were added to: list all uploaded media (), provide an RSS feed (), update articles (), and create orders ().
 
 - ****
-    - **Importance:** The main FastAPI application file defining all API endpoints.
-    - **Changes:** Multiple endpoints were added:  and  for the password reset flow; a secure, single-use  to promote a user to admin post-deployment; and  to update the sitemap.xml.
+    - **Importance:** Displays a single product's details and is the primary point for adding items to the cart.
+    - **Summary of Changes:** Underwent significant changes. The image gallery was rebuilt to be interactive (swipe/arrows). The Add to Cart logic was fixed to correctly save items with their full image URL to . The component was also updated to use the  to display the product's name in the navigation path.
 
 - ****
-    - **Importance:** Stores backend configuration, including the database name.
-    - **Changes:** The  was changed from  to  to resolve an issue where product data was not appearing because it was stored in a different database.
+    - **Importance:** A new page created to handle the order submission process.
+    - **Summary of Changes:** Created from scratch. It fetches cart data from , displays a summary, and contains a form for user details. The form submission logic was debugged to correctly map frontend field names () to backend Pydantic model names ().
 
 - ****
-    - **Importance:** Customizes the Create React App build process.
-    - **Changes:** The  was added to generate Gzip () compressed versions of assets, and the Webpack config was updated to optimize code-splitting for better performance.
+    - **Importance:** The admin interface for managing blog content.
+    - **Summary of Changes:** Transformed from a simple generate article page into a full management UI. It now fetches and lists all existing articles, with controls to delete or toggle their publication status, communicating with new and existing backend endpoints.
+
+- ****
+    - **Importance:** Standalone scripts for database maintenance and administration.
+    - **Summary of Changes:** Several scripts (, , etc.) were fixed to read the database name from the  file instead of using hardcoded values, which was a source of data loss during deployments. New scripts were added to seed legal pages and fix image URL inconsistencies.
 </code_architecture>
 
 <pending_tasks>
-- **Create MongoDB Backup Guide:** The user explicitly requested instructions on how to back up the MongoDB database after experiencing data loss. This task was acknowledged but not completed.
-- **OAuth Integration:** The initial plan mentioned Google/Yandex OAuth, but this feature was paused and never implemented.
+- **Investigate Yandex DNS Error:** The user reported a DNS connection error from Yandex Webmaster. The site appears to be live, but this needs further investigation to ensure search engine visibility is not compromised.
+- **Implement a Permanent Deployment Fix:** The core problem of  being overwritten on deploy needs to be resolved in the CI/CD pipeline itself, rather than relying on a manual post-deployment script.
 </pending_tasks>
 
 <current_work>
-The immediate preceding task was investigating why product images had disappeared from the public-facing site 12 hours after a successful deployment. The AI engineer conducted a thorough investigation and determined the following:
-1.  The application was correctly configured to use the .
-2.  The image files still existed in the  directory.
-3.  The backend file-serving endpoint was functional.
-4.  A direct query of the  revealed that the product documents themselves had lost their associated image URLs; only two products remained, each with a single image.
+The immediate last task was investigating a DNS error reported by Yandex Webmaster, which was preventing their crawler from accessing the site. The AI engineer had just begun the diagnostic process.
 
-The conclusion was that the data in the database had been altered or reset, unrelated to a code or deployment fault. This led directly to the user's final request: to provide instructions on how to create backups for the MongoDB database to prevent future data loss. The AI was in the process of acknowledging this request and preparing to create the guide when the session concluded.
+**Action Taken:** The engineer executed HTTP/2 200 
+date: Tue, 18 Nov 2025 08:12:23 GMT
+content-type: text/html; charset=utf-8
+cf-ray: 9a0600a3edde11a7-ORD
+access-control-allow-origin: *
+cache-control: public, max-age=300
+access-control-allow-headers: Content-Type
+access-control-allow-methods: GET, HEAD, OPTIONS
+cache-tag: apparel-platform-2
+set-cookie: __cf_bm=0K4896Cuqhs8_d5ZfUkiDADQ0No_1YJ_W3HH_kQYeig-1763453543-1.0.1.1-3sN7dcPk8xcK3aeBYJMvRfslE61JCdOGCo_r6lL8rpUg7zOqboEViLihPbTKDc2_Hz175vrX.GmhgqY6px.n_DVlCpBnTZwdQEwJ0SIy8YA; path=/; expires=Tue, 18-Nov-25 08:42:23 GMT; domain=.avk-pro.ru; HttpOnly; Secure; SameSite=None
+server: cloudflare
+ to test the site's accessibility.
+
+**Result:** The command returned a  status, and the response headers confirmed the site is live and being served via Cloudflare.
+
+**Conclusion:** This result indicates that the website is not completely down. The problem reported by Yandex is likely not a total server outage but could be a transient DNS issue, a regional accessibility problem, a configuration issue specific to the Yandex bot (e.g., in ), or an issue with Cloudflare's configuration for certain user agents. The next step is to probe these more specific possibilities.
 </current_work>
 
 <optional_next_step>
-Create a markdown file named  with instructions for the user on how to back up their MongoDB database using  and .
+Check  and  for any rules that might be blocking the Yandex bot, and then use an external DNS checker tool to verify the  domain's DNS records are propagating correctly worldwide.
 </optional_next_step>
