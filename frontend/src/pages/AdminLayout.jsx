@@ -84,12 +84,9 @@ const AdminLayout = () => {
   };
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
+    localStorage.removeItem('admin_session');
+    navigate('/admin/login');
   };
-
-  if (!isAuthenticated) {
-    return <Navigate to="/admin/login" replace />;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
