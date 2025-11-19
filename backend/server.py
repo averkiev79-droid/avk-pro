@@ -893,14 +893,9 @@ async def admin_login(request: AdminLoginRequest):
 # Old JWT-based auth endpoints removed - now using simple password-based admin auth
 
 # ============================================================================
-# USER MANAGEMENT API - Admin endpoints (KEEPING FOR ADMIN PANEL)
-async def login(credentials: UserLogin):
-    """Login user"""
-    try:
-        logger.info(f"Login attempt for email: {credentials.email}")
-        
-        # Find user by email
-        user = await db.users.find_one({"email": credentials.email})
+# Старые JWT endpoints удалены - теперь используется простая auth через пароль
+
+# ============================================================================
         
         if not user:
             logger.warning(f"User not found: {credentials.email}")
