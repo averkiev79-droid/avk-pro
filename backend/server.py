@@ -890,7 +890,10 @@ async def admin_login(request: AdminLoginRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@api_router.post("/auth/login", response_model=Token)
+# Old JWT-based auth endpoints removed - now using simple password-based admin auth
+
+# ============================================================================
+# USER MANAGEMENT API - Admin endpoints (KEEPING FOR ADMIN PANEL)
 async def login(credentials: UserLogin):
     """Login user"""
     try:
