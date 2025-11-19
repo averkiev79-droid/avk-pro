@@ -114,8 +114,9 @@ function AppContent() {
                 
                 {/* Admin login - Simplified password-based auth */}
                 <Route path="/admin/login" element={<AdminLoginPage />} />
+                <Route path="/admin/simple-orders" element={<SimpleOrdersPage />} />
                 
-                {/* Admin routes */}
+                {/* Admin routes (old system - keeping for now) */}
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<DashboardPage />} />
                   <Route path="dashboard" element={<DashboardPage />} />
