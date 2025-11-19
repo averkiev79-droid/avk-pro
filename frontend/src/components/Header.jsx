@@ -108,15 +108,6 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <div className="lg:hidden flex items-center gap-4">
-            {isAuthenticated ? (
-              <Link to="/profile" className="text-gray-900">
-                <User size={22} strokeWidth={1.5} />
-              </Link>
-            ) : (
-              <Link to="/login" className="text-gray-900">
-                <User size={22} strokeWidth={1.5} />
-              </Link>
-            )}
             <Link to="/cart" className="relative text-gray-900">
               <ShoppingCart size={22} strokeWidth={1.5} />
               {cartCount > 0 && (
