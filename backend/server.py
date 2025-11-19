@@ -856,60 +856,37 @@ async def generate_article_with_ai(request: AIGenerateRequest):
 from simple_auth import SimpleAuth
 from order_email_service import OrderEmailService
 
+class AdminLoginRequest(BaseModel):
+    password: str
+
 @api_router.post("/admin/login", response_model=dict)
-async def admin_login(password: str):
-    """Register a new user"""
+async def admin_login(request: AdminLoginRequest):
+    """Simple admin login with password from environment"""
     try:
-        # Check if user already exists
-        existing_user = await db.users.find_one({"email": user_data.email})
-        if existing_user:
+        # Verify password against environment variable
+        if not SimpleAuth.verify_admin_password(request.password):
             raise HTTPException(
-                status_code=400,
-                detail="Email already registered"
+                status_code=401,
+                detail="Неверный пароль"
             )
         
-        # Create new user
-        user_dict = {
-            "user_id": str(uuid.uuid4()),
-            "email": user_data.email,
-            "hashed_password": get_password_hash(user_data.password),
-            "full_name": user_data.full_name,
-            "phone": user_data.phone,
-            "role": "customer",  # Default role
-            "disabled": False,
-            "created_at": datetime.now(timezone.utc).isoformat(),
-            "updated_at": datetime.now(timezone.utc).isoformat()
+        # Create session
+        session_data = SimpleAuth.create_admin_session()
+        
+        logger.info(f"Admin logged in: {session_data['email']}")
+        
+        return {
+            "success": True,
+            "message": "Успешный вход",
+            "session_token": session_data["session_token"],
+            "email": session_data["email"],
+            "role": session_data["role"]
         }
-        
-        result = await db.users.insert_one(user_dict)
-        
-        if not result.inserted_id:
-            raise HTTPException(status_code=500, detail="Failed to create user")
-        
-        # Create access token
-        access_token = create_access_token(data={"sub": user_dict["user_id"]})
-        
-        # Return token and user info
-        user_response = UserResponse(
-            user_id=user_dict["user_id"],
-            email=user_dict["email"],
-            full_name=user_dict["full_name"],
-            phone=user_dict.get("phone"),
-            role=user_dict["role"],
-            disabled=user_dict["disabled"],
-            address=user_dict.get("address"),
-            city=user_dict.get("city"),
-            created_at=datetime.fromisoformat(user_dict["created_at"])
-        )
-        
-        logger.info(f"User registered: {user_dict['email']}")
-        
-        return Token(access_token=access_token, user=user_response)
         
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Error registering user: {str(e)}")
+        logger.error(f"Error during admin login: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
