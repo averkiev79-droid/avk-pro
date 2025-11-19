@@ -850,11 +850,14 @@ async def generate_article_with_ai(request: AIGenerateRequest):
 
 
 # ============================================================================
-# AUTHENTICATION API - User registration, login, profile
+# SIMPLIFIED AUTHENTICATION API - Admin-only password-based login
 # ============================================================================
 
-@api_router.post("/auth/register", response_model=Token, status_code=201)
-async def register(user_data: UserCreate):
+from simple_auth import SimpleAuth
+from order_email_service import OrderEmailService
+
+@api_router.post("/admin/login", response_model=dict)
+async def admin_login(password: str):
     """Register a new user"""
     try:
         # Check if user already exists
