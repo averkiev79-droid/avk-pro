@@ -41,13 +41,16 @@ const LegalPagesPage = lazy(() => import('./pages/admin/LegalPagesPage'));
 const MediaPage = lazy(() => import('./pages/admin/MediaPage'));
 const SiteSettingsPage = lazy(() => import('./pages/admin/SiteSettingsPage'));
 
-// Auth pages
+// Auth pages (keeping old pages for now, but will remove later)
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const AuthCallbackPage = lazy(() => import('./pages/AuthCallbackPage'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
+
+// New simplified admin auth
+const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'));
 const MakeAdminPage = lazy(() => import('./pages/MakeAdminPage'));
 const TestUploadPage = lazy(() => import('./pages/TestUploadPage'));
 const TestGuidelinesPage = lazy(() => import('./pages/TestGuidelinesPage'));
