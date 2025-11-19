@@ -5,7 +5,7 @@
 После каждого обновления/deploy переменная `REACT_APP_BACKEND_URL` в файле `/app/frontend/.env` **сбрасывается** на неправильное значение:
 
 ```
-❌ https://cart-checkout-fix-1.preview.emergentagent.com
+❌ https://avk-ecommerce.preview.emergentagent.com
 ```
 
 Вместо правильного:
