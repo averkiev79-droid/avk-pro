@@ -100,37 +100,7 @@ const Header = () => {
                 </span>
               )}
             </Link>
-            {isAuthenticated ? (
-              <>
-                {user?.role === 'admin' && (
-                  <Link to="/admin" className="text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-2">
-                    <Shield size={20} strokeWidth={1.5} />
-                    <span className="text-sm font-medium">Админ</span>
-                  </Link>
-                )}
-                <Link to="/profile" className="text-gray-900 hover:text-gray-600 transition-colors flex items-center gap-2">
-                  <User size={22} strokeWidth={1.5} />
-                  <span className="text-sm font-medium">{user?.full_name || user?.email}</span>
-                </Link>
-                <button
-                  onClick={() => {
-                    logout();
-                    navigate('/');
-                  }}
-                  className="text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-2"
-                >
-                  <LogOut size={20} strokeWidth={1.5} />
-                  <span className="text-sm font-medium">Выход</span>
-                </button>
-              </>
-            ) : (
-              <Button asChild variant="outline" className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white">
-                <Link to="/login" className="flex items-center gap-2">
-                  <User size={18} strokeWidth={1.5} />
-                  <span className="text-sm font-medium">Вход</span>
-                </Link>
-              </Button>
-            )}
+            {/* Removed user authentication - now using simplified admin-only system */}
             <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-5 rounded-md transition-colors font-medium">
               <Link to="/order">Заказать</Link>
             </Button>
