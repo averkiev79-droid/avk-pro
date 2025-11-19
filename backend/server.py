@@ -666,7 +666,7 @@ async def get_rss_feed():
                 try:
                     pub_date = datetime.fromisoformat(created_at).strftime('%a, %d %b %Y %H:%M:%S GMT')
                     SubElement(item, 'pubDate').text = pub_date
-                except:
+                except (ValueError, TypeError):
                     pass
             
             # GUID
