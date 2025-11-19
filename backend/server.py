@@ -864,3 +864,15 @@ async def admin_login(request: AdminLoginRequest):
 # Old JWT-based auth endpoints removed - now using simple password-based admin auth
 
 # ============================================================================
+# INCLUDE API ROUTER (must be after all route definitions)
+# ============================================================================
+app.include_router(api_router)
+
+
+# ============================================================================
+# APPLICATION LIFECYCLE EVENTS
+# ============================================================================
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    client.close()
