@@ -35,9 +35,11 @@ const AdminLoginPage = () => {
         role: data.role,
       }));
 
-      // Show success message and redirect to home
-      alert('✅ Успешный вход в админ-панель!\n\nВы можете управлять заказами и товарами.');
-      navigate('/');
+      // Show success message
+      alert('✅ Успешный вход!\n\nДобро пожаловать в админ-панель.');
+      
+      // Redirect to simple orders page
+      window.location.href = '/admin/simple-orders';
     } catch (err) {
       setError(err.message || 'Ошибка соединения с сервером');
     } finally {
