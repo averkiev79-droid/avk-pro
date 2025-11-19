@@ -17,7 +17,6 @@ import {
   BookOpen,
   ExternalLink
 } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import ProductsPage from './admin/ProductsPage';
@@ -36,16 +35,23 @@ import { companyInfo } from '../mock';
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [adminSession, setAdminSession] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, isAuthenticated, loading } = useAuth();
 
-  // Redirect to login if not authenticated
+  // Check for simplified admin authentication
   useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      navigate('/login');
+    const session = localStorage.getItem('admin_session');
+    if (!session) {
+      navigate('/admin/login');
+    } else {
+      try {
+        setAdminSession(JSON.parse(session));
+      } catch (e) {
+        navigate('/admin/login');
+      }
     }
-  }, [loading, isAuthenticated, navigate]);
+  }, [navigate]);
 
   // Check if user is admin
   useEffect(() => {
