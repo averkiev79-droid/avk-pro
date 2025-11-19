@@ -700,33 +700,6 @@ async def get_rss_feed():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@api_router.patch("/articles/{article_id}", response_model=dict)
-async def update_article(article_id: str, article_update: ArticleUpdate):
-    """Update article"""
-    try:
-        article = await db.articles.find_one({"id": article_id})
-        if not article:
-            raise HTTPException(status_code=404, detail="Статья не найдена")
-        
-        update_data = {k: v for k, v in article_update.model_dump().items() if v is not None}
-        update_data["updated_at"] = datetime.now().isoformat()
-        
-        await db.articles.update_one(
-            {"id": article_id},
-            {"$set": update_data}
-        )
-        
-        return {
-            "success": True,
-            "message": "Статья обновлена"
-        }
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error updating article: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
 @api_router.put("/articles/{article_id}", response_model=dict)
 async def update_article(article_id: str, article: dict):
     """Update article"""
