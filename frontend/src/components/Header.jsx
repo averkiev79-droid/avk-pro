@@ -152,48 +152,7 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
-              {isAuthenticated ? (
-                <>
-                  {user?.role === 'admin' && (
-                    <Link
-                      to="/admin"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="py-3 px-4 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 transition-colors rounded-md flex items-center gap-2 mt-2 border border-blue-200"
-                    >
-                      <Shield size={18} strokeWidth={1.5} />
-                      <span>Админпанель</span>
-                    </Link>
-                  )}
-                  <Link
-                    to="/profile"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="py-3 px-4 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors rounded-md flex items-center gap-2 mt-2"
-                  >
-                    <User size={18} strokeWidth={1.5} />
-                    <span>{user?.full_name || user?.email}</span>
-                  </Link>
-                  <button
-                    onClick={() => {
-                      logout();
-                      navigate('/');
-                      setIsMenuOpen(false);
-                    }}
-                    className="py-3 px-4 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors rounded-md flex items-center gap-2 w-full text-left"
-                  >
-                    <LogOut size={18} strokeWidth={1.5} />
-                    <span>Выход</span>
-                  </button>
-                </>
-              ) : (
-                <Link
-                  to="/login"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="py-3 px-4 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors rounded-md flex items-center gap-2 mt-2"
-                >
-                  <User size={18} strokeWidth={1.5} />
-                  <span>Вход</span>
-                </Link>
-              )}
+              {/* Removed user authentication - simplified admin-only system */}
               <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white w-full mt-4 py-6">
                 <Link to="/order" onClick={() => setIsMenuOpen(false)}>Заказать</Link>
               </Button>
