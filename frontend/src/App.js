@@ -51,6 +51,7 @@ const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 
 // New simplified admin auth
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'));
+const SimpleOrdersPage = lazy(() => import('./pages/admin/SimpleOrdersPage'));
 const MakeAdminPage = lazy(() => import('./pages/MakeAdminPage'));
 const TestUploadPage = lazy(() => import('./pages/TestUploadPage'));
 const TestGuidelinesPage = lazy(() => import('./pages/TestGuidelinesPage'));
