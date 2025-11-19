@@ -111,6 +111,9 @@ function AppContent() {
                 <Route path="/auth/callback" element={<AuthCallbackPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 
+                {/* Admin login - Simplified password-based auth */}
+                <Route path="/admin/login" element={<AdminLoginPage />} />
+                
                 {/* Admin routes */}
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<DashboardPage />} />
