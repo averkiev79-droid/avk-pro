@@ -373,23 +373,48 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
-            {/* Color Selection */}
+            {/* Color Selection with Image Previews */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 Цвет: <span className="text-sport-blue font-bold">{selectedColor}</span>
               </label>
-              <div className="flex gap-2 flex-wrap">
-                {colors.map(color => (
+              <div className="flex gap-3 flex-wrap">
+                {colors.map((color, index) => (
                   <button
                     key={color}
-                    onClick={() => setSelectedColor(color)}
-                    className={`px-4 sm:px-5 py-3 sm:py-2.5 rounded-lg border-2 transition-all duration-300 font-medium text-sm sm:text-base ${
+                    onClick={() => {
+                      setSelectedColor(color);
+                      // Change to the corresponding image if available
+                      if (images[index]) {
+                        setSelectedImage(index);
+                      }
+                    }}
+                    className={`relative rounded-lg border-3 transition-all duration-300 overflow-hidden group ${
                       selectedColor === color
-                        ? 'bg-sport-blue text-white border-sport-blue shadow-md'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-sport-blue'
+                        ? 'border-sport-blue ring-2 ring-sport-blue ring-offset-2 shadow-lg'
+                        : 'border-gray-300 hover:border-sport-blue hover:shadow-md'
                     }`}
+                    title={color}
                   >
-                    {color}
+                    {/* Image Preview */}
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 relative">
+                      <img 
+                        src={images[index] || images[0]} 
+                        alt={color}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Color label overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs py-1 px-2 text-center truncate">
+                        {color}
+                      </div>
+                    </div>
+                    
+                    {/* Selected indicator */}
+                    {selectedColor === color && (
+                      <div className="absolute top-1 right-1 bg-sport-blue text-white rounded-full p-1">
+                        <Check size={12} strokeWidth={3} />
+                      </div>
+                    )}
                   </button>
                 ))}
               </div>
