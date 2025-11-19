@@ -456,10 +456,8 @@ async def create_order(order: OrderCreate, background_tasks: BackgroundTasks):
         # Save to database
         await db.orders.insert_one(order_dict)
         
-        # Send email confirmation in background
-        background_tasks.add_task(EmailService.send_order_confirmation, order_data)
-        
-        # Send Telegram notification in background
+        # Send order notifications in background (email to admin + telegram)
+        background_tasks.add_task(OrderEmailService.send_new_order_notification, order_data)
         background_tasks.add_task(TelegramService.send_order_notification, order_data)
         
         return {
