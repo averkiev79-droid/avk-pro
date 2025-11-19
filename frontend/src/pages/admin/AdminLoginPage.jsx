@@ -35,8 +35,9 @@ const AdminLoginPage = () => {
         role: data.role,
       }));
 
-      // Redirect to admin panel
-      navigate('/admin/products');
+      // Show success message and redirect to home
+      alert('✅ Успешный вход в админ-панель!\n\nВы можете управлять заказами и товарами.');
+      navigate('/');
     } catch (err) {
       setError(err.message || 'Ошибка соединения с сервером');
     } finally {
