@@ -39,28 +39,7 @@ const AdminLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Check for simplified admin authentication
-  useEffect(() => {
-    const session = localStorage.getItem('admin_session');
-    if (!session) {
-      navigate('/admin/login');
-    } else {
-      try {
-        setAdminSession(JSON.parse(session));
-      } catch (e) {
-        navigate('/admin/login');
-      }
-    }
-  }, [navigate]);
-
-  // Show loading while checking auth
-  if (!adminSession) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-gray-600">Проверка доступа...</div>
-      </div>
-    );
-  }
+  // No authentication required - admin panel is open
 
   const navigation = [
     { name: 'Дашборд', href: '/admin', icon: LayoutDashboard, exact: true },
