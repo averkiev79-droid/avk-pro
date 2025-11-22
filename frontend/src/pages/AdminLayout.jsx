@@ -35,7 +35,6 @@ import { companyInfo } from '../mock';
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [adminSession, setAdminSession] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
 
