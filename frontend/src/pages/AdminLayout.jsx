@@ -63,8 +63,7 @@ const AdminLayout = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('admin_session');
-    navigate('/admin/login');
+    navigate('/');
   };
 
   return (
