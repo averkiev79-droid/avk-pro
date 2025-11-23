@@ -208,6 +208,7 @@ class Product(BaseModel):
     images: List[str] = []  # List of image URLs
     features: Optional[List[str]] = []
     size_categories: Optional[List[str]] = ["kids", "teens", "adults"]
+    status: str = "active"  # active, pre_order, popular, unpublished
     is_featured: bool = False
     is_active: bool = True
     created_at: datetime = Field(default_factory=lambda: datetime.now())
