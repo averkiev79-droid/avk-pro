@@ -262,6 +262,14 @@ const ProductsPage = () => {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Управление продукцией</h1>
           <p className="text-gray-600">Добавляйте, редактируйте и удаляйте товары</p>
+          {filteredProducts.length > 0 && (
+            <button
+              onClick={toggleSelectAll}
+              className="text-sm text-blue-600 hover:underline mt-1"
+            >
+              {selectedProducts.length === filteredProducts.length ? 'Снять выбор со всех' : 'Выбрать все'}
+            </button>
+          )}
         </div>
         
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
