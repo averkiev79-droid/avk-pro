@@ -56,33 +56,45 @@ const ProductsPage = () => {
     }
   };
 
-  // Массовое удаление товаров
-  const handleBulkDelete = async () => {
+  // Массовые действия с товарами
+  const handleBulkAction = async (action) => {
     if (selectedProducts.length === 0) {
-      toast.error('Выберите товары для удаления');
+      toast.error('Выберите товары');
       return;
     }
 
-    if (!window.confirm(`Вы уверены, что хотите удалить ${selectedProducts.length} товаров?`)) {
+    const actionNames = {
+      'delete': 'удалить',
+      'active': 'перевести в наличие',
+      'pre_order': 'перевести под заказ',
+      'popular': 'сделать популярными',
+      'unpublished': 'снять с публикации'
+    };
+
+    if (action === 'delete' && !window.confirm(`Вы уверены, что хотите ${actionNames[action]} ${selectedProducts.length} товаров?`)) {
       return;
     }
 
     setIsDeleting(true);
     try {
-      const deletePromises = selectedProducts.map(productId =>
-        fetch(`${backendUrl}/api/products/${productId}`, {
-          method: 'DELETE'
+      const response = await fetch(`${backendUrl}/api/products/bulk-action`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product_ids: selectedProducts,
+          action: action
         })
-      );
+      });
 
-      await Promise.all(deletePromises);
-      
-      toast.success(`Удалено товаров: ${selectedProducts.length}`);
+      if (!response.ok) throw new Error('Failed to perform bulk action');
+
+      const data = await response.json();
+      toast.success(data.message || `Действие выполнено`);
       setSelectedProducts([]);
       fetchProducts();
     } catch (error) {
-      console.error('Error deleting products:', error);
-      toast.error('Ошибка при удалении товаров');
+      console.error('Error in bulk action:', error);
+      toast.error('Ошибка при выполнении действия');
     } finally {
       setIsDeleting(false);
     }
