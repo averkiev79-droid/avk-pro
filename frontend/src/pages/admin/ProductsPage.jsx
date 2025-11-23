@@ -496,7 +496,17 @@ const ProductsPage = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map(product => (
-            <Card key={product.id} className="overflow-hidden">
+            <Card key={product.id} className="overflow-hidden relative">
+              {/* Чекбокс для выбора */}
+              <div className="absolute top-2 left-2 z-10">
+                <input
+                  type="checkbox"
+                  checked={selectedProducts.includes(product.id)}
+                  onChange={() => toggleProductSelection(product.id)}
+                  className="w-5 h-5 rounded border-2 border-white shadow-lg cursor-pointer"
+                />
+              </div>
+              
               <div className="aspect-square bg-gray-100 relative">
                 {product.images && product.images.length > 0 ? (
                   <>
