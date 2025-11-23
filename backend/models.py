@@ -234,5 +234,6 @@ class ProductUpdate(BaseModel):
     images: Optional[List[str]] = None
     features: Optional[List[str]] = None
     size_categories: Optional[List[str]] = None
+    status: Optional[str] = None
     is_featured: Optional[bool] = None
     is_active: Optional[bool] = None
