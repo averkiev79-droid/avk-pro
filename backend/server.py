@@ -940,6 +940,52 @@ async def delete_product(product_id: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class BulkActionRequest(BaseModel):
+    product_ids: List[str]
+    action: str  # "delete", "active", "pre_order", "popular", "unpublished"
+
+
+@api_router.post("/products/bulk-action", response_model=dict)
+async def bulk_action_products(request: BulkActionRequest):
+    """Bulk actions on products"""
+    try:
+        if request.action == "delete":
+            result = await db.products.delete_many({"id": {"$in": request.product_ids}})
+            logger.info(f"Deleted {result.deleted_count} products")
+            return {
+                "success": True,
+                "message": f"Удалено товаров: {result.deleted_count}"
+            }
+        else:
+            # Update status
+            update_data = {}
+            if request.action == "active":
+                update_data = {"status": "active", "is_active": True}
+            elif request.action == "pre_order":
+                update_data = {"status": "pre_order"}
+            elif request.action == "popular":
+                update_data = {"status": "popular", "is_featured": True}
+            elif request.action == "unpublished":
+                update_data = {"status": "unpublished", "is_active": False}
+            
+            if update_data:
+                update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+                result = await db.products.update_many(
+                    {"id": {"$in": request.product_ids}},
+                    {"$set": update_data}
+                )
+                logger.info(f"Updated {result.modified_count} products to {request.action}")
+                return {
+                    "success": True,
+                    "message": f"Обновлено товаров: {result.modified_count}"
+                }
+        
+        return {"success": False, "message": "Неизвестное действие"}
+    except Exception as e:
+        logger.error(f"Error in bulk action: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ============================================================================
 # SIMPLIFIED AUTHENTICATION API - Admin-only password-based login
 # ============================================================================
