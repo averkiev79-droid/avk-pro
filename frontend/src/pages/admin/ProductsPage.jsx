@@ -495,15 +495,52 @@ const ProductsPage = () => {
           </Select>
 
           {selectedProducts.length > 0 && (
-            <Button
-              variant="destructive"
-              onClick={handleBulkDelete}
-              disabled={isDeleting}
-              className="flex items-center gap-2"
-            >
-              <Trash2 size={16} />
-              {isDeleting ? 'Удаление...' : `Удалить выбранные (${selectedProducts.length})`}
-            </Button>
+            <div className="flex gap-2 flex-wrap">
+              <Button
+                variant="outline"
+                onClick={() => handleBulkAction('active')}
+                disabled={isDeleting}
+                className="flex items-center gap-1 text-xs px-3 py-1 h-8 bg-green-50 hover:bg-green-100 text-green-700 border-green-300"
+              >
+                В наличии
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => handleBulkAction('pre_order')}
+                disabled={isDeleting}
+                className="flex items-center gap-1 text-xs px-3 py-1 h-8 bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-300"
+              >
+                Под заказ
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => handleBulkAction('popular')}
+                disabled={isDeleting}
+                className="flex items-center gap-1 text-xs px-3 py-1 h-8 bg-yellow-50 hover:bg-yellow-100 text-yellow-700 border-yellow-300"
+              >
+                Популярное
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => handleBulkAction('unpublished')}
+                disabled={isDeleting}
+                className="flex items-center gap-1 text-xs px-3 py-1 h-8 bg-gray-50 hover:bg-gray-100 text-gray-700 border-gray-300"
+              >
+                Снять с публикации
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => handleBulkAction('delete')}
+                disabled={isDeleting}
+                className="flex items-center gap-1 text-xs px-3 py-1 h-8"
+              >
+                <Trash2 size={14} />
+                Удалить
+              </Button>
+              <span className="text-xs text-gray-600 flex items-center px-2">
+                Выбрано: {selectedProducts.length}
+              </span>
+            </div>
           )}
         </div>
       </Card>
