@@ -222,6 +222,7 @@ class ProductCreate(BaseModel):
     images: List[str] = []
     features: Optional[List[str]] = []
     size_categories: Optional[List[str]] = ["kids", "teens", "adults"]
+    status: str = "active"
     is_featured: bool = False
     is_active: bool = True
 
