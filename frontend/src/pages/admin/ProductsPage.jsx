@@ -450,7 +450,7 @@ const ProductsPage = () => {
 
       {/* Filters */}
       <Card className="p-4">
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 items-center">
           <div className="flex-1 min-w-[200px]">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -473,6 +473,18 @@ const ProductsPage = () => {
               ))}
             </SelectContent>
           </Select>
+
+          {selectedProducts.length > 0 && (
+            <Button
+              variant="destructive"
+              onClick={handleBulkDelete}
+              disabled={isDeleting}
+              className="flex items-center gap-2"
+            >
+              <Trash2 size={16} />
+              {isDeleting ? 'Удаление...' : `Удалить выбранные (${selectedProducts.length})`}
+            </Button>
+          )}
         </div>
       </Card>
 
