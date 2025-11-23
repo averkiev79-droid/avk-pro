@@ -24,6 +24,8 @@ const ProductsPage = () => {
   const [imageUrls, setImageUrls] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadingFiles, setUploadingFiles] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     category: '',
