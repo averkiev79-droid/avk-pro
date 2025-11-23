@@ -56,6 +56,56 @@ const ProductsPage = () => {
     }
   };
 
+  // Массовое удаление товаров
+  const handleBulkDelete = async () => {
+    if (selectedProducts.length === 0) {
+      toast.error('Выберите товары для удаления');
+      return;
+    }
+
+    if (!window.confirm(`Вы уверены, что хотите удалить ${selectedProducts.length} товаров?`)) {
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      const deletePromises = selectedProducts.map(productId =>
+        fetch(`${backendUrl}/api/products/${productId}`, {
+          method: 'DELETE'
+        })
+      );
+
+      await Promise.all(deletePromises);
+      
+      toast.success(`Удалено товаров: ${selectedProducts.length}`);
+      setSelectedProducts([]);
+      fetchProducts();
+    } catch (error) {
+      console.error('Error deleting products:', error);
+      toast.error('Ошибка при удалении товаров');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  // Выбор/снятие выбора товара
+  const toggleProductSelection = (productId) => {
+    setSelectedProducts(prev =>
+      prev.includes(productId)
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId]
+    );
+  };
+
+  // Выбрать/снять все
+  const toggleSelectAll = () => {
+    if (selectedProducts.length === filteredProducts.length) {
+      setSelectedProducts([]);
+    } else {
+      setSelectedProducts(filteredProducts.map(p => p.id));
+    }
+  };
+
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
