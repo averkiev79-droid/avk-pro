@@ -157,7 +157,14 @@ const CheckoutPage = () => {
       </section>
 
       <div className="container py-12 px-4 sm:px-6">
-        {cartItems.length === 0 ? (
+        {isLoading ? (
+          <Card className="p-12 text-center">
+            <div className="flex justify-center items-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+            </div>
+            <p className="mt-4 text-gray-600">Загрузка данных заказа...</p>
+          </Card>
+        ) : cartItems.length === 0 ? (
           <Card className="p-12 text-center">
             <ShoppingCart className="mx-auto mb-4 text-gray-400" size={64} />
             <h2 className="text-2xl font-bold mb-4">Корзина пуста</h2>
