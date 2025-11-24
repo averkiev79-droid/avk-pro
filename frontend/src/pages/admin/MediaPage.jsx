@@ -82,6 +82,22 @@ const MediaPage = () => {
     setTimeout(() => setCopiedUrl(''), 2000);
   };
 
+  const handleDeleteFile = async (filename) => {
+    if (!window.confirm('Вы уверены, что хотите удалить этот файл?')) {
+      return;
+    }
+
+    try {
+      await axios.delete(`${BACKEND_URL}/api/uploads/${filename}`);
+      toast.success('Файл удален успешно');
+      // Reload the file list
+      await fetchUploadedFiles();
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast.error('Ошибка при удалении файла');
+    }
+  };
+
   return (
     <div className="p-8">
       <div className="mb-8">
