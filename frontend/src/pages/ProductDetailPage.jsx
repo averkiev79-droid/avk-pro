@@ -434,19 +434,8 @@ const ProductDetailPage = () => {
                       key={variant.id || variantIndex}
                       onClick={() => {
                         setSelectedColor(variant.name);
-                        
-                        // Сформировать полный URL изображения варианта
-                        const variantImageUrl = variant.preview_image && typeof variant.preview_image === 'string' 
-                          ? (variant.preview_image.startsWith('http') ? variant.preview_image : `${BACKEND_URL}${variant.preview_image}`)
-                          : '';
-                        
-                        // Найти индекс этого изображения в галерее
-                        const imageIndex = images.findIndex(img => img === variantImageUrl);
-                        
-                        // Установить найденное изображение или первое
-                        setSelectedImage(imageIndex !== -1 ? imageIndex : 0);
-                        
-                        console.log('Variant clicked:', variant.name, 'Image index:', imageIndex !== -1 ? imageIndex : 0);
+                        setSelectedImage(0); // Сбросить на первое изображение
+                        console.log('Вариант выбран:', variant.name, 'Размер:', selectedSizeCategory);
                       }}
                       className={`relative rounded-lg border-2 transition-all duration-300 overflow-hidden group hover:shadow-lg ${
                         selectedColor === variant.name
