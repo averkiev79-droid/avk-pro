@@ -233,7 +233,7 @@ const HomePage = () => {
                   <div className="transition-all duration-300 group cursor-pointer">
                     <div className="aspect-square overflow-hidden bg-gray-100 mb-4 rounded-md">
                       <img
-                        src={product.images && product.images.length > 0 
+                        src={product.images && product.images.length > 0 && typeof product.images[0] === 'string'
                           ? (product.images[0].startsWith('http') ? product.images[0] : `${BACKEND_URL}${product.images[0]}`)
                           : '/images/placeholder.svg'} 
                         alt={product.name}
