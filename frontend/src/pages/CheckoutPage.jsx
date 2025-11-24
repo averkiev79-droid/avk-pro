@@ -16,6 +16,7 @@ const CheckoutPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [cartError, setCartError] = useState(false);
   
   const [formData, setFormData] = useState({
     customerName: '',
@@ -27,36 +28,42 @@ const CheckoutPage = () => {
   });
 
   useEffect(() => {
-    // Загрузка корзины из localStorage
-    try {
-      console.log('CheckoutPage: Loading cart from localStorage');
-      const savedCart = localStorage.getItem('cart');
-      console.log('CheckoutPage: savedCart:', savedCart);
+    // Загрузка корзины из localStorage с задержкой для надежности
+    const loadCart = async () => {
+      // Небольшая задержка для гарантии, что localStorage доступен
+      await new Promise(resolve => setTimeout(resolve, 100));
       
-      if (savedCart) {
-        const cart = JSON.parse(savedCart);
-        console.log('CheckoutPage: parsed cart:', cart);
+      try {
+        console.log('CheckoutPage: Loading cart from localStorage');
+        const savedCart = localStorage.getItem('cart');
+        console.log('CheckoutPage: savedCart:', savedCart);
         
-        if (cart.length === 0) {
-          toast.error('Корзина пуста');
-          navigate('/cart');
-          return;
+        if (savedCart) {
+          const cart = JSON.parse(savedCart);
+          console.log('CheckoutPage: parsed cart:', cart, 'length:', cart.length);
+          
+          if (cart.length === 0) {
+            console.log('CheckoutPage: Cart is empty');
+            setCartError(true);
+            setIsLoading(false);
+            return;
+          }
+          console.log('CheckoutPage: Setting cart items:', cart);
+          setCartItems(cart);
+        } else {
+          console.log('CheckoutPage: No cart in localStorage');
+          setCartError(true);
         }
-        setCartItems(cart);
-      } else {
-        toast.error('Корзина пуста');
-        navigate('/cart');
-        return;
+      } catch (error) {
+        console.error('CheckoutPage: Error loading cart:', error);
+        setCartError(true);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('CheckoutPage: Error loading cart:', error);
-      toast.error('Ошибка загрузки корзины');
-      navigate('/cart');
-      return;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [navigate]);
+    };
+    
+    loadCart();
+  }, []);
 
   const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
