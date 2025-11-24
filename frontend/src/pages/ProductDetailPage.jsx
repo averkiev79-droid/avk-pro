@@ -133,23 +133,38 @@ const ProductDetailPage = () => {
   
   // Получить изображения в зависимости от выбранной категории размера
   const getSizeCategoryImages = () => {
+    let categoryImages = [];
+    
     // Если есть изображения для конкретной категории размера
     if (product.size_category_images && product.size_category_images[selectedSizeCategory]?.length > 0) {
-      return product.size_category_images[selectedSizeCategory].map(img => 
+      categoryImages = product.size_category_images[selectedSizeCategory].map(img => 
         img.startsWith('http') ? img : `${BACKEND_URL}${img}`
       );
     }
     // Fallback на общие изображения или для взрослых
-    if (product.size_category_images && product.size_category_images['adults']?.length > 0) {
-      return product.size_category_images['adults'].map(img => 
+    else if (product.size_category_images && product.size_category_images['adults']?.length > 0) {
+      categoryImages = product.size_category_images['adults'].map(img => 
         img.startsWith('http') ? img : `${BACKEND_URL}${img}`
       );
     }
     // Fallback на images
-    if (product.images && product.images.length > 0) {
-      return product.images.map(img => img.startsWith('http') ? img : `${BACKEND_URL}${img}`);
+    else if (product.images && product.images.length > 0) {
+      categoryImages = product.images.map(img => img.startsWith('http') ? img : `${BACKEND_URL}${img}`);
+    } else {
+      categoryImages = ['/images/placeholder.svg'];
     }
-    return ['/images/placeholder.svg'];
+    
+    // Добавить изображения вариантов в начало галереи (если они еще не там)
+    if (product.variants && product.variants.length > 0) {
+      const variantImages = product.variants
+        .filter(v => v.preview_image)
+        .map(v => v.preview_image.startsWith('http') ? v.preview_image : `${BACKEND_URL}${v.preview_image}`)
+        .filter(img => !categoryImages.includes(img)); // Исключить дубликаты
+      
+      return [...variantImages, ...categoryImages];
+    }
+    
+    return categoryImages;
   };
   
   const images = getSizeCategoryImages();
