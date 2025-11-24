@@ -242,14 +242,12 @@ class ProductCreate(BaseModel):
     category: str
     description: str
     base_price: float
-    images: List[str] = []
+    images: List[ProductImage] = []
     features: Optional[List[str]] = []
     size_categories: Optional[List[str]] = ["kids", "teens", "adults"]
     status: str = "active"
     is_featured: bool = False
     is_active: bool = True
-    size_category_images: Optional[dict] = {"kids": [], "teens": [], "adults": []}
-    variants: Optional[List[ProductVariant]] = []
     detailed_description: Optional[str] = ""
     specifications: Optional[dict] = {}
     main_features: Optional[List[str]] = []
