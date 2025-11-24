@@ -418,29 +418,24 @@ const ProductDetailPage = () => {
                   Варианты дизайна:
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {product.variants.slice(0, 4).map((variant, index) => (
+                  {product.variants.slice(0, 4).map((variant, variantIndex) => (
                     <button
-                      key={variant.id || index}
+                      key={variant.id || variantIndex}
                       onClick={() => {
                         setSelectedColor(variant.name);
-                        // Найти изображение варианта в основной галерее
-                        const variantImageUrl = variant.preview_image && typeof variant.preview_image === 'string' && variant.preview_image.startsWith('http') 
-                          ? variant.preview_image 
-                          : `${BACKEND_URL}${variant.preview_image}`;
+                        
+                        // Сформировать полный URL изображения варианта
+                        const variantImageUrl = variant.preview_image && typeof variant.preview_image === 'string' 
+                          ? (variant.preview_image.startsWith('http') ? variant.preview_image : `${BACKEND_URL}${variant.preview_image}`)
+                          : '';
                         
                         // Найти индекс этого изображения в галерее
                         const imageIndex = images.findIndex(img => img === variantImageUrl);
                         
-                        if (imageIndex !== -1) {
-                          // Если изображение найдено в галерее - показать его
-                          setSelectedImage(imageIndex);
-                        } else if (images[index]) {
-                          // Fallback: использовать изображение по индексу варианта
-                          setSelectedImage(index);
-                        } else {
-                          // Fallback: показать первое изображение
-                          setSelectedImage(0);
-                        }
+                        // Установить найденное изображение или первое
+                        setSelectedImage(imageIndex !== -1 ? imageIndex : 0);
+                        
+                        console.log('Variant clicked:', variant.name, 'Image index:', imageIndex !== -1 ? imageIndex : 0);
                       }}
                       className={`relative rounded-lg border-2 transition-all duration-300 overflow-hidden group hover:shadow-lg ${
                         selectedColor === variant.name
