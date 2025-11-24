@@ -191,7 +191,7 @@ const ProductDetailPage = () => {
       });
     } else {
       // Добавить новый товар в корзину
-      const imageUrl = product.images && product.images.length > 0 
+      const imageUrl = product.images && product.images.length > 0 && typeof product.images[0] === 'string'
         ? (product.images[0].startsWith('http') 
             ? product.images[0] 
             : `${process.env.REACT_APP_BACKEND_URL}${product.images[0]}`)
