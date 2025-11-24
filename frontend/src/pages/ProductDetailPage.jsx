@@ -30,7 +30,7 @@ const ProductDetailPage = () => {
   const [loading, setLoading] = useState(true);
   
   const [quantity, setQuantity] = useState(10);
-  const [selectedSizeCategory, setSelectedSizeCategory] = useState('adult');
+  const [selectedSizeCategory, setSelectedSizeCategory] = useState('adults');
   const [selectedColor, setSelectedColor] = useState('Синий');
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImage, setSelectedImage] = useState(0);
