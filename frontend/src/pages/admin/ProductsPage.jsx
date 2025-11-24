@@ -379,11 +379,35 @@ const ProductsPage = () => {
 
   const handleRemoveSizeCategoryImage = (category, index) => {
     if (category === 'kids') {
-      setSizeImagesKids(sizeImagesKids.filter((_, i) => i !== index));
+      const newImages = sizeImagesKids.filter((_, i) => i !== index);
+      setSizeImagesKids(newImages);
+      setFormData(prev => ({
+        ...prev,
+        size_category_images: {
+          ...prev.size_category_images,
+          kids: newImages
+        }
+      }));
     } else if (category === 'teens') {
-      setSizeImagesTeens(sizeImagesTeens.filter((_, i) => i !== index));
+      const newImages = sizeImagesTeens.filter((_, i) => i !== index);
+      setSizeImagesTeens(newImages);
+      setFormData(prev => ({
+        ...prev,
+        size_category_images: {
+          ...prev.size_category_images,
+          teens: newImages
+        }
+      }));
     } else if (category === 'adults') {
-      setSizeImagesAdults(sizeImagesAdults.filter((_, i) => i !== index));
+      const newImages = sizeImagesAdults.filter((_, i) => i !== index);
+      setSizeImagesAdults(newImages);
+      setFormData(prev => ({
+        ...prev,
+        size_category_images: {
+          ...prev.size_category_images,
+          adults: newImages
+        }
+      }));
     }
   };
 
