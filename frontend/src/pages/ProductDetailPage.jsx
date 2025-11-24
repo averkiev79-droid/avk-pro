@@ -454,12 +454,12 @@ const ProductDetailPage = () => {
                           : 'border-gray-300 hover:border-sport-blue'
                       }`}
                     >
-                      {/* Image Preview */}
+                      {/* Technical Image Preview */}
                       <div className="aspect-square relative bg-gray-100">
                         <img 
-                          src={variant.preview_image && typeof variant.preview_image === 'string' && variant.preview_image.startsWith('http') 
-                            ? variant.preview_image 
-                            : `${BACKEND_URL}${variant.preview_image}`} 
+                          src={variant.technical_image && typeof variant.technical_image === 'string' && variant.technical_image.startsWith('http') 
+                            ? variant.technical_image 
+                            : `${BACKEND_URL}${variant.technical_image}`} 
                           alt={variant.name}
                           className="w-full h-full object-cover"
                           onError={(e) => {
