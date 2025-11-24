@@ -373,52 +373,61 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
-            {/* Color Selection with Image Previews */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
-                Цвет: <span className="text-sport-blue font-bold">{selectedColor}</span>
-              </label>
-              <div className="flex gap-3 flex-wrap">
-                {colors.map((color, index) => (
-                  <button
-                    key={color}
-                    onClick={() => {
-                      setSelectedColor(color);
-                      // Change to the corresponding image if available
-                      if (images[index]) {
-                        setSelectedImage(index);
-                      }
-                    }}
-                    className={`relative rounded-lg border-3 transition-all duration-300 overflow-hidden group ${
-                      selectedColor === color
-                        ? 'border-sport-blue ring-2 ring-sport-blue ring-offset-2 shadow-lg'
-                        : 'border-gray-300 hover:border-sport-blue hover:shadow-md'
-                    }`}
-                    title={color}
-                  >
-                    {/* Image Preview */}
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 relative">
-                      <img 
-                        src={images[index] || images[0]} 
-                        alt={color}
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Color label overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs py-1 px-2 text-center truncate">
-                        {color}
+            {/* Product Variants Selection */}
+            {product.variants && product.variants.length > 0 && (
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Варианты дизайна:
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {product.variants.slice(0, 4).map((variant, index) => (
+                    <button
+                      key={variant.id || index}
+                      onClick={() => {
+                        setSelectedColor(variant.name);
+                        // Change to the corresponding image if available
+                        if (images[index]) {
+                          setSelectedImage(index);
+                        }
+                      }}
+                      className={`relative rounded-lg border-2 transition-all duration-300 overflow-hidden group hover:shadow-lg ${
+                        selectedColor === variant.name
+                          ? 'border-sport-blue ring-2 ring-sport-blue ring-offset-2 shadow-lg'
+                          : 'border-gray-300 hover:border-sport-blue'
+                      }`}
+                    >
+                      {/* Image Preview */}
+                      <div className="aspect-square relative bg-gray-100">
+                        <img 
+                          src={variant.preview_image && typeof variant.preview_image === 'string' && variant.preview_image.startsWith('http') 
+                            ? variant.preview_image 
+                            : `${BACKEND_URL}${variant.preview_image}`} 
+                          alt={variant.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.src = images[0] || '/images/placeholder.svg';
+                          }}
+                        />
                       </div>
-                    </div>
-                    
-                    {/* Selected indicator */}
-                    {selectedColor === color && (
-                      <div className="absolute top-1 right-1 bg-sport-blue text-white rounded-full p-1">
-                        <Check size={12} strokeWidth={3} />
+                      
+                      {/* Variant name */}
+                      <div className="p-2 bg-white">
+                        <p className="text-xs font-medium text-gray-700 text-center truncate">
+                          {variant.name}
+                        </p>
                       </div>
-                    )}
-                  </button>
-                ))}
+                      
+                      {/* Selected indicator */}
+                      {selectedColor === variant.name && (
+                        <div className="absolute top-2 right-2 bg-sport-blue text-white rounded-full p-1.5 shadow-lg">
+                          <Check size={14} strokeWidth={3} />
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Quantity */}
             <div className="mb-6">
