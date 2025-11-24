@@ -898,9 +898,9 @@ const ProductsPage = () => {
                             className="w-full text-xs border rounded px-2 py-1"
                           >
                             <option value="">Все варианты</option>
-                            {formData.variants.map((v, vIndex) => (
-                              <option key={vIndex} value={v.id || `variant-${vIndex}`}>
-                                {v.name || `Вариант ${vIndex + 1}`}
+                            {formData.variants.map((v) => (
+                              <option key={v.id} value={v.id}>
+                                {v.name || 'Без названия'}
                               </option>
                             ))}
                           </select>
