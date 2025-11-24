@@ -901,8 +901,10 @@ async def update_product(product_id: str, product_update: ProductUpdate):
         
         update_data['updated_at'] = datetime.now(timezone.utc).isoformat()
         
-        logger.info(f"Updating product {product_id} with data: {list(update_data.keys())}")
-        logger.debug(f"Update data details: size_category_images={update_data.get('size_category_images')}, variants_count={len(update_data.get('variants', []))}")
+        logger.info(f"Updating product {product_id} with fields: {list(update_data.keys())}")
+        logger.info(f"Size category images: kids={len(update_data.get('size_category_images', {}).get('kids', []))}, teens={len(update_data.get('size_category_images', {}).get('teens', []))}, adults={len(update_data.get('size_category_images', {}).get('adults', []))}")
+        logger.info(f"Variants: {len(update_data.get('variants', []))}, Detailed description length: {len(update_data.get('detailed_description', ''))}, Main features: {len(update_data.get('main_features', []))}, Specifications: {len(update_data.get('specifications', {}))}")
+        logger.info(f"Full update data: {update_data}")
         
         result = await db.products.update_one(
             {"id": product_id},
