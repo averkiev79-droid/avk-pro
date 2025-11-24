@@ -35,7 +35,12 @@ const ProductsPage = () => {
     variants: [],
     detailed_description: '',
     specifications: {},
-    main_features: []
+    main_features: [],
+    size_category_images: {
+      kids: [],
+      teens: [],
+      adults: []
+    }
   });
 
   const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
