@@ -130,14 +130,34 @@ const ProductDetailPage = () => {
   
   // Use product images or fallback to placeholder
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
-  const images = product.images && product.images.length > 0 
-    ? product.images.map(img => img.startsWith('http') ? img : `${BACKEND_URL}${img}`)
-    : ['/images/placeholder.svg'];
+  
+  // Получить изображения в зависимости от выбранной категории размера
+  const getSizeCategoryImages = () => {
+    // Если есть изображения для конкретной категории размера
+    if (product.size_category_images && product.size_category_images[selectedSizeCategory]?.length > 0) {
+      return product.size_category_images[selectedSizeCategory].map(img => 
+        img.startsWith('http') ? img : `${BACKEND_URL}${img}`
+      );
+    }
+    // Fallback на общие изображения или для взрослых
+    if (product.size_category_images && product.size_category_images['adults']?.length > 0) {
+      return product.size_category_images['adults'].map(img => 
+        img.startsWith('http') ? img : `${BACKEND_URL}${img}`
+      );
+    }
+    // Fallback на images
+    if (product.images && product.images.length > 0) {
+      return product.images.map(img => img.startsWith('http') ? img : `${BACKEND_URL}${img}`);
+    }
+    return ['/images/placeholder.svg'];
+  };
+  
+  const images = getSizeCategoryImages();
 
   const sizeCategories = [
     { id: 'kids', name: 'Дети 110-140' },
     { id: 'teens', name: 'Подростки 146-170' },
-    { id: 'adult', name: 'Взрослые' }
+    { id: 'adults', name: 'Взрослые' }
   ];
   const colors = ['Синий', 'Красный', 'Черный', 'Белый', 'Зеленый'];
 
