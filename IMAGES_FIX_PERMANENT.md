@@ -5,7 +5,7 @@
 ### Главная проблема
 Frontend использовал **НЕПРАВИЛЬНЫЙ BACKEND_URL** в production:
 ```
-Было: https://avk-shop.preview.emergentagent.com
+Было: https://avksport-ecom.preview.emergentagent.com
 Должно быть: https://avk-pro.ru
 ```
 
