@@ -254,3 +254,7 @@ class ProductUpdate(BaseModel):
     status: Optional[str] = None
     is_featured: Optional[bool] = None
     is_active: Optional[bool] = None
+    variants: Optional[List[ProductVariant]] = None
+    detailed_description: Optional[str] = None
+    specifications: Optional[dict] = None
+    main_features: Optional[List[str]] = None
