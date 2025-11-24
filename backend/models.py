@@ -197,20 +197,11 @@ class ResetPasswordRequest(BaseModel):
 
 
 # Product Models
-class Club(BaseModel):
-    """Хоккейный клуб с техническим рисунком"""
-    model_config = ConfigDict(extra="ignore")
-    
+class ProductVariant(BaseModel):
+    """Вариант товара с превью и названием"""
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str  # Название клуба (например: "Викинги", "СКА")
-    technical_image: str  # URL технического рисунка (плоское фото дизайна)
-    created_at: datetime = Field(default_factory=lambda: datetime.now())
-    
-class ProductImage(BaseModel):
-    """Изображение товара с привязкой к клубу и размеру"""
-    url: str
-    club_id: Optional[str] = None  # ID клуба (если фото привязано к клубу)
-    size_category: Optional[str] = None  # "kids", "teens", "adults" (если привязано)
+    name: str  # Например: "СКА Стрельна", "Викинги"
+    preview_image: str  # URL превью изображения
     
 class Product(BaseModel):
     model_config = ConfigDict(extra="ignore")
