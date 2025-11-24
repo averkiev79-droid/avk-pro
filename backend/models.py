@@ -201,7 +201,7 @@ class ProductVariant(BaseModel):
     """Вариант товара (пример вида) с техническим рисунком"""
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str  # Например: "Викинги", "СКА Стрельна"
-    technical_image: str  # URL технического рисунка (плоское фото)
+    technical_image: Optional[str] = None  # URL технического рисунка (плоское фото)
 
 class ProductImage(BaseModel):
     """Фотография товара с привязками"""
