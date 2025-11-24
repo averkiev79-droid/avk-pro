@@ -264,6 +264,7 @@ const ProductsPage = () => {
       base_price: '', 
       features: [],
       variants: [],
+      product_images: [],
       detailed_description: '',
       specifications: {},
       main_features: [],
