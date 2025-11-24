@@ -209,6 +209,14 @@ const MediaPage = () => {
                         </>
                       )}
                     </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleDeleteFile(file.filename)}
+                      className="border-red-300 hover:bg-red-50 text-red-600"
+                    >
+                      <Trash2 size={16} />
+                    </Button>
                   </div>
                 </div>
               </div>
