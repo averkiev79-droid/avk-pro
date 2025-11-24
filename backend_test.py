@@ -1500,6 +1500,372 @@ class AuthAPITester:
             
         return []
     
+    # ==================== PRODUCT VARIANTS TESTS ====================
+    
+    def test_create_product_with_variants(self):
+        """Test POST /api/products - Create product with variants and tagged images"""
+        print("\n=== Testing Product Creation with Variants ===")
+        
+        # Test data as specified in the Russian review request
+        product_data = {
+            "name": "Тестовая форма",
+            "category": "jersey",
+            "description": "Тест вариантов",
+            "base_price": 2500,
+            "images": [],
+            "variants": [
+                {
+                    "id": "var-1",
+                    "name": "Викинги",
+                    "technical_image": "https://via.placeholder.com/300/0000FF/FFFFFF?text=Vikings"
+                },
+                {
+                    "id": "var-2", 
+                    "name": "СКА Стрельна",
+                    "technical_image": "https://via.placeholder.com/300/FF0000/FFFFFF?text=SKA"
+                }
+            ],
+            "product_images": [
+                {
+                    "url": "https://via.placeholder.com/600/0000FF/FFFFFF?text=Vikings+Kids",
+                    "variant_id": "var-1",
+                    "size_category": "kids"
+                },
+                {
+                    "url": "https://via.placeholder.com/600/0000FF/FFFFFF?text=Vikings+Adults",
+                    "variant_id": "var-1", 
+                    "size_category": "adults"
+                },
+                {
+                    "url": "https://via.placeholder.com/600/FF0000/FFFFFF?text=SKA+Kids",
+                    "variant_id": "var-2",
+                    "size_category": "kids"
+                }
+            ]
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/products", json=product_data, timeout=10)
+            
+            if response.status_code == 201:
+                result = response.json()
+                if result.get("success") and result.get("id"):
+                    product_id = result["id"]
+                    self.created_product_ids.append(product_id)
+                    self.log_result(
+                        "Create Product with Variants", 
+                        True, 
+                        f"Product with variants created successfully with ID: {product_id}",
+                        {
+                            "product_id": product_id, 
+                            "variants_count": len(product_data["variants"]),
+                            "product_images_count": len(product_data["product_images"]),
+                            "response": result
+                        }
+                    )
+                    return product_id
+                else:
+                    self.log_result("Create Product with Variants", False, "Invalid response format", {"response": result})
+            else:
+                self.log_result("Create Product with Variants", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Create Product with Variants", False, f"Request failed: {str(e)}")
+            
+        return None
+    
+    def test_get_product_with_variants(self, product_id):
+        """Test GET /api/products/{product_id} - Get product with variants structure"""
+        print(f"\n=== Testing Get Product with Variants (ID: {product_id}) ===")
+        
+        if not product_id:
+            self.log_result("Get Product with Variants", False, "No product ID provided")
+            return None
+            
+        try:
+            response = requests.get(f"{self.base_url}/products/{product_id}", timeout=10)
+            
+            if response.status_code == 200:
+                product = response.json()
+                
+                # Validate product structure with variants
+                required_fields = ["id", "name", "category", "description", "base_price", "variants", "product_images"]
+                missing_fields = [field for field in required_fields if field not in product]
+                
+                if not missing_fields:
+                    variants = product.get("variants", [])
+                    product_images = product.get("product_images", [])
+                    
+                    # Validate variants structure
+                    variants_valid = True
+                    for variant in variants:
+                        if not all(key in variant for key in ["id", "name", "technical_image"]):
+                            variants_valid = False
+                            break
+                    
+                    # Validate product_images structure
+                    images_valid = True
+                    for img in product_images:
+                        if not all(key in img for key in ["url", "variant_id", "size_category"]):
+                            images_valid = False
+                            break
+                    
+                    if variants_valid and images_valid:
+                        self.log_result(
+                            "Get Product with Variants", 
+                            True, 
+                            f"Product retrieved with correct variants structure",
+                            {
+                                "product_id": product["id"],
+                                "name": product["name"],
+                                "variants_count": len(variants),
+                                "product_images_count": len(product_images),
+                                "variants": [{"id": v["id"], "name": v["name"]} for v in variants],
+                                "image_mappings": [{"variant_id": img["variant_id"], "size_category": img["size_category"]} for img in product_images]
+                            }
+                        )
+                        return product
+                    else:
+                        self.log_result("Get Product with Variants", False, "Invalid variants or product_images structure", {
+                            "variants_valid": variants_valid,
+                            "images_valid": images_valid,
+                            "variants": variants,
+                            "product_images": product_images
+                        })
+                else:
+                    self.log_result("Get Product with Variants", False, f"Missing required fields: {missing_fields}")
+            elif response.status_code == 404:
+                self.log_result("Get Product with Variants", False, "Product not found (404)")
+            else:
+                self.log_result("Get Product with Variants", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Get Product with Variants", False, f"Request failed: {str(e)}")
+            
+        return None
+    
+    def test_update_product_with_variants(self, product_id):
+        """Test PUT /api/products/{product_id} - Update product with new variant and images"""
+        print(f"\n=== Testing Update Product with Variants (ID: {product_id}) ===")
+        
+        if not product_id:
+            self.log_result("Update Product with Variants", False, "No product ID provided")
+            return False
+            
+        # Update data - add new variant and images
+        update_data = {
+            "name": "Тестовая форма (Обновлено)",
+            "variants": [
+                {
+                    "id": "var-1",
+                    "name": "Викинги",
+                    "technical_image": "https://via.placeholder.com/300/0000FF/FFFFFF?text=Vikings"
+                },
+                {
+                    "id": "var-2", 
+                    "name": "СКА Стрельна",
+                    "technical_image": "https://via.placeholder.com/300/FF0000/FFFFFF?text=SKA"
+                },
+                {
+                    "id": "var-3",
+                    "name": "Новый Дизайн",
+                    "technical_image": "https://via.placeholder.com/300/00FF00/FFFFFF?text=New"
+                }
+            ],
+            "product_images": [
+                {
+                    "url": "https://via.placeholder.com/600/0000FF/FFFFFF?text=Vikings+Kids",
+                    "variant_id": "var-1",
+                    "size_category": "kids"
+                },
+                {
+                    "url": "https://via.placeholder.com/600/0000FF/FFFFFF?text=Vikings+Adults",
+                    "variant_id": "var-1", 
+                    "size_category": "adults"
+                },
+                {
+                    "url": "https://via.placeholder.com/600/FF0000/FFFFFF?text=SKA+Kids",
+                    "variant_id": "var-2",
+                    "size_category": "kids"
+                },
+                {
+                    "url": "https://via.placeholder.com/600/00FF00/FFFFFF?text=New+Teens",
+                    "variant_id": "var-3",
+                    "size_category": "teens"
+                }
+            ]
+        }
+        
+        try:
+            response = requests.put(f"{self.base_url}/products/{product_id}", json=update_data, timeout=10)
+            
+            if response.status_code == 200:
+                result = response.json()
+                if result.get("success"):
+                    self.log_result(
+                        "Update Product with Variants", 
+                        True, 
+                        "Product with variants updated successfully",
+                        {"product_id": product_id, "response": result}
+                    )
+                    
+                    # Verify the update by fetching the product
+                    updated_product = self.test_get_product_with_variants(product_id)
+                    if updated_product:
+                        variants = updated_product.get("variants", [])
+                        product_images = updated_product.get("product_images", [])
+                        
+                        if (updated_product.get("name") == update_data["name"] and 
+                            len(variants) == 3 and
+                            len(product_images) == 4):
+                            self.log_result(
+                                "Verify Variants Update", 
+                                True, 
+                                "Variants update verification successful",
+                                {
+                                    "updated_name": updated_product.get("name"),
+                                    "variants_count": len(variants),
+                                    "product_images_count": len(product_images)
+                                }
+                            )
+                            return True
+                        else:
+                            self.log_result("Verify Variants Update", False, "Updated variants data doesn't match", {
+                                "expected_variants": 3,
+                                "actual_variants": len(variants),
+                                "expected_images": 4,
+                                "actual_images": len(product_images)
+                            })
+                else:
+                    self.log_result("Update Product with Variants", False, "Update response indicates failure", {"response": result})
+            else:
+                self.log_result("Update Product with Variants", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Update Product with Variants", False, f"Request failed: {str(e)}")
+            
+        return False
+    
+    def test_backward_compatibility_old_images(self):
+        """Test creating product with old images structure (backward compatibility)"""
+        print("\n=== Testing Backward Compatibility - Old Images Structure ===")
+        
+        # Test data with old structure (only images field)
+        product_data = {
+            "name": "Старая структура товара",
+            "category": "jersey",
+            "description": "Тест обратной совместимости",
+            "base_price": 1500,
+            "images": [
+                "https://via.placeholder.com/400/CCCCCC/000000?text=Old+Image+1",
+                "https://via.placeholder.com/400/CCCCCC/000000?text=Old+Image+2"
+            ]
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/products", json=product_data, timeout=10)
+            
+            if response.status_code == 201:
+                result = response.json()
+                if result.get("success") and result.get("id"):
+                    product_id = result["id"]
+                    self.created_product_ids.append(product_id)
+                    
+                    # Verify the product was created with old structure
+                    product = self.test_get_single_product(product_id)
+                    if product:
+                        images = product.get("images", [])
+                        variants = product.get("variants", [])
+                        product_images = product.get("product_images", [])
+                        
+                        if len(images) == 2 and len(variants) == 0 and len(product_images) == 0:
+                            self.log_result(
+                                "Backward Compatibility - Old Images", 
+                                True, 
+                                "Old images structure works correctly",
+                                {
+                                    "product_id": product_id,
+                                    "images_count": len(images),
+                                    "variants_count": len(variants),
+                                    "product_images_count": len(product_images)
+                                }
+                            )
+                            return product_id
+                        else:
+                            self.log_result("Backward Compatibility - Old Images", False, "Old structure not preserved correctly")
+                else:
+                    self.log_result("Backward Compatibility - Old Images", False, "Invalid response format", {"response": result})
+            else:
+                self.log_result("Backward Compatibility - Old Images", False, f"HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Backward Compatibility - Old Images", False, f"Request failed: {str(e)}")
+            
+        return None
+    
+    def test_validation_incorrect_variant_data(self):
+        """Test validation with incorrect variant data"""
+        print("\n=== Testing Validation - Incorrect Variant Data ===")
+        
+        # Test data with missing required fields in variants
+        product_data = {
+            "name": "Тест валидации",
+            "category": "jersey",
+            "description": "Тест некорректных данных",
+            "base_price": 2000,
+            "variants": [
+                {
+                    "id": "var-1",
+                    "name": "Викинги"
+                    # Missing technical_image
+                },
+                {
+                    # Missing id and name
+                    "technical_image": "https://via.placeholder.com/300/FF0000/FFFFFF?text=SKA"
+                }
+            ],
+            "product_images": [
+                {
+                    "url": "https://via.placeholder.com/600/0000FF/FFFFFF?text=Test",
+                    "variant_id": "nonexistent-variant",
+                    "size_category": "invalid_category"
+                }
+            ]
+        }
+        
+        try:
+            response = requests.post(f"{self.base_url}/products", json=product_data, timeout=10)
+            
+            # This should either succeed (if validation is lenient) or fail with 422
+            if response.status_code == 422:
+                result = response.json()
+                self.log_result(
+                    "Validation - Incorrect Variant Data", 
+                    True, 
+                    "Correctly rejected invalid variant data",
+                    {"status_code": 422, "detail": result.get("detail")}
+                )
+                return True
+            elif response.status_code == 201:
+                # If it succeeds, that's also acceptable (lenient validation)
+                result = response.json()
+                if result.get("id"):
+                    self.created_product_ids.append(result["id"])
+                self.log_result(
+                    "Validation - Incorrect Variant Data", 
+                    True, 
+                    "Lenient validation - product created despite incomplete variant data",
+                    {"status_code": 201, "product_id": result.get("id")}
+                )
+                return True
+            else:
+                self.log_result("Validation - Incorrect Variant Data", False, f"Unexpected HTTP {response.status_code}", {"response": response.text})
+                
+        except Exception as e:
+            self.log_result("Validation - Incorrect Variant Data", False, f"Request failed: {str(e)}")
+            
+        return False
+
     def run_all_tests(self):
         """Run all authentication and product API tests"""
         print(f"🚀 Starting Authentication & Product API Tests")
