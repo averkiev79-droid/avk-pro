@@ -14,23 +14,63 @@ const CartPage = () => {
     try {
       const savedCart = localStorage.getItem('cart');
       if (savedCart) {
-        return JSON.parse(savedCart);
+        const parsed = JSON.parse(savedCart);
+        console.log('CartPage: Loading cart from localStorage:', parsed);
+        return parsed;
       }
     } catch (error) {
-      console.error('Error loading cart:', error);
+      console.error('CartPage: Error loading cart:', error);
     }
     // Возвращаем пустую корзину
+    console.log('CartPage: No cart in localStorage, returning empty array');
     return [];
   };
 
   const [cartItems, setCartItems] = useState(getInitialCart);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Загрузка корзины после монтирования компонента (для надежности)
+  useEffect(() => {
+    const loadCart = () => {
+      try {
+        const savedCart = localStorage.getItem('cart');
+        console.log('CartPage: useEffect checking localStorage:', savedCart);
+        if (savedCart) {
+          const parsed = JSON.parse(savedCart);
+          console.log('CartPage: useEffect parsed cart:', parsed);
+          setCartItems(parsed);
+        }
+      } catch (error) {
+        console.error('CartPage: useEffect error loading cart:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadCart();
+    
+    // Слушаем события обновления корзины
+    const handleCartUpdate = () => {
+      console.log('CartPage: cartUpdated event received');
+      loadCart();
+    };
+    
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    
+    return () => {
+      window.removeEventListener('cartUpdated', handleCartUpdate);
+    };
+  }, []);
 
   // Сохранение корзины в localStorage при изменении
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-    // Dispatch custom event to update header cart count
-    window.dispatchEvent(new Event('cartUpdated'));
-  }, [cartItems]);
+    if (!isLoading) {
+      console.log('CartPage: Saving cart to localStorage:', cartItems);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      // Dispatch custom event to update header cart count
+      window.dispatchEvent(new Event('cartUpdated'));
+    }
+  }, [cartItems, isLoading]);
 
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity < 10) {
