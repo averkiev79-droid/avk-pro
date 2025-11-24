@@ -747,7 +747,7 @@ const ProductsPage = () => {
                 <p className="text-xs text-gray-600">Добавьте варианты дизайна с техническими рисунками (плоские фото)</p>
                 
                 {formData.variants.map((variant, index) => (
-                  <div key={index} className="flex gap-2 items-start p-3 border rounded-lg bg-gray-50">
+                  <div key={variant.id || index} className="flex gap-2 items-start p-3 border rounded-lg bg-gray-50">
                     <div className="flex-1 space-y-2">
                       <Input
                         value={variant.name}
@@ -791,9 +791,15 @@ const ProductsPage = () => {
                     size="sm"
                     variant="outline"
                     onClick={() => {
+                      // Генерируем уникальный ID сразу при добавлении
+                      const newVariant = {
+                        id: `variant-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                        name: '',
+                        technical_image: ''
+                      };
                       setFormData({
                         ...formData,
-                        variants: [...formData.variants, { name: '', technical_image: '' }]
+                        variants: [...formData.variants, newVariant]
                       });
                     }}
                     className="w-full"
