@@ -15,6 +15,7 @@ const CheckoutPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   const [formData, setFormData] = useState({
     customerName: '',
@@ -28,20 +29,32 @@ const CheckoutPage = () => {
   useEffect(() => {
     // Загрузка корзины из localStorage
     try {
+      console.log('CheckoutPage: Loading cart from localStorage');
       const savedCart = localStorage.getItem('cart');
+      console.log('CheckoutPage: savedCart:', savedCart);
+      
       if (savedCart) {
         const cart = JSON.parse(savedCart);
+        console.log('CheckoutPage: parsed cart:', cart);
+        
         if (cart.length === 0) {
           toast.error('Корзина пуста');
           navigate('/cart');
+          return;
         }
         setCartItems(cart);
       } else {
+        toast.error('Корзина пуста');
         navigate('/cart');
+        return;
       }
     } catch (error) {
-      console.error('Error loading cart:', error);
+      console.error('CheckoutPage: Error loading cart:', error);
+      toast.error('Ошибка загрузки корзины');
       navigate('/cart');
+      return;
+    } finally {
+      setIsLoading(false);
     }
   }, [navigate]);
 
