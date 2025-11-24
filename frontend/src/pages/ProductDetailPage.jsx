@@ -380,7 +380,10 @@ const ProductDetailPage = () => {
                 {sizeCategories.map(sizeCategory => (
                   <button
                     key={sizeCategory.id}
-                    onClick={() => setSelectedSizeCategory(sizeCategory.id)}
+                    onClick={() => {
+                      setSelectedSizeCategory(sizeCategory.id);
+                      setSelectedImage(0); // Сбросить на первое изображение при смене категории
+                    }}
                     className={`px-4 sm:px-5 py-3 sm:py-2.5 rounded-lg border-2 transition-all duration-300 font-medium text-sm sm:text-base ${
                       selectedSizeCategory === sizeCategory.id
                         ? 'bg-sport-blue text-white border-sport-blue shadow-md'
