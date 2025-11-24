@@ -31,7 +31,11 @@ const ProductsPage = () => {
     category: '',
     description: '',
     base_price: '',
-    features: []
+    features: [],
+    variants: [],
+    detailed_description: '',
+    specifications: {},
+    main_features: []
   });
 
   const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
