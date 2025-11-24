@@ -605,7 +605,7 @@ const ProductDetailPage = () => {
                   <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 group border border-gray-200 bg-white h-full">
                     <div className="aspect-square overflow-hidden bg-gray-100">
                       <img 
-                        src={relProduct.images && relProduct.images.length > 0 
+                        src={relProduct.images && relProduct.images.length > 0 && typeof relProduct.images[0] === 'string'
                           ? (relProduct.images[0].startsWith('http') ? relProduct.images[0] : `${BACKEND_URL}${relProduct.images[0]}`)
                           : '/images/placeholder.svg'}
                         alt={relProduct.name}
