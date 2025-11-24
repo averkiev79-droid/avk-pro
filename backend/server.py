@@ -889,13 +889,20 @@ async def get_product(product_id: str):
 async def update_product(product_id: str, product_update: ProductUpdate):
     """Update a product"""
     try:
-        # Only update fields that are provided
-        update_data = {k: v for k, v in product_update.model_dump().items() if v is not None}
+        # Only update fields that are provided (but include empty lists/dicts)
+        update_data = {}
+        for k, v in product_update.model_dump().items():
+            # Include field if it's not None, or if it's an empty list/dict (which are valid updates)
+            if v is not None or isinstance(v, (list, dict)):
+                update_data[k] = v
         
         if not update_data:
             raise HTTPException(status_code=400, detail="No fields to update")
         
         update_data['updated_at'] = datetime.now(timezone.utc).isoformat()
+        
+        logger.info(f"Updating product {product_id} with data: {list(update_data.keys())}")
+        logger.debug(f"Update data details: size_category_images={update_data.get('size_category_images')}, variants_count={len(update_data.get('variants', []))}")
         
         result = await db.products.update_one(
             {"id": product_id},
@@ -905,7 +912,7 @@ async def update_product(product_id: str, product_update: ProductUpdate):
         if result.matched_count == 0:
             raise HTTPException(status_code=404, detail="Товар не найден")
         
-        logger.info(f"Product {product_id} updated")
+        logger.info(f"Product {product_id} updated successfully")
         
         return {
             "success": True,
