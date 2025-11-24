@@ -310,6 +310,59 @@ const ProductsPage = () => {
     setUploadedImages(uploadedImages.filter((_, i) => i !== index));
   };
 
+  // Загрузка изображений для категорий размеров
+  const handleSizeCategoryFileUpload = async (e, category) => {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+
+    setUploadingFiles(true);
+    
+    try {
+      const uploadPromises = files.map(async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch(`${backendUrl}/api/upload`, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) throw new Error('Upload failed');
+        
+        const data = await response.json();
+        return `${backendUrl}${data.url}`;
+      });
+
+      const urls = await Promise.all(uploadPromises);
+      
+      // Обновить соответствующий state
+      if (category === 'kids') {
+        setSizeImagesKids([...sizeImagesKids, ...urls]);
+      } else if (category === 'teens') {
+        setSizeImagesTeens([...sizeImagesTeens, ...urls]);
+      } else if (category === 'adults') {
+        setSizeImagesAdults([...sizeImagesAdults, ...urls]);
+      }
+      
+      toast.success(`${files.length} изображений загружено для ${category === 'kids' ? 'детей' : category === 'teens' ? 'подростков' : 'взрослых'}`);
+    } catch (error) {
+      console.error('Error uploading files:', error);
+      toast.error('Ошибка загрузки изображений');
+    } finally {
+      setUploadingFiles(false);
+    }
+  };
+
+  const handleRemoveSizeCategoryImage = (category, index) => {
+    if (category === 'kids') {
+      setSizeImagesKids(sizeImagesKids.filter((_, i) => i !== index));
+    } else if (category === 'teens') {
+      setSizeImagesTeens(sizeImagesTeens.filter((_, i) => i !== index));
+    } else if (category === 'adults') {
+      setSizeImagesAdults(sizeImagesAdults.filter((_, i) => i !== index));
+    }
+  };
+
   const getCategoryName = (categoryId) => {
     return categories.find(c => c.id === categoryId)?.name || categoryId;
   };
