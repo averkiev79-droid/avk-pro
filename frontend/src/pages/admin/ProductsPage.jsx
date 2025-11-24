@@ -149,7 +149,12 @@ const ProductsPage = () => {
     const productData = {
       ...formData,
       base_price: parseFloat(formData.base_price),
-      images: allImages
+      images: allImages,
+      size_category_images: {
+        kids: sizeImagesKids,
+        teens: sizeImagesTeens,
+        adults: sizeImagesAdults
+      }
     };
 
     try {
