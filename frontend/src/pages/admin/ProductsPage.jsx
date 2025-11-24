@@ -147,10 +147,18 @@ const ProductsPage = () => {
     const validUrls = imageUrls.filter(url => url.trim() !== '');
     const allImages = [...uploadedImages, ...validUrls];
     
+    // Генерировать ID для вариантов если их нет
+    const variantsWithIds = formData.variants.map((v, index) => ({
+      ...v,
+      id: v.id || `variant-${index}-${Date.now()}`
+    }));
+    
     const productData = {
       ...formData,
       base_price: parseFloat(formData.base_price),
       images: allImages,
+      variants: variantsWithIds,
+      product_images: formData.product_images || [],
       size_category_images: {
         kids: sizeImagesKids,
         teens: sizeImagesTeens,
