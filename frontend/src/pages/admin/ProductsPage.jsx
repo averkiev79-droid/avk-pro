@@ -319,12 +319,12 @@ const ProductsPage = () => {
     
     try {
       const uploadPromises = files.map(async (file) => {
-        const formData = new FormData();
-        formData.append('file', file);
+        const formDataUpload = new FormData();
+        formDataUpload.append('file', file);
 
         const response = await fetch(`${backendUrl}/api/upload`, {
           method: 'POST',
-          body: formData
+          body: formDataUpload
         });
 
         if (!response.ok) throw new Error('Upload failed');
@@ -335,13 +335,37 @@ const ProductsPage = () => {
 
       const urls = await Promise.all(uploadPromises);
       
-      // Обновить соответствующий state
+      // Обновить соответствующий state и formData
       if (category === 'kids') {
-        setSizeImagesKids([...sizeImagesKids, ...urls]);
+        const newImages = [...sizeImagesKids, ...urls];
+        setSizeImagesKids(newImages);
+        setFormData(prev => ({
+          ...prev,
+          size_category_images: {
+            ...prev.size_category_images,
+            kids: newImages
+          }
+        }));
       } else if (category === 'teens') {
-        setSizeImagesTeens([...sizeImagesTeens, ...urls]);
+        const newImages = [...sizeImagesTeens, ...urls];
+        setSizeImagesTeens(newImages);
+        setFormData(prev => ({
+          ...prev,
+          size_category_images: {
+            ...prev.size_category_images,
+            teens: newImages
+          }
+        }));
       } else if (category === 'adults') {
-        setSizeImagesAdults([...sizeImagesAdults, ...urls]);
+        const newImages = [...sizeImagesAdults, ...urls];
+        setSizeImagesAdults(newImages);
+        setFormData(prev => ({
+          ...prev,
+          size_category_images: {
+            ...prev.size_category_images,
+            adults: newImages
+          }
+        }));
       }
       
       toast.success(`${files.length} изображений загружено для ${category === 'kids' ? 'детей' : category === 'teens' ? 'подростков' : 'взрослых'}`);
