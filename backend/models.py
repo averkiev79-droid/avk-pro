@@ -211,12 +211,19 @@ class Product(BaseModel):
     category: str  # jersey, pants, training, jacket, etc.
     description: str
     base_price: float
-    images: List[str] = []  # List of image URLs
+    images: List[str] = []  # List of image URLs (общие или для adults по умолчанию)
     features: Optional[List[str]] = []
     size_categories: Optional[List[str]] = ["kids", "teens", "adults"]
     status: str = "active"  # active, pre_order, popular, unpublished
     is_featured: bool = False
     is_active: bool = True
+    
+    # Изображения для разных категорий размеров
+    size_category_images: Optional[dict] = {
+        "kids": [],      # Фото для детей
+        "teens": [],     # Фото для подростков
+        "adults": []     # Фото для взрослых
+    }
     
     # Новые поля для расширенной карточки товара
     variants: Optional[List[ProductVariant]] = []  # Варианты товара (макс 4)
