@@ -238,6 +238,10 @@ class ProductCreate(BaseModel):
     status: str = "active"
     is_featured: bool = False
     is_active: bool = True
+    variants: Optional[List[ProductVariant]] = []
+    detailed_description: Optional[str] = ""
+    specifications: Optional[dict] = {}
+    main_features: Optional[List[str]] = []
 
 class ProductUpdate(BaseModel):
     name: Optional[str] = None
