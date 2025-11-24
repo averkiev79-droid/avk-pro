@@ -195,7 +195,8 @@ const ProductsPage = () => {
       variants: product.variants || [],
       detailed_description: product.detailed_description || '',
       specifications: product.specifications || {},
-      main_features: product.main_features || []
+      main_features: product.main_features || [],
+      size_category_images: product.size_category_images || { kids: [], teens: [], adults: [] }
     });
     // Separate uploaded images (full URLs) from external URLs
     const images = product.images || [];
@@ -203,6 +204,13 @@ const ProductsPage = () => {
     const external = images.filter(url => !url.includes(backendUrl));
     setUploadedImages(uploaded);
     setImageUrls(external.length > 0 ? external : []);
+    
+    // Загрузить изображения для категорий размеров
+    const sizeImages = product.size_category_images || { kids: [], teens: [], adults: [] };
+    setSizeImagesKids(sizeImages.kids || []);
+    setSizeImagesTeens(sizeImages.teens || []);
+    setSizeImagesAdults(sizeImages.adults || []);
+    
     setIsDialogOpen(true);
   };
 
