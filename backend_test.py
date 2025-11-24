@@ -1944,6 +1944,26 @@ class AuthAPITester:
         # Product Test 7: Datetime serialization
         self.test_datetime_serialization()
         
+        # ==================== PRODUCT VARIANTS TESTS ====================
+        print("\n🎨 PRODUCT VARIANTS TESTS")
+        print("=" * 40)
+        
+        # Variant Test 1: Create product with variants
+        variant_product_id = self.test_create_product_with_variants()
+        
+        # Variant Test 2: Get product with variants
+        if variant_product_id:
+            self.test_get_product_with_variants(variant_product_id)
+            
+            # Variant Test 3: Update product with variants
+            self.test_update_product_with_variants(variant_product_id)
+        
+        # Variant Test 4: Backward compatibility with old images
+        self.test_backward_compatibility_old_images()
+        
+        # Variant Test 5: Validation with incorrect data
+        self.test_validation_incorrect_variant_data()
+        
         # ==================== FILE UPLOAD TESTS ====================
         print("\n📁 FILE UPLOAD TESTS")
         print("=" * 40)
