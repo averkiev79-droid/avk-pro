@@ -458,6 +458,186 @@ const ProductsPage = () => {
                   💡 <strong>Совет:</strong> Первое изображение будет отображаться как главное в каталоге
                 </p>
               </div>
+
+              {/* Product Variants */}
+              <div className="space-y-3 border-t pt-4">
+                <Label className="text-base font-semibold">Варианты товара (макс 4)</Label>
+                <p className="text-xs text-gray-600">Добавьте варианты дизайна с превью (например: "СКА Стрельна", "Викинги")</p>
+                
+                {formData.variants.map((variant, index) => (
+                  <div key={index} className="flex gap-2 items-start p-3 border rounded-lg bg-gray-50">
+                    <div className="flex-1 space-y-2">
+                      <Input
+                        value={variant.name}
+                        onChange={(e) => {
+                          const newVariants = [...formData.variants];
+                          newVariants[index].name = e.target.value;
+                          setFormData({...formData, variants: newVariants});
+                        }}
+                        placeholder="Название варианта (например: СКА Стрельна)"
+                        className="text-sm"
+                      />
+                      <Input
+                        value={variant.preview_image}
+                        onChange={(e) => {
+                          const newVariants = [...formData.variants];
+                          newVariants[index].preview_image = e.target.value;
+                          setFormData({...formData, variants: newVariants});
+                        }}
+                        placeholder="URL превью изображения"
+                        className="text-sm"
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        const newVariants = formData.variants.filter((_, i) => i !== index);
+                        setFormData({...formData, variants: newVariants});
+                      }}
+                      className="text-red-600 hover:bg-red-50 mt-1"
+                    >
+                      <X size={16} />
+                    </Button>
+                  </div>
+                ))}
+                
+                {formData.variants.length < 4 && (
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      setFormData({
+                        ...formData,
+                        variants: [...formData.variants, { name: '', preview_image: '' }]
+                      });
+                    }}
+                    className="w-full"
+                  >
+                    <Plus size={16} className="mr-2" />
+                    Добавить вариант
+                  </Button>
+                )}
+              </div>
+
+              {/* Detailed Description */}
+              <div className="space-y-2 border-t pt-4">
+                <Label htmlFor="detailed_description">Подробное описание (HTML поддерживается)</Label>
+                <Textarea
+                  id="detailed_description"
+                  value={formData.detailed_description}
+                  onChange={(e) => setFormData({...formData, detailed_description: e.target.value})}
+                  rows={5}
+                  placeholder="Введите подробное описание товара. Можно использовать HTML теги."
+                />
+              </div>
+
+              {/* Main Features */}
+              <div className="space-y-3 border-t pt-4">
+                <Label className="text-base font-semibold">Основные характеристики</Label>
+                {formData.main_features.map((feature, index) => (
+                  <div key={index} className="flex gap-2">
+                    <Input
+                      value={feature}
+                      onChange={(e) => {
+                        const newFeatures = [...formData.main_features];
+                        newFeatures[index] = e.target.value;
+                        setFormData({...formData, main_features: newFeatures});
+                      }}
+                      placeholder="Например: Дышащая ткань"
+                      className="text-sm"
+                    />
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        const newFeatures = formData.main_features.filter((_, i) => i !== index);
+                        setFormData({...formData, main_features: newFeatures});
+                      }}
+                      className="text-red-600 hover:bg-red-50"
+                    >
+                      <X size={16} />
+                    </Button>
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    setFormData({
+                      ...formData,
+                      main_features: [...formData.main_features, '']
+                    });
+                  }}
+                  className="w-full"
+                >
+                  <Plus size={16} className="mr-2" />
+                  Добавить характеристику
+                </Button>
+              </div>
+
+              {/* Technical Specifications */}
+              <div className="space-y-3 border-t pt-4">
+                <Label className="text-base font-semibold">Технические характеристики</Label>
+                {Object.entries(formData.specifications).map(([key, value], index) => (
+                  <div key={index} className="flex gap-2">
+                    <Input
+                      value={key}
+                      onChange={(e) => {
+                        const newSpecs = {...formData.specifications};
+                        delete newSpecs[key];
+                        newSpecs[e.target.value] = value;
+                        setFormData({...formData, specifications: newSpecs});
+                      }}
+                      placeholder="Название (например: Материал)"
+                      className="text-sm flex-1"
+                    />
+                    <Input
+                      value={value}
+                      onChange={(e) => {
+                        const newSpecs = {...formData.specifications};
+                        newSpecs[key] = e.target.value;
+                        setFormData({...formData, specifications: newSpecs});
+                      }}
+                      placeholder="Значение (например: 100% полиэстер)"
+                      className="text-sm flex-1"
+                    />
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        const newSpecs = {...formData.specifications};
+                        delete newSpecs[key];
+                        setFormData({...formData, specifications: newSpecs});
+                      }}
+                      className="text-red-600 hover:bg-red-50"
+                    >
+                      <X size={16} />
+                    </Button>
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    const newKey = `spec_${Object.keys(formData.specifications).length + 1}`;
+                    setFormData({
+                      ...formData,
+                      specifications: {...formData.specifications, [newKey]: ''}
+                    });
+                  }}
+                  className="w-full"
+                >
+                  <Plus size={16} className="mr-2" />
+                  Добавить характеристику
+                </Button>
+              </div>
               
               <div className="flex gap-2 pt-4">
                 <Button type="submit" className="bg-sport-blue hover:bg-sport-red">
