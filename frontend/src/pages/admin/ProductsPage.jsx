@@ -733,111 +733,47 @@ const ProductsPage = () => {
                 </div>
               </div>
 
-              {/* Product Variants */}
+              {/* Product Variants - УПРОЩЕННАЯ ВЕРСИЯ */}
               <div className="space-y-3 border-t pt-4">
-                <Label className="text-base font-semibold">Варианты товара (макс 4)</Label>
-                <p className="text-xs text-gray-600 mb-3">
-                  📌 <strong>Логика:</strong> Технический рисунок (превью) + фото на людях для каждого размера (спереди, сзади, сбоку)
-                </p>
+                <Label className="text-base font-semibold">Варианты / Примеры видов (макс 4)</Label>
+                <p className="text-xs text-gray-600">Добавьте варианты дизайна с техническими рисунками (плоские фото)</p>
                 
-                {formData.variants.map((variant, variantIndex) => (
-                  <div key={variantIndex} className="border-2 rounded-lg bg-white">
-                    {/* Заголовок варианта */}
-                    <div className="p-3 bg-gray-50 border-b flex items-center justify-between">
-                      <div className="flex-1 flex gap-2">
-                        <Input
-                          value={variant.name}
-                          onChange={(e) => {
-                            const newVariants = [...formData.variants];
-                            newVariants[variantIndex].name = e.target.value;
-                            setFormData({...formData, variants: newVariants});
-                          }}
-                          placeholder="Название (например: Викинги)"
-                          className="text-sm font-medium"
-                        />
-                        <Input
-                          value={variant.preview_image}
-                          onChange={(e) => {
-                            const newVariants = [...formData.variants];
-                            newVariants[variantIndex].preview_image = e.target.value;
-                            setFormData({...formData, variants: newVariants});
-                          }}
-                          placeholder="URL технического рисунка"
-                          className="text-sm"
-                        />
-                      </div>
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          const newVariants = formData.variants.filter((_, i) => i !== variantIndex);
+                {formData.variants.map((variant, index) => (
+                  <div key={index} className="flex gap-2 items-start p-3 border rounded-lg bg-gray-50">
+                    <div className="flex-1 space-y-2">
+                      <Input
+                        value={variant.name}
+                        onChange={(e) => {
+                          const newVariants = [...formData.variants];
+                          newVariants[index].name = e.target.value;
                           setFormData({...formData, variants: newVariants});
                         }}
-                        className="text-red-600 hover:bg-red-50 ml-2"
-                      >
-                        <X size={16} />
-                      </Button>
+                        placeholder="Название (например: Викинги)"
+                        className="text-sm"
+                      />
+                      <Input
+                        value={variant.technical_image || variant.preview_image || ''}
+                        onChange={(e) => {
+                          const newVariants = [...formData.variants];
+                          newVariants[index].technical_image = e.target.value;
+                          setFormData({...formData, variants: newVariants});
+                        }}
+                        placeholder="URL технического рисунка"
+                        className="text-sm"
+                      />
                     </div>
-                    
-                    {/* Фото на людях по размерам */}
-                    <div className="p-3 space-y-3">
-                      <p className="text-xs text-gray-600">Загрузите фото этого дизайна на людях (2-3 фото: спереди, сзади, сбоку)</p>
-                      
-                      {/* Дети */}
-                      <div className="p-2 bg-blue-50 rounded">
-                        <Label className="text-xs font-medium">👶 Дети</Label>
-                        <Input
-                          value={variant.size_category_images?.kids?.join(', ') || ''}
-                          onChange={(e) => {
-                            const newVariants = [...formData.variants];
-                            if (!newVariants[variantIndex].size_category_images) {
-                              newVariants[variantIndex].size_category_images = { kids: [], teens: [], adults: [] };
-                            }
-                            newVariants[variantIndex].size_category_images.kids = e.target.value.split(',').map(s => s.trim()).filter(s => s);
-                            setFormData({...formData, variants: newVariants});
-                          }}
-                          placeholder="URLs через запятую"
-                          className="text-xs mt-1"
-                        />
-                      </div>
-                      
-                      {/* Подростки */}
-                      <div className="p-2 bg-green-50 rounded">
-                        <Label className="text-xs font-medium">🧒 Подростки</Label>
-                        <Input
-                          value={variant.size_category_images?.teens?.join(', ') || ''}
-                          onChange={(e) => {
-                            const newVariants = [...formData.variants];
-                            if (!newVariants[variantIndex].size_category_images) {
-                              newVariants[variantIndex].size_category_images = { kids: [], teens: [], adults: [] };
-                            }
-                            newVariants[variantIndex].size_category_images.teens = e.target.value.split(',').map(s => s.trim()).filter(s => s);
-                            setFormData({...formData, variants: newVariants});
-                          }}
-                          placeholder="URLs через запятую"
-                          className="text-xs mt-1"
-                        />
-                      </div>
-                      
-                      {/* Взрослые */}
-                      <div className="p-2 bg-purple-50 rounded">
-                        <Label className="text-xs font-medium">🧑 Взрослые</Label>
-                        <Input
-                          value={variant.size_category_images?.adults?.join(', ') || ''}
-                          onChange={(e) => {
-                            const newVariants = [...formData.variants];
-                            if (!newVariants[variantIndex].size_category_images) {
-                              newVariants[variantIndex].size_category_images = { kids: [], teens: [], adults: [] };
-                            }
-                            newVariants[variantIndex].size_category_images.adults = e.target.value.split(',').map(s => s.trim()).filter(s => s);
-                            setFormData({...formData, variants: newVariants});
-                          }}
-                          placeholder="URLs через запятую"
-                          className="text-xs mt-1"
-                        />
-                      </div>
-                    </div>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        const newVariants = formData.variants.filter((_, i) => i !== index);
+                        setFormData({...formData, variants: newVariants});
+                      }}
+                      className="text-red-600 hover:bg-red-50 mt-1"
+                    >
+                      <X size={16} />
+                    </Button>
                   </div>
                 ))}
                 
@@ -849,18 +785,178 @@ const ProductsPage = () => {
                     onClick={() => {
                       setFormData({
                         ...formData,
-                        variants: [...formData.variants, { 
-                          name: '', 
-                          preview_image: '',
-                          size_category_images: { kids: [], teens: [], adults: [] }
-                        }]
+                        variants: [...formData.variants, { name: '', technical_image: '' }]
                       });
                     }}
                     className="w-full"
                   >
                     <Plus size={16} className="mr-2" />
-                    Добавить вариант дизайна
+                    Добавить вариант
                   </Button>
+                )}
+              </div>
+
+              {/* Product Images с привязками - НОВАЯ СЕКЦИЯ */}
+              <div className="space-y-3 border-t pt-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label className="text-base font-semibold">Фотографии с привязками</Label>
+                    <p className="text-xs text-gray-600">Загрузите фото и привяжите их к вариантам и размерам</p>
+                  </div>
+                  <input
+                    type="file"
+                    id="product-images-upload"
+                    multiple
+                    accept="image/*"
+                    onChange={async (e) => {
+                      const files = Array.from(e.target.files);
+                      if (files.length === 0) return;
+
+                      setUploadingFiles(true);
+                      
+                      try {
+                        const uploadPromises = files.map(async (file) => {
+                          const formDataUpload = new FormData();
+                          formDataUpload.append('file', file);
+
+                          const response = await fetch(`${backendUrl}/api/upload`, {
+                            method: 'POST',
+                            body: formDataUpload
+                          });
+
+                          if (!response.ok) throw new Error('Upload failed');
+                          
+                          const data = await response.json();
+                          return `${backendUrl}${data.url}`;
+                        });
+
+                        const urls = await Promise.all(uploadPromises);
+                        
+                        // Добавить загруженные фото в product_images
+                        const newImages = urls.map(url => ({ url, variant_id: null, size_category: null }));
+                        setFormData(prev => ({
+                          ...prev,
+                          product_images: [...prev.product_images, ...newImages]
+                        }));
+                        
+                        toast.success(`${files.length} фото загружено`);
+                      } catch (error) {
+                        console.error('Error uploading files:', error);
+                        toast.error('Ошибка загрузки фото');
+                      } finally {
+                        setUploadingFiles(false);
+                      }
+                    }}
+                    className="hidden"
+                    disabled={uploadingFiles}
+                  />
+                  <label htmlFor="product-images-upload" className="cursor-pointer">
+                    <Button type="button" size="sm" disabled={uploadingFiles} asChild>
+                      <span>
+                        <Upload size={16} className="mr-2" />
+                        {uploadingFiles ? 'Загрузка...' : 'Загрузить фото'}
+                      </span>
+                    </Button>
+                  </label>
+                </div>
+                
+                {formData.product_images && formData.product_images.length > 0 && (
+                  <div className="space-y-2">
+                    {formData.product_images.map((img, imgIndex) => (
+                      <div key={imgIndex} className="flex gap-3 items-center p-3 border rounded-lg bg-white">
+                        {/* Превью фото */}
+                        <img 
+                          src={img.url} 
+                          alt={`Фото ${imgIndex + 1}`} 
+                          className="w-16 h-16 object-cover rounded border"
+                        />
+                        
+                        {/* Dropdown выбора варианта */}
+                        <div className="flex-1 space-y-1">
+                          <Label className="text-xs">Привязать к варианту:</Label>
+                          <select
+                            value={img.variant_id || ''}
+                            onChange={(e) => {
+                              const newImages = [...formData.product_images];
+                              newImages[imgIndex].variant_id = e.target.value || null;
+                              setFormData({...formData, product_images: newImages});
+                            }}
+                            className="w-full text-xs border rounded px-2 py-1"
+                          >
+                            <option value="">Все варианты</option>
+                            {formData.variants.map((v, vIndex) => (
+                              <option key={vIndex} value={v.id || `variant-${vIndex}`}>
+                                {v.name || `Вариант ${vIndex + 1}`}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        
+                        {/* Checkboxes размеров */}
+                        <div className="flex-1 space-y-1">
+                          <Label className="text-xs">Привязать к размерам:</Label>
+                          <div className="flex gap-2 text-xs">
+                            <label className="flex items-center gap-1">
+                              <input
+                                type="checkbox"
+                                checked={img.size_category === 'kids'}
+                                onChange={(e) => {
+                                  const newImages = [...formData.product_images];
+                                  newImages[imgIndex].size_category = e.target.checked ? 'kids' : null;
+                                  setFormData({...formData, product_images: newImages});
+                                }}
+                              />
+                              Дети
+                            </label>
+                            <label className="flex items-center gap-1">
+                              <input
+                                type="checkbox"
+                                checked={img.size_category === 'teens'}
+                                onChange={(e) => {
+                                  const newImages = [...formData.product_images];
+                                  newImages[imgIndex].size_category = e.target.checked ? 'teens' : null;
+                                  setFormData({...formData, product_images: newImages});
+                                }}
+                              />
+                              Подростки
+                            </label>
+                            <label className="flex items-center gap-1">
+                              <input
+                                type="checkbox"
+                                checked={img.size_category === 'adults'}
+                                onChange={(e) => {
+                                  const newImages = [...formData.product_images];
+                                  newImages[imgIndex].size_category = e.target.checked ? 'adults' : null;
+                                  setFormData({...formData, product_images: newImages});
+                                }}
+                              />
+                              Взрослые
+                            </label>
+                          </div>
+                        </div>
+                        
+                        {/* Удалить */}
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="outline"
+                          onClick={() => {
+                            const newImages = formData.product_images.filter((_, i) => i !== imgIndex);
+                            setFormData({...formData, product_images: newImages});
+                          }}
+                          className="text-red-600 hover:bg-red-50"
+                        >
+                          <X size={16} />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {(!formData.product_images || formData.product_images.length === 0) && (
+                  <p className="text-xs text-gray-500 text-center py-4">
+                    Загрузите фото, чтобы начать привязку к вариантам и размерам
+                  </p>
                 )}
               </div>
 
