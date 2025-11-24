@@ -38,7 +38,8 @@ const ProductsPage = () => {
     description: '',
     base_price: '',
     features: [],
-    variants: [],
+    variants: [],  // Упрощенные: name + technical_image
+    product_images: [],  // Новая система: url + variant_id + size_category
     detailed_description: '',
     specifications: {},
     main_features: [],
