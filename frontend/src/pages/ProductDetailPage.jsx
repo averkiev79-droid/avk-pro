@@ -521,17 +521,38 @@ const ProductDetailPage = () => {
             {activeTab === 'description' && (
               <div className="text-gray-700 leading-relaxed">
                 <h3 className="text-2xl font-bold text-dark mb-4">Подробное описание</h3>
-                <p className="mb-4">
-                  {product.name} - это профессиональная экипировка, изготовленная из высококачественных материалов. 
-                  Идеально подходит для тренировок и соревнований любого уровня.
-                </p>
-                <p className="mb-4">
-                  Наша технология сублимационной печати гарантирует яркость и долговечность рисунка. 
-                  Дышащая ткань обеспечивает комфорт во время интенсивных тренировок.
-                </p>
-                <p>
-                  Возможна печать вашего логотипа и номеров. Минимальная партия заказа - от 10 штук.
-                </p>
+                {product.detailed_description ? (
+                  <div 
+                    className="prose prose-lg max-w-none"
+                    dangerouslySetInnerHTML={{ __html: product.detailed_description }}
+                  />
+                ) : (
+                  <>
+                    <p className="mb-4">
+                      {product.name} - это профессиональная экипировка, изготовленная из высококачественных материалов. 
+                      Идеально подходит для тренировок и соревнований любого уровня.
+                    </p>
+                    <p className="mb-4">
+                      Наша технология сублимационной печати гарантирует яркость и долговечность рисунка. 
+                      Дышащая ткань обеспечивает комфорт во время интенсивных тренировок.
+                    </p>
+                    <p>
+                      Возможна печать вашего логотипа и номеров. Минимальная партия заказа - от 10 штук.
+                    </p>
+                  </>
+                )}
+                
+                {/* Main Features */}
+                {product.main_features && product.main_features.length > 0 && (
+                  <div className="mt-6">
+                    <h4 className="text-lg font-bold text-dark mb-3">Основные характеристики:</h4>
+                    <ul className="list-disc list-inside space-y-2">
+                      {product.main_features.map((feature, index) => (
+                        <li key={index} className="text-gray-700">{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             )}
 
