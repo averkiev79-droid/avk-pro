@@ -197,6 +197,12 @@ class ResetPasswordRequest(BaseModel):
 
 
 # Product Models
+class ProductVariant(BaseModel):
+    """Вариант товара с превью и названием"""
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str  # Например: "СКА Стрельна", "Викинги"
+    preview_image: str  # URL превью изображения
+    
 class Product(BaseModel):
     model_config = ConfigDict(extra="ignore")
     
@@ -211,6 +217,13 @@ class Product(BaseModel):
     status: str = "active"  # active, pre_order, popular, unpublished
     is_featured: bool = False
     is_active: bool = True
+    
+    # Новые поля для расширенной карточки товара
+    variants: Optional[List[ProductVariant]] = []  # Варианты товара (макс 4)
+    detailed_description: Optional[str] = ""  # Подробное описание (HTML)
+    specifications: Optional[dict] = {}  # Технические характеристики (ключ-значение)
+    main_features: Optional[List[str]] = []  # Основные характеристики
+    
     created_at: datetime = Field(default_factory=lambda: datetime.now())
     updated_at: datetime = Field(default_factory=lambda: datetime.now())
 
