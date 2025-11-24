@@ -554,6 +554,117 @@ const ProductsPage = () => {
                 </p>
               </div>
 
+              {/* Size Category Images */}
+              <div className="space-y-4 border-t pt-4">
+                <div className="flex items-center gap-2">
+                  <Label className="text-base font-semibold">Изображения по категориям размеров</Label>
+                  <Badge variant="outline" className="text-xs">Опционально</Badge>
+                </div>
+                <p className="text-xs text-gray-600">Загрузите отдельные изображения для детей, подростков и взрослых. При выборе категории размера будут отображаться соответствующие фотографии.</p>
+                
+                {/* Kids Images */}
+                <div className="space-y-2 p-3 border rounded-lg bg-gray-50">
+                  <Label className="text-sm font-medium">👶 Дети (110-140 см)</Label>
+                  <input
+                    type="file"
+                    id="kids-upload"
+                    multiple
+                    accept="image/*"
+                    onChange={(e) => handleSizeCategoryFileUpload(e, 'kids')}
+                    className="hidden"
+                    disabled={uploadingFiles}
+                  />
+                  <label htmlFor="kids-upload" className="cursor-pointer block border-2 border-dashed border-gray-300 rounded p-3 text-center hover:border-gray-400 transition-colors bg-white">
+                    <Upload className="mx-auto h-8 w-8 text-gray-400 mb-1" />
+                    <p className="text-xs text-gray-600">{uploadingFiles ? 'Загрузка...' : 'Загрузить фото для детей'}</p>
+                  </label>
+                  {sizeImagesKids.length > 0 && (
+                    <div className="grid grid-cols-5 gap-2 mt-2">
+                      {sizeImagesKids.map((url, index) => (
+                        <div key={index} className="relative group">
+                          <img src={url} alt={`Дети ${index + 1}`} className="w-full h-16 object-cover rounded border" />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveSizeCategoryImage('kids', index)}
+                            className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600"
+                          >
+                            <X size={10} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Teens Images */}
+                <div className="space-y-2 p-3 border rounded-lg bg-gray-50">
+                  <Label className="text-sm font-medium">🧒 Подростки (146-170 см)</Label>
+                  <input
+                    type="file"
+                    id="teens-upload"
+                    multiple
+                    accept="image/*"
+                    onChange={(e) => handleSizeCategoryFileUpload(e, 'teens')}
+                    className="hidden"
+                    disabled={uploadingFiles}
+                  />
+                  <label htmlFor="teens-upload" className="cursor-pointer block border-2 border-dashed border-gray-300 rounded p-3 text-center hover:border-gray-400 transition-colors bg-white">
+                    <Upload className="mx-auto h-8 w-8 text-gray-400 mb-1" />
+                    <p className="text-xs text-gray-600">{uploadingFiles ? 'Загрузка...' : 'Загрузить фото для подростков'}</p>
+                  </label>
+                  {sizeImagesTeens.length > 0 && (
+                    <div className="grid grid-cols-5 gap-2 mt-2">
+                      {sizeImagesTeens.map((url, index) => (
+                        <div key={index} className="relative group">
+                          <img src={url} alt={`Подростки ${index + 1}`} className="w-full h-16 object-cover rounded border" />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveSizeCategoryImage('teens', index)}
+                            className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600"
+                          >
+                            <X size={10} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Adults Images */}
+                <div className="space-y-2 p-3 border rounded-lg bg-gray-50">
+                  <Label className="text-sm font-medium">🧑 Взрослые</Label>
+                  <input
+                    type="file"
+                    id="adults-upload"
+                    multiple
+                    accept="image/*"
+                    onChange={(e) => handleSizeCategoryFileUpload(e, 'adults')}
+                    className="hidden"
+                    disabled={uploadingFiles}
+                  />
+                  <label htmlFor="adults-upload" className="cursor-pointer block border-2 border-dashed border-gray-300 rounded p-3 text-center hover:border-gray-400 transition-colors bg-white">
+                    <Upload className="mx-auto h-8 w-8 text-gray-400 mb-1" />
+                    <p className="text-xs text-gray-600">{uploadingFiles ? 'Загрузка...' : 'Загрузить фото для взрослых'}</p>
+                  </label>
+                  {sizeImagesAdults.length > 0 && (
+                    <div className="grid grid-cols-5 gap-2 mt-2">
+                      {sizeImagesAdults.map((url, index) => (
+                        <div key={index} className="relative group">
+                          <img src={url} alt={`Взрослые ${index + 1}`} className="w-full h-16 object-cover rounded border" />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveSizeCategoryImage('adults', index)}
+                            className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600"
+                          >
+                            <X size={10} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
               {/* Product Variants */}
               <div className="space-y-3 border-t pt-4">
                 <Label className="text-base font-semibold">Варианты товара (макс 4)</Label>
