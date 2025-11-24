@@ -198,10 +198,16 @@ class ResetPasswordRequest(BaseModel):
 
 # Product Models
 class ProductVariant(BaseModel):
-    """Вариант товара с превью и названием"""
+    """Вариант товара (пример вида) с техническим рисунком"""
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str  # Например: "СКА Стрельна", "Викинги"
-    preview_image: str  # URL превью изображения
+    name: str  # Например: "Викинги", "СКА Стрельна"
+    technical_image: str  # URL технического рисунка (плоское фото)
+
+class ProductImage(BaseModel):
+    """Фотография товара с привязками"""
+    url: str  # URL фотографии
+    variant_id: Optional[str] = None  # ID варианта (если привязано)
+    size_category: Optional[str] = None  # "kids", "teens", "adults" (если привязано)
     
 class Product(BaseModel):
     model_config = ConfigDict(extra="ignore")
