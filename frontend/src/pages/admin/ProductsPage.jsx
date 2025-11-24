@@ -733,44 +733,108 @@ const ProductsPage = () => {
               {/* Product Variants */}
               <div className="space-y-3 border-t pt-4">
                 <Label className="text-base font-semibold">Варианты товара (макс 4)</Label>
-                <p className="text-xs text-gray-600">Добавьте варианты дизайна с превью (например: "СКА Стрельна", "Викинги")</p>
+                <p className="text-xs text-gray-600 mb-3">
+                  📌 <strong>Логика:</strong> Технический рисунок (превью) + фото на людях для каждого размера (спереди, сзади, сбоку)
+                </p>
                 
-                {formData.variants.map((variant, index) => (
-                  <div key={index} className="flex gap-2 items-start p-3 border rounded-lg bg-gray-50">
-                    <div className="flex-1 space-y-2">
-                      <Input
-                        value={variant.name}
-                        onChange={(e) => {
-                          const newVariants = [...formData.variants];
-                          newVariants[index].name = e.target.value;
+                {formData.variants.map((variant, variantIndex) => (
+                  <div key={variantIndex} className="border-2 rounded-lg bg-white">
+                    {/* Заголовок варианта */}
+                    <div className="p-3 bg-gray-50 border-b flex items-center justify-between">
+                      <div className="flex-1 flex gap-2">
+                        <Input
+                          value={variant.name}
+                          onChange={(e) => {
+                            const newVariants = [...formData.variants];
+                            newVariants[variantIndex].name = e.target.value;
+                            setFormData({...formData, variants: newVariants});
+                          }}
+                          placeholder="Название (например: Викинги)"
+                          className="text-sm font-medium"
+                        />
+                        <Input
+                          value={variant.preview_image}
+                          onChange={(e) => {
+                            const newVariants = [...formData.variants];
+                            newVariants[variantIndex].preview_image = e.target.value;
+                            setFormData({...formData, variants: newVariants});
+                          }}
+                          placeholder="URL технического рисунка"
+                          className="text-sm"
+                        />
+                      </div>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          const newVariants = formData.variants.filter((_, i) => i !== variantIndex);
                           setFormData({...formData, variants: newVariants});
                         }}
-                        placeholder="Название варианта (например: СКА Стрельна)"
-                        className="text-sm"
-                      />
-                      <Input
-                        value={variant.preview_image}
-                        onChange={(e) => {
-                          const newVariants = [...formData.variants];
-                          newVariants[index].preview_image = e.target.value;
-                          setFormData({...formData, variants: newVariants});
-                        }}
-                        placeholder="URL превью изображения"
-                        className="text-sm"
-                      />
+                        className="text-red-600 hover:bg-red-50 ml-2"
+                      >
+                        <X size={16} />
+                      </Button>
                     </div>
-                    <Button
-                      type="button"
-                      size="sm"
-                      variant="outline"
-                      onClick={() => {
-                        const newVariants = formData.variants.filter((_, i) => i !== index);
-                        setFormData({...formData, variants: newVariants});
-                      }}
-                      className="text-red-600 hover:bg-red-50 mt-1"
-                    >
-                      <X size={16} />
-                    </Button>
+                    
+                    {/* Фото на людях по размерам */}
+                    <div className="p-3 space-y-3">
+                      <p className="text-xs text-gray-600">Загрузите фото этого дизайна на людях (2-3 фото: спереди, сзади, сбоку)</p>
+                      
+                      {/* Дети */}
+                      <div className="p-2 bg-blue-50 rounded">
+                        <Label className="text-xs font-medium">👶 Дети</Label>
+                        <Input
+                          value={variant.size_category_images?.kids?.join(', ') || ''}
+                          onChange={(e) => {
+                            const newVariants = [...formData.variants];
+                            if (!newVariants[variantIndex].size_category_images) {
+                              newVariants[variantIndex].size_category_images = { kids: [], teens: [], adults: [] };
+                            }
+                            newVariants[variantIndex].size_category_images.kids = e.target.value.split(',').map(s => s.trim()).filter(s => s);
+                            setFormData({...formData, variants: newVariants});
+                          }}
+                          placeholder="URLs через запятую"
+                          className="text-xs mt-1"
+                        />
+                      </div>
+                      
+                      {/* Подростки */}
+                      <div className="p-2 bg-green-50 rounded">
+                        <Label className="text-xs font-medium">🧒 Подростки</Label>
+                        <Input
+                          value={variant.size_category_images?.teens?.join(', ') || ''}
+                          onChange={(e) => {
+                            const newVariants = [...formData.variants];
+                            if (!newVariants[variantIndex].size_category_images) {
+                              newVariants[variantIndex].size_category_images = { kids: [], teens: [], adults: [] };
+                            }
+                            newVariants[variantIndex].size_category_images.teens = e.target.value.split(',').map(s => s.trim()).filter(s => s);
+                            setFormData({...formData, variants: newVariants});
+                          }}
+                          placeholder="URLs через запятую"
+                          className="text-xs mt-1"
+                        />
+                      </div>
+                      
+                      {/* Взрослые */}
+                      <div className="p-2 bg-purple-50 rounded">
+                        <Label className="text-xs font-medium">🧑 Взрослые</Label>
+                        <Input
+                          value={variant.size_category_images?.adults?.join(', ') || ''}
+                          onChange={(e) => {
+                            const newVariants = [...formData.variants];
+                            if (!newVariants[variantIndex].size_category_images) {
+                              newVariants[variantIndex].size_category_images = { kids: [], teens: [], adults: [] };
+                            }
+                            newVariants[variantIndex].size_category_images.adults = e.target.value.split(',').map(s => s.trim()).filter(s => s);
+                            setFormData({...formData, variants: newVariants});
+                          }}
+                          placeholder="URLs через запятую"
+                          className="text-xs mt-1"
+                        />
+                      </div>
+                    </div>
                   </div>
                 ))}
                 
@@ -782,13 +846,17 @@ const ProductsPage = () => {
                     onClick={() => {
                       setFormData({
                         ...formData,
-                        variants: [...formData.variants, { name: '', preview_image: '' }]
+                        variants: [...formData.variants, { 
+                          name: '', 
+                          preview_image: '',
+                          size_category_images: { kids: [], teens: [], adults: [] }
+                        }]
                       });
                     }}
                     className="w-full"
                   >
                     <Plus size={16} className="mr-2" />
-                    Добавить вариант
+                    Добавить вариант дизайна
                   </Button>
                 )}
               </div>
