@@ -157,6 +157,17 @@ const ProductsPage = () => {
       }
     };
 
+    console.log('Submitting product data:', {
+      ...productData,
+      size_category_images_kids_count: sizeImagesKids.length,
+      size_category_images_teens_count: sizeImagesTeens.length,
+      size_category_images_adults_count: sizeImagesAdults.length,
+      variants_count: productData.variants?.length || 0,
+      has_detailed_description: !!productData.detailed_description,
+      specifications_count: Object.keys(productData.specifications || {}).length,
+      main_features_count: productData.main_features?.length || 0
+    });
+
     try {
       if (editingProduct) {
         // Update existing product
@@ -166,7 +177,13 @@ const ProductsPage = () => {
           body: JSON.stringify(productData)
         });
 
-        if (!response.ok) throw new Error('Failed to update product');
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          console.error('Update failed:', errorData);
+          throw new Error('Failed to update product');
+        }
+        
+        console.log('Product updated successfully');
         toast.success('Товар обновлен');
       } else {
         // Create new product
