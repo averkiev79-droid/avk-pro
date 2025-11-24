@@ -147,10 +147,10 @@ const ProductsPage = () => {
     const validUrls = imageUrls.filter(url => url.trim() !== '');
     const allImages = [...uploadedImages, ...validUrls];
     
-    // Генерировать ID для вариантов если их нет
+    // Убедимся, что все варианты имеют ID (для старых товаров без ID)
     const variantsWithIds = formData.variants.map((v, index) => ({
       ...v,
-      id: v.id || `variant-${index}-${Date.now()}`
+      id: v.id || `variant-${Date.now()}-${index}`
     }));
     
     const productData = {
