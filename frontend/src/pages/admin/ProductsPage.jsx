@@ -214,7 +214,17 @@ const ProductsPage = () => {
   };
 
   const resetForm = () => {
-    setFormData({ name: '', category: '', description: '', base_price: '', features: [] });
+    setFormData({ 
+      name: '', 
+      category: '', 
+      description: '', 
+      base_price: '', 
+      features: [],
+      variants: [],
+      detailed_description: '',
+      specifications: {},
+      main_features: []
+    });
     setImageUrls([]);
     setUploadedImages([]);
     setEditingProduct(null);
