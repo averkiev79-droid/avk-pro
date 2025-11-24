@@ -207,6 +207,29 @@ async def get_uploaded_files():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get files: {str(e)}")
 
+@api_router.delete("/uploads/{filename}")
+async def delete_uploaded_file(filename: str):
+    """Delete an uploaded file"""
+    try:
+        file_path = UPLOAD_DIR / filename
+        
+        # Check if file exists
+        if not file_path.exists():
+            raise HTTPException(status_code=404, detail="File not found")
+        
+        # Check if it's actually a file (not a directory)
+        if not file_path.is_file():
+            raise HTTPException(status_code=400, detail="Invalid file")
+        
+        # Delete the file
+        file_path.unlink()
+        
+        return {"success": True, "message": f"File {filename} deleted successfully"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete file: {str(e)}")
+
 # ==================== REVIEWS API ====================
 @api_router.get("/reviews", response_model=List[Review])
 async def get_reviews():
