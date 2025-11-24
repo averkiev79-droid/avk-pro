@@ -180,7 +180,11 @@ const ProductsPage = () => {
       category: product.category,
       description: product.description,
       base_price: product.base_price.toString(),
-      features: product.features || []
+      features: product.features || [],
+      variants: product.variants || [],
+      detailed_description: product.detailed_description || '',
+      specifications: product.specifications || {},
+      main_features: product.main_features || []
     });
     // Separate uploaded images (full URLs) from external URLs
     const images = product.images || [];
