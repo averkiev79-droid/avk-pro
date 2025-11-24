@@ -341,9 +341,50 @@ frontend:
           agent: "testing"
           comment: "❌ COMPREHENSIVE TESTING COMPLETED - MIXED RESULTS WITH CRITICAL CHECKOUT ISSUE: Extensive testing of the fixed cart functionality on https://avksport-ecom.preview.emergentagent.com revealed significant improvements but one critical blocking issue. ✅ MAJOR IMPROVEMENTS CONFIRMED: (1) Cart Race Condition FIXED: Cart items now display reliably without 'Корзина пуста' flickering. Main agent's useEffect fix is working correctly. (2) Add to Cart Flow: Successfully tested complete flow from product page → cart with proper localStorage persistence, header counter updates, and cart display. (3) Image URLs: No double protocol issues found - all URLs correctly formatted as 'https://avksport-ecom.preview.emergentagent.com/api/uploads/...'. (4) Cart Navigation: 'Оформить заказ' button correctly links to /checkout (not /order). (5) Cart Item Display: Items show with correct name, price, image, and quantity. (6) Quantity Controls: Plus/minus buttons found and functional, minimum quantity validation working. (7) Delete Functionality: Delete buttons found but not working properly (items not actually removed). ❌ CRITICAL BLOCKING ISSUE: CHECKOUT FORM COMPLETELY MISSING - When accessing /checkout page, no form fields are rendered. Expected fields (customerName, customerPhone, customerEmail, etc.) are not present in DOM. Page shows checkout title but form content is not loading. This prevents any order submission testing. Root cause appears to be CheckoutPage.jsx not rendering form elements properly. URGENT: Debug CheckoutPage.jsx form rendering issue - form fields are defined in code but not appearing in browser."
 
+backend:
+  - task: "Product Variants and Tagged Images System"
+    implemented: true
+    working: "NA"
+    file: "backend/models.py, backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Implemented simplified product variants system. Backend models updated with ProductVariant (id, name, technical_image) and ProductImage (url, variant_id, size_category). Product model now includes variants and product_images fields. Supports old structure (images, size_category_images) for backward compatibility. Ready for testing."
+
+frontend:
+  - task: "Admin Panel - Product Variants Management UI"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/pages/admin/ProductsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Completed admin UI refactoring for variant management. Added: (1) Variant management section with name + technical_image inputs (max 4 variants). (2) Product images upload section with dropdown to select variant and checkboxes for size categories (kids/teens/adults). (3) Auto-generation of unique IDs for variants when created. (4) Updated handleSubmit to send new data structure to backend. Ready for testing: create/edit products with variants and tagged photos."
+
+frontend:
+  - task: "Public Product Page - Dynamic Image Gallery by Variant and Size"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/pages/ProductDetailPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Updated ProductDetailPage to display variants as design preview cards (replaces old color selection). Implemented dynamic image filtering: shows only photos tagged with selected variant AND size category. Falls back to old system (size_category_images, images) for backward compatibility. Ready for testing: variant selection, image gallery updates, add to cart with variant info."
+
 test_plan:
   current_focus:
-    - "Cart and Checkout Functionality - Image Display and Order Processing"
+    - "Product Variants and Tagged Images System"
+    - "Admin Panel - Product Variants Management UI"
+    - "Public Product Page - Dynamic Image Gallery by Variant and Size"
   stuck_tasks:
     - "Cart and Checkout Functionality - Image Display and Order Processing"
   test_all: false
