@@ -216,6 +216,7 @@ const ProductsPage = () => {
       base_price: product.base_price.toString(),
       features: product.features || [],
       variants: product.variants || [],
+      product_images: product.product_images || [],
       detailed_description: product.detailed_description || '',
       specifications: product.specifications || {},
       main_features: product.main_features || [],
