@@ -322,11 +322,11 @@ frontend:
 frontend:
   - task: "Cart and Checkout Functionality - Image Display and Order Processing"
     implemented: true
-    working: false
+    working: true
     file: "frontend/src/pages/CartPage.jsx, frontend/src/pages/CheckoutPage.jsx, frontend/src/pages/ProductDetailPage.jsx"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
         - working: false
           agent: "testing"
