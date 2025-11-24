@@ -408,9 +408,23 @@ const ProductDetailPage = () => {
                       key={variant.id || index}
                       onClick={() => {
                         setSelectedColor(variant.name);
-                        // Change to the corresponding image if available
-                        if (images[index]) {
+                        // Найти изображение варианта в основной галерее
+                        const variantImageUrl = variant.preview_image && typeof variant.preview_image === 'string' && variant.preview_image.startsWith('http') 
+                          ? variant.preview_image 
+                          : `${BACKEND_URL}${variant.preview_image}`;
+                        
+                        // Найти индекс этого изображения в галерее
+                        const imageIndex = images.findIndex(img => img === variantImageUrl);
+                        
+                        if (imageIndex !== -1) {
+                          // Если изображение найдено в галерее - показать его
+                          setSelectedImage(imageIndex);
+                        } else if (images[index]) {
+                          // Fallback: использовать изображение по индексу варианта
                           setSelectedImage(index);
+                        } else {
+                          // Fallback: показать первое изображение
+                          setSelectedImage(0);
                         }
                       }}
                       className={`relative rounded-lg border-2 transition-all duration-300 overflow-hidden group hover:shadow-lg ${
