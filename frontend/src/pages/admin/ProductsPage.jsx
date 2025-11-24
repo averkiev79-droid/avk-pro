@@ -24,6 +24,12 @@ const ProductsPage = () => {
   const [imageUrls, setImageUrls] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [uploadingFiles, setUploadingFiles] = useState(false);
+  
+  // Изображения для категорий размеров
+  const [sizeImagesKids, setSizeImagesKids] = useState([]);
+  const [sizeImagesTeens, setSizeImagesTeens] = useState([]);
+  const [sizeImagesAdults, setSizeImagesAdults] = useState([]);
+  
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const [formData, setFormData] = useState({
