@@ -242,10 +242,14 @@ const ProductsPage = () => {
       variants: [],
       detailed_description: '',
       specifications: {},
-      main_features: []
+      main_features: [],
+      size_category_images: { kids: [], teens: [], adults: [] }
     });
     setImageUrls([]);
     setUploadedImages([]);
+    setSizeImagesKids([]);
+    setSizeImagesTeens([]);
+    setSizeImagesAdults([]);
     setEditingProduct(null);
     setIsDialogOpen(false);
   };
