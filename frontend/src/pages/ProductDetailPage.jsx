@@ -138,26 +138,31 @@ const ProductDetailPage = () => {
   const getSizeCategoryImages = () => {
     let categoryImages = [];
     
-    // Если выбран вариант дизайна И у него есть фото для выбранного размера
-    if (selectedVariant?.size_category_images && selectedVariant.size_category_images[selectedSizeCategory]?.length > 0) {
-      categoryImages = selectedVariant.size_category_images[selectedSizeCategory].map(img => 
-        img.startsWith('http') ? img : `${BACKEND_URL}${img}`
-      );
-      console.log(`Showing variant "${selectedVariant.name}" images for size category "${selectedSizeCategory}":`, categoryImages.length);
+    // НОВАЯ СИСТЕМА: product_images с привязками
+    if (product.product_images && product.product_images.length > 0) {
+      // Фильтровать по выбранному варианту и размеру
+      const filtered = product.product_images.filter(img => {
+        const matchesVariant = !img.variant_id || !selectedVariant || img.variant_id === selectedVariant.id;
+        const matchesSize = !img.size_category || img.size_category === selectedSizeCategory;
+        return matchesVariant && matchesSize;
+      });
+      
+      if (filtered.length > 0) {
+        categoryImages = filtered.map(img => 
+          img.url.startsWith('http') ? img.url : `${BACKEND_URL}${img.url}`
+        );
+        console.log(`НОВАЯ СИСТЕМА: Показываю ${categoryImages.length} фото для варианта "${selectedVariant?.name || 'нет'}" и размера "${selectedSizeCategory}"`);
+        return categoryImages;
+      }
     }
-    // Fallback: если у варианта есть фото для взрослых
-    else if (selectedVariant?.size_category_images && selectedVariant.size_category_images['adults']?.length > 0) {
-      categoryImages = selectedVariant.size_category_images['adults'].map(img => 
-        img.startsWith('http') ? img : `${BACKEND_URL}${img}`
-      );
-    }
-    // Fallback: общие фото товара для выбранного размера
-    else if (product.size_category_images && product.size_category_images[selectedSizeCategory]?.length > 0) {
+    
+    // СТАРАЯ СИСТЕМА (fallback): size_category_images
+    if (product.size_category_images && product.size_category_images[selectedSizeCategory]?.length > 0) {
       categoryImages = product.size_category_images[selectedSizeCategory].map(img => 
         img.startsWith('http') ? img : `${BACKEND_URL}${img}`
       );
     }
-    // Fallback: общие фото товара для взрослых
+    // Fallback: фото для взрослых
     else if (product.size_category_images && product.size_category_images['adults']?.length > 0) {
       categoryImages = product.size_category_images['adults'].map(img => 
         img.startsWith('http') ? img : `${BACKEND_URL}${img}`
@@ -165,7 +170,7 @@ const ProductDetailPage = () => {
     }
     // Fallback на product.images
     else if (product.images && product.images.length > 0) {
-      categoryImages = product.images.map(img => img.startsWith('http') ? img : `${BACKEND_URL}${img}`);
+      categoryImages = product.images.map(img => typeof img === 'string' && img.startsWith('http') ? img : `${BACKEND_URL}${img}`);
     } else {
       categoryImages = ['/images/placeholder.svg'];
     }
