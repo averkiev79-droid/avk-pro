@@ -171,13 +171,13 @@ const CheckoutPage = () => {
             </div>
             <p className="mt-4 text-gray-600">Загрузка данных заказа...</p>
           </Card>
-        ) : cartItems.length === 0 ? (
+        ) : cartError || cartItems.length === 0 ? (
           <Card className="p-12 text-center">
             <ShoppingCart className="mx-auto mb-4 text-gray-400" size={64} />
             <h2 className="text-2xl font-bold mb-4">Корзина пуста</h2>
-            <p className="text-gray-600 mb-6">Добавьте товары из каталога</p>
-            <Button asChild>
-              <a href="/catalog">Перейти в каталог</a>
+            <p className="text-gray-600 mb-6">Добавьте товары из каталога перед оформлением заказа</p>
+            <Button asChild className="bg-gray-900 hover:bg-gray-800 text-white">
+              <a href="/cart">Вернуться в корзину</a>
             </Button>
           </Card>
         ) : (
