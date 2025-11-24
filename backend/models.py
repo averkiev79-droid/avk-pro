@@ -268,13 +268,14 @@ class ProductUpdate(BaseModel):
     description: Optional[str] = None
     base_price: Optional[float] = None
     images: Optional[List[str]] = None
+    variants: Optional[List[ProductVariant]] = None
+    product_images: Optional[List[ProductImage]] = None
     features: Optional[List[str]] = None
     size_categories: Optional[List[str]] = None
     status: Optional[str] = None
     is_featured: Optional[bool] = None
     is_active: Optional[bool] = None
     size_category_images: Optional[dict] = None
-    variants: Optional[List[ProductVariant]] = None
     detailed_description: Optional[str] = None
     specifications: Optional[dict] = None
     main_features: Optional[List[str]] = None
