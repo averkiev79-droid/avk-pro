@@ -131,37 +131,43 @@ const ProductDetailPage = () => {
   // Use product images or fallback to placeholder
   const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
   
-  // Получить изображения в зависимости от выбранной категории размера
+  // Найти выбранный вариант по selectedColor
+  const selectedVariant = product.variants?.find(v => v.name === selectedColor);
+  
+  // Получить изображения в зависимости от выбранного варианта и категории размера
   const getSizeCategoryImages = () => {
     let categoryImages = [];
     
-    // Если есть изображения для конкретной категории размера
-    if (product.size_category_images && product.size_category_images[selectedSizeCategory]?.length > 0) {
+    // Если выбран вариант дизайна И у него есть фото для выбранного размера
+    if (selectedVariant?.size_category_images && selectedVariant.size_category_images[selectedSizeCategory]?.length > 0) {
+      categoryImages = selectedVariant.size_category_images[selectedSizeCategory].map(img => 
+        img.startsWith('http') ? img : `${BACKEND_URL}${img}`
+      );
+      console.log(`Showing variant "${selectedVariant.name}" images for size category "${selectedSizeCategory}":`, categoryImages.length);
+    }
+    // Fallback: если у варианта есть фото для взрослых
+    else if (selectedVariant?.size_category_images && selectedVariant.size_category_images['adults']?.length > 0) {
+      categoryImages = selectedVariant.size_category_images['adults'].map(img => 
+        img.startsWith('http') ? img : `${BACKEND_URL}${img}`
+      );
+    }
+    // Fallback: общие фото товара для выбранного размера
+    else if (product.size_category_images && product.size_category_images[selectedSizeCategory]?.length > 0) {
       categoryImages = product.size_category_images[selectedSizeCategory].map(img => 
         img.startsWith('http') ? img : `${BACKEND_URL}${img}`
       );
     }
-    // Fallback на общие изображения или для взрослых
+    // Fallback: общие фото товара для взрослых
     else if (product.size_category_images && product.size_category_images['adults']?.length > 0) {
       categoryImages = product.size_category_images['adults'].map(img => 
         img.startsWith('http') ? img : `${BACKEND_URL}${img}`
       );
     }
-    // Fallback на images
+    // Fallback на product.images
     else if (product.images && product.images.length > 0) {
       categoryImages = product.images.map(img => img.startsWith('http') ? img : `${BACKEND_URL}${img}`);
     } else {
       categoryImages = ['/images/placeholder.svg'];
-    }
-    
-    // Добавить изображения вариантов в начало галереи (если они еще не там)
-    if (product.variants && product.variants.length > 0) {
-      const variantImages = product.variants
-        .filter(v => v.preview_image)
-        .map(v => v.preview_image.startsWith('http') ? v.preview_image : `${BACKEND_URL}${v.preview_image}`)
-        .filter(img => !categoryImages.includes(img)); // Исключить дубликаты
-      
-      return [...variantImages, ...categoryImages];
     }
     
     return categoryImages;
