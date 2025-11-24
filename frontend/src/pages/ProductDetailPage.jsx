@@ -559,30 +559,43 @@ const ProductDetailPage = () => {
             {activeTab === 'specs' && (
               <div>
                 <h3 className="text-2xl font-bold text-dark mb-4">Технические характеристики</h3>
-                <table className="w-full border-collapse">
-                  <tbody>
-                    <tr className="border-b border-gray-200">
-                      <td className="py-3 font-medium text-gray-700">Материал:</td>
-                      <td className="py-3 text-gray-600">100% полиэстер</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="py-3 font-medium text-gray-700">Технология печати:</td>
-                      <td className="py-3 text-gray-600">Сублимация</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="py-3 font-medium text-gray-700">Доступные категории:</td>
-                      <td className="py-3 text-gray-600">Дети 110-140, Подростки 146-170, Взрослые</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="py-3 font-medium text-gray-700">Срок изготовления:</td>
-                      <td className="py-3 text-gray-600">От 14 дней</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="py-3 font-medium text-gray-700">Минимальный заказ:</td>
-                      <td className="py-3 text-gray-600">10 штук</td>
-                    </tr>
-                  </tbody>
-                </table>
+                {product.specifications && Object.keys(product.specifications).length > 0 ? (
+                  <table className="w-full border-collapse">
+                    <tbody>
+                      {Object.entries(product.specifications).map(([key, value], index) => (
+                        <tr key={index} className="border-b border-gray-200">
+                          <td className="py-3 font-medium text-gray-700 w-1/3">{key}:</td>
+                          <td className="py-3 text-gray-600">{value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <table className="w-full border-collapse">
+                    <tbody>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-3 font-medium text-gray-700">Материал:</td>
+                        <td className="py-3 text-gray-600">100% полиэстер</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-3 font-medium text-gray-700">Технология печати:</td>
+                        <td className="py-3 text-gray-600">Сублимация</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-3 font-medium text-gray-700">Доступные категории:</td>
+                        <td className="py-3 text-gray-600">Дети 110-140, Подростки 146-170, Взрослые</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-3 font-medium text-gray-700">Срок изготовления:</td>
+                        <td className="py-3 text-gray-600">От 14 дней</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-3 font-medium text-gray-700">Минимальный заказ:</td>
+                        <td className="py-3 text-gray-600">10 штук</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                )}
               </div>
             )}
 
