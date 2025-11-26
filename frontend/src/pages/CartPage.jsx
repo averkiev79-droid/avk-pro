@@ -51,17 +51,8 @@ const CartPage = () => {
     
     loadCart();
     
-    // Слушаем события обновления корзины
-    const handleCartUpdate = () => {
-      console.log('CartPage: cartUpdated event received');
-      loadCart();
-    };
-    
-    window.addEventListener('cartUpdated', handleCartUpdate);
-    
-    return () => {
-      window.removeEventListener('cartUpdated', handleCartUpdate);
-    };
+    // Удалили слушатель события cartUpdated, так как он создавал бесконечный цикл
+    // CartPage сам управляет своим состоянием корзины
   }, []);
 
   // Сохранение корзины в localStorage при изменении (НЕ запускаем событие здесь, чтобы избежать цикла)
