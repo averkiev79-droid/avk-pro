@@ -84,6 +84,9 @@ const CartPage = () => {
     setCartItems(cartItems.map(item => 
       item.id === id ? { ...item, quantity: newQuantity } : item
     ));
+    
+    // Обновляем счетчик корзины в header
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const removeItem = (id) => {
