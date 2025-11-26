@@ -91,6 +91,9 @@ const CartPage = () => {
     
     setCartItems(prevItems => prevItems.filter(item => item.id !== id));
     
+    // Обновляем счетчик корзины в header
+    window.dispatchEvent(new Event('cartUpdated'));
+    
     toast.success(`${itemToRemove?.name} удален из корзины`, {
       duration: 2000,
     });
