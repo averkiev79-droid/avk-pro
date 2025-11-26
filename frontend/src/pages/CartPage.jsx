@@ -64,13 +64,13 @@ const CartPage = () => {
     };
   }, []);
 
-  // Сохранение корзины в localStorage при изменении
+  // Сохранение корзины в localStorage при изменении (НЕ запускаем событие здесь, чтобы избежать цикла)
   useEffect(() => {
     if (!isLoading) {
       console.log('CartPage: Saving cart to localStorage:', cartItems);
       localStorage.setItem('cart', JSON.stringify(cartItems));
-      // Dispatch custom event to update header cart count
-      window.dispatchEvent(new Event('cartUpdated'));
+      // НЕ запускаем cartUpdated здесь - это создает бесконечный цикл
+      // Событие запускается только при явных действиях (добавление/удаление товара)
     }
   }, [cartItems, isLoading]);
 
