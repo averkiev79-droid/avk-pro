@@ -156,6 +156,14 @@ const CheckoutPage = () => {
       {/* Header */}
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-12 border-b border-gray-200">
         <div className="container max-w-7xl mx-auto px-4">
+          <Button
+            variant="ghost"
+            onClick={() => navigate('/cart')}
+            className="mb-4 hover:bg-white/50"
+          >
+            <ArrowLeft size={20} className="mr-2" />
+            Вернуться в корзину
+          </Button>
           <h1 className="text-4xl sm:text-5xl font-bold mb-3 tracking-tight text-gray-900">
             <span className="italic font-serif text-gray-700">Оформление заказа</span>
           </h1>
